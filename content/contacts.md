@@ -7,7 +7,7 @@ path = "contacts"
 [extra]
 links = [
   { icon = "github", name = "GitHub", link = "https://github.com/KevinRayScottUM" },
-  { name = "Hugging Face", link = "https://huggingface.co/TensorCat" },
-  { name = "Kaggle", link = "https://www.kaggle.com/kevinrayscott" },
+  { icon = "huggingface", name = "Hugging Face", link = "https://huggingface.co/TensorCat" },
+  { icon = "kaggle", name = "Kaggle", link = "https://www.kaggle.com/kevinrayscott" },
 ]
 +++
