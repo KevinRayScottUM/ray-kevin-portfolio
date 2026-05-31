@@ -186,6 +186,11 @@
   display: block;
 }
 
+img.portfolio-social-svg,
+img.inline.h-6.w-6 {
+  object-fit: contain;
+}
+
 .prose,
 .prose p,
 .prose li,
