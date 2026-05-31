@@ -172,6 +172,41 @@
   display: block;
 }
 
+.portfolio-biography-copy,
+.portfolio-biography-copy p {
+  text-align: justify;
+  text-justify: inter-word;
+  hyphens: auto;
+}
+
+.portfolio-profile-grid {
+  column-gap: 56px;
+  row-gap: 24px;
+  align-items: flex-start;
+}
+
+.portfolio-interest-col,
+.portfolio-education-col {
+  flex: 1 1 0;
+  min-width: 0;
+}
+
+.portfolio-interest-col ul {
+  padding-right: 10px;
+}
+
+.portfolio-education-col {
+  padding-left: 18px;
+}
+
+.portfolio-education-col li {
+  margin-bottom: 16px;
+}
+
+.portfolio-education-col .text-gray-400 {
+  margin-top: 4px;
+}
+
 .blog-index-wrap {
   max-width: 980px;
   margin: 0 auto;
@@ -421,6 +456,23 @@
 
   .portfolio-display-subname {
     font-size: 20px;
+  }
+
+  .portfolio-profile-grid {
+    column-gap: 0;
+  }
+
+  .portfolio-interest-col,
+  .portfolio-education-col {
+    flex: 1 1 100%;
+  }
+
+  .portfolio-interest-col ul {
+    padding-right: 0;
+  }
+
+  .portfolio-education-col {
+    padding-left: 0;
   }
 
   .blog-index-wrap,

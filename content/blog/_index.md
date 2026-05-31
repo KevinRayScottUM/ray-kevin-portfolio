@@ -11,7 +11,7 @@ description = "Research notes and engineering reflections on reliable AI systems
 [extra]
 index_title = "Recent Notes"
 index_show = true
-index_elements = 4
+index_elements = 2
 hidden_nav = true
 +++
 

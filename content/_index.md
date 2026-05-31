@@ -8,26 +8,24 @@ display_name_secondary = "Kevin Ray Scott"
 title = "AI, Robotics, Data Analytics & Intelligent Agent Developer"
 
 interests = [
-  "Reliable AI systems and trustworthy intelligent agents",
-  "Retrieval-Augmented Generation, LLM fine-tuning, and evidence-grounded generation",
-  "Agent Harness Engineering, planning-generation-evaluation workflows, and controllable AI systems",
-  "Reinforcement learning, PPO-style optimization, reward design, and model alignment",
-  "Computer vision, medical image analysis, explainable AI, and multimodal AI",
-  "Robotics perception, ROS-based interaction, gesture control, and human-centered interfaces",
-  "Data analytics, time-series forecasting, spatial-temporal modeling, and applied machine learning",
+  "Reliable AI agents and controllable intelligent systems",
+  "RAG, LLM fine-tuning, and grounded generation",
+  "Agent harness engineering and evaluation loops",
+  "Reinforcement learning, reward design, and alignment",
+  "Computer vision, medical AI, XAI, and multimodal learning",
+  "ROS-based robotics and human-centered interfaces",
+  "Time-series, spatiotemporal analytics, and applied ML",
 ]
 
 [[extra.education.courses]]
 course = "B.Eng. / B.Sc. in Software Engineering"
 institution = "Harbin Normal University"
 year = "Undergraduate"
-notes = "Undergraduate study focused on software engineering foundations, programming, systems development, and applied computing."
 
 [[extra.education.courses]]
 course = "M.Sc. in Artificial Intelligence"
 institution = "Universiti Malaya"
 year = "Postgraduate"
-notes = "Postgraduate study focused on artificial intelligence, intelligent systems, machine learning, and applied AI research."
 
 [[extra.avatar_icons]]
 icon = "github"
