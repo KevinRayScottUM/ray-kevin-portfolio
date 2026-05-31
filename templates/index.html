@@ -4,8 +4,8 @@
 
 {% block biography %}
 <div class="">
-  <div class="flex md:flex-row flex-wrap sm:flex-nowrap justify-center container mx-auto max-w-5xl py-10 px-3">
-    <div class="basis-full sm:basis-2/5 ">
+  <div class="portfolio-hero-layout flex md:flex-row flex-wrap sm:flex-nowrap justify-center container mx-auto max-w-5xl py-10 px-3">
+    <div class="portfolio-hero-profile-col basis-full sm:basis-2/5 ">
       <div class="container mx-auto portfolio-profile-panel">
         <div class="portfolio-avatar-frame">
           <img class="portfolio-avatar-image" src="{{ get_url(path=config.extra.avatar) }}" alt="Profile image"/>
@@ -27,7 +27,7 @@
         </div>
       </div>
     </div>
-    <div class="basis-full sm:basis-3/5">
+    <div class="portfolio-hero-content-col basis-full sm:basis-3/5">
       <h1 class="font-bold font-sans break-normal text-gray-900 text-3xl sm:text-5xl pb-4">{{trans(key="Biography", lang=lang)}}</h1>
       <article class="prose prose-indigo portfolio-biography-copy">
       {{ section.content | safe }}
