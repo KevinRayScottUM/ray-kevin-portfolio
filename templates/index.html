@@ -70,7 +70,7 @@
   {% set ssection_data = get_section(path=ssection, metadata_only=true) -%}
   {% if ssection_data.extra.index_show -%}
       <div class="{% if index % 2 != 0%} bg-white {% else %} bg-gray-50 {% endif %}">
-        <div class="container max-w-4xl mx-auto px-4 py-8">
+        <div class="portfolio-index-section container max-w-5xl mx-auto px-4 py-8">
           {% set index_elements = ssection_data.extra.index_elements | default(value=2) -%}
           {% set show_description = ssection_data.extra.description_in_index | default(value=true) -%}
           {{ macros::section_index_summary(section_path=ssection, show_element=index_elements, show_description=show_description) }}

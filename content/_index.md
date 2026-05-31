@@ -18,14 +18,14 @@ interests = [
 ]
 
 [[extra.education.courses]]
-course = "B.Eng. / B.Sc. in Software Engineering"
-institution = "Harbin Normal University"
-year = "Undergraduate"
-
-[[extra.education.courses]]
 course = "M.Sc. in Artificial Intelligence"
 institution = "Universiti Malaya"
 year = "Postgraduate"
+
+[[extra.education.courses]]
+course = "B.Eng. / B.Sc. in Software Engineering"
+institution = "Harbin Normal University"
+year = "Undergraduate"
 
 [[extra.avatar_icons]]
 icon = "github"
