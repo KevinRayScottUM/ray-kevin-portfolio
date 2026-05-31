@@ -1,0 +1,4 @@
+{% macro stylesheet() %}
+<link rel="stylesheet" href="{{ get_url(path="styles/styles.css") | safe }}" />
+<link rel="stylesheet" href="{{ get_url(path="styles/custom.css") | safe }}" />
+{% endmacro %}

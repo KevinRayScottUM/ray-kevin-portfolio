@@ -6,29 +6,22 @@
 <div class="">
   <div class="flex md:flex-row flex-wrap sm:flex-nowrap justify-center container mx-auto max-w-5xl py-10 px-3">
     <div class="basis-full sm:basis-2/5 ">
-      <div class="container mx-auto">
-        {% set image = resize_image(path=config.extra.avatar, format="webp", width=208, height=208) %}
-        <img class="object-center w-52 h-52 rounded-full mx-auto" src="{{image.url}}" alt="Profile image"/>
+      <div class="container mx-auto portfolio-profile-panel">
+        <div class="portfolio-avatar-frame">
+          <img class="portfolio-avatar-image" src="{{ get_url(path=config.extra.avatar) }}" alt="Profile image"/>
+        </div>
         <h1 class="text-center font-bold break-normal text-gray-900 text-3xl py-1">{{ section.title }}</h1>
         {% if section.extra.title %}
         <h2 class="text-center font-bold break-normal text-gray-400 text-lg py-1">{{ section.extra.title | markdown(inline=true) | safe }}</h2>
         {% endif %}
-        <div class="flex flex-row flex-wrap container py-10 justify-center">
+        <div class="portfolio-social-icons" aria-label="Profile links">
           {% for icon in section.extra.avatar_icons %}
-            <div class="basis p-3 ">
-              <a href="{{icon.link}}" target="_blank"><i>{{ icons::factory(icon=icon.icon,classes="inline h-12 w-12 flex-no-shrink stroke-blue-600 hover:stroke-blue-800 visited:stroke-purple-600 fill-blue-600 visited:fill-purple-600 hover:fill-blue-800 ") }}</i></a>
-            </div>
+            <a class="portfolio-social-button" href="{{icon.link}}" target="_blank" rel="noopener" title="{{ icon.icon }}">
+              <span class="sr-only">{{ icon.icon }}</span>
+              <i>{{ icons::factory(icon=icon.icon,classes="portfolio-social-svg") }}</i>
+            </a>
           {% endfor %}
         </div>
-        {% if section.extra.profile_links %}
-        <div class="flex flex-row flex-wrap container justify-center">
-          {% for profile in section.extra.profile_links %}
-            <div class="basis p-3">
-              <a class="text-blue-600 hover:text-blue-800 visited:text-purple-600 font-bold" href="{{ profile.link }}" target="_blank">{{ profile.name }}</a>
-            </div>
-          {% endfor %}
-        </div>
-        {% endif %}
       </div>
     </div>
     <div class="basis-full sm:basis-3/5">

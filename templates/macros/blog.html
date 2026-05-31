@@ -1,0 +1,43 @@
+{% macro page_summary(page, show_wordcount=false, show_description=true) %}
+{% if page.extra.type -%}
+{{ publication::summary(page=page, show_urls=false, show_frame=false, show_description=show_description) }}
+{% else -%}
+<article class="blog-card" data-post-id="{{ page.slug }}">
+  <a class="blog-card-main" href="{{ page.permalink | safe }}">
+    <div class="blog-card-copy">
+      <div class="blog-card-meta">
+        <img class="blog-author-avatar" src="{{ get_url(path=config.extra.avatar) }}" alt="Kevin Ray Scott">
+        <span class="blog-author-name">Kevin Ray Scott</span>
+        {% if page.date %}<span class="blog-dot">·</span><time>{{ page.date }}</time>{% endif %}
+      </div>
+      <h2 class="blog-card-title">{{ page.title }}</h2>
+      {% if show_description -%}
+        {% if page.description %}
+        <p class="blog-card-description">{{ page.description | markdown(inline=true) | safe }}</p>
+        {% elif page.extra.tldr %}
+        <p class="blog-card-description">{{ page.extra.tldr | markdown(inline=true) | safe }}</p>
+        {% endif -%}
+      {% endif -%}
+    </div>
+    {% if page.extra.thumbnail %}
+    <div class="blog-card-thumb">
+      <img src="{{ get_url(path=page.extra.thumbnail) }}" alt="">
+    </div>
+    {% endif %}
+  </a>
+  <div class="blog-card-actions">
+    <button type="button" class="blog-action" data-blog-action="like" data-post-id="{{ page.slug }}" data-initial-count="{{ page.extra.likes | default(value=0) }}" aria-label="Like {{ page.title }}">
+      {{ icons::factory(icon="clap", classes="blog-action-icon") }}
+      <span data-like-count>{{ page.extra.likes | default(value=0) }}</span>
+    </button>
+    <button type="button" class="blog-action" data-blog-action="bookmark" data-post-id="{{ page.slug }}" aria-label="Bookmark {{ page.title }}">
+      {{ icons::factory(icon="bookmark", classes="blog-action-icon") }}
+    </button>
+    <button type="button" class="blog-action" data-blog-action="share" data-share-url="{{ page.permalink | safe }}" data-share-title="{{ page.title }}" aria-label="Share {{ page.title }}">
+      {{ icons::factory(icon="share", classes="blog-action-icon") }}
+      <span>Share</span>
+    </button>
+  </div>
+</article>
+{% endif -%}
+{% endmacro %}

@@ -4,6 +4,8 @@ Static personal portfolio website for Kevin Ray Scott (雷凯文 / LEI KAIWEN), 
 
 The site is designed as a clean academic and professional portfolio for internship, job, and future PhD or research applications. It includes a homepage, project experience page, about page, blog/notes section, and contact page.
 
+Blog like, bookmark, and share controls are implemented as lightweight frontend interactions. Likes and bookmarks are stored in the visitor's browser with `localStorage`; global public counters would require a Cloudflare Pages Functions plus KV/D1 backend later.
+
 ## Local Setup on macOS
 
 Install the required tools:

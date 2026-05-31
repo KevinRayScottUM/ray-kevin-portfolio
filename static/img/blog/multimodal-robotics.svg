@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Multimodal robotics thumbnail">
+  <rect width="600" height="360" fill="#ecfeff"/>
+  <circle cx="302" cy="170" r="82" fill="#0891b2"/>
+  <rect x="238" y="122" width="128" height="96" rx="20" fill="#ffffff"/>
+  <circle cx="278" cy="162" r="11" fill="#111827"/>
+  <circle cx="326" cy="162" r="11" fill="#111827"/>
+  <path d="M274 194c18 13 38 13 56 0" fill="none" stroke="#111827" stroke-width="8" stroke-linecap="round"/>
+  <path d="M206 171H90M514 171H398" stroke="#06b6d4" stroke-width="10" stroke-linecap="round"/>
+  <path d="M132 123c28-30 68-46 112-42M468 216c-28 30-68 46-112 42" fill="none" stroke="#f97316" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="90" cy="171" r="24" fill="#f97316"/>
+  <circle cx="514" cy="171" r="24" fill="#16a34a"/>
+</svg>

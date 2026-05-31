@@ -1,0 +1,34 @@
+{% macro nav(website_title) %}
+<nav id="header" class="portfolio-nav">
+  <div class="portfolio-nav-inner">
+    <div class="portfolio-brand">
+      <a href="{{ get_url(path="#", trailing_slash=false) }}">{{ website_title }}</a>
+    </div>
+    <div class="portfolio-nav-scroll" id="nav-content">
+      <ul class="portfolio-nav-list">
+        {% if lang == config.default_language -%}
+          {% set menu_items = config.extra.menu_items -%}
+        {% else -%}
+          {% set menu_items = config.extra[lang].menu_items -%}
+        {% endif -%}
+
+        {% set active_path = current_path | default(value="") -%}
+        {% for item in menu_items -%}
+          {% set active = false -%}
+          {% if item.path == "#" and active_path == "/" -%}
+            {% set active = true -%}
+          {% endif -%}
+          {% if item.path != "#" and active_path and active_path is starting_with(item.path) -%}
+            {% set active = true -%}
+          {% endif -%}
+          <li>
+            <a href="{{ get_url(path=item.path, trailing_slash=false, lang=lang) }}" class="portfolio-nav-link{% if active %} is-active{% endif %}">
+              {{ item.name }}
+            </a>
+          </li>
+        {% endfor -%}
+      </ul>
+    </div>
+  </div>
+</nav>
+{% endmacro %}

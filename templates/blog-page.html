@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% block title -%}
+{% set section = get_section(path=page.ancestors[1], metadata_only=true) -%}
+<title>{% if section -%}{{ section.title }} | {% endif %} {{ config.title }}</title>
+{% endblock title -%}
+
+{% block content %}
+<script defer src="{{ get_url(path="js/blog-actions.js") }}"></script>
+<div class="blog-post-wrap" data-post-id="{{ page.slug }}">
+  <div class="blog-post-header">
+    <div class="blog-card-meta blog-post-meta">
+      <img class="blog-author-avatar" src="{{ get_url(path=config.extra.avatar) }}" alt="Kevin Ray Scott">
+      <span class="blog-author-name">Kevin Ray Scott</span>
+      {% if page.date %}<span class="blog-dot">·</span><time>{{ page.date }}</time>{% endif %}
+      {% if page.reading_time %}<span class="blog-dot">·</span><span>{{ page.reading_time }} min read</span>{% endif %}
+    </div>
+    <h1>{{ page.title }}</h1>
+    {% if page.description %}<p class="blog-post-description">{{ page.description }}</p>{% endif %}
+    <div class="blog-card-actions blog-post-actions">
+      <button type="button" class="blog-action" data-blog-action="like" data-post-id="{{ page.slug }}" data-initial-count="{{ page.extra.likes | default(value=0) }}" aria-label="Like {{ page.title }}">
+        {{ icons::factory(icon="clap", classes="blog-action-icon") }}
+        <span data-like-count>{{ page.extra.likes | default(value=0) }}</span>
+      </button>
+      <button type="button" class="blog-action" data-blog-action="bookmark" data-post-id="{{ page.slug }}" aria-label="Bookmark {{ page.title }}">
+        {{ icons::factory(icon="bookmark", classes="blog-action-icon") }}
+      </button>
+      <button type="button" class="blog-action" data-blog-action="share" data-share-url="{{ page.permalink | safe }}" data-share-title="{{ page.title }}" aria-label="Share {{ page.title }}">
+        {{ icons::factory(icon="share", classes="blog-action-icon") }}
+        <span>Share</span>
+      </button>
+    </div>
+  </div>
+  {% if page.extra.thumbnail %}
+  <img class="blog-post-hero" src="{{ get_url(path=page.extra.thumbnail) }}" alt="">
+  {% endif %}
+  {% if page.extra.tldr -%}
+  <p class="blog-post-tldr"> <span>TLDR.</span> {{ page.extra.tldr | safe }} </p>
+  {% endif -%}
+  <article class="prose prose-indigo max-w-3xl blog-post-content">
+    {{ macros::toc() }}
+    {{ page.content | safe }}
+    {% if page.extra.external_link %}<p><a href="{{page.extra.external_link | safe}}" target="_blank">{{page.extra.external_link | safe}}</a></p>{% endif -%}
+  </article>
+</div>
+{% endblock content %}

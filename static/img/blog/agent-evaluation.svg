@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Agent evaluation thumbnail">
+  <rect width="600" height="360" fill="#f5f3ff"/>
+  <rect x="70" y="66" width="460" height="228" rx="24" fill="#ffffff" stroke="#ddd6fe" stroke-width="3"/>
+  <path d="M136 230V132M230 230v-66M324 230V98M418 230v-110" stroke="#7c3aed" stroke-width="18" stroke-linecap="round"/>
+  <path d="M112 238h340" stroke="#c4b5fd" stroke-width="7" stroke-linecap="round"/>
+  <circle cx="458" cy="104" r="30" fill="#f59e0b"/>
+  <path d="M445 105l10 10 18-24" fill="none" stroke="#ffffff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>

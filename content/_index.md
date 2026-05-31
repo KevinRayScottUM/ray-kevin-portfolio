@@ -32,21 +32,15 @@ notes = "Postgraduate study focused on artificial intelligence, intelligent syst
 icon = "github"
 link = "https://github.com/KevinRayScottUM"
 
-[[extra.profile_links]]
-name = "GitHub"
-link = "https://github.com/KevinRayScottUM"
-
-[[extra.profile_links]]
-name = "Hugging Face"
+[[extra.avatar_icons]]
+icon = "huggingface"
 link = "https://huggingface.co/TensorCat"
 
-[[extra.profile_links]]
-name = "Kaggle"
+[[extra.avatar_icons]]
+icon = "kaggle"
 link = "https://www.kaggle.com/kevinrayscott"
 +++
 
 I am Kevin Ray Scott (雷凯文 / LEI KAIWEN), a software engineering and artificial intelligence student interested in building reliable intelligent systems that connect models, data, interfaces, and real-world workflows. My recent work focuses on LLM fine-tuning, retrieval-augmented generation, agent harness engineering, reinforcement learning-style optimization, ROS-based robotics interaction, data-driven analytics, computer vision, multimodal AI, and medical AI.
 
 I enjoy turning research ideas into working systems, especially when the system needs evidence grounding, controllable agent behavior, robust failure handling, interpretable evaluation, and practical user interfaces. Across my projects, I try to think beyond isolated models and build complete workflows around data preparation, model adaptation, evaluation, deployment, and user interaction.
-
-You can find my work on [GitHub](https://github.com/KevinRayScottUM), [Hugging Face](https://huggingface.co/TensorCat), and [Kaggle](https://www.kaggle.com/kevinrayscott).

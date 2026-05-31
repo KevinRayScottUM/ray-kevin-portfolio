@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+<script defer src="{{ get_url(path="js/blog-actions.js") }}"></script>
+<div class="blog-index-wrap">
+  <div class="blog-index-heading">
+    <h1>{{ section.title }}</h1>
+    {% if section.description %}<p>{{ section.description }}</p>{% endif %}
+  </div>
+
+  <div class="blog-list">
+  {% for page in section.pages %}
+    {{ blog::page_summary(page=page) }}
+  {% endfor %}
+  </div>
+</div>
+{% endblock content %}

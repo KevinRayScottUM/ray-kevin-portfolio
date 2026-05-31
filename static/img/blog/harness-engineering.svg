@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Agent harness engineering thumbnail">
+  <rect width="600" height="360" fill="#f8fafc"/>
+  <rect x="54" y="54" width="492" height="252" rx="22" fill="#ffffff" stroke="#dbeafe" stroke-width="3"/>
+  <circle cx="142" cy="138" r="48" fill="#2563eb"/>
+  <path d="M123 139h38M142 120v38" stroke="#fff" stroke-width="10" stroke-linecap="round"/>
+  <rect x="237" y="94" width="222" height="38" rx="8" fill="#dbeafe"/>
+  <rect x="237" y="154" width="284" height="24" rx="7" fill="#e5e7eb"/>
+  <rect x="237" y="196" width="246" height="24" rx="7" fill="#e5e7eb"/>
+  <path d="M153 224c54 44 173 48 276 12" fill="none" stroke="#16a34a" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="455" cy="230" r="18" fill="#16a34a"/>
+</svg>
