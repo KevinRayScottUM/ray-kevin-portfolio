@@ -30,6 +30,7 @@ avatar = "img/Kevin.png"
 favicon = "img/Kevin.png"
 email = ""
 contact_in_index = false
+public_base_url = "https://kevinrayscott.pages.dev"
 language_codes = []
 
 menu_items = [

@@ -6,6 +6,7 @@
 {% endblock title -%}
 
 {% block content %}
+{% set share_url = config.extra.public_base_url ~ page.path -%}
 <script defer src="{{ get_url(path="js/blog-actions.js") }}"></script>
 <div class="blog-post-wrap" data-post-id="{{ page.slug }}">
   <div class="blog-post-header">
@@ -25,7 +26,7 @@
       <button type="button" class="blog-action" data-blog-action="bookmark" data-post-id="{{ page.slug }}" aria-label="Bookmark {{ page.title }}">
         {{ icons::factory(icon="bookmark", classes="blog-action-icon") }}
       </button>
-      <button type="button" class="blog-action" data-blog-action="share" data-share-url="{{ page.permalink | safe }}" data-share-title="{{ page.title }}" aria-label="Share {{ page.title }}">
+      <button type="button" class="blog-action" data-blog-action="share" data-share-url="{{ share_url | safe }}" data-share-title="{{ page.title }}" aria-label="Share {{ page.title }}">
         {{ icons::factory(icon="share", classes="blog-action-icon") }}
         <span>Share</span>
       </button>
