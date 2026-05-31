@@ -81,7 +81,7 @@ ZOLA_VERSION = 0.22.1
 
 11. Deploy.
 12. After deployment, copy the generated `*.pages.dev` URL.
-13. If the URL is not `https://ray-kevin-portfolio.pages.dev/`, update `base_url` in `config.toml` and push again.
+13. If the URL is not `https://kevinrayscott.pages.dev/`, update `base_url` in `config.toml` and push again.
 
 After Cloudflare Pages creates the real URL, update `base_url` in `config.toml` if the final URL is different.
 
@@ -90,7 +90,7 @@ After Cloudflare Pages creates the real URL, update `base_url` in `config.toml` 
 The current temporary Cloudflare Pages base URL is:
 
 ```text
-https://ray-kevin-portfolio.pages.dev/
+https://kevinrayscott.pages.dev/
 ```
 
 If the final Cloudflare Pages URL or a custom domain changes, update `base_url` in `config.toml` before building or deploying.
