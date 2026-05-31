@@ -1,0 +1,41 @@
+base_url = "https://ray-kevin-portfolio.pages.dev/"
+title = "Kevin Ray Scott | AI, Robotics & Intelligent Systems"
+theme = "kodama-theme"
+compile_sass = false
+build_search_index = false
+default_language = "en"
+
+[translations]
+Biography = "Biography"
+Interests = "Research Interests"
+Education = "Education"
+toc = "Table of Contents"
+Published = "Published"
+Abstract = "Abstract"
+volume = "volume"
+number = "number"
+pages = "pages"
+
+[slugify]
+paths = "on"
+taxonomies = "on"
+anchors = "on"
+
+[markdown]
+render_emoji = false
+
+[extra]
+version = "1.0.1"
+avatar = "img/Kevin.png"
+favicon = "img/Kevin.png"
+email = ""
+contact_in_index = false
+language_codes = []
+
+menu_items = [
+  { path = "#", name = "Home" },
+  { path = "/project-experience", name = "Project Experience" },
+  { path = "/about", name = "About" },
+  { path = "/blog", name = "Blog / Notes" },
+  { path = "/contacts", name = "Contact" },
+]
