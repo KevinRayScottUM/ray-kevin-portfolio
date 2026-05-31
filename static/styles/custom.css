@@ -264,6 +264,18 @@
   list-style: none;
 }
 
+.portfolio-page-wrap,
+.portfolio-page-wrap .prose {
+  box-sizing: border-box;
+  max-width: 100%;
+}
+
+.portfolio-page-wrap .prose p,
+.portfolio-page-wrap .prose li {
+  overflow-wrap: break-word;
+  word-break: normal;
+}
+
 .blog-index-wrap {
   max-width: 980px;
   margin: 0 auto;
@@ -605,6 +617,11 @@
 
   .portfolio-display-subname {
     font-size: 20px;
+  }
+
+  .portfolio-social-icons {
+    padding-top: 26px;
+    padding-bottom: 34px;
   }
 
   .portfolio-profile-grid {
