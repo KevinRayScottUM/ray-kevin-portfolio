@@ -172,11 +172,28 @@
   display: block;
 }
 
+.prose,
+.prose p,
+.prose li,
+.prose blockquote,
 .portfolio-biography-copy,
-.portfolio-biography-copy p {
+.portfolio-biography-copy p,
+.blog-index-heading p,
+.blog-card-description,
+.blog-post-description,
+.blog-post-tldr,
+.blog-post-content p,
+.blog-post-content li {
   text-align: justify;
   text-justify: inter-word;
   hyphens: auto;
+}
+
+.prose :where(h1, h2, h3, h4, h5, h6),
+.blog-index-heading h1,
+.blog-card-title,
+.blog-post-header h1 {
+  text-align: left;
 }
 
 .portfolio-profile-grid {
