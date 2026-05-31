@@ -10,7 +10,10 @@
         <div class="portfolio-avatar-frame">
           <img class="portfolio-avatar-image" src="{{ get_url(path=config.extra.avatar) }}" alt="Profile image"/>
         </div>
-        <h1 class="text-center font-bold break-normal text-gray-900 text-3xl py-1">{{ section.title }}</h1>
+        <h1 class="portfolio-display-name">{{ section.title }}</h1>
+        {% if section.extra.display_name_secondary %}
+        <div class="portfolio-display-subname">{{ section.extra.display_name_secondary }}</div>
+        {% endif %}
         {% if section.extra.title %}
         <h2 class="text-center font-bold break-normal text-gray-400 text-lg py-1">{{ section.extra.title | markdown(inline=true) | safe }}</h2>
         {% endif %}

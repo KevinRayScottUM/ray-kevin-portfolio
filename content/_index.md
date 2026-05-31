@@ -1,9 +1,10 @@
 +++
-title = "Kevin Ray Scott | 雷凯文"
+title = "LEI KAIWEN ｜雷凯文"
 template = "index.html"
 page_template = "page.html"
 
 [extra]
+display_name_secondary = "Kevin Ray Scott"
 title = "AI, Robotics, Data Analytics & Intelligent Agent Developer"
 
 interests = [

@@ -97,6 +97,22 @@
   text-align: center;
 }
 
+.portfolio-display-name {
+  margin: 18px auto 0;
+  color: #111827;
+  font-weight: 800;
+  font-size: 31px;
+  line-height: 1.15;
+}
+
+.portfolio-display-subname {
+  margin-top: 8px;
+  color: #111827;
+  font-weight: 800;
+  font-size: 22px;
+  line-height: 1.2;
+}
+
 .portfolio-avatar-frame {
   width: 224px;
   height: 224px;
@@ -397,6 +413,14 @@
   .portfolio-avatar-frame {
     width: 202px;
     height: 202px;
+  }
+
+  .portfolio-display-name {
+    font-size: 27px;
+  }
+
+  .portfolio-display-subname {
+    font-size: 20px;
   }
 
   .blog-index-wrap,
