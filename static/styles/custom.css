@@ -549,6 +549,11 @@
 }
 
 @media (min-width: 1280px) {
+  .portfolio-nav-list {
+    justify-content: flex-start;
+    padding-left: clamp(84px, 6.7vw, 96px);
+  }
+
   .portfolio-hero-layout {
     max-width: 1180px;
     justify-content: flex-start;
