@@ -1,6 +1,6 @@
 +++
 title = "Ferrari: Federated Feature Unlearning via Feature Sensitivity"
-date = 2026-05-25
+date = 2025-09-18
 
 description = "A technical reading note on the NeurIPS 2024 Ferrari paper, which studies feature-level unlearning in federated learning through sensitivity minimization."
 

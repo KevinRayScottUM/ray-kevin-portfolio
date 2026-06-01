@@ -1,6 +1,6 @@
 +++
 title = "Retrieval Is Not Grounding: What Makes RAG Reliable?"
-date = 2026-05-30
+date = 2024-10-20
 
 description = "Retrieval gives a model context, but grounding requires evidence selection, answer constraints, and failure-aware evaluation."
 

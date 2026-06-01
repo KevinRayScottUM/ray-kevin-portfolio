@@ -1,6 +1,6 @@
 +++
 title = "Multimodal Interfaces for Human-Centered Robotics"
-date = 2026-05-28
+date = 2022-07-22
 
 description = "Notes on combining gesture, voice, state machines, and feedback loops for robotics systems that feel controllable."
 

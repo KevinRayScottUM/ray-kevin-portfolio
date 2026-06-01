@@ -1,6 +1,6 @@
 +++
 title = "Medical AI Needs Explainable Failure, Not Only Accuracy"
-date = 2026-05-27
+date = 2023-05-09
 
 description = "A reflection on why medical AI systems should report uncertainty, failure modes, and evidence rather than only predictions."
 

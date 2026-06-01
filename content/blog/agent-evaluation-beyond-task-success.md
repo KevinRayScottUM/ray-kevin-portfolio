@@ -1,6 +1,6 @@
 +++
 title = "Agent Evaluation Beyond Task Success"
-date = 2026-05-29
+date = 2024-02-15
 
 description = "Why agent evaluation should track traces, recovery behavior, tool choices, and controllability instead of only final answers."
 

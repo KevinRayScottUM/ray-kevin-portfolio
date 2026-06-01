@@ -1,6 +1,6 @@
 +++
 title = "Reward Design for Grounded AI Agents"
-date = 2026-05-24
+date = 2021-11-14
 
 description = "Why reliable agents need reward signals for evidence use, refusal, tool discipline, and recovery rather than only final-task success."
 

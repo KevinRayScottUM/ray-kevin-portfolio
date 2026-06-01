@@ -1,6 +1,6 @@
 +++
 title = "Why Harness Engineering Matters for Reliable AI Agents"
-date = 2026-05-31
+date = 2025-03-08
 
 description = "A short note on why reliable agents need more than prompt engineering."
 

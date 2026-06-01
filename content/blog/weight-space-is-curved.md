@@ -1,6 +1,6 @@
 +++
 title = "DeepSeek V4 and Curved Weight Space: Full Rank Is Not the Whole Geometry"
-date = 2026-05-26
+date = 2026-01-12
 
 description = "A mathematical note on why full-rank parameter matrices can still live near a much lower-dimensional curved manifold."
 
