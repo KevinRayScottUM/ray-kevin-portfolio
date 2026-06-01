@@ -45,8 +45,22 @@
 
   function animateIndicator(indicator, from, to) {
     var direction = to.left >= from.left ? 1 : -1;
-    var anticipation = Math.min(14, Math.abs(to.left - from.left) * 0.16);
-    var overshoot = Math.min(18, Math.abs(to.left - from.left) * 0.13);
+    var fromRight = from.left + from.width;
+    var toRight = to.left + to.width;
+    var stretchLeft = direction > 0 ? from.left : Math.min(to.left, from.left);
+    var stretchRight = direction > 0 ? Math.max(toRight, fromRight) : fromRight;
+    var stretchWidth = Math.max(24, stretchRight - stretchLeft);
+
+    if (indicator.getAnimations) {
+      indicator.getAnimations().forEach(function (animation) {
+        animation.cancel();
+      });
+    }
+
+    if (!indicator.animate) {
+      place(indicator, to);
+      return;
+    }
 
     indicator.animate(
       [
@@ -56,14 +70,14 @@
           offset: 0,
         },
         {
-          transform: "translateX(" + (from.left - direction * anticipation) + "px)",
-          width: Math.max(24, from.width * 0.92) + "px",
-          offset: 0.14,
+          transform: "translateX(" + stretchLeft + "px)",
+          width: stretchWidth + "px",
+          offset: 0.38,
         },
         {
-          transform: "translateX(" + (to.left + direction * overshoot) + "px)",
-          width: Math.max(to.width, from.width) + "px",
-          offset: 0.78,
+          transform: "translateX(" + to.left + "px)",
+          width: Math.max(to.width, stretchWidth * 0.42) + "px",
+          offset: 0.74,
         },
         {
           transform: "translateX(" + to.left + "px)",
@@ -72,8 +86,8 @@
         },
       ],
       {
-        duration: 760,
-        easing: "cubic-bezier(0.2, 0.86, 0.22, 1)",
+        duration: 920,
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
       }
     );
   }

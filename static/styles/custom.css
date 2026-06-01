@@ -107,11 +107,12 @@
   width: 0;
   height: 3px;
   border-radius: 999px;
-  background: #2563eb;
-  box-shadow: 0 3px 12px rgba(37, 99, 235, 0.24);
+  background: linear-gradient(90deg, #2563eb 0%, #3b82f6 100%);
+  box-shadow: 0 3px 14px rgba(37, 99, 235, 0.22);
   pointer-events: none;
   transform: translateX(0);
   transform-origin: left center;
+  will-change: transform, width;
 }
 
 .portfolio-profile-panel {
