@@ -2,6 +2,10 @@
 <script>
   (function () {
     try {
+      if (window.matchMedia && window.matchMedia("(pointer: fine)").matches) {
+        document.documentElement.classList.add("tensorcat-cursor-enabled");
+      }
+
       if (window.sessionStorage && window.sessionStorage.getItem("tensorcat-nav-transition")) {
         document.documentElement.classList.add("portfolio-transition-preload");
       }
