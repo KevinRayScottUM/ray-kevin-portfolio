@@ -513,6 +513,21 @@ img.inline.h-6.w-6 {
   margin-top: 0;
 }
 
+.math-block {
+  margin: 18px 0;
+  padding: 12px 14px;
+  color: #111827;
+  background: #f8fafc;
+  border: 1px solid #e5e7eb;
+  border-left: 4px solid #2563eb;
+  border-radius: 6px;
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", monospace;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: left;
+  overflow-x: auto;
+}
+
 @media (max-width: 860px) {
   .portfolio-nav-inner {
     align-items: flex-start;

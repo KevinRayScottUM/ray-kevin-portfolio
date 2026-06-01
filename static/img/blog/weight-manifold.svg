@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Curved weight-space manifold">
+  <rect width="600" height="360" fill="#f8fafc"/>
+  <rect x="34" y="38" width="532" height="284" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="58" y="76" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Curved Weight Space, Low-Dimensional Motion</text>
+  <path d="M84 236c78-88 156-116 236-74 73 38 132 16 196-70" fill="none" stroke="#93c5fd" stroke-width="38" stroke-linecap="round"/>
+  <path d="M84 236c78-88 156-116 236-74 73 38 132 16 196-70" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
+  <g fill="#0f172a">
+    <circle cx="190" cy="174" r="7"/>
+    <circle cx="320" cy="162" r="7"/>
+    <circle cx="454" cy="126" r="7"/>
+  </g>
+  <g stroke="#ea580c" stroke-width="3" stroke-linecap="round">
+    <line x1="190" y1="174" x2="254" y2="138"/>
+    <line x1="320" y1="162" x2="382" y2="170"/>
+    <line x1="454" y1="126" x2="500" y2="76"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">
+    <text x="82" y="292">full rank can be a local coordinate artifact</text>
+    <text x="330" y="292">dim(M) much smaller than dim(W)</text>
+    <text x="96" y="116">W in R^D</text>
+    <text x="412" y="214">tangent update: delta W in T_W M</text>
+  </g>
+</svg>

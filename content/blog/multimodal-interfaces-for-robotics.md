@@ -7,7 +7,7 @@ description = "Notes on combining gesture, voice, state machines, and feedback l
 [extra]
 tldr = "Human-centered robotics interfaces need more than recognition accuracy. They need clear state, feedback, lock-in rules, and recovery paths."
 thumbnail = "img/blog/multimodal-robotics.svg"
-likes = 6
+likes = 143
 +++
 
 Robotics interfaces often focus on recognition accuracy: did the system classify the gesture or command correctly? Accuracy matters, but a human-centered interface also needs clear state. The user should know when the system is listening, what it selected, and how to cancel or recover from a wrong interpretation.

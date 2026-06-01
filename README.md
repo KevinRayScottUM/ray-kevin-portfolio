@@ -116,7 +116,8 @@ The function automatically creates the `blog_likes` table if it does not exist. 
 Behavior:
 
 - `GET /api/likes?posts=post-a,post-b` returns public counts.
-- `POST /api/likes` with `{ "postId": "post-a" }` increments that post count.
+- `POST /api/likes` with `{ "postId": "post-a", "action": "like" }` increments that post count.
+- `POST /api/likes` with `{ "postId": "post-a", "action": "unlike" }` decrements that post count without going below zero.
 - Open blog pages refresh cloud counts on load, when the tab becomes visible again, and about every 30 seconds while visible.
 - If D1 is not bound yet, the page gracefully falls back to the static Markdown count and local browser state.
 

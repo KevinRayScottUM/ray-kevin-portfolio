@@ -7,7 +7,7 @@ description = "A reflection on why medical AI systems should report uncertainty,
 [extra]
 tldr = "In medical AI, the failure case matters as much as the success case. Systems should expose uncertainty, evidence, and model limits."
 thumbnail = "img/blog/medical-ai.svg"
-likes = 8
+likes = 157
 +++
 
 Medical AI is often discussed through metrics such as accuracy, F1, AUC, or Dice score. These metrics are necessary, but they do not fully describe whether a system is safe to reason with. A model can perform well on a benchmark while still failing silently on distribution shifts, imaging artifacts, or rare conditions.

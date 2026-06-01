@@ -7,7 +7,7 @@ description = "Why agent evaluation should track traces, recovery behavior, tool
 [extra]
 tldr = "A final answer can look correct while the agent's path is fragile. Evaluation should inspect the trace, the tool calls, and the failure recovery behavior."
 thumbnail = "img/blog/agent-evaluation.svg"
-likes = 7
+likes = 164
 +++
 
 Many agent benchmarks focus on whether the final task was completed. That is useful, but it is not enough for reliable deployment. An agent can arrive at a correct-looking answer through an unsafe tool call, a lucky retrieval result, or a reasoning path that cannot recover when the environment changes.

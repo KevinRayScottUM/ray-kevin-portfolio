@@ -7,7 +7,7 @@ description = "Retrieval gives a model context, but grounding requires evidence 
 [extra]
 tldr = "A RAG system is not reliable just because it retrieves documents. The important layer is how evidence is selected, checked, cited, and evaluated."
 thumbnail = "img/blog/rag-grounding.svg"
-likes = 9
+likes = 171
 +++
 
 Retrieval-Augmented Generation is often described as a way to reduce hallucination, but retrieval alone does not guarantee grounded answers. A system can retrieve relevant documents and still answer with unsupported claims, mix sources incorrectly, or ignore the evidence when the model's prior knowledge feels more fluent.

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Reward design for grounded agents">
+  <rect width="600" height="360" fill="#f8fafc"/>
+  <rect x="34" y="38" width="532" height="284" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="58" y="76" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Reward Design for Grounded Agents</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">
+    <rect x="62" y="128" width="114" height="52" rx="10" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="90" y="158" fill="#1d4ed8">Answer</text>
+    <rect x="238" y="128" width="124" height="52" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="264" y="158" fill="#047857">Evidence</text>
+    <rect x="424" y="128" width="112" height="52" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="452" y="158" fill="#c2410c">Penalty</text>
+  </g>
+  <g stroke="#0f172a" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" fill="none">
+    <path d="M176 154h56"/>
+    <path d="m224 145 10 9-10 9"/>
+    <path d="M362 154h56"/>
+    <path d="m410 145 10 9-10 9"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="16" fill="#111827">
+    <text x="90" y="248">R = + grounded answer</text>
+    <text x="90" y="276">    + useful tool use</text>
+    <text x="90" y="304">    - unsupported claim - unsafe action</text>
+  </g>
+  <path d="M78 214h444" stroke="#e5e7eb" stroke-width="2"/>
+</svg>

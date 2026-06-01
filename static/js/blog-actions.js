@@ -1,5 +1,6 @@
 (function () {
   var cloudLikeCounts = {};
+  var fallbackStorage = {};
   var likeRefreshTimer = null;
 
   function storageKey(postId, action) {
@@ -10,20 +11,38 @@
     return Object.prototype.hasOwnProperty.call(cloudLikeCounts, postId);
   }
 
+  function readStoredValue(key) {
+    try {
+      if (window.localStorage) return window.localStorage.getItem(key);
+    } catch (_error) {
+      return fallbackStorage[key] || null;
+    }
+    return fallbackStorage[key] || null;
+  }
+
+  function writeStoredValue(key, value) {
+    fallbackStorage[key] = value;
+    try {
+      if (window.localStorage) window.localStorage.setItem(key, value);
+    } catch (_error) {
+      // Keep the in-memory fallback for browser contexts where storage is blocked.
+    }
+  }
+
   function getLiked(postId) {
-    return window.localStorage.getItem(storageKey(postId, "liked")) === "true";
+    return readStoredValue(storageKey(postId, "liked")) === "true";
   }
 
   function setLiked(postId, value) {
-    window.localStorage.setItem(storageKey(postId, "liked"), value ? "true" : "false");
+    writeStoredValue(storageKey(postId, "liked"), value ? "true" : "false");
   }
 
   function getBookmarked(postId) {
-    return window.localStorage.getItem(storageKey(postId, "bookmarked")) === "true";
+    return readStoredValue(storageKey(postId, "bookmarked")) === "true";
   }
 
   function setBookmarked(postId, value) {
-    window.localStorage.setItem(storageKey(postId, "bookmarked"), value ? "true" : "false");
+    writeStoredValue(storageKey(postId, "bookmarked"), value ? "true" : "false");
   }
 
   function collectPostIds() {
@@ -60,6 +79,11 @@
     collectPostIds().forEach(syncPost);
   }
 
+  function adjustCloudCount(postId, delta) {
+    if (!hasCloudCount(postId)) return;
+    cloudLikeCounts[postId] = Math.max(0, Number(cloudLikeCounts[postId] || 0) + delta);
+  }
+
   function loadCloudLikes() {
     var postIds = collectPostIds();
     if (!postIds.length || !window.fetch) return;
@@ -81,7 +105,7 @@
     });
   }
 
-  function saveCloudLike(postId) {
+  function saveCloudLike(postId, liked) {
     if (!window.fetch) return Promise.reject(new Error("Fetch unavailable"));
 
     return window.fetch("/api/likes", {
@@ -90,7 +114,7 @@
         accept: "application/json",
         "content-type": "application/json",
       },
-      body: JSON.stringify({ postId: postId }),
+      body: JSON.stringify({ postId: postId, action: liked ? "like" : "unlike", liked: liked }),
       cache: "no-store",
     }).then(function (response) {
       if (!response.ok) throw new Error("Likes API unavailable");
@@ -203,15 +227,16 @@
     var action = button.getAttribute("data-blog-action");
     var postId = button.getAttribute("data-post-id");
     if (action === "like" && postId) {
-      if (getLiked(postId)) {
-        syncPost(postId);
-        return;
-      }
+      var nextLiked = !getLiked(postId);
+      var delta = nextLiked ? 1 : -1;
 
-      setLiked(postId, true);
-      if (hasCloudCount(postId)) cloudLikeCounts[postId] += 1;
+      setLiked(postId, nextLiked);
+      adjustCloudCount(postId, delta);
       syncPost(postId);
-      saveCloudLike(postId).catch(function () {
+
+      saveCloudLike(postId, nextLiked).catch(function () {
+        setLiked(postId, !nextLiked);
+        adjustCloudCount(postId, -delta);
         syncPost(postId);
       });
     }

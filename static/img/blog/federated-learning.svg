@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Federated learning architecture">
+  <rect width="600" height="360" fill="#f8fafc"/>
+  <rect x="34" y="38" width="532" height="284" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
+  <text x="58" y="76" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Federated Learning: Updates Move, Data Stays</text>
+  <g font-family="Inter, Arial, sans-serif" font-size="12" font-weight="700">
+    <rect x="232" y="122" width="136" height="76" rx="14" fill="#eff6ff" stroke="#2563eb" stroke-width="2"/>
+    <text x="262" y="153" fill="#1d4ed8">Server</text>
+    <text x="254" y="172" fill="#1d4ed8">FedAvg</text>
+    <rect x="70" y="234" width="110" height="54" rx="10" fill="#ecfdf5" stroke="#059669" stroke-width="2"/>
+    <text x="100" y="266" fill="#047857">client A</text>
+    <rect x="245" y="234" width="110" height="54" rx="10" fill="#fff7ed" stroke="#ea580c" stroke-width="2"/>
+    <text x="275" y="266" fill="#c2410c">client B</text>
+    <rect x="420" y="234" width="110" height="54" rx="10" fill="#f5f3ff" stroke="#7c3aed" stroke-width="2"/>
+    <text x="450" y="266" fill="#6d28d9">client C</text>
+  </g>
+  <g fill="none" stroke="#0f172a" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M180 244c40-50 62-72 92-78"/>
+    <path d="M300 234v-30"/>
+    <path d="M420 244c-40-50-62-72-92-78"/>
+    <path d="m260 167 12-1-7 10M300 215l-8-10h16M340 167-328 166l7 10"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif" font-size="12" fill="#64748b">
+    <text x="76" y="124">local data never leaves device</text>
+    <text x="76" y="146">gradients need privacy controls</text>
+    <text x="376" y="124">non-IID clients</text>
+    <text x="376" y="146">communication bottlenecks</text>
+  </g>
+</svg>

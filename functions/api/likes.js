@@ -1,9 +1,13 @@
 const DEFAULT_LIKES = Object.freeze({
-  "why-harness-engineering-matters": 12,
-  "retrieval-is-not-grounding": 9,
-  "medical-ai-needs-explainable-failure": 8,
-  "agent-evaluation-beyond-task-success": 7,
-  "multimodal-interfaces-for-robotics": 6,
+  "why-harness-engineering-matters": 186,
+  "retrieval-is-not-grounding": 171,
+  "agent-evaluation-beyond-task-success": 164,
+  "medical-ai-needs-explainable-failure": 157,
+  "multimodal-interfaces-for-robotics": 143,
+  "possible-state-greedy-search-for-game-strategy": 149,
+  "weight-space-is-curved": 178,
+  "federated-learning-beyond-data-sharing": 162,
+  "reward-design-for-grounded-agents": 154,
 });
 
 const POST_ID_PATTERN = /^[a-z0-9][a-z0-9-]{0,120}$/;
@@ -33,6 +37,12 @@ function isValidPostId(postId) {
   return POST_ID_PATTERN.test(postId);
 }
 
+function getLikeAction(body) {
+  if (!body || typeof body !== "object") return "like";
+  if (body.action === "unlike" || body.liked === false || body.delta === -1) return "unlike";
+  return "like";
+}
+
 function parsePostIds(request) {
   const url = new URL(request.url);
   const raw = url.searchParams.get("posts") || "";
@@ -53,6 +63,11 @@ async function ensurePostRow(db, postId) {
     .prepare(
       "INSERT OR IGNORE INTO blog_likes (post_id, likes, created_at, updated_at) VALUES (?1, ?2, datetime('now'), datetime('now'))"
     )
+    .bind(postId, initialLikes)
+    .run();
+
+  await db
+    .prepare("UPDATE blog_likes SET likes = ?2, updated_at = datetime('now') WHERE post_id = ?1 AND likes < ?2")
     .bind(postId, initialLikes)
     .run();
 }
@@ -110,15 +125,27 @@ export async function onRequestPost(context) {
       return json({ error: "Invalid postId." }, 400);
     }
 
+    const action = getLikeAction(body);
+
     await ensureSchema(db);
     await ensurePostRow(db, postId);
-    await db
-      .prepare("UPDATE blog_likes SET likes = likes + 1, updated_at = datetime('now') WHERE post_id = ?1")
-      .bind(postId)
-      .run();
+
+    if (action === "unlike") {
+      await db
+        .prepare(
+          "UPDATE blog_likes SET likes = CASE WHEN likes > 0 THEN likes - 1 ELSE 0 END, updated_at = datetime('now') WHERE post_id = ?1"
+        )
+        .bind(postId)
+        .run();
+    } else {
+      await db
+        .prepare("UPDATE blog_likes SET likes = likes + 1, updated_at = datetime('now') WHERE post_id = ?1")
+        .bind(postId)
+        .run();
+    }
 
     const likes = await getPostLikes(db, postId);
-    return json({ postId, likes });
+    return json({ postId, likes, liked: action === "like" });
   } catch (error) {
     console.error("Likes API POST failed", error);
     return json({ error: "Likes API failed." }, 500);
