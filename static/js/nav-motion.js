@@ -1,7 +1,7 @@
 (function () {
   var STORAGE_KEY = "tensorcat-nav-transition";
   var TRANSITION_TTL = 2600;
-  var EXIT_DELAY = 230;
+  var EXIT_DELAY = 240;
   var activeAnimation = null;
   var pendingPageExit = false;
 
@@ -90,18 +90,6 @@
     indicator.style.transform = "translate3d(" + position.left + "px, 0, 0)";
   }
 
-  function ensureTransitionLayer() {
-    var layer = document.querySelector("[data-page-transition-layer]");
-    if (layer) return layer;
-
-    layer = document.createElement("div");
-    layer.className = "portfolio-transition-layer";
-    layer.setAttribute("data-page-transition-layer", "");
-    layer.setAttribute("aria-hidden", "true");
-    document.body.appendChild(layer);
-    return layer;
-  }
-
   function clearPreload() {
     document.documentElement.classList.remove("portfolio-transition-preload");
   }
@@ -112,16 +100,12 @@
       return;
     }
 
-    var layer = ensureTransitionLayer();
-    layer.classList.add("is-entering", "is-visible");
+    document.body.classList.add("portfolio-page-entering");
     clearPreload();
 
     window.requestAnimationFrame(function () {
       window.requestAnimationFrame(function () {
-        layer.classList.remove("is-visible");
-        window.setTimeout(function () {
-          layer.classList.remove("is-entering");
-        }, 520);
+        document.body.classList.remove("portfolio-page-entering");
       });
     });
   }
@@ -130,11 +114,8 @@
     if (pendingPageExit) return;
     pendingPageExit = true;
 
-    var layer = ensureTransitionLayer();
-    layer.classList.remove("is-entering");
-
     window.requestAnimationFrame(function () {
-      layer.classList.add("is-visible");
+      document.body.classList.add("portfolio-page-exiting");
       window.setTimeout(function () {
         window.location.href = href;
       }, EXIT_DELAY);
@@ -377,6 +358,7 @@
       window.requestAnimationFrame(function () {
         pendingPageExit = false;
         clearPreload();
+        document.body.classList.remove("portfolio-page-entering", "portfolio-page-exiting");
         syncToActive(scroll, indicator);
       });
     });

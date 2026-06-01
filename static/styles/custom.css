@@ -10,30 +10,25 @@
   border: 0;
 }
 
-html.portfolio-transition-preload body {
+body > :not(#header) {
+  transition:
+    opacity 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    transform 420ms cubic-bezier(0.16, 1, 0.3, 1),
+    filter 420ms cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: opacity, transform, filter;
+}
+
+html.portfolio-transition-preload body > :not(#header),
+body.portfolio-page-entering > :not(#header) {
   opacity: 0;
+  transform: translate3d(0, 8px, 0) scale(0.998);
+  filter: blur(1px);
 }
 
-.portfolio-transition-layer {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
+body.portfolio-page-exiting > :not(#header) {
   opacity: 0;
-  background:
-    radial-gradient(circle at 50% 28%, rgba(248, 250, 252, 0.78), rgba(255, 255, 255, 0.98) 58%),
-    rgba(255, 255, 255, 0.96);
-  transition: opacity 280ms cubic-bezier(0.22, 1, 0.36, 1);
-  will-change: opacity;
-}
-
-.portfolio-transition-layer.is-visible {
-  opacity: 1;
-}
-
-.portfolio-transition-layer.is-entering {
-  transition-duration: 460ms;
-  transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  transform: translate3d(0, -6px, 0) scale(0.998);
+  filter: blur(1px);
 }
 
 .portfolio-nav {
