@@ -201,8 +201,8 @@
         },
       ],
       {
-        duration: 820,
-        easing: "cubic-bezier(0.18, 1, 0.32, 1)",
+        duration: 1040,
+        easing: "cubic-bezier(0.16, 1, 0.3, 1)",
         fill: "forwards",
       }
     );
