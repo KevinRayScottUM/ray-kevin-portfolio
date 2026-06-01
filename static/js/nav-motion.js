@@ -1,7 +1,7 @@
 (function () {
-  var NAVIGATE_DELAY = 660;
+  var STORAGE_KEY = "tensorcat-nav-transition";
+  var TRANSITION_TTL = 2600;
   var activeAnimation = null;
-  var pendingNavigation = false;
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -9,6 +9,54 @@
     } else {
       callback();
     }
+  }
+
+  function normalizeUrl(value) {
+    try {
+      var url = new URL(value, window.location.href);
+      var path = url.pathname.replace(/\/+$/, "");
+      return path || "/";
+    } catch (_error) {
+      return "/";
+    }
+  }
+
+  function writeTransition(fromHref, toHref) {
+    try {
+      window.sessionStorage.setItem(
+        STORAGE_KEY,
+        JSON.stringify({
+          from: normalizeUrl(fromHref),
+          to: normalizeUrl(toHref),
+          time: Date.now(),
+        })
+      );
+    } catch (_error) {
+      // The navigation still works; only the cross-page underline motion is skipped.
+    }
+  }
+
+  function readTransition() {
+    try {
+      var raw = window.sessionStorage.getItem(STORAGE_KEY);
+      window.sessionStorage.removeItem(STORAGE_KEY);
+      if (!raw) return null;
+
+      var transition = JSON.parse(raw);
+      if (!transition || Date.now() - transition.time > TRANSITION_TTL) return null;
+      if (transition.to !== normalizeUrl(window.location.href)) return null;
+
+      return transition;
+    } catch (_error) {
+      return null;
+    }
+  }
+
+  function linkForPath(path) {
+    var links = Array.prototype.slice.call(document.querySelectorAll(".portfolio-nav-link"));
+    return links.find(function (link) {
+      return normalizeUrl(link.href) === path;
+    });
   }
 
   function measure(scroll, link) {
@@ -45,27 +93,12 @@
     var travel = Math.abs(distance);
     var direction = distance >= 0 ? 1 : -1;
     var widthDelta = Math.abs(to.width - from.width);
-    var stretch = Math.min(86, Math.max(18, travel * 0.34 + widthDelta * 0.28));
+    var stretch = Math.min(104, Math.max(22, travel * 0.38 + widthDelta * 0.32));
     var glideWidth = Math.max(
       to.width,
-      from.width + Math.min(52, travel * 0.18) + widthDelta * 0.22
+      from.width + Math.min(60, travel * 0.2) + widthDelta * 0.25
     );
-    var settle = Math.min(7, Math.max(2, travel * 0.018));
-
-    var first = {
-      left: direction > 0 ? from.left : from.left - stretch,
-      width: from.width + stretch,
-    };
-
-    var second = {
-      left: from.left + distance * 0.66 - (direction < 0 ? stretch * 0.16 : 0),
-      width: glideWidth,
-    };
-
-    var third = {
-      left: to.left - direction * settle,
-      width: to.width + settle * 2,
-    };
+    var settle = Math.min(6, Math.max(2, travel * 0.014));
 
     return [
       {
@@ -74,18 +107,24 @@
         offset: 0,
       },
       {
-        transform: "translate3d(" + first.left + "px, 0, 0)",
-        width: first.width + "px",
-        offset: 0.3,
+        transform:
+          "translate3d(" +
+          (direction > 0 ? from.left : from.left - stretch) +
+          "px, 0, 0)",
+        width: from.width + stretch + "px",
+        offset: 0.28,
       },
       {
-        transform: "translate3d(" + second.left + "px, 0, 0)",
-        width: second.width + "px",
+        transform:
+          "translate3d(" +
+          (from.left + distance * 0.72 - (direction < 0 ? stretch * 0.12 : 0)) +
+          "px, 0, 0)",
+        width: glideWidth + "px",
         offset: 0.72,
       },
       {
-        transform: "translate3d(" + third.left + "px, 0, 0)",
-        width: third.width + "px",
+        transform: "translate3d(" + (to.left - direction * settle) + "px, 0, 0)",
+        width: to.width + settle * 2 + "px",
         offset: 0.9,
       },
       {
@@ -96,16 +135,16 @@
     ];
   }
 
-  function animateIndicator(indicator, from, to, duration) {
+  function animateIndicator(indicator, from, to) {
     if (activeAnimation) activeAnimation.cancel();
 
     if (!indicator.animate) {
       place(indicator, to);
-      return null;
+      return;
     }
 
     activeAnimation = indicator.animate(stretchKeyframes(from, to), {
-      duration: duration || 720,
+      duration: 840,
       easing: "cubic-bezier(0.22, 1, 0.36, 1)",
       fill: "forwards",
     });
@@ -117,8 +156,6 @@
         activeAnimation = null;
       }
     };
-
-    return activeAnimation;
   }
 
   function syncToActive(scroll, indicator) {
@@ -126,9 +163,29 @@
     if (!activeLink) return null;
 
     centerInScroll(scroll, activeLink);
-    var position = measure(scroll, activeLink);
-    place(indicator, position);
+    place(indicator, measure(scroll, activeLink));
     return activeLink;
+  }
+
+  function runArrivalMotion(scroll, indicator, transition) {
+    var activeLink = document.querySelector(".portfolio-nav-link.is-active");
+    var fromLink = transition ? linkForPath(transition.from) : null;
+    if (!activeLink || !fromLink || fromLink === activeLink) {
+      syncToActive(scroll, indicator);
+      return;
+    }
+
+    centerInScroll(scroll, activeLink);
+
+    window.requestAnimationFrame(function () {
+      var from = measure(scroll, fromLink);
+      var to = measure(scroll, activeLink);
+
+      place(indicator, from);
+      window.requestAnimationFrame(function () {
+        animateIndicator(indicator, from, to);
+      });
+    });
   }
 
   function isNormalClick(event) {
@@ -148,30 +205,16 @@
 
     scroll.classList.add("is-enhanced");
 
-    var activeLink = syncToActive(scroll, indicator);
-    if (!activeLink) return;
+    runArrivalMotion(scroll, indicator, readTransition());
 
     document.querySelectorAll(".portfolio-nav-link").forEach(function (link) {
       link.addEventListener("click", function (event) {
-        if (!isNormalClick(event) || pendingNavigation) return;
+        if (!isNormalClick(event)) return;
 
-        var href = link.href;
-        if (!href || href === window.location.href) return;
+        var activeLink = document.querySelector(".portfolio-nav-link.is-active");
+        if (!activeLink || normalizeUrl(link.href) === normalizeUrl(activeLink.href)) return;
 
-        var current = document.querySelector(".portfolio-nav-link.is-active") || activeLink;
-        var from = measure(scroll, current);
-        var to = measure(scroll, link);
-
-        event.preventDefault();
-        pendingNavigation = true;
-
-        current.classList.remove("is-active");
-        link.classList.add("is-active");
-        animateIndicator(indicator, from, to, 760);
-
-        window.setTimeout(function () {
-          window.location.href = href;
-        }, NAVIGATE_DELAY);
+        writeTransition(activeLink.href, link.href);
       });
     });
 
@@ -183,9 +226,9 @@
       }, 90);
     });
 
-    window.addEventListener("pageshow", function () {
+    window.addEventListener("pageshow", function (event) {
+      if (!event.persisted) return;
       window.requestAnimationFrame(function () {
-        pendingNavigation = false;
         syncToActive(scroll, indicator);
       });
     });
