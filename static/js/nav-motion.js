@@ -158,6 +158,64 @@
     };
   }
 
+  function playActiveIndicator(indicator, position) {
+    if (activeAnimation) activeAnimation.cancel();
+
+    if (!indicator.animate) {
+      place(indicator, position);
+      return;
+    }
+
+    var bloom = Math.min(34, Math.max(18, position.width * 0.28));
+    var softSettle = Math.min(8, Math.max(4, position.width * 0.08));
+    var expanded = {
+      left: position.left - bloom,
+      width: position.width + bloom * 2,
+    };
+    var settled = {
+      left: position.left + softSettle / 2,
+      width: Math.max(24, position.width - softSettle),
+    };
+
+    activeAnimation = indicator.animate(
+      [
+        {
+          transform: "translate3d(" + position.left + "px, 0, 0)",
+          width: position.width + "px",
+          offset: 0,
+        },
+        {
+          transform: "translate3d(" + expanded.left + "px, 0, 0)",
+          width: expanded.width + "px",
+          offset: 0.42,
+        },
+        {
+          transform: "translate3d(" + settled.left + "px, 0, 0)",
+          width: settled.width + "px",
+          offset: 0.82,
+        },
+        {
+          transform: "translate3d(" + position.left + "px, 0, 0)",
+          width: position.width + "px",
+          offset: 1,
+        },
+      ],
+      {
+        duration: 620,
+        easing: "cubic-bezier(0.2, 1, 0.22, 1)",
+        fill: "forwards",
+      }
+    );
+
+    activeAnimation.onfinish = function () {
+      place(indicator, position);
+      if (activeAnimation) {
+        activeAnimation.cancel();
+        activeAnimation = null;
+      }
+    };
+  }
+
   function syncToActive(scroll, indicator) {
     var activeLink = document.querySelector(".portfolio-nav-link.is-active");
     if (!activeLink) return null;
@@ -212,7 +270,14 @@
         if (!isNormalClick(event)) return;
 
         var activeLink = document.querySelector(".portfolio-nav-link.is-active");
-        if (!activeLink || normalizeUrl(link.href) === normalizeUrl(activeLink.href)) return;
+        if (!activeLink) return;
+
+        if (normalizeUrl(link.href) === normalizeUrl(activeLink.href)) {
+          event.preventDefault();
+          centerInScroll(scroll, activeLink);
+          playActiveIndicator(indicator, measure(scroll, activeLink));
+          return;
+        }
 
         writeTransition(activeLink.href, link.href);
       });
