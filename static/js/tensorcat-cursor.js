@@ -16,14 +16,7 @@
     node.className = "tensorcat-cursor";
     node.setAttribute("aria-hidden", "true");
     node.innerHTML =
-      '<span class="tensorcat-tail"></span>' +
-      '<span class="tensorcat-cursor-core">' +
-      '<span class="tensorcat-ear tensorcat-ear-left"></span>' +
-      '<span class="tensorcat-ear tensorcat-ear-right"></span>' +
-      '<span class="tensorcat-eye tensorcat-eye-left"></span>' +
-      '<span class="tensorcat-eye tensorcat-eye-right"></span>' +
-      '<span class="tensorcat-nose"></span>' +
-      "</span>";
+      '<img class="tensorcat-cursor-image" src="/img/cursor/tensorcat_cursor_64.png" alt="">';
     document.body.appendChild(node);
     return node;
   }
@@ -34,7 +27,7 @@
 
     if (cursorNode) {
       cursorNode.style.transform =
-        "translate3d(" + (cursor.x - 8) + "px, " + (cursor.y - 10) + "px, 0)";
+        "translate3d(" + (cursor.x - 16) + "px, " + (cursor.y - 16) + "px, 0)";
     }
 
     rafId = window.requestAnimationFrame(render);
@@ -57,7 +50,7 @@
     cursorNode.classList.add("is-clicking");
     clickTimer = window.setTimeout(function () {
       cursorNode.classList.remove("is-clicking");
-    }, 360);
+    }, 540);
   }
 
   function createClickPop(event) {
