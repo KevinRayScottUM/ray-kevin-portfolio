@@ -1,23 +1,48 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Curved weight-space manifold">
-  <rect width="600" height="360" fill="#f8fafc"/>
-  <rect x="34" y="38" width="532" height="284" rx="18" fill="#ffffff" stroke="#cbd5e1" stroke-width="2"/>
-  <text x="58" y="76" font-family="Inter, Arial, sans-serif" font-size="18" font-weight="700" fill="#111827">Curved Weight Space, Low-Dimensional Motion</text>
-  <path d="M84 236c78-88 156-116 236-74 73 38 132 16 196-70" fill="none" stroke="#93c5fd" stroke-width="38" stroke-linecap="round"/>
-  <path d="M84 236c78-88 156-116 236-74 73 38 132 16 196-70" fill="none" stroke="#2563eb" stroke-width="4" stroke-linecap="round"/>
-  <g fill="#0f172a">
-    <circle cx="190" cy="174" r="7"/>
-    <circle cx="320" cy="162" r="7"/>
-    <circle cx="454" cy="126" r="7"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="English illustration of DeepSeek V4 curved weight space">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#070b20"/>
+      <stop offset="1" stop-color="#171043"/>
+    </linearGradient>
+    <linearGradient id="curve" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#1d4ed8"/>
+      <stop offset=".5" stop-color="#22d3ee"/>
+      <stop offset="1" stop-color="#6366f1"/>
+    </linearGradient>
+    <filter id="glow" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feMerge>
+        <feMergeNode in="blur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  <rect width="600" height="360" fill="url(#bg)"/>
+  <rect x="24" y="18" width="126" height="34" rx="17" fill="#312e81"/>
+  <text x="52" y="40" font-family="Inter, Arial, sans-serif" font-size="15" font-weight="800" fill="#eef2ff">DeepSeek V4</text>
+  <g transform="translate(70 78)">
+    <rect x="0" y="0" width="460" height="218" rx="16" fill="#0b102a" stroke="#7c2d12" stroke-width="2" stroke-dasharray="10 8" opacity=".95"/>
+    <g stroke="#1e293b" stroke-width="1">
+      <path d="M0 44h460"/><path d="M0 88h460"/><path d="M0 132h460"/><path d="M0 176h460"/>
+      <path d="M64 0v218"/><path d="M138 0v218"/><path d="M212 0v218"/><path d="M286 0v218"/><path d="M360 0v218"/>
+    </g>
+    <path d="M18 168c42-98 96-28 142-66 38-31 58-104 106-34 48 70 80 142 122 38 22-56 54-78 76-28" fill="none" stroke="url(#curve)" stroke-width="5" stroke-linecap="round" filter="url(#glow)"/>
+    <path d="M244 104c22-64 58-70 76-86" fill="none" stroke="#22d3ee" stroke-width="3" opacity=".65"/>
+    <path d="M312 132c28-40 56-48 82-62" fill="none" stroke="#22d3ee" stroke-width="3" opacity=".65"/>
+    <g fill="#22d3ee" filter="url(#glow)">
+      <circle cx="48" cy="142" r="4"/>
+      <circle cx="108" cy="120" r="4"/>
+      <circle cx="178" cy="82" r="4"/>
+      <circle cx="226" cy="58" r="4"/>
+      <circle cx="268" cy="90" r="4"/>
+      <circle cx="328" cy="152" r="4"/>
+      <circle cx="408" cy="74" r="4"/>
+      <circle cx="444" cy="94" r="4"/>
+    </g>
   </g>
-  <g stroke="#ea580c" stroke-width="3" stroke-linecap="round">
-    <line x1="190" y1="174" x2="254" y2="138"/>
-    <line x1="320" y1="162" x2="382" y2="170"/>
-    <line x1="454" y1="126" x2="500" y2="76"/>
-  </g>
-  <g font-family="Inter, Arial, sans-serif" font-size="13" fill="#334155">
-    <text x="82" y="292">full rank can be a local coordinate artifact</text>
-    <text x="330" y="292">dim(M) much smaller than dim(W)</text>
-    <text x="96" y="116">W in R^D</text>
-    <text x="412" y="214">tangent update: delta W in T_W M</text>
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="82" y="82" font-size="13" font-weight="700" fill="#f59e0b">eRank: full rank (3600)</text>
+    <text x="250" y="318" font-size="14" font-weight="800" fill="#22d3ee">TwoNN manifold (~92D)</text>
+    <text x="194" y="346" font-size="25" font-weight="900" fill="#f8fafc">Weight Space Is Curved</text>
   </g>
 </svg>
