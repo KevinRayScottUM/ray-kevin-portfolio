@@ -6,6 +6,7 @@
   var cursorNode = null;
   var rafId = null;
   var clickTimer = null;
+  var CURSOR_SVG_PATH = "/img/cursor/tensorcat_cursor_exact_vector.svg";
 
   function supportsFinePointer() {
     return window.matchMedia && window.matchMedia("(pointer: fine)").matches;
@@ -15,30 +16,48 @@
     var node = document.createElement("div");
     node.className = "tensorcat-cursor";
     node.setAttribute("aria-hidden", "true");
-    node.innerHTML =
-      '<svg class="tensorcat-cursor-svg" viewBox="0 0 256 256" focusable="false">' +
-      '<g class="tensorcat-cursor-tail">' +
-      '<path d="M118 182 C89 209 119 239 149 221 C170 208 159 185 140 195" fill="none" stroke="#ffffff" stroke-width="15" stroke-linecap="round"/>' +
-      '<path d="M118 182 C89 209 119 239 149 221 C170 208 159 185 140 195" fill="none" stroke="#111827" stroke-width="9" stroke-linecap="round"/>' +
-      "</g>" +
-      '<g class="tensorcat-cursor-head">' +
-      '<path d="M38 22 L82 98 L55 142 L39 188 L107 155 L128 184 L128 63 Z" fill="#111827" stroke="#ffffff" stroke-width="8" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path d="M128 63 L218 22 L198 111 L218 168 L159 166 L128 184 Z" fill="#ffffff" stroke="#111827" stroke-width="6" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path class="tensorcat-cursor-ear tensorcat-cursor-ear-left" d="M62 35 L90 97 L75 83 Z" fill="#ffffff" stroke="#111827" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path class="tensorcat-cursor-ear tensorcat-cursor-ear-right" d="M194 35 L170 96 L185 82 Z" fill="#111827" stroke="#ffffff" stroke-width="5" stroke-linejoin="round" stroke-linecap="round"/>' +
-      '<path d="M128 62 L128 184" stroke="#111827" stroke-width="3" opacity="0.9"/>' +
-      '<path d="M70 116 C88 108 101 110 112 120 C96 125 80 129 70 116 Z" fill="#ffffff"/>' +
-      '<circle cx="96" cy="118" r="5" fill="#111827"/>' +
-      '<path d="M144 120 C158 108 177 106 190 115 C178 130 159 127 144 120 Z" fill="#111827"/>' +
-      '<circle cx="164" cy="118" r="5" fill="#ffffff"/>' +
-      '<path d="M116 151 L128 146 L140 151 L128 160 Z" fill="#ffffff" stroke="#111827" stroke-width="2" stroke-linejoin="round"/>' +
-      '<path d="M128 160 Q118 172 104 174 M128 160 Q140 172 154 174" fill="none" stroke="#ffffff" stroke-width="3" stroke-linecap="round"/>' +
-      '<path class="tensorcat-cursor-whiskers" d="M47 145 L8 132 M52 157 L10 162 M204 145 L244 132 M199 157 L242 162" stroke="#111827" stroke-width="5" stroke-linecap="round"/>' +
-      '<path class="tensorcat-cursor-whiskers-light" d="M47 145 L8 132 M52 157 L10 162 M204 145 L244 132 M199 157 L242 162" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>' +
-      "</g>" +
-      "</svg>";
     document.body.appendChild(node);
+    loadCursorSvg(node);
     return node;
+  }
+
+  function loadCursorSvg(node) {
+    window
+      .fetch(CURSOR_SVG_PATH, { cache: "force-cache" })
+      .then(function (response) {
+        if (!response.ok) {
+          throw new Error("TensorCat cursor SVG failed to load");
+        }
+        return response.text();
+      })
+      .then(function (svgText) {
+        if (!node.isConnected) return;
+        inlineCursorSvg(node, svgText);
+      })
+      .catch(function () {
+        document.documentElement.classList.remove("tensorcat-cursor-enabled");
+        if (node.parentNode) node.parentNode.removeChild(node);
+        if (cursorNode === node) cursorNode = null;
+      });
+  }
+
+  function inlineCursorSvg(node, svgText) {
+    var template = document.createElement("template");
+    template.innerHTML = svgText.trim();
+
+    var svg = template.content.querySelector("svg");
+    if (!svg) {
+      throw new Error("TensorCat cursor asset is not valid SVG");
+    }
+
+    svg.classList.add("tensorcat-cursor-svg");
+    svg.setAttribute("aria-hidden", "true");
+    svg.setAttribute("focusable", "false");
+    svg.removeAttribute("width");
+    svg.removeAttribute("height");
+
+    node.replaceChildren(svg);
+    node.classList.add("is-ready");
   }
 
   function render() {
@@ -47,7 +66,7 @@
 
     if (cursorNode) {
       cursorNode.style.transform =
-        "translate3d(" + (cursor.x - 23) + "px, " + (cursor.y - 23) + "px, 0)";
+        "translate3d(" + (cursor.x - 25) + "px, " + (cursor.y - 25) + "px, 0)";
     }
 
     rafId = window.requestAnimationFrame(render);
