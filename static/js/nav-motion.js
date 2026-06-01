@@ -1,7 +1,9 @@
 (function () {
   var STORAGE_KEY = "tensorcat-nav-transition";
   var TRANSITION_TTL = 2600;
+  var EXIT_DELAY = 230;
   var activeAnimation = null;
+  var pendingPageExit = false;
 
   function ready(callback) {
     if (document.readyState === "loading") {
@@ -86,6 +88,57 @@
   function place(indicator, position) {
     indicator.style.width = position.width + "px";
     indicator.style.transform = "translate3d(" + position.left + "px, 0, 0)";
+  }
+
+  function ensureTransitionLayer() {
+    var layer = document.querySelector("[data-page-transition-layer]");
+    if (layer) return layer;
+
+    layer = document.createElement("div");
+    layer.className = "portfolio-transition-layer";
+    layer.setAttribute("data-page-transition-layer", "");
+    layer.setAttribute("aria-hidden", "true");
+    document.body.appendChild(layer);
+    return layer;
+  }
+
+  function clearPreload() {
+    document.documentElement.classList.remove("portfolio-transition-preload");
+  }
+
+  function playPageEnter(transition) {
+    if (!transition) {
+      clearPreload();
+      return;
+    }
+
+    var layer = ensureTransitionLayer();
+    layer.classList.add("is-entering", "is-visible");
+    clearPreload();
+
+    window.requestAnimationFrame(function () {
+      window.requestAnimationFrame(function () {
+        layer.classList.remove("is-visible");
+        window.setTimeout(function () {
+          layer.classList.remove("is-entering");
+        }, 520);
+      });
+    });
+  }
+
+  function startPageExit(href) {
+    if (pendingPageExit) return;
+    pendingPageExit = true;
+
+    var layer = ensureTransitionLayer();
+    layer.classList.remove("is-entering");
+
+    window.requestAnimationFrame(function () {
+      layer.classList.add("is-visible");
+      window.setTimeout(function () {
+        window.location.href = href;
+      }, EXIT_DELAY);
+    });
   }
 
   function stretchKeyframes(from, to) {
@@ -287,7 +340,9 @@
 
     scroll.classList.add("is-enhanced");
 
-    runArrivalMotion(scroll, indicator, readTransition());
+    var transition = readTransition();
+    playPageEnter(transition);
+    runArrivalMotion(scroll, indicator, transition);
 
     document.querySelectorAll(".portfolio-nav-link").forEach(function (link) {
       link.addEventListener("click", function (event) {
@@ -303,7 +358,9 @@
           return;
         }
 
+        event.preventDefault();
         writeTransition(activeLink.href, link.href);
+        startPageExit(link.href);
       });
     });
 
@@ -318,6 +375,8 @@
     window.addEventListener("pageshow", function (event) {
       if (!event.persisted) return;
       window.requestAnimationFrame(function () {
+        pendingPageExit = false;
+        clearPreload();
         syncToActive(scroll, indicator);
       });
     });

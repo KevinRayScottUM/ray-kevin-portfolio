@@ -1,4 +1,13 @@
 {% macro stylesheet() %}
+<script>
+  (function () {
+    try {
+      if (window.sessionStorage && window.sessionStorage.getItem("tensorcat-nav-transition")) {
+        document.documentElement.classList.add("portfolio-transition-preload");
+      }
+    } catch (_error) {}
+  })();
+</script>
 <link rel="stylesheet" href="{{ get_url(path="styles/styles.css") | safe }}" />
 <link rel="stylesheet" href="{{ get_url(path="styles/custom.css") | safe }}" />
 <script defer src="{{ get_url(path="js/nav-motion.js") | safe }}"></script>
