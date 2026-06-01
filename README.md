@@ -4,7 +4,7 @@ Static personal portfolio website for Kevin Ray Scott (雷凯文 / LEI KAIWEN), 
 
 The site is designed as a clean academic and professional portfolio for internship, job, and future PhD or research applications. It includes a homepage, project experience page, about page, blog/notes section, and contact page.
 
-Blog like, bookmark, and share controls are implemented as lightweight frontend interactions. Likes and bookmarks are stored in the visitor's browser with `localStorage`; global public counters would require a Cloudflare Pages Functions plus KV/D1 backend later.
+Blog bookmark and share controls are lightweight frontend interactions. Blog likes use a Cloudflare Pages Function at `/api/likes` with a D1 database binding, so public like counts can update across browsers and devices after deployment. The visitor's browser still uses `localStorage` only to avoid repeated likes from the same browser.
 
 ## Local Setup on macOS
 
@@ -84,6 +84,41 @@ ZOLA_VERSION = 0.22.1
 13. If the URL is not `https://kevinrayscott.pages.dev/`, update `base_url` in `config.toml` and push again.
 
 After Cloudflare Pages creates the real URL, update `base_url` in `config.toml` if the final URL is different.
+
+## Cloudflare D1 Blog Likes
+
+The blog like counter is backed by a small Cloudflare Pages Function:
+
+```text
+functions/api/likes.js
+```
+
+The function expects one D1 binding. Use this binding name:
+
+```text
+DB
+```
+
+Recommended setup in Cloudflare Dashboard:
+
+1. Open **Cloudflare Dashboard**.
+2. Go to **Workers & Pages**.
+3. Open the Pages project for this portfolio.
+4. Create a D1 database, for example `ray-kevin-portfolio-likes`.
+5. Open the Pages project's settings.
+6. Add a D1 database binding.
+7. Set the binding variable name to `DB`.
+8. Select the D1 database you created.
+9. Save and redeploy the Pages project.
+
+The function automatically creates the `blog_likes` table if it does not exist. The initial counts are seeded from the current blog note defaults the first time each post is requested.
+
+Behavior:
+
+- `GET /api/likes?posts=post-a,post-b` returns public counts.
+- `POST /api/likes` with `{ "postId": "post-a" }` increments that post count.
+- Open blog pages refresh cloud counts on load, when the tab becomes visible again, and about every 30 seconds while visible.
+- If D1 is not bound yet, the page gracefully falls back to the static Markdown count and local browser state.
 
 ## Base URL Reminder
 

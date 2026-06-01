@@ -1,6 +1,13 @@
 (function () {
+  var cloudLikeCounts = {};
+  var likeRefreshTimer = null;
+
   function storageKey(postId, action) {
     return "tensorcat-blog:" + action + ":" + postId;
+  }
+
+  function hasCloudCount(postId) {
+    return Object.prototype.hasOwnProperty.call(cloudLikeCounts, postId);
   }
 
   function getLiked(postId) {
@@ -19,6 +26,15 @@
     window.localStorage.setItem(storageKey(postId, "bookmarked"), value ? "true" : "false");
   }
 
+  function collectPostIds() {
+    var posts = {};
+    document.querySelectorAll("[data-post-id]").forEach(function (element) {
+      var postId = element.getAttribute("data-post-id");
+      if (postId) posts[postId] = true;
+    });
+    return Object.keys(posts);
+  }
+
   function syncPost(postId) {
     var likeButtons = document.querySelectorAll('[data-blog-action="like"][data-post-id="' + postId + '"]');
     var bookmarkButtons = document.querySelectorAll('[data-blog-action="bookmark"][data-post-id="' + postId + '"]');
@@ -27,10 +43,11 @@
 
     likeButtons.forEach(function (button) {
       var baseCount = Number(button.getAttribute("data-initial-count") || "0");
+      var displayCount = hasCloudCount(postId) ? cloudLikeCounts[postId] : baseCount + (liked ? 1 : 0);
       var count = button.querySelector("[data-like-count]");
       button.classList.toggle("is-active", liked);
       button.setAttribute("aria-pressed", liked ? "true" : "false");
-      if (count) count.textContent = String(baseCount + (liked ? 1 : 0));
+      if (count) count.textContent = String(displayCount);
     });
 
     bookmarkButtons.forEach(function (button) {
@@ -40,12 +57,62 @@
   }
 
   function syncAll() {
-    var posts = {};
-    document.querySelectorAll("[data-post-id]").forEach(function (element) {
-      var postId = element.getAttribute("data-post-id");
-      if (postId) posts[postId] = true;
+    collectPostIds().forEach(syncPost);
+  }
+
+  function loadCloudLikes() {
+    var postIds = collectPostIds();
+    if (!postIds.length || !window.fetch) return;
+
+    window.fetch("/api/likes?posts=" + encodeURIComponent(postIds.join(",")), {
+      headers: { accept: "application/json" },
+      cache: "no-store",
+    }).then(function (response) {
+      if (!response.ok) throw new Error("Likes API unavailable");
+      return response.json();
+    }).then(function (data) {
+      var counts = data && data.counts ? data.counts : {};
+      Object.keys(counts).forEach(function (postId) {
+        cloudLikeCounts[postId] = Number(counts[postId] || 0);
+      });
+      syncAll();
+    }).catch(function () {
+      syncAll();
     });
-    Object.keys(posts).forEach(syncPost);
+  }
+
+  function saveCloudLike(postId) {
+    if (!window.fetch) return Promise.reject(new Error("Fetch unavailable"));
+
+    return window.fetch("/api/likes", {
+      method: "POST",
+      headers: {
+        accept: "application/json",
+        "content-type": "application/json",
+      },
+      body: JSON.stringify({ postId: postId }),
+      cache: "no-store",
+    }).then(function (response) {
+      if (!response.ok) throw new Error("Likes API unavailable");
+      return response.json();
+    }).then(function (data) {
+      if (data && typeof data.likes !== "undefined") {
+        cloudLikeCounts[postId] = Number(data.likes || 0);
+      }
+      syncPost(postId);
+    });
+  }
+
+  function startCloudLikeRefresh() {
+    if (!window.fetch || likeRefreshTimer) return;
+
+    likeRefreshTimer = window.setInterval(function () {
+      if (!document.hidden) loadCloudLikes();
+    }, 30000);
+
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) loadCloudLikes();
+    });
   }
 
   function ensureShareToast() {
@@ -136,8 +203,17 @@
     var action = button.getAttribute("data-blog-action");
     var postId = button.getAttribute("data-post-id");
     if (action === "like" && postId) {
-      setLiked(postId, !getLiked(postId));
+      if (getLiked(postId)) {
+        syncPost(postId);
+        return;
+      }
+
+      setLiked(postId, true);
+      if (hasCloudCount(postId)) cloudLikeCounts[postId] += 1;
       syncPost(postId);
+      saveCloudLike(postId).catch(function () {
+        syncPost(postId);
+      });
     }
     if (action === "bookmark" && postId) {
       setBookmarked(postId, !getBookmarked(postId));
@@ -149,8 +225,14 @@
   });
 
   if (document.readyState === "loading") {
-    document.addEventListener("DOMContentLoaded", syncAll);
+    document.addEventListener("DOMContentLoaded", function () {
+      syncAll();
+      loadCloudLikes();
+      startCloudLikeRefresh();
+    });
   } else {
     syncAll();
+    loadCloudLikes();
+    startCloudLikeRefresh();
   }
 })();
