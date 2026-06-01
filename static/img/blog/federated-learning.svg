@@ -1,10 +1,10 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Editorial illustration of federated learning">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 360" role="img" aria-label="Ferrari federated feature unlearning illustration">
   <defs>
     <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#ecfeff"/>
       <stop offset="1" stop-color="#f8fafc"/>
     </linearGradient>
-    <linearGradient id="cloud" x1="0" y1="0" x2="1" y2="1">
+    <linearGradient id="teal" x1="0" y1="0" x2="1" y2="1">
       <stop offset="0" stop-color="#0f766e"/>
       <stop offset="1" stop-color="#14b8a6"/>
     </linearGradient>
@@ -14,31 +14,36 @@
   </defs>
   <rect width="600" height="360" fill="url(#bg)"/>
   <rect x="38" y="34" width="524" height="292" rx="24" fill="#ffffff" filter="url(#shadow)"/>
-  <g transform="translate(78 82)">
-    <rect x="0" y="90" width="100" height="80" rx="16" fill="#ecfeff" stroke="#99f6e4" stroke-width="2"/>
-    <rect x="168" y="28" width="112" height="92" rx="18" fill="#f0fdfa" stroke="#5eead4" stroke-width="2"/>
-    <rect x="344" y="92" width="104" height="78" rx="16" fill="#ecfeff" stroke="#99f6e4" stroke-width="2"/>
-    <g fill="#0f172a">
-      <rect x="28" y="118" width="44" height="24" rx="5"/>
-      <rect x="204" y="58" width="40" height="24" rx="5"/>
-      <rect x="374" y="118" width="44" height="24" rx="5"/>
+  <g transform="translate(74 78)">
+    <rect x="0" y="38" width="180" height="150" rx="22" fill="#0f172a"/>
+    <rect x="28" y="66" width="124" height="86" rx="12" fill="#1e293b"/>
+    <g opacity=".95">
+      <rect x="42" y="80" width="28" height="28" fill="#334155"/>
+      <rect x="74" y="80" width="28" height="28" fill="#14b8a6" opacity=".85"/>
+      <rect x="106" y="80" width="28" height="28" fill="#475569"/>
+      <rect x="42" y="112" width="28" height="28" fill="#475569"/>
+      <rect x="74" y="112" width="28" height="28" fill="#f97316" opacity=".58"/>
+      <rect x="106" y="112" width="28" height="28" fill="#334155"/>
     </g>
-    <g stroke="#94a3b8" stroke-width="5" stroke-linecap="round">
-      <path d="M26 154h48"/>
-      <path d="M198 94h52"/>
-      <path d="M370 154h52"/>
-    </g>
-    <path d="M118 128c48-70 152-82 212 0" fill="none" stroke="#99f6e4" stroke-width="8" stroke-linecap="round" opacity=".7"/>
-    <path d="M128 148c72 48 148 48 194 0" fill="none" stroke="#99f6e4" stroke-width="8" stroke-linecap="round" opacity=".7"/>
-    <path d="M224 122c46 0 82 32 82 72h-164c0-40 36-72 82-72z" fill="url(#cloud)"/>
-    <circle cx="186" cy="138" r="34" fill="#14b8a6"/>
-    <circle cx="262" cy="138" r="34" fill="#0f766e"/>
-    <path d="M224 154c-22 11-36 30-36 56h72c0-26-14-45-36-56z" fill="#ccfbf1"/>
+    <circle cx="88" cy="112" r="47" fill="none" stroke="#f97316" stroke-width="6" stroke-dasharray="11 9" opacity=".82"/>
+    <path d="M154 34c34 12 54 40 54 78s-20 66-54 78" fill="none" stroke="#99f6e4" stroke-width="7" stroke-linecap="round" opacity=".72"/>
   </g>
-  <g opacity=".56">
-    <circle cx="92" cy="296" r="9" fill="#14b8a6"/>
-    <circle cx="124" cy="296" r="9" fill="#0f766e"/>
-    <rect x="160" y="289" width="206" height="14" rx="7" fill="#ccfbf1"/>
-    <rect x="78" y="314" width="172" height="12" rx="6" fill="#e0f2fe"/>
+  <g transform="translate(318 74)">
+    <path d="M92 0c54 0 92 38 92 86 0 58-50 96-92 116C50 182 0 144 0 86 0 38 38 0 92 0z" fill="#ccfbf1"/>
+    <circle cx="70" cy="78" r="34" fill="url(#teal)"/>
+    <circle cx="120" cy="78" r="34" fill="#0f766e"/>
+    <path d="M94 94c-30 13-50 42-50 78h100c0-36-20-65-50-78z" fill="#ecfeff"/>
+    <rect x="36" y="198" width="126" height="24" rx="12" fill="#ecfeff" stroke="#99f6e4"/>
+    <rect x="50" y="206" width="54" height="8" rx="4" fill="#14b8a6"/>
+  </g>
+  <g transform="translate(386 158)">
+    <circle cx="52" cy="52" r="48" fill="#ffffff" stroke="#99f6e4" stroke-width="3"/>
+    <path d="M30 64c12-30 30-44 58-44" fill="none" stroke="#cbd5e1" stroke-width="10" stroke-linecap="round"/>
+    <path d="M30 64c9-22 20-34 38-40" fill="none" stroke="#14b8a6" stroke-width="10" stroke-linecap="round"/>
+    <circle cx="76" cy="24" r="8" fill="#0f766e"/>
+  </g>
+  <g font-family="Inter, Arial, sans-serif">
+    <text x="74" y="294" font-size="20" font-weight="900" fill="#0f172a">Ferrari Feature Unlearning</text>
+    <text x="74" y="318" font-size="13" font-weight="700" fill="#0f766e">lower feature sensitivity, preserve model utility</text>
   </g>
 </svg>
