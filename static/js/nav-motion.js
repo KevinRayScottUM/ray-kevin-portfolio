@@ -93,12 +93,36 @@
     var travel = Math.abs(distance);
     var direction = distance >= 0 ? 1 : -1;
     var widthDelta = Math.abs(to.width - from.width);
+    var settle = Math.min(6, Math.max(2, travel * 0.014));
+
+    if (to.width < from.width - 6) {
+      var fromCenter = from.left + from.width / 2;
+      var toCenter = to.left + to.width / 2;
+      var centerDistance = toCenter - fromCenter;
+
+      function centeredFrame(progress, width, offset, drift) {
+        var center = fromCenter + centerDistance * progress + (drift || 0);
+        return {
+          transform: "translate3d(" + (center - width / 2) + "px, 0, 0)",
+          width: width + "px",
+          offset: offset,
+        };
+      }
+
+      return [
+        centeredFrame(0, from.width, 0),
+        centeredFrame(0.16, from.width - widthDelta * 0.42, 0.22),
+        centeredFrame(0.58, to.width + widthDelta * 0.26, 0.58),
+        centeredFrame(0.94, to.width + settle * 2, 0.86, direction * settle),
+        centeredFrame(1, to.width, 1),
+      ];
+    }
+
     var stretch = Math.min(104, Math.max(22, travel * 0.38 + widthDelta * 0.32));
     var glideWidth = Math.max(
       to.width,
       from.width + Math.min(60, travel * 0.2) + widthDelta * 0.25
     );
-    var settle = Math.min(6, Math.max(2, travel * 0.014));
 
     return [
       {
