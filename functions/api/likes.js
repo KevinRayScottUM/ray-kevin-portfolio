@@ -86,7 +86,8 @@ export async function onRequestGet(context) {
 
     return json({ counts });
   } catch (error) {
-    return json({ error: "Likes API failed.", detail: error && error.message ? error.message : String(error) }, 500);
+    console.error("Likes API GET failed", error);
+    return json({ error: "Likes API failed." }, 500);
   }
 }
 
@@ -119,6 +120,7 @@ export async function onRequestPost(context) {
     const likes = await getPostLikes(db, postId);
     return json({ postId, likes });
   } catch (error) {
-    return json({ error: "Likes API failed.", detail: error && error.message ? error.message : String(error) }, 500);
+    console.error("Likes API POST failed", error);
+    return json({ error: "Likes API failed." }, 500);
   }
 }
