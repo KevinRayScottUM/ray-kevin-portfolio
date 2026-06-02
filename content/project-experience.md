@@ -8,6 +8,8 @@ path = "project-experience"
 
 **Date:** Mar 2026 - May 2026
 
+**Project link:** [TensorCat/TensorTalk](https://huggingface.co/TensorCat/TensorTalk)
+
 - Built TensorTalk, an agentic AI system for FSKTM, Universiti Malaya handbook Q&A, combining fine-tuned LLMs, RAG, PPO-style optimization, and Harness Engineering for agent workflow control.
 - Built a handbook-to-SFT dataset pipeline with PDF/Markdown preprocessing, source chunking, manual index alignment, evidence matching, metadata preservation, and training-ready QA JSONL generation.
 - Fine-tuned Qwen3-8B with LoRA/SFT on curated handbook QA data, supported by metadata for source handbook, audience scope, section, evidence, and error analysis.
@@ -17,6 +19,8 @@ path = "project-experience"
 ## TensorSign: Malay Sign Language Recognition System
 
 **Date:** Sep 2025 - Oct 2025
+
+**Project link:** [KevinRayScottUM/Malaysian_Sign_Language](https://github.com/KevinRayScottUM/Malaysian_Sign_Language)
 
 - Built TensorSign, a real-time Malay Sign Language recognition system for 90 gesture classes using landmark-based temporal modeling.
 - Extracted 258-D MediaPipe Holistic features from pose and hand landmarks, converting videos into normalized 30-frame sequence tensors.
@@ -28,6 +32,8 @@ path = "project-experience"
 
 **Date:** Mar 2026 - May 2026
 
+**Project link:** [KevinRayScottUM/Malaysia-Flood-Rainfall-Dashboard](https://github.com/KevinRayScottUM/Malaysia-Flood-Rainfall-Dashboard)
+
 - Converted CHIRPS daily NetCDF climate files into a structured 2000-2026 Malaysia city-level rainfall dataset for downstream EDA and modeling.
 - Manually defined 25 research city anchor points with latitude, longitude, and radius, then extracted city rainfall using geospatial Haversine grid masking.
 - Engineered rainfall indicators from gridded data, including avg/max/min/median rainfall, rainy/heavy/very-heavy grid ratios, and rainfall-based flood-risk proxy labels.
@@ -37,6 +43,8 @@ path = "project-experience"
 ## TensorHome: ROS-Based Multi-Modal Smart Home Control System
 
 **Date:** Apr 2026 - May 2026
+
+**Project link:** [KevinRayScottUM/House-Controling-System](https://github.com/KevinRayScottUM/House-Controling-System)
 
 - Developed a ROS1 Noetic smart-home control system with gesture recognition, offline Vosk ASR, ROS topic routing, state management, Pygame GUI, and audio feedback.
 - Designed a rule-based gesture protocol with left-hand room selection, right-hand device/action control, and a selection-lock + standby state machine to prevent false triggers.
