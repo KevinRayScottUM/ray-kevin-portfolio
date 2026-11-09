@@ -4,6 +4,7 @@ date = 2026-11-09
 description = "Two horizons can have identical marginal uncertainty and very different uncertainty about their difference. A fixed-marginal experiment isolates what forecast shape contributes."
 
 [extra]
+likes = 158
 thumbnail = "img/blog/forecast-horizon-shape.webp"
 figure_alt = "Two horizon pairs have the same time lag but different forecast-shape distances; three matrices show how the shape factor modifies the reference correlation."
 figure_caption = "Figure 1 from the manuscript. The curves and matrices are schematic. Equal time separation need not mean equal separation in forecast shape."

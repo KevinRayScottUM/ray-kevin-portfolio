@@ -4,6 +4,7 @@ date = 2026-11-09
 description = "A judge can agree with a human and still make a decision the rubric never authorized. TradeoffBench separates applying a rule from supplying a missing preference."
 
 [extra]
+likes = 173
 thumbnail = "img/blog/rubric-score-substitution.webp"
 figure_alt = "For 2,707 fixed MultiPref comparisons, own-score decisions disagree with the rater 16 times and peer-mean decisions 780 times, a paired increase of 28.223 percentage points."
 figure_caption = "Figure 3 from the manuscript. Rows and columns track the same comparisons under two score sources. The target rater and strict-Pareto rule are held fixed; the whisker is a paired 95% interval."

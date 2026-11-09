@@ -4,6 +4,7 @@ date = 2026-11-09
 description = "A ranked batch of opposite points contains comparisons that cancel a shared nuisance. Whether that information pays off depends on how often the next batch can adapt."
 
 [extra]
+likes = 126
 thumbnail = "img/blog/ranked-query-rounds.webp"
 figure_alt = "Airfoil and Concrete training-gap curves over sixteen feedback rounds, with paired terminal ratios comparing full-ranking recovery to external controls."
 figure_caption = "Figure 4 from the manuscript. The trajectories compare training gaps under endpoint and round caps. The ratio panel compares the full-ranking method to controls; the separate short-cycle results below are from Table 2."

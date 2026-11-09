@@ -4,6 +4,7 @@ date = 2026-11-09
 description = "For a quadratic objective observed only through rankings, choosing where to query controls how much of a dense Hessian the decoder ever has to represent."
 
 [extra]
+likes = 137
 thumbnail = "img/blog/ordinal-query-cycle.webp"
 figure_alt = "An eight-coordinate cycle joins primary and bridge edges. A separate plot shows four distinguishable ranking states on the finite cycle versus one on two disconnected cycles."
 figure_caption = "Figure 1 from the manuscript. Bridges distinguish four rankings in the illustrated family, but even the connected finite design leaves a range of directions with the same ranking."

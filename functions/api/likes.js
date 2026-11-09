@@ -1,3 +1,4 @@
+// Owner-configured display seeds, not measured visitor endorsements.
 const DEFAULT_LIKES = Object.freeze({
   "why-harness-engineering-matters": 186,
   "retrieval-is-not-grounding": 171,
@@ -8,6 +9,10 @@ const DEFAULT_LIKES = Object.freeze({
   "weight-space-is-curved": 178,
   "federated-learning-beyond-data-sharing": 162,
   "reward-design-for-grounded-agents": 154,
+  "coordinate-circles-and-curvature": 137,
+  "forecast-horizon-dependence": 158,
+  "rankings-and-feedback-rounds": 126,
+  "when-rubrics-cannot-decide": 173,
 });
 
 const POST_ID_PATTERN = /^[a-z0-9][a-z0-9-]{0,120}$/;
