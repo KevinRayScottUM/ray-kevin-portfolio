@@ -1,0 +1,9 @@
+{% macro icon(name) %}
+<img src="{{ get_url(path="img/lab/icons/" ~ name ~ ".svg") }}" width="18" height="18" alt="" aria-hidden="true">
+{% endmacro %}
+
+{% macro tool(name, label, action) %}
+<button type="button" class="lab-icon-button" data-lab-action="{{ action }}" aria-label="{{ label }}" data-tooltip="{{ label }}">
+  {{ self::icon(name=name) }}
+</button>
+{% endmacro %}

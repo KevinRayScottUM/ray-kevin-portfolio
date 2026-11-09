@@ -38,5 +38,6 @@ menu_items = [
   { path = "/project-experience", name = "Project Experience" },
   { path = "/about", name = "About" },
   { path = "/blog", name = "Blog / Notes" },
+  { path = "/lab", name = "TensorCat Lab" },
   { path = "/contacts", name = "Contact" },
 ]

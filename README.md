@@ -131,6 +131,57 @@ https://kevinrayscott.pages.dev/
 
 If the final Cloudflare Pages URL or a custom domain changes, update `base_url` in `config.toml` before building or deploying.
 
+## TensorCat Lab
+
+The Lab lives at `/lab/`. It is a static Zola section with a local dual-arm
+cloth sandbox and an empty experiment directory. It is a conceptual
+world-model-themed study, not a trained world model or a research result.
+There are no model weights, inference requests, GPU sessions, or WebGL contexts.
+Three.js 0.170.0 uses its CPU-side SVGRenderer; cannon-es 0.20.0 handles cloth
+distance constraints and gravity locally. The robot geometry is procedural.
+
+- Section metadata and future entries: `content/lab/`.
+- Workbench layout and experiment index: `templates/lab.html`.
+- Scoped styling: `static/styles/lab.css`.
+- Controls, export, and overlay lifecycle: `static/js/lab.js`.
+- Scene, robot inverse kinematics, and cloth constraints: `static/js/lab-world.js`.
+- Pinned local libraries and licenses: `static/vendor/`.
+
+To add a future experiment, add a Markdown file inside `content/lab/` with
+`title`, `description`, and an integer `weight` in TOML front matter. Published
+entries appear in the Experiments tab automatically. Add `template` to that
+file when the experiment needs its own interactive view. Use `draft = true`
+until it is ready to publish. Do not add unimplemented controls or invented
+results to the directory.
+
+The controls support keyboard focus, reduced motion, and mobile layout. Expanded
+view preserves the site's custom cursor and restores focus on dismissal.
+PNG export rasterizes the current SVG scene locally. Settings stay in memory for the
+current page session; there is no server or account storage.
+
+The two colored grippers can be dragged. Left-button drags on empty background
+orbit the camera; clicking robot geometry or cloth does not start a camera drag.
+Trackpad two-finger scroll rotates the view, and pinch gestures zoom smoothly.
+Horizontal and vertical orbit input is inverted consistently for mouse,
+trackpad, and touch. Pinch zoom retains its usual spread-to-enlarge direction.
+The viewer handles both ctrl+wheel pinches and Safari GestureEvents, preventing
+page zoom only inside the scene. Line-mode mouse wheels zoom; on pixel-mode
+devices, Ctrl+wheel also zooms. The camera reset tool preserves the cloth state.
+On touchscreens, one finger orbits and two fingers combine orbit and pinch zoom.
+Grip span, lift, tempo, mesh resolution, and surface/thread/particle views are
+adjustable. Pause stops the scripted arm motion; direct manipulation can still
+settle the cloth. Arrow keys move the left gripper; Shift plus arrow keys moves
+the right. This is bounded, illustrative cloth physics with no self-collision,
+robot contact dynamics, or learned prediction.
+
+The [3D World Simulator](https://jwang771.github.io/3dworldsimulator/) provides
+visual inspiration only. Its media, trained models, and GPU-backed interactive
+service are not embedded or used.
+
+Motion reference: [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/motion).
+The locally vendored icons are from Lucide 0.468.0. Their ISC/MIT license is
+included in `static/img/lab/icons/LICENSE`; no icon CDN is needed at runtime.
+
 ## GitHub Preparation
 
 If this project is not already committed to GitHub, run:

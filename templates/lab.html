@@ -1,0 +1,128 @@
+{% extends "base.html" %}
+{% import "macros/lab.html" as lab %}
+
+{% block user_head %}
+<link rel="stylesheet" href="{{ get_url(path="styles/lab.css") }}">
+<script type="importmap">{"imports":{"three":"{{ get_url(path="vendor/three/three.module.min.js") }}"}}</script>
+{% endblock user_head %}
+{% block title %}<title>{{ section.title }} | {{ config.title }}</title>{% endblock title %}
+
+{% block content %}
+<main class="tensorcat-lab" data-lab>
+  <header class="lab-heading">
+    <div>
+      <p class="lab-eyebrow">TensorCat / Experimental</p>
+      <h1>TensorCat Lab<span aria-hidden="true">.</span></h1>
+    </div>
+    <span class="lab-status"><span aria-hidden="true"></span>Local CPU</span>
+  </header>
+  <p class="lab-model-note">World-model concept study / No learned model</p>
+
+  <div class="lab-view-nav">
+    <div class="lab-tabs" role="tablist" aria-label="Lab views">
+      <span class="lab-tab-pill" aria-hidden="true"></span>
+      <button id="lab-tab-workspace" type="button" role="tab" aria-selected="true" aria-controls="lab-workspace-panel" data-lab-tab="workspace">Workspace</button>
+      <button id="lab-tab-experiments" type="button" role="tab" aria-selected="false" aria-controls="lab-experiments-panel" tabindex="-1" data-lab-tab="experiments">Experiments <span>{{ section.pages | length }}</span></button>
+    </div>
+    <span class="lab-version">EARLY ACCESS / 01</span>
+  </div>
+
+  <section id="lab-workspace-panel" role="tabpanel" aria-labelledby="lab-tab-workspace" class="lab-panel">
+    <div class="lab-workbench" data-lab-workbench>
+      <div class="lab-toolbar">
+        <div class="lab-study-title"><span class="lab-study-dot" aria-hidden="true"></span><span>Dual-arm cloth</span><span class="lab-draft">Concept</span></div>
+        <div class="lab-tools">
+          <button type="button" class="lab-icon-button" data-lab-action="play" aria-label="Pause motion" aria-pressed="false" data-tooltip="Pause motion">
+            <span data-lab-pause-icon>{{ lab::icon(name="pause") }}</span>
+            <span data-lab-play-icon hidden>{{ lab::icon(name="play") }}</span>
+          </button>
+          {{ lab::tool(name="rotate-ccw", label="Reset workspace", action="reset") }}
+          {{ lab::tool(name="rotate-3d", label="Reset camera", action="camera") }}
+          <span class="lab-tool-divider" aria-hidden="true"></span>
+          {{ lab::tool(name="download", label="Download image", action="download") }}
+          <button type="button" class="lab-icon-button" data-lab-action="expand" aria-label="Expand workspace" aria-expanded="false" data-tooltip="Expand workspace">
+            <span data-lab-expand-icon>{{ lab::icon(name="maximize-2") }}</span>
+            <span data-lab-collapse-icon hidden>{{ lab::icon(name="minimize-2") }}</span>
+          </button>
+        </div>
+      </div>
+
+      <div class="lab-workbench-body">
+        <div class="lab-stage">
+          <div data-lab-scene tabindex="0" role="img" aria-label="Interactive 3D scene of two robot arms holding a deformable cloth" aria-describedby="lab-scene-help"></div>
+          <p id="lab-scene-help" class="sr-only">Drag the background with the left mouse button to orbit. On a trackpad, swipe with two fingers to orbit and pinch to zoom. Drag a colored gripper to move it. Arrow keys move the left gripper; Shift and arrow keys move the right.</p>
+          <div class="lab-stage-caption" aria-hidden="true"><strong>Deformable world / 01</strong><span data-lab-dimensions>16 × 10</span></div>
+          <div class="lab-coordinates" aria-hidden="true"><span data-lab-coordinates>u 0.50 / v 0.50</span><span data-lab-camera>100%</span></div>
+          <p class="lab-canvas-fallback" hidden data-lab-fallback>The scene could not be loaded.</p>
+        </div>
+
+        <aside class="lab-inspector" aria-label="Workspace controls">
+          <div class="lab-inspector-heading"><h2>Manipulation</h2><span>01</span></div>
+          <fieldset class="lab-control-group">
+            <legend>Render</legend>
+            <div class="lab-segmented" role="group" aria-label="Rendering mode">
+              <button type="button" data-lab-mode="surface" aria-pressed="true">Surface</button>
+              <button type="button" data-lab-mode="lines" aria-pressed="false">Threads</button>
+              <button type="button" data-lab-mode="points" aria-pressed="false">Particles</button>
+            </div>
+          </fieldset>
+          <fieldset class="lab-control-group">
+            <legend>Accent</legend>
+            <div class="lab-swatches" role="group" aria-label="Accent color">
+              <button type="button" style="--swatch: #2563eb" data-lab-color="#2563eb" aria-label="Cobalt" aria-pressed="true" data-tooltip="Cobalt"></button>
+              <button type="button" style="--swatch: #087f8c" data-lab-color="#087f8c" aria-label="Teal" aria-pressed="false" data-tooltip="Teal"></button>
+              <button type="button" style="--swatch: #d65b72" data-lab-color="#d65b72" aria-label="Rose" aria-pressed="false" data-tooltip="Rose"></button>
+              <button type="button" style="--swatch: #222b37" data-lab-color="#222b37" aria-label="Graphite" aria-pressed="false" data-tooltip="Graphite"></button>
+            </div>
+          </fieldset>
+          <div class="lab-control-group">
+            <label for="lab-density">Mesh resolution <output for="lab-density" data-lab-output="density">16</output></label>
+            <input id="lab-density" type="range" min="10" max="22" step="2" value="16" data-lab-range="density">
+          </div>
+          <div class="lab-control-group">
+            <label for="lab-speed">Motion <output for="lab-speed" data-lab-output="speed">0.40</output></label>
+            <input id="lab-speed" type="range" min="0" max="100" value="40" data-lab-range="speed">
+          </div>
+          <div class="lab-control-group">
+            <label for="lab-response">Grip span <output for="lab-response" data-lab-output="response">0.55</output></label>
+            <input id="lab-response" type="range" min="0" max="100" value="55" data-lab-range="response">
+          </div>
+          <div class="lab-control-group">
+            <label for="lab-lift">Lift <output for="lab-lift" data-lab-output="lift">0.45</output></label>
+            <input id="lab-lift" type="range" min="0" max="100" value="45" data-lab-range="lift">
+          </div>
+          <div class="lab-switch-row"><label for="lab-grid">Floor grid</label><input id="lab-grid" type="checkbox" role="switch" data-lab-toggle="grid" checked></div>
+          <div class="lab-switch-row"><label for="lab-pointer">Gripper control</label><input id="lab-pointer" type="checkbox" role="switch" data-lab-toggle="pointer" checked></div>
+          <p class="lab-inspector-note">Physics proxy / No inference</p>
+        </aside>
+      </div>
+      <div class="lab-statusbar"><span><span class="lab-live-dot" aria-hidden="true"></span><span data-lab-run-status>Running</span></span><span><span data-lab-point-count>160</span> particles<span class="lab-statusbar-divider">/</span>CPU · SVG</span></div>
+    </div>
+    <div class="lab-workspace-foot"><span>01 / Concept sandbox</span><a href="https://jwang771.github.io/3dworldsimulator/" target="_blank" rel="noopener">Scene inspiration {{ lab::icon(name="arrow-up-right") }}</a></div>
+  </section>
+
+  <section id="lab-experiments-panel" role="tabpanel" aria-labelledby="lab-tab-experiments" class="lab-panel" hidden>
+    {% if section.pages | length > 0 %}
+    <div class="lab-experiment-list">
+      {% for experiment in section.pages %}
+      <a href="{{ experiment.permalink }}" class="lab-experiment-entry">
+        <span class="lab-eyebrow">Study {{ loop.index }}</span>
+        <h2>{{ experiment.title }}</h2>
+        {% if experiment.description %}<p>{{ experiment.description }}</p>{% endif %}
+        {{ lab::icon(name="arrow-up-right") }}
+      </a>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="lab-empty">
+      <div class="lab-empty-icon">{{ lab::icon(name="flask-conical") }}</div>
+      <p class="lab-eyebrow">Experiments / 00</p>
+      <h2>Nothing published. Yet.</h2>
+      <button type="button" class="lab-return" data-lab-action="workspace">Back to workspace {{ lab::icon(name="arrow-up-right") }}</button>
+    </div>
+    {% endif %}
+  </section>
+  <div class="lab-toast" role="status" aria-live="polite" data-lab-toast></div>
+</main>
+<script type="module" src="{{ get_url(path="js/lab.js") }}"></script>
+{% endblock content %}
