@@ -21,7 +21,7 @@
       {% endif -%}
     </div>
     {% if page.extra.thumbnail %}
-    <div class="blog-card-thumb">
+    <div class="blog-card-thumb{% if page.extra.figure_caption %} paper-thumb{% endif %}">
       <img src="{{ get_url(path=page.extra.thumbnail) }}" alt="">
     </div>
     {% endif %}

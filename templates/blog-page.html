@@ -33,7 +33,14 @@
     </div>
   </div>
   {% if page.extra.thumbnail %}
+  {% if page.extra.figure_caption %}
+  <figure class="paper-figure">
+    <a href="{{ get_url(path=page.extra.thumbnail) }}"><img src="{{ get_url(path=page.extra.thumbnail) }}" alt="{{ page.extra.figure_alt }}"></a>
+    <figcaption>{{ page.extra.figure_caption }}</figcaption>
+  </figure>
+  {% else %}
   <img class="blog-post-hero" src="{{ get_url(path=page.extra.thumbnail) }}" alt="">
+  {% endif %}
   {% endif %}
   {% if page.extra.tldr -%}
   <p class="blog-post-tldr"> <span>TLDR.</span> {{ page.extra.tldr | safe }} </p>

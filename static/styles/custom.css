@@ -900,6 +900,32 @@ img.inline.h-6.w-6 {
   background: #f3f4f6;
 }
 
+.paper-figure {
+  margin: 28px 0;
+}
+
+.paper-figure img {
+  display: block;
+  max-width: 100%;
+  max-height: 360px;
+  width: auto;
+  height: auto;
+  margin-inline: auto;
+}
+
+.paper-figure figcaption {
+  max-width: 70ch;
+  margin: 12px auto 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: #4b5563;
+}
+
+.blog-card-thumb.paper-thumb img {
+  object-fit: contain;
+  background: white;
+}
+
 .blog-post-tldr {
   margin: 0 0 22px;
   padding: 16px 18px;
