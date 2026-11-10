@@ -144,54 +144,106 @@ handlers are retained. The underlying site remains Zola with Kodama templates.
 
 ## TensorCat Lab
 
-The Lab lives at `/lab/`. It is a static Zola section with a local dual-arm
-cloth sandbox and an empty experiment directory. It is a conceptual
-world-model-themed study, not a trained world model or a research result.
-There are no model weights, inference requests, GPU sessions, or WebGL contexts.
-Three.js 0.170.0 uses its CPU-side SVGRenderer; cannon-es 0.20.0 handles cloth
-distance constraints and gravity locally. The robot geometry is procedural.
+The `/lab/` route now contains a local TC-06 research-console prototype.
+It remains static Zola: no service, model weights, inference requests, or new
+runtime package installation. Three.js r170 supplies geometry and math only;
+projection, clipping, depth testing, UV interpolation, geometric sampling and
+rasterization execute on the CPU with Canvas 2D / ImageData. cannon-es supplies
+fixed-step physics, not a trained world model.
 
-- Section metadata and future entries: `content/lab/`.
-- Workbench layout and experiment index: `templates/lab.html`.
-- Scoped styling: `static/styles/lab.css`.
-- Controls, export, and overlay lifecycle: `static/js/lab.js`.
-- Scene, robot inverse kinematics, and cloth constraints: `static/js/lab-world.js`.
-- Pinned local libraries and licenses: `static/vendor/`.
+Console mode opens by default. Click a cartridge in the upper gallery or sidebar;
+it inserts automatically. Wait for READY,
+then press A to run the real experiment inside the handheld screen. Start opens
+the pause menu; it is not a launch requirement. A/B, D-pad, joystick, Start/Select and the screen
+are independently selectable 3D geometry, with equivalent accessible HTML
+controls. Six front-facing cartridges occupy uniformly spaced, screen-anchored
+slots above the handheld. The chosen card leaves its slot empty while the other
+five stay put; ejecting returns it to that exact slot. The actual transfer card
+aligns over the slot and descends into the internal bay. Transparent gallery
+pixels and a depth-aware foreground pass prevent any white rectangle or gallery
+card from hiding it. Only the housing naturally occludes the seated cartridge.
+Replacing a cartridge ejects the old one first; rapid requests queue the latest
+choice without restarting an in-flight movement. Lab mode is an explicit expanded presentation of the same cached
+experiment world, not an automatic destination after pressing A.
 
-To add a future experiment, add a Markdown file inside `content/lab/` with
-`title`, `description`, and an integer `weight` in TOML front matter. Published
-entries appear in the Experiments tab automatically. Add `template` to that
-file when the experiment needs its own interactive view. Use `draft = true`
-until it is ready to publish. Do not add unimplemented controls or invented
-results to the directory.
+Cartridges and the handheld have restrained, critically damped pointer-relative
+3D hover. The outer camera remains front-facing while the hardware transforms:
+small drags return to the current face; deliberate flips snap to Front or Back
+over 400 ms. The gallery does not rotate or zoom with the handheld. Front/Back
+are the only Console view presets; the expanded Lab retains its free camera.
 
-The controls support keyboard focus, reduced motion, and mobile layout. Expanded
-view preserves the site's custom cursor and restores focus on dismissal.
-PNG export rasterizes the current SVG scene locally. Settings stay in memory for the
-current page session; there is no server or account storage.
+The physical lower-front OFF/ON slider is functional, with equivalent keyboard-
+operable Power switch in the sidebar. Default is ON. OFF pauses the shared
+runtime, clears captured input, darkens the screen and dims the existing LED;
+mechanical insertion/ejection and hardware inspection remain available. ON shows
+the inserted cartridge's ready screen and waits for A; it never silently resumes.
 
-The two colored grippers can be dragged. Left-button drags on empty background
-orbit the camera; clicking robot geometry or cloth does not start a camera drag.
-Trackpad two-finger scroll rotates the view, and pinch gestures zoom smoothly.
-Horizontal and vertical orbit input is inverted consistently for mouse,
-trackpad, and touch. Pinch zoom retains its usual spread-to-enlarge direction.
-The viewer handles both ctrl+wheel pinches and Safari GestureEvents, preventing
-page zoom only inside the scene. Line-mode mouse wheels zoom; on pixel-mode
-devices, Ctrl+wheel also zooms. The camera reset tool preserves the cloth state.
-On touchscreens, one finger orbits and two fingers combine orbit and pinch zoom.
-Grip span, lift, tempo, mesh resolution, and surface/thread/particle views are
-adjustable. Pause stops the scripted arm motion; direct manipulation can still
-settle the cloth. Arrow keys move the left gripper; Shift plus arrow keys moves
-the right. This is bounded, illustrative cloth physics with no self-collision,
-robot contact dynamics, or learned prediction.
+Six tasks share world state, sampling and inspection: cloth, peg insertion,
+Push-T, box packing, slender-marker insertion and rope threading. Surface,
+wireframe, real particles and full-scene sampled point clouds use actual
+geometry. Inspect world/local/relative/camera XYZ; export point CSV/PLY,
+world-state JSON, trajectory JSON and viewport PNG locally.
 
+Drag outer empty space deliberately to flip; right/middle drag pans. Outer
+two-finger scrolling uses the same magnetic face constraints; Ctrl+wheel or
+Safari pinch zooms. Inner screen and expanded Lab use their separate free camera.
+Touch pointers combine two-finger rotation/pinch. Drag actual grippers on the projected screen or in Lab mode; screen
+input is ray-mapped into its local UV coordinates and never orbits the outer
+handheld camera. Focus screen enlarges the same live framebuffer without
+switching mode. D-pad Up zooms in, Down zooms out, and Left/Right are inactive
+during the experiment. The physical analog joystick orbits the inner experiment
+camera, like dragging its screen. Select opens arm, axis, tilt
+and auto-sequence tools. A toggles the gripper (Push-T triggers its push action),
+B backs out through the pause menu, and Start pauses/resumes. Focus the
+canvas for arrows, A/Enter, B/Escape and Space. Reduced motion starts physics
+paused. Rendering stops while hidden or offscreen.
+
+The embedded scene has an independent 1024x576 backing store (1280x720 at High,
+up to 1536x864 in Focus). Outer rendering follows CSS size and device pixel ratio
+with tier-specific safety caps, real supersampling, bilinear alpha-aware texture
+sampling and mipmaps. Stationary handheld geometry is depth-cached while the live
+screen is rerasterized. The rear badge is a circular mesh using the unchanged
+original artwork; only the small lower-left front decal was removed.
+
+Timeline records bounded snapshots for scrubbing/replay. Prediction compares
+two cloned physical rollouts with target/tilt actions, terminal geometry samples,
+paths and measured outcomes. Applying commits an action, not the predicted
+terminal state. Previewing does not advance the live world. "Pause at goal"
+stops after eight consecutive valid evaluations; disable it to study subsequent
+instability. Goal detection is not a guarantee of sustained physical stability.
+
+Source map: `templates/lab.html`, `static/styles/lab-v3.css`,
+`static/js/lab-v3/{app,graphics,console,session,mechanics,motion,gallery,power,embedded-display,experiment-view,robot,simulation}.js`, and
+`static/lab/tc06/experiments.json`. Old cloth/SVG files are retained but not loaded.
+Licenses remain in `static/vendor/` and `static/img/lab/icons/LICENSE`.
+
+Reproduce assets and checks from the repository root:
+
+```bash
+python3 tools/tc06/process_assets.py /Users/kevin/Desktop/TensorCat.png
+/Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python tools/tc06/generate_console.py -- --render
+node --test tests/lab-v3.test.mjs tests/tc06-console.test.mjs tests/tc06-interactions.test.mjs tests/nav-motion.test.cjs
+node tools/tc06/benchmark.mjs
+zola check
+zola build
+zola serve
+```
+
+Asset preparation requires Pillow; only model generation requires Blender 4.x.
+Neither is required by visitors or Cloudflare Pages. The editable, packed-texture
+`.blend` lives in `assets/tc06/`. GLB, CPU mesh JSON, original logo, derived badge,
+labels and twelve CPU previews live in `static/lab/tc06/`. The original logo is
+copied byte-for-byte; only exterior-connected white pixels become transparent
+in the derived badge. Provenance is recorded in `branding.json`.
+
+See [current interaction refinement and validation](docs/tc06-interaction-refinement.md),
+[earlier console integration](docs/tc06-console-refinement.md),
+[initial V3 implementation ledger](docs/lab-v3-status.md) and
+[measured benchmarks](docs/lab-v3-benchmark.json) for features, validation,
+approximations and remaining V3 requirements. This is a runnable local prototype,
+not full V3 acceptance or a validated robot system. This update is not deployed.
 The [3D World Simulator](https://jwang771.github.io/3dworldsimulator/) provides
-visual inspiration only. Its media, trained models, and GPU-backed interactive
-service are not embedded or used.
-
-Motion reference: [Apple Human Interface Guidelines](https://developer.apple.com/design/human-interface-guidelines/motion).
-The locally vendored icons are from Lucide 0.468.0. Their ISC/MIT license is
-included in `static/img/lab/icons/LICENSE`; no icon CDN is needed at runtime.
+research inspiration; its neural model and service are not embedded.
 
 ## GitHub Preparation
 

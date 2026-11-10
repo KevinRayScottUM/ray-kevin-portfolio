@@ -1,0 +1,430 @@
+{
+  "date": "2026-11-10",
+  "url": "http://127.0.0.1:1111/lab/",
+  "journeys": [
+    {
+      "task": "cloth",
+      "mode": "console",
+      "state": "EXPERIMENT_RUNNING",
+      "time": 0.13333333333333333,
+      "seat": [
+        0,
+        0.048000000640749926,
+        0.0009999999999999996
+      ],
+      "contained": true,
+      "visible": true
+    },
+    {
+      "task": "plug",
+      "mode": "console",
+      "state": "EXPERIMENT_RUNNING",
+      "time": 0.13333333333333333,
+      "seat": [
+        0,
+        0.048000000640749926,
+        0.0009999999999999996
+      ],
+      "contained": true,
+      "visible": true
+    },
+    {
+      "task": "pusht",
+      "mode": "console",
+      "state": "EXPERIMENT_RUNNING",
+      "time": 0.13333333333333333,
+      "seat": [
+        0,
+        0.048000000640749926,
+        0.0009999999999999996
+      ],
+      "contained": true,
+      "visible": true
+    },
+    {
+      "task": "box",
+      "mode": "console",
+      "state": "EXPERIMENT_RUNNING",
+      "time": 0.13333333333333333,
+      "seat": [
+        0,
+        0.048000000640749926,
+        0.0009999999999999996
+      ],
+      "contained": true,
+      "visible": true
+    },
+    {
+      "task": "marker",
+      "mode": "console",
+      "state": "EXPERIMENT_RUNNING",
+      "time": 0.13333333333333333,
+      "seat": [
+        0,
+        0.048000000640749926,
+        0.0009999999999999996
+      ],
+      "contained": true,
+      "visible": true
+    },
+    {
+      "task": "rope",
+      "mode": "console",
+      "state": "EXPERIMENT_RUNNING",
+      "time": 0.13333333333333333,
+      "seat": [
+        0,
+        0.048000000640749926,
+        0.0009999999999999996
+      ],
+      "contained": true,
+      "visible": true
+    }
+  ],
+  "renderModes": [
+    {
+      "mode": "console",
+      "renderMode": "wire",
+      "triangles": 14608,
+      "points": 0,
+      "innerFrames": 1682
+    },
+    {
+      "mode": "console",
+      "renderMode": "particles",
+      "triangles": 14608,
+      "points": 0,
+      "innerFrames": 1706
+    },
+    {
+      "mode": "console",
+      "renderMode": "cloud",
+      "triangles": 2,
+      "points": 2300,
+      "innerFrames": 1729
+    },
+    {
+      "mode": "console",
+      "renderMode": "surface",
+      "triangles": 2,
+      "points": 0,
+      "innerFrames": 1739
+    }
+  ],
+  "performance": {
+    "samples": [
+      {
+        "outerMs": 8.100000001490116,
+        "embeddedMs": 3.7000000029802322,
+        "physicsMs": 0.19999999552965164,
+        "totalMs": 21,
+        "fps": 24
+      },
+      {
+        "outerMs": 8,
+        "embeddedMs": 3.4000000059604645,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 22.299999997019768,
+        "fps": 24
+      },
+      {
+        "outerMs": 7.0999999940395355,
+        "embeddedMs": 3.899999998509884,
+        "physicsMs": 0.09999999403953552,
+        "totalMs": 21.69999999552965,
+        "fps": 24
+      },
+      {
+        "outerMs": 7,
+        "embeddedMs": 3.600000001490116,
+        "physicsMs": 0.19999999552965164,
+        "totalMs": 20.100000001490116,
+        "fps": 24
+      },
+      {
+        "outerMs": 7.700000002980232,
+        "embeddedMs": 3.399999998509884,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.5,
+        "fps": 24
+      },
+      {
+        "outerMs": 7.700000002980232,
+        "embeddedMs": 3.2000000029802322,
+        "physicsMs": 0,
+        "totalMs": 20.399999998509884,
+        "fps": 24
+      },
+      {
+        "outerMs": 7.4000000059604645,
+        "embeddedMs": 3.3000000044703484,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 19.700000002980232,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.5,
+        "embeddedMs": 3.5,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.30000000447035,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.700000002980232,
+        "embeddedMs": 4.100000001490116,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.700000002980232,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 8.100000001490116,
+        "embeddedMs": 3.8000000044703484,
+        "physicsMs": 0.29999999701976776,
+        "totalMs": 21.900000005960464,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 8,
+        "embeddedMs": 3.7999999970197678,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.900000005960464,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.5,
+        "embeddedMs": 3.899999998509884,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 22.100000001490116,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.800000004470348,
+        "embeddedMs": 4,
+        "physicsMs": 0.20000000298023224,
+        "totalMs": 20.900000005960464,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 8,
+        "embeddedMs": 3.7999999970197678,
+        "physicsMs": 0.09999999403953552,
+        "totalMs": 20.69999999552965,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.699999995529652,
+        "embeddedMs": 3.600000001490116,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 23.299999997019768,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.399999998509884,
+        "embeddedMs": 3.7999999970197678,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 21.100000001490116,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.300000004470348,
+        "embeddedMs": 4,
+        "physicsMs": 0.20000000298023224,
+        "totalMs": 22.30000000447035,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.4000000059604645,
+        "embeddedMs": 3.2999999970197678,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.100000001490116,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.800000004470348,
+        "embeddedMs": 3.3000000044703484,
+        "physicsMs": 0.20000000298023224,
+        "totalMs": 20.5,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.700000002980232,
+        "embeddedMs": 3.399999998509884,
+        "physicsMs": 0,
+        "totalMs": 19.600000001490116,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.700000002980232,
+        "embeddedMs": 3.399999998509884,
+        "physicsMs": 0.20000000298023224,
+        "totalMs": 19.600000001490116,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.9000000059604645,
+        "embeddedMs": 3.0999999940395355,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.100000001490116,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.199999995529652,
+        "embeddedMs": 3.5,
+        "physicsMs": 0.19999999552965164,
+        "totalMs": 19.69999999552965,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.600000001490116,
+        "embeddedMs": 3.4000000059604645,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.30000000447035,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.300000004470348,
+        "embeddedMs": 3.7000000029802322,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 19.80000000447035,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.299999997019768,
+        "embeddedMs": 3.399999998509884,
+        "physicsMs": 0.19999999552965164,
+        "totalMs": 21.5,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.899999998509884,
+        "embeddedMs": 3.3000000044703484,
+        "physicsMs": 0.19999999552965164,
+        "totalMs": 20.600000001490116,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 6.799999997019768,
+        "embeddedMs": 3.100000001490116,
+        "physicsMs": 0.19999999552965164,
+        "totalMs": 18.5,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 6.700000002980232,
+        "embeddedMs": 3.1999999955296516,
+        "physicsMs": 0.20000000298023224,
+        "totalMs": 18.900000005960464,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 7.5,
+        "embeddedMs": 3,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 19.19999999552965,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 6.899999998509884,
+        "embeddedMs": 3.2000000029802322,
+        "physicsMs": 0,
+        "totalMs": 18.899999998509884,
+        "fps": 21.291009387399534
+      },
+      {
+        "outerMs": 6.800000004470348,
+        "embeddedMs": 3.100000001490116,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 18.30000000447035,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 7.300000004470348,
+        "embeddedMs": 3.6999999955296516,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 19.400000005960464,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 7.200000002980232,
+        "embeddedMs": 3,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 20.100000001490116,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 6.699999995529652,
+        "embeddedMs": 3.2000000029802322,
+        "physicsMs": 0.20000000298023224,
+        "totalMs": 18.399999998509884,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 7.5,
+        "embeddedMs": 3.100000001490116,
+        "physicsMs": 0.20000000298023224,
+        "totalMs": 20.5,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 7.199999995529652,
+        "embeddedMs": 3.3000000044703484,
+        "physicsMs": 0.19999999552965164,
+        "totalMs": 23.69999999552965,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 6.9000000059604645,
+        "embeddedMs": 3.399999998509884,
+        "physicsMs": 0.09999999403953552,
+        "totalMs": 18.600000001490116,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 6.899999998509884,
+        "embeddedMs": 3,
+        "physicsMs": 0.10000000149011612,
+        "totalMs": 18.19999999552965,
+        "fps": 23.226555695344945
+      },
+      {
+        "outerMs": 6.799999997019768,
+        "embeddedMs": 3.0999999940395355,
+        "physicsMs": 0,
+        "totalMs": 17.600000001490116,
+        "fps": 23.226555695344945
+      }
+    ],
+    "viewport": [
+      1440,
+      1000
+    ],
+    "dpr": 1,
+    "outer": [
+      1365,
+      725
+    ],
+    "inner": [
+      1024,
+      576
+    ],
+    "cached": true,
+    "innerCached": true,
+    "note": "40 observations of distinct embedded frames, settled BOX, Balanced, stationary cameras. Not a moving-cloth benchmark."
+  },
+  "manualObservations": {
+    "physicalALaunch": true,
+    "projectedGripperDrag": true,
+    "outerCameraIsolated": true,
+    "upZoomIn": true,
+    "downZoomOut": true,
+    "leftRightInactive": true,
+    "physicalJoystickInnerOrbit": true,
+    "focusSameSession": true,
+    "pauseTimeStable": true,
+    "consoleLabPausedBodyPositionsIdentical": true,
+    "rearBadgeCircular": true,
+    "mobileViewportWidth": 390,
+    "mobileDocumentWidth": 390,
+    "nativeHardwareGesturesTested": false
+  }
+}

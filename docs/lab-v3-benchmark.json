@@ -1,0 +1,212 @@
+{
+  "date": "2026-11-10T12:44:32.244Z",
+  "environment": {
+    "runtime": "v24.19.0",
+    "cpu": "Apple M4",
+    "platform": "darwin",
+    "arch": "arm64",
+    "logicalCores": 10
+  },
+  "protocol": "Node CPU rasterizer + Cannon physics; no browser upload/compositing. 5 warmups + 20 measured frames. 1800-step automatic runs, balanced default physics; not a browser FPS claim.",
+  "profiles": [
+    {
+      "quality": "low",
+      "task": "cloth",
+      "width": 480,
+      "height": 270,
+      "frameP50ms": 6.722542000000004,
+      "frameP95ms": 7.336792000000003,
+      "physicsP50ms": 1.5581670000000258,
+      "triangles": 1453
+    },
+    {
+      "quality": "low",
+      "task": "box",
+      "width": 480,
+      "height": 270,
+      "frameP50ms": 5.563041999999996,
+      "frameP95ms": 6.3401250000000005,
+      "physicsP50ms": 0.20179200000001174,
+      "triangles": 707
+    },
+    {
+      "quality": "low",
+      "task": "rope",
+      "width": 480,
+      "height": 270,
+      "frameP50ms": 6.733499999999935,
+      "frameP95ms": 7.711041999999907,
+      "physicsP50ms": 0.2973749999999882,
+      "triangles": 2083
+    },
+    {
+      "quality": "balanced",
+      "task": "cloth",
+      "width": 960,
+      "height": 540,
+      "frameP50ms": 22.26370799999995,
+      "frameP95ms": 29.432333000000085,
+      "physicsP50ms": 1.4691659999998592,
+      "triangles": 1453
+    },
+    {
+      "quality": "balanced",
+      "task": "box",
+      "width": 960,
+      "height": 540,
+      "frameP50ms": 19.189832999999908,
+      "frameP95ms": 19.793083000000024,
+      "physicsP50ms": 0.14370800000006057,
+      "triangles": 707
+    },
+    {
+      "quality": "balanced",
+      "task": "rope",
+      "width": 960,
+      "height": 540,
+      "frameP50ms": 21.436916999999994,
+      "frameP95ms": 21.934332999999924,
+      "physicsP50ms": 0.2717499999998836,
+      "triangles": 2371
+    },
+    {
+      "quality": "high",
+      "task": "cloth",
+      "width": 1280,
+      "height": 720,
+      "frameP50ms": 36.851250000000164,
+      "frameP95ms": 38.361541999999645,
+      "physicsP50ms": 1.5037919999999758,
+      "triangles": 1453
+    },
+    {
+      "quality": "high",
+      "task": "box",
+      "width": 1280,
+      "height": 720,
+      "frameP50ms": 33.260499999999865,
+      "frameP95ms": 33.7160829999998,
+      "physicsP50ms": 0.13608300000032614,
+      "triangles": 707
+    },
+    {
+      "quality": "high",
+      "task": "rope",
+      "width": 1280,
+      "height": 720,
+      "frameP50ms": 37.102875000000495,
+      "frameP95ms": 38.56445800000074,
+      "physicsP50ms": 0.3512090000003809,
+      "triangles": 2659
+    }
+  ],
+  "automatic": [
+    {
+      "task": "cloth",
+      "firstSuccessSeconds": 1.2000000000000006,
+      "final": {
+        "time": 29.999999999999577,
+        "action": "fold",
+        "contacts": 6,
+        "grasps": 2,
+        "particles": 160,
+        "success": false,
+        "constraintError": 0.0031380618283886608,
+        "foldProgress": 0.7563779675039035,
+        "center": [
+          0.03542393627541147,
+          0.27182722416817007,
+          0.026058649057321033
+        ]
+      }
+    },
+    {
+      "task": "plug",
+      "firstSuccessSeconds": 6.249999999999983,
+      "final": {
+        "time": 29.999999999999577,
+        "action": "Sequence complete",
+        "contacts": 2,
+        "grasps": 0,
+        "particles": 0,
+        "success": false,
+        "radialError": 0.21279729552029833,
+        "angularError": 1.5709518199610328,
+        "insertionDepth": 0,
+        "valid": false,
+        "tip": [
+          0.14103591179589461,
+          0.10697103422560417,
+          0.22330825122266598
+        ],
+        "blocked": false
+      }
+    },
+    {
+      "task": "pusht",
+      "firstSuccessSeconds": 2.583333333333329,
+      "final": {
+        "time": 29.999999999999577,
+        "action": "Position region reached; check orientation",
+        "contacts": 0,
+        "grasps": 0,
+        "particles": 0,
+        "success": false,
+        "translationError": 0.021391424066610917,
+        "angularError": 1.1326400198577042
+      }
+    },
+    {
+      "task": "box",
+      "firstSuccessSeconds": 25.149999999999853,
+      "final": {
+        "time": 29.999999999999577,
+        "action": "Sequence complete",
+        "contacts": 0,
+        "grasps": 0,
+        "particles": 0,
+        "success": true,
+        "packed": 3,
+        "remaining": 0
+      }
+    },
+    {
+      "task": "marker",
+      "firstSuccessSeconds": 6.933333333333314,
+      "final": {
+        "time": 29.999999999999577,
+        "action": "Sequence complete",
+        "contacts": 4,
+        "grasps": 0,
+        "particles": 0,
+        "success": false,
+        "radialError": 0.05721712141179777,
+        "angularError": 1.3599373156347252,
+        "insertionDepth": 0,
+        "valid": false,
+        "tip": [
+          0.22173965233985288,
+          0.08868737091159054,
+          0.07642510377329378
+        ],
+        "blocked": false
+      }
+    },
+    {
+      "task": "rope",
+      "firstSuccessSeconds": 2.2166666666666637,
+      "final": {
+        "time": 29.999999999999577,
+        "action": "Sequence complete",
+        "contacts": 22,
+        "grasps": 1,
+        "particles": 36,
+        "success": false,
+        "constraintError": 0.00316922278878692,
+        "crossed": true,
+        "throughSegments": 0,
+        "allThrough": false
+      }
+    }
+  ]
+}

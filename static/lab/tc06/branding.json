@@ -1,0 +1,10 @@
+{
+  "source_sha256": "4d5d469fc8ab09c62d5035b3d8565c0034b694b853307837b1170a1649c1c158",
+  "size": [
+    400,
+    400
+  ],
+  "source_mode": "RGB",
+  "derived": "logo-badge.png",
+  "operation": "Exterior-connected near-white removal only; original badge and internal artwork preserved."
+}

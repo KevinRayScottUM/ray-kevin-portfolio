@@ -1,0 +1,2 @@
+objectId,pointId,x,y,z,r,g,b,frame,units,timestamp,simulationTime
+cloth.node-0,cloth.node-0.particle,-0.3199999532931382,0.5999572327984056,0.029999999999999746,57,141,144,world,m,2026-11-10T12:47:19.677Z,0.24999999999999997
