@@ -1,103 +1,109 @@
 {% extends "base.html" %}
-
+{% block user_head %}
+<link rel="stylesheet" href="{{ get_url(path="styles/home-layout.css") }}">
+{% endblock user_head %}
 {% block content %}
-
-{% block biography %}
-<div class="">
-  <div class="portfolio-hero-layout flex md:flex-row flex-wrap sm:flex-nowrap justify-center container mx-auto max-w-5xl py-10 px-3">
-    <div class="portfolio-hero-profile-col basis-full sm:basis-2/5 ">
-      <div class="container mx-auto portfolio-profile-panel">
-        <div class="portfolio-avatar-frame">
-          <img class="portfolio-avatar-image" src="{{ get_url(path=config.extra.avatar) }}" alt="Profile image"/>
-        </div>
-        <h1 class="portfolio-display-name">{{ section.title }}</h1>
-        {% if section.extra.display_name_secondary %}
-        <div class="portfolio-display-subname">{{ section.extra.display_name_secondary }}</div>
-        {% endif %}
-        {% if section.extra.title %}
-        <h2 class="text-center font-bold break-normal text-gray-400 text-lg py-1">{{ section.extra.title | markdown(inline=true) | safe }}</h2>
-        {% endif %}
-        <div class="portfolio-social-icons" aria-label="Profile links">
-          {% for icon in section.extra.avatar_icons %}
-            <a class="portfolio-social-button" href="{{icon.link}}" target="_blank" rel="noopener" title="{{ icon.icon }}">
-              <span class="sr-only">{{ icon.icon }}</span>
-              <i>{{ icons::factory(icon=icon.icon,classes="portfolio-social-svg") }}</i>
-            </a>
-          {% endfor %}
-        </div>
-      </div>
-    </div>
-    <div class="portfolio-hero-content-col basis-full sm:basis-3/5">
-      <div class="portfolio-hero-content-inner">
-        <h1 class="portfolio-biography-title font-bold font-sans break-normal text-gray-900 text-3xl sm:text-5xl pb-4">{{trans(key="Biography", lang=lang)}}</h1>
-        <article class="prose prose-indigo portfolio-biography-copy">
-        {{ section.content | safe }}
-        </article>
-        <div class="portfolio-profile-grid flex md:flex-row flex-wrap sm:flex-nowrap justify-center container mx-auto max-w-4xl sm:py-10 py-4">
-          <div class="portfolio-interest-col basis-full sm:basis-1/2 pb-4">
-            <h2 class="font-bold font-sans break-normal text-gray-900 text-2xl py-1">{{trans(key="Interests", lang=lang)}}</h2>
-            <ul class="list-disc pl-4">
-              {% for interest in section.extra.interests %}
-              <li class="py-1"> {{ interest }} </li>
-              {% endfor %}
-            </ul>
+<main class="home-publication">
+  <section class="home-intro" aria-labelledby="home-title">
+    <div class="home-intro-inner">
+      <div class="home-scene">
+        <figure class="home-photo" data-home-photo>
+          <div class="home-photo-image">
+            <img src="{{ get_url(path="img/kevin-editorial-portrait.png") }}" alt="Kevin Ray Scott, LEI KAIWEN / 雷凯文" fetchpriority="high" width="955" height="1647">
           </div>
-          <div class="portfolio-education-col basis-full sm:basis-1/2">
-            <h2 class="font-bold font-sans break-normal text-gray-900 text-2xl py-1">{{trans(key="Education", lang=lang)}}</h2>
-            <ul class="">
-              {% for course in section.extra.education.courses %}
-              <li class="py-1">
-                <div class="flex flex-row flex-wrap">
-                  <div class="basis-full">
-                    <i>{{ icons::factory(icon="academic",classes="inline h-6 w-6 flex-no-shrink") }}</i> {{ course.course }}{% if course.year %}, {{ course.year }}{% endif %}
-                  </div>
-                  <div class="basis-full text-gray-400">
-                  {{ course.institution }}
-                  </div>
-                </div>
-              </li>
-              {% endfor %}
-            </ul>
-          </div>
-        </div>
+          <figcaption><strong>Kevin Ray Scott</strong></figcaption>
+        </figure>
+        <aside class="home-question" data-home-note-tilt aria-label="Quote by Alan Turing">
+          <span>Quote</span>
+          <blockquote>Can machines<br> think?</blockquote>
+          <cite><a href="https://doi.org/10.1093/mind/LIX.236.433" target="_blank" rel="noopener">Alan Turing · 1950</a></cite>
+          <svg class="home-neural-sketch" viewBox="0 0 176 58" fill="none" aria-hidden="true">
+            <g class="home-neural-connections" stroke="currentColor" stroke-width=".8" opacity=".32">
+              <path d="M12 14 62 7M12 14 62 29M12 14 62 51M12 44 62 7M12 44 62 29M12 44 62 51M62 7 113 7M62 7 113 29M62 7 113 51M62 29 113 7M62 29 113 29M62 29 113 51M62 51 113 7M62 51 113 29M62 51 113 51M113 7 164 14M113 7 164 44M113 29 164 14M113 29 164 44M113 51 164 14M113 51 164 44"/>
+            </g>
+            <g class="home-neural-nodes" stroke="currentColor" stroke-width="1.1">
+              <circle cx="12" cy="14" r="3.5"/><circle cx="12" cy="44" r="3.5"/>
+              <circle cx="62" cy="7" r="3.5"/><circle cx="62" cy="29" r="3.5"/><circle cx="62" cy="51" r="3.5"/>
+              <circle cx="113" cy="7" r="3.5"/><circle cx="113" cy="29" r="3.5"/><circle cx="113" cy="51" r="3.5"/>
+              <circle cx="164" cy="14" r="3.5"/><circle cx="164" cy="44" r="3.5"/>
+            </g>
+          </svg>
+        </aside>
+      </div>
+      <div class="home-intro-copy">
+        <p class="home-eyebrow"><span aria-hidden="true"></span>Research notes by Kevin Ray Scott</p>
+        <h1 id="home-title">LEI KAIWEN,<br><em>雷凯文.</em></h1>
+        <p class="home-intro-description">Building reliable intelligent systems.<br>Exploring models, evidence, and real-world interaction.</p>
+        <a class="home-explore" href="#notebook">Explore the writing <span aria-hidden="true">↓</span></a>
+        <p class="home-topics">AI RESEARCH <span>·</span> INTELLIGENT AGENTS <span>·</span> ROBOTICS</p>
       </div>
     </div>
-  </div>
-  {% endblock biography %}
+  </section>
 
-  {% block index_summaries -%}
-
-  {% set_global index = 0 -%}
-  {% for ssection in section.subsections -%}
-  {% set ssection_data = get_section(path=ssection, metadata_only=true) -%}
-  {% if ssection_data.extra.index_show -%}
-      <div class="{% if index % 2 != 0%} bg-white {% else %} bg-gray-50 {% endif %}">
-        <div class="portfolio-index-section container max-w-5xl mx-auto px-4 py-8">
-          {% set index_elements = ssection_data.extra.index_elements | default(value=2) -%}
-          {% set show_description = ssection_data.extra.description_in_index | default(value=true) -%}
-          {{ macros::section_index_summary(section_path=ssection, show_element=index_elements, show_description=show_description) }}
-        </div>
+  <section id="notebook" class="home-notebook" aria-labelledby="notebook-title">
+    <div class="home-writing">
+      <div class="home-section-heading">
+        <div><p class="home-eyebrow">The notebook</p><h2 id="notebook-title">Ideas worth exploring.</h2></div>
+        <span class="home-folio">01 / Writing</span>
       </div>
-    {% set_global index = index + 1 -%}
-    {% endif -%}
-  {% endfor -%}
-  {% endblock index_summaries -%}
+      <div class="home-filters" role="group" aria-label="Filter recent notes">
+        <button type="button" data-home-filter="all" aria-pressed="true">All writing</button>
+        <button type="button" data-home-filter="research" aria-pressed="false">Research</button>
+        <button type="button" data-home-filter="systems" aria-pressed="false">AI systems</button>
+        <button type="button" data-home-filter="robotics" aria-pressed="false">Robotics</button>
+      </div>
+      {% set notes = get_section(path="blog/_index.md") %}
+      <div class="home-note-list">
+        {% for note in notes.pages %}
+        {% set category = "systems" %}
+        {% if note.slug is containing("robotics") %}
+          {% set category = "robotics" %}
+        {% elif note.extra.figure_caption or note.slug is containing("weight-space") or note.slug is containing("federated") %}
+          {% set category = "research" %}
+        {% endif %}
+        <div data-home-note="{{ category }}"{% if loop.index > 2 %} hidden{% endif %}>
+          <div class="home-note-label"><span>Research note</span><span>{% if loop.index <= 4 %}Selected{% else %}From the notebook{% endif %}</span></div>
+          {{ blog::page_summary(page=note) }}
+        </div>
+        {% endfor %}
+      </div>
+      <p class="home-filter-status sr-only" role="status" aria-live="polite" data-home-filter-status></p>
+      <a class="home-more" href="{{ get_url(path="/blog/") }}">All notes <span aria-hidden="true">↗</span></a>
+    </div>
+    <aside class="home-about">
+      <img class="home-about-avatar" src="{{ get_url(path=config.extra.avatar) }}" alt="" loading="lazy">
+      <p class="home-eyebrow">A little about me</p>
+      <h2>Hi, I'm Kevin.</h2>
+      <p>I study artificial intelligence at Universiti Malaya and build systems around language models, data, and human interaction.</p>
+      <a class="home-about-link" href="{{ get_url(path="/about/") }}">More about me <span aria-hidden="true">↗</span></a>
+      <div class="home-profiles" aria-label="Profile links">
+        {% for icon in section.extra.avatar_icons %}
+        <a href="{{ icon.link }}" target="_blank" rel="noopener" aria-label="{{ icon.icon }}" title="{{ icon.icon }}">{{ icons::factory(icon=icon.icon,classes="home-profile-icon") }}</a>
+        {% endfor %}
+      </div>
+      <a class="home-lab-link" href="{{ get_url(path="/lab/") }}"><span>In the lab</span><strong>TensorCat Lab ↗</strong></a>
+    </aside>
+  </section>
 
-  {% block index_contact -%}
-
-    {% if lang == config.default_language -%}
-      {% set contact_data = config.extra.menu_items -%}
-    {% else -%}
-      {% set contact_data = config.extra[lang].menu_items -%}
-    {% endif -%}
-
-    {% if config.extra.contact_in_index == true -%}
-    <div class="{% if index % 2 != 0%} bg-white {% else %} bg-gray-50 {% endif %}">
-      <div class="container max-w-4xl mx-auto px-4">
-      {{ macros::contact_from_config(section=section, config=config) }}
+  <section class="home-background" aria-labelledby="background-title">
+    <div class="home-background-inner">
+      <div class="home-background-copy">
+        <p class="home-eyebrow">02 / Background</p>
+        <h2 id="background-title">Biography.</h2>
+        <article class="prose portfolio-biography-copy">{{ section.content | safe }}</article>
+        <a class="home-about-link" href="{{ get_url(path="/project-experience/") }}">Explore my projects <span aria-hidden="true">↗</span></a>
+      </div>
+      <div class="home-background-facts">
+        <h3>Education</h3>
+        {% for course in section.extra.education.courses %}
+        <div class="home-education-item"><strong>{{ course.course }}</strong><span>{{ course.institution }}</span></div>
+        {% endfor %}
+        <h3>Research Interests</h3>
+        <ul>{% for interest in section.extra.interests %}<li>{{ interest }}</li>{% endfor %}</ul>
       </div>
     </div>
-    {% endif -%}
-  {% endblock index_contact -%}
-
-{% endblock content-%}
+  </section>
+</main>
+<script defer src="{{ get_url(path="js/blog-actions.js") }}"></script>
+<script defer src="{{ get_url(path="js/home-layout.js") }}"></script>
+{% endblock content %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="editorial-contact">
+  <p class="editorial-kicker">06 / Start a conversation</p>
+  <h1>Contact<span>.</span></h1>
+  <p class="editorial-contact-intro">Research, engineering, and the questions in between.</p>
+  <div class="editorial-contact-links">
+    {% for link in page.extra.links %}
+    <a href="{{ link.link }}" target="_blank" rel="noopener">
+      <span class="editorial-contact-icon">{{ icons::factory(icon=link.icon,classes="editorial-contact-svg") }}</span>
+      <span>{{ link.name }}</span><span class="editorial-contact-arrow" aria-hidden="true">↗</span>
+    </a>
+    {% endfor %}
+  </div>
+  <div class="editorial-page-end"><span>Kevin Ray Scott / TensorCat</span><span>LEI KAIWEN / 雷凯文</span></div>
+</main>
+{% endblock content %}

@@ -131,6 +131,17 @@ https://kevinrayscott.pages.dev/
 
 If the final Cloudflare Pages URL or a custom domain changes, update `base_url` in `config.toml` before building or deploying.
 
+## Editorial Presentation
+
+The presentation layer in `static/styles/editorial.css` follows the owner's
+supplied editorial reference: serif headings, restrained green accents, fine
+rules, and alternating paper/white surfaces. WebsiteBench was inspected as a
+website-reconstruction benchmark, not installed as a Zola theme. No third-party
+reference-site content or benchmark environment is included.
+
+Existing navigation transitions, cursor behavior, blog actions, and Lab input
+handlers are retained. The underlying site remains Zola with Kodama templates.
+
 ## TensorCat Lab
 
 The Lab lives at `/lab/`. It is a static Zola section with a local dual-arm

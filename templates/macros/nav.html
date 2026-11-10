@@ -22,7 +22,7 @@
             {% set active = true -%}
           {% endif -%}
           <li>
-            <a href="{{ get_url(path=item.path, trailing_slash=false, lang=lang) }}" class="portfolio-nav-link{% if active %} is-active{% endif %}">
+            <a href="{{ get_url(path=item.path, trailing_slash=false, lang=lang) }}" class="portfolio-nav-link{% if item.path == "/contacts" %} portfolio-nav-contact{% endif %}{% if active %} is-active{% endif %}">
               {{ item.name }}
             </a>
           </li>

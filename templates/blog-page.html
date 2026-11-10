@@ -9,6 +9,7 @@
 {% set share_url = config.extra.public_base_url ~ page.path -%}
 <script defer src="{{ get_url(path="js/blog-actions.js") }}"></script>
 <div class="blog-post-wrap" data-post-id="{{ page.slug }}">
+  <a class="editorial-kicker editorial-back" href="{{ get_url(path="/blog/") }}">← Back to the notebook</a>
   <div class="blog-post-header">
     <div class="blog-card-meta blog-post-meta">
       <img class="blog-author-avatar" src="{{ get_url(path=config.extra.avatar) }}" alt="Kevin Ray Scott">

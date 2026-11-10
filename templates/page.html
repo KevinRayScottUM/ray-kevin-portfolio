@@ -2,6 +2,7 @@
 
 {% block content %}
 <div class="portfolio-page-wrap container max-w-3xl mx-auto px-5 sm:px-3">
+  <p class="editorial-kicker">{% if page.path is containing("project-experience") %}02 / Research &amp; engineering{% else %}03 / Background &amp; perspective{% endif %}</p>
   <div class="pt-8 flex">
     <h1 class="grow font-bold font-sans break-normal text-gray-900 text-3xl">{{ page.title }}</h1>
   </div>
@@ -12,5 +13,6 @@
     {{ page.content | safe }}
     {% if page.extra.external_link %}<p><a href="{{page.extra.external_link | safe}}" target="_blank">{{page.extra.external_link | safe}}</a></p>{% endif -%}
   </article>
+  <div class="editorial-page-end"><span>Kevin Ray Scott / TensorCat</span><a href="{{ get_url(path="/contacts/") }}">Get in touch <span aria-hidden="true">↗</span></a></div>
 </div>
 {% endblock content %}

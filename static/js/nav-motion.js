@@ -278,6 +278,13 @@
     var activeLink = document.querySelector(".portfolio-nav-link.is-active");
     if (!activeLink) return null;
 
+    // A viewport change invalidates any in-flight animation's pixel coordinates.
+    if (activeAnimation) {
+      activeAnimation.onfinish = null;
+      activeAnimation.cancel();
+      activeAnimation = null;
+    }
+
     centerInScroll(scroll, activeLink);
     place(indicator, measure(scroll, activeLink));
     return activeLink;
