@@ -23,6 +23,8 @@ body.bg-white { color: var(--editorial-ink); background: #fff; }
 .portfolio-nav-link.portfolio-nav-contact { border: 1px solid #77816e; border-radius: 24px; margin-left: 8px; padding-inline: 20px; transition: background-color 240ms ease, color 240ms ease, border-color 240ms ease, transform 300ms cubic-bezier(.22,1,.36,1); }
 .portfolio-nav-link.portfolio-nav-contact:hover, .portfolio-nav-link.portfolio-nav-contact:focus-visible { background: #e9eee6; border-color: var(--editorial-green); }
 .portfolio-nav-link.portfolio-nav-contact:focus-visible { outline: 2px solid var(--editorial-green); outline-offset: 2px; }
+.portfolio-nav-link.portfolio-nav-contact.is-active { background: var(--editorial-green); color: #f7faf4; border-color: var(--editorial-green); }
+.portfolio-nav-indicator[hidden],
 .portfolio-nav-contact.is-active::after,
 .portfolio-nav-scroll:has(.portfolio-nav-contact.is-active) > .portfolio-nav-indicator { display: none; }
 .editorial-kicker { margin: 0 0 20px; font-size: 11px !important; font-weight: 600; line-height: 1.6; color: var(--editorial-green) !important; text-align: left !important; text-transform: uppercase; hyphens: none; }

@@ -61,6 +61,10 @@
     });
   }
 
+  function isContactLink(link) {
+    return !!link && link.classList.contains("portfolio-nav-contact");
+  }
+
   function measure(scroll, link) {
     var scrollRect = scroll.getBoundingClientRect();
     var linkRect = link.getBoundingClientRect();
@@ -286,14 +290,19 @@
     }
 
     centerInScroll(scroll, activeLink);
-    place(indicator, measure(scroll, activeLink));
+    indicator.hidden = isContactLink(activeLink);
+    if (!indicator.hidden) place(indicator, measure(scroll, activeLink));
     return activeLink;
   }
 
   function runArrivalMotion(scroll, indicator, transition) {
     var activeLink = document.querySelector(".portfolio-nav-link.is-active");
     var fromLink = transition ? linkForPath(transition.from) : null;
-    if (!activeLink || !fromLink || fromLink === activeLink) {
+    // Contact uses its filled button, never an underline animation endpoint.
+    if (
+      !activeLink || !fromLink || fromLink === activeLink ||
+      isContactLink(activeLink) || isContactLink(fromLink)
+    ) {
       syncToActive(scroll, indicator);
       return;
     }
@@ -342,7 +351,9 @@
         if (normalizeUrl(link.href) === normalizeUrl(activeLink.href)) {
           event.preventDefault();
           centerInScroll(scroll, activeLink);
-          playActiveIndicator(indicator, measure(scroll, activeLink));
+          if (!isContactLink(activeLink)) {
+            playActiveIndicator(indicator, measure(scroll, activeLink));
+          }
           return;
         }
 
