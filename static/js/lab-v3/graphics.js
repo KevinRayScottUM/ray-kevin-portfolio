@@ -200,7 +200,7 @@ export class SoftwareRenderer {
     this.objects = [];
     this.pointData = [];
     this.stats = { ms: 0, triangles: 0, points: 0 };
-    this.studio=false;this.materialCache=new WeakMap();this.lightingGeometry=new WeakMap();this.lightingValues=new WeakMap();this.lightFrame=0;
+    this.studio=false;this.materialCache=new WeakMap();this.lightingGeometry=new WeakMap();this.lightingValues=new WeakMap();this.projectedVertices=new WeakMap();this.lightFrame=0;
     this.setBackground("#f7f9f9");
     this.setQuality("balanced");
   }
@@ -276,7 +276,7 @@ export class SoftwareRenderer {
   }
   render(scene, rig, options = {}) {
     const start = performance.now();
-    this.lightFrame++;this.stats.shadedVertices=0;
+    this.lightFrame++;this.stats.shadedVertices=0;this.stats.projectedVertices=0;
     const cacheKey=options.staticKey?this.studio+":"+this.quality+":"+options.staticKey:null;
     const cached=Boolean(cacheKey&&options.mode!=="cloud"&&options.mode!=="wire"&&options.mode!=="particles"&&this.staticCache?.key===cacheKey);
     const pixels = this.image.data;
@@ -334,30 +334,40 @@ export class SoftwareRenderer {
         const displayBase=base.clone().convertLinearToSRGB(),baseRGB=[displayBase.r*255,displayBase.g*255,displayBase.b*255];
         const texture = this.textures.get(object.userData.texture);
         const lighting=this.studio?this.lightingMap(object.geometry):null;
+        let projection=null;
+        if(options.vertexCache&&this.studio){
+          projection=this.projectedVertices.get(object);
+          if(!projection||projection.frame.length!==positions.length/3){projection={frame:new Uint32Array(positions.length/3),vertices:new Array(positions.length/3)};this.projectedVertices.set(object,projection);}
+        }
         let values=this.lightingValues.get(object);
         if(lighting&&(!values||values.frame.length!==lighting.count)){values={frame:new Uint32Array(lighting.count),diffuse:new Float32Array(lighting.count),specular:new Float32Array(lighting.count)};this.lightingValues.set(object,values);}
+        const lightVertex=(index,vertex)=>{
+          const slot=lighting.map[index];
+          if(values.frame[slot]!==this.lightFrame){
+            vertexNormal.fromArray(normals||[0,0,1],normals?index*3:0).applyMatrix3(normalMatrix).normalize();
+            vertexPosition.fromArray(positions,index*3).applyMatrix4(object.matrixWorld);
+            studioLighting(vertexNormal,vertexPosition,rig.camera.position,kind,this.quality,factors);
+            values.frame[slot]=this.lightFrame;values.diffuse[slot]=factors.diffuse;values.specular[slot]=factors.specular;this.stats.shadedVertices++;
+          }
+          vertex[6]=values.diffuse[slot];vertex[7]=values.specular[slot];
+        };
         for (let offset = 0; offset < count; offset += 3) {
           const vertices = [];
           normal.set(0, 0, 0);
           for (let corner = 0; corner < 3; corner++) {
             const index = indices ? indices[offset + corner] : offset + corner;
+            if(projection?.frame[index]===this.lightFrame){vertices.push(projection.vertices[index]);continue;}
             const x = positions[index * 3], y = positions[index * 3 + 1], z = positions[index * 3 + 2];
-            vertices.push([m[0]*x+m[4]*y+m[8]*z+m[12], m[1]*x+m[5]*y+m[9]*z+m[13], m[2]*x+m[6]*y+m[10]*z+m[14], m[3]*x+m[7]*y+m[11]*z+m[15], uv ? uv[index*2] : 0, uv ? uv[index*2+1] : 0]);
+            const vertex=projection?(projection.vertices[index]||(projection.vertices[index]=new Array(8))):new Array(this.studio?8:6);
+            vertex[0]=m[0]*x+m[4]*y+m[8]*z+m[12];vertex[1]=m[1]*x+m[5]*y+m[9]*z+m[13];vertex[2]=m[2]*x+m[6]*y+m[10]*z+m[14];vertex[3]=m[3]*x+m[7]*y+m[11]*z+m[15];vertex[4]=uv?uv[index*2]:0;vertex[5]=uv?uv[index*2+1]:0;
+            vertices.push(vertex);this.stats.projectedVertices++;
             if (normals&&!this.studio) normal.add(vertexNormal.fromArray(normals, index * 3));
-            if(this.studio){
-              const slot=lighting.map[index];
-              if(values.frame[slot]!==this.lightFrame){
-                vertexNormal.fromArray(normals||[0,0,1],normals?index*3:0).applyMatrix3(normalMatrix).normalize();
-                vertexPosition.set(x,y,z).applyMatrix4(object.matrixWorld);
-                studioLighting(vertexNormal,vertexPosition,rig.camera.position,kind,this.quality,factors);
-                values.frame[slot]=this.lightFrame;values.diffuse[slot]=factors.diffuse;values.specular[slot]=factors.specular;this.stats.shadedVertices++;
-              }
-              vertices[corner].push(values.diffuse[slot],values.specular[slot]);
-            }
+            if(this.studio)lightVertex(index,vertex);
+            if(projection)projection.frame[index]=this.lightFrame;
           }
           if(!this.studio)normal.applyMatrix3(normalMatrix).normalize();
           const shade = this.studio||object.userData.texture ? 1 : .68 + .32 * Math.max(0, normal.dot(new THREE.Vector3(-.4,.8,.6).normalize()));
-          const polygon = clipPolygon(vertices);
+          const polygon = options.fastClip&&vertices.every(v=>v[3]>0&&Math.abs(v[0])<=v[3]&&Math.abs(v[1])<=v[3]&&Math.abs(v[2])<=v[3])?vertices:clipPolygon(vertices);
           if (polygon.length < 3) continue;
           const screen = polygon.map(v => [(v[0]/v[3]+1)*this.width/2, (1-v[1]/v[3])*this.height/2, v[2]/v[3], 1/v[3], v[4]/v[3], v[5]/v[3], ...(this.studio?[v[6]/v[3],v[7]/v[3]]:[])]);
           const display=this.studio?null:base.clone().multiplyScalar(shade).convertLinearToSRGB();

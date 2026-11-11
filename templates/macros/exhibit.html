@@ -1,0 +1,26 @@
+{% import "macros/lab.html" as lab %}
+{% macro preview(exhibit) %}
+<article class="lab-preview-layer" data-preview-id="{{ exhibit.id }}" aria-labelledby="lab-title-{{ exhibit.id }}">
+  <header class="lab-preview-header"><p>Live exhibit preview <span>/ {{ exhibit.number }}</span></p><span class="lab-availability"><i aria-hidden="true"></i>{{ exhibit.status }}</span></header>
+  {% if exhibit.preview_component | default(value="") == "tensorcat-showcase" %}
+  <div class="lab-preview-visual lab-showcase" data-preview-visual>
+    <div class="lab-showcase-frame" data-showcase data-showcase-assets="{{ get_url(path='lab/tc06/') }}" tabindex="0" role="group" aria-label="TensorCat 3D hardware tour" aria-describedby="lab-showcase-help-{{ exhibit.id }}">
+      <img data-showcase-fallback src="{{ get_url(path=exhibit.cover) }}" alt="{{ exhibit.cover_alt }}" width="1440" height="810" decoding="async">
+      <canvas data-showcase-canvas aria-label="Three-dimensional TensorCat handheld"></canvas>
+      <div class="lab-showcase-cartridges" aria-hidden="true"><canvas></canvas></div>
+      <p class="lab-gallery-status" id="lab-showcase-help-{{ exhibit.id }}">Explore with a horizontal swipe or drag. Left and Right arrow keys select a view; Home and End move to the first and last view.</p>
+    </div>
+    <div class="lab-showcase-controls"><span data-showcase-pose>Front overview</span><output data-showcase-progress aria-label="Hardware tour stage">01 / 08</output><div><button type="button" data-showcase-step="-1" aria-label="Previous hardware view" title="Previous hardware view" disabled>{{ lab::icon(name="chevron-left") }}</button><button type="button" data-showcase-step="1" aria-label="Next hardware view" title="Next hardware view" disabled>{{ lab::icon(name="chevron-right") }}</button></div></div>
+  </div>
+  {% else %}
+  <a class="lab-preview-visual" data-preview-visual href="{{ get_url(path=exhibit.route, trailing_slash=true) }}" aria-label="Enter {{ exhibit.title }} — {{ exhibit.subtitle }}"><img src="{{ get_url(path=exhibit.cover) }}" alt="{{ exhibit.cover_alt | default(value=exhibit.title) }}" width="{{ exhibit.cover_width | default(value=1440) }}" height="{{ exhibit.cover_height | default(value=810) }}" decoding="async" style="object-fit:{{ exhibit.cover_fit | default(value='contain') }}"></a>
+  {% endif %}
+  <div class="lab-preview-copy">
+    <p class="lab-eyebrow">Exhibit {{ exhibit.number }} / {{ exhibit.category }}</p>
+    <h2 id="lab-title-{{ exhibit.id }}">{{ exhibit.title }} <span>— {{ exhibit.subtitle }}</span></h2>
+    <p class="lab-preview-description">{{ exhibit.description }}</p>
+    <ul class="lab-exhibit-tags" aria-label="Research areas">{% for tag in exhibit.technology_tags %}<li>{{ tag }}</li>{% endfor %}</ul>
+    <a class="lab-exhibit-enter" href="{{ get_url(path=exhibit.route, trailing_slash=true) }}">Enter Exhibit {{ lab::icon(name="arrow-up-right") }}</a>
+  </div>
+</article>
+{% endmacro %}

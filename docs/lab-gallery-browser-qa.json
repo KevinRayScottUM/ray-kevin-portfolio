@@ -1,0 +1,7275 @@
+{
+  "date": "2026-11-11",
+  "transitionEnvironment": {
+    "viewport": [
+      1440,
+      1000
+    ],
+    "testData": "Three local-only fixtures; mobile-forward captured at 390x844"
+  },
+  "summary": [
+    {
+      "name": "reverse",
+      "samples": 50,
+      "transitionSamples": 44,
+      "heightValues": [
+        908
+      ],
+      "rainPersistent": true,
+      "rainBufferSizes": [
+        "1440x1000"
+      ],
+      "maxLayers": 2,
+      "blankFrames": 0,
+      "frameIntervalMs": {
+        "median": 16.700000000000728,
+        "p95": 17
+      }
+    },
+    {
+      "name": "forward",
+      "samples": 51,
+      "transitionSamples": 45,
+      "heightValues": [
+        908
+      ],
+      "rainPersistent": true,
+      "rainBufferSizes": [
+        "1440x1000"
+      ],
+      "maxLayers": 2,
+      "blankFrames": 0,
+      "frameIntervalMs": {
+        "median": 16.69999999999709,
+        "p95": 17.19999999999709
+      }
+    },
+    {
+      "name": "rapid",
+      "samples": 115,
+      "transitionSamples": 90,
+      "heightValues": [
+        908
+      ],
+      "rainPersistent": true,
+      "rainBufferSizes": [
+        "1440x1000"
+      ],
+      "maxLayers": 2,
+      "blankFrames": 0,
+      "frameIntervalMs": {
+        "median": 16.69999999999709,
+        "p95": 17.19999999999709
+      }
+    },
+    {
+      "name": "mobile-forward",
+      "samples": 50,
+      "transitionSamples": 45,
+      "heightValues": [
+        675
+      ],
+      "rainPersistent": true,
+      "rainBufferSizes": [
+        "390x844"
+      ],
+      "maxLayers": 2,
+      "blankFrames": 0,
+      "frameIntervalMs": {
+        "median": 16.69999999999709,
+        "p95": 16.799999999999272
+      }
+    }
+  ],
+  "responsive": [
+    {
+      "viewport": [
+        390,
+        844
+      ],
+      "grid": "354px",
+      "index": {
+        "x": 18,
+        "y": 265.4296875,
+        "width": 354,
+        "height": 180.9375,
+        "top": 265.4296875,
+        "right": 372,
+        "bottom": 446.3671875,
+        "left": 18
+      },
+      "preview": {
+        "x": 18,
+        "y": 468.3671875,
+        "width": 354,
+        "height": 589,
+        "top": 468.3671875,
+        "right": 372,
+        "bottom": 1057.3671875,
+        "left": 18
+      },
+      "overflow": 0,
+      "visual": {
+        "x": 19,
+        "y": 518.3671875,
+        "width": 352,
+        "height": 198,
+        "top": 518.3671875,
+        "right": 371,
+        "bottom": 716.3671875,
+        "left": 19
+      },
+      "image": [
+        1440,
+        810
+      ],
+      "realEntries": 1,
+      "reserved": 3,
+      "rainLayers": 1
+    },
+    {
+      "viewport": [
+        768,
+        1024
+      ],
+      "grid": "720px",
+      "index": {
+        "x": 24,
+        "y": 249.0390625,
+        "width": 720,
+        "height": 180.9375,
+        "top": 249.0390625,
+        "right": 744,
+        "bottom": 429.9765625,
+        "left": 24
+      },
+      "preview": {
+        "x": 24,
+        "y": 451.9765625,
+        "width": 720,
+        "height": 725,
+        "top": 451.9765625,
+        "right": 744,
+        "bottom": 1176.9765625,
+        "left": 24
+      },
+      "overflow": 0,
+      "visual": {
+        "x": 25,
+        "y": 501.9765625,
+        "width": 718,
+        "height": 403.875,
+        "top": 501.9765625,
+        "right": 743,
+        "bottom": 905.8515625,
+        "left": 25
+      },
+      "image": [
+        1440,
+        810
+      ],
+      "realEntries": 1,
+      "reserved": 3,
+      "rainLayers": 1
+    },
+    {
+      "viewport": [
+        1280,
+        900
+      ],
+      "grid": "340.477px 851.523px",
+      "index": {
+        "x": 32,
+        "y": 233.7890625,
+        "width": 340.4765625,
+        "height": 564.5,
+        "top": 233.7890625,
+        "right": 372.4765625,
+        "bottom": 798.2890625,
+        "left": 32
+      },
+      "preview": {
+        "x": 396.4765625,
+        "y": 233.7890625,
+        "width": 851.5234375,
+        "height": 781,
+        "top": 233.7890625,
+        "right": 1248,
+        "bottom": 1014.7890625,
+        "left": 396.4765625
+      },
+      "overflow": 0,
+      "visual": {
+        "x": 397.4765625,
+        "y": 283.7890625,
+        "width": 849.5234375,
+        "height": 477.8515625,
+        "top": 283.7890625,
+        "right": 1247,
+        "bottom": 761.640625,
+        "left": 397.4765625
+      },
+      "image": [
+        1440,
+        810
+      ],
+      "realEntries": 1,
+      "reserved": 3,
+      "rainLayers": 1
+    },
+    {
+      "viewport": [
+        1440,
+        1000
+      ],
+      "grid": "385.273px 966.727px",
+      "index": {
+        "x": 32,
+        "y": 233.7890625,
+        "width": 385.2734375,
+        "height": 564.5,
+        "top": 233.7890625,
+        "right": 417.2734375,
+        "bottom": 798.2890625,
+        "left": 32
+      },
+      "preview": {
+        "x": 441.2734375,
+        "y": 233.7890625,
+        "width": 966.7265625,
+        "height": 846,
+        "top": 233.7890625,
+        "right": 1408,
+        "bottom": 1079.7890625,
+        "left": 441.2734375
+      },
+      "overflow": 0,
+      "visual": {
+        "x": 442.2734375,
+        "y": 283.7890625,
+        "width": 964.7265625,
+        "height": 542.65625,
+        "top": 283.7890625,
+        "right": 1407,
+        "bottom": 826.4453125,
+        "left": 442.2734375
+      },
+      "image": [
+        1440,
+        810
+      ],
+      "realEntries": 1,
+      "reserved": 3,
+      "rainLayers": 1
+    },
+    {
+      "viewport": [
+        1920,
+        1080
+      ],
+      "grid": "463.68px 1168.32px",
+      "index": {
+        "x": 132,
+        "y": 233.7890625,
+        "width": 463.6796875,
+        "height": 564.5,
+        "top": 233.7890625,
+        "right": 595.6796875,
+        "bottom": 798.2890625,
+        "left": 132
+      },
+      "preview": {
+        "x": 619.6796875,
+        "y": 233.7890625,
+        "width": 1168.3203125,
+        "height": 959,
+        "top": 233.7890625,
+        "right": 1788,
+        "bottom": 1192.7890625,
+        "left": 619.6796875
+      },
+      "overflow": 0,
+      "visual": {
+        "x": 620.6796875,
+        "y": 283.7890625,
+        "width": 1166.3203125,
+        "height": 656.0546875,
+        "top": 283.7890625,
+        "right": 1787,
+        "bottom": 939.84375,
+        "left": 620.6796875
+      },
+      "image": [
+        1440,
+        810
+      ],
+      "realEntries": 1,
+      "reserved": 3,
+      "rainLayers": 1
+    }
+  ],
+  "verifiedInteractions": [
+    "forward",
+    "reverse",
+    "rapid-latest-wins",
+    "same-project-no-replay",
+    "keyboard-focus-and-enter",
+    "reduced-motion-selection",
+    "reduce-motion-mid-transition",
+    "missing-image-retains-active",
+    "real-exhibit-insert-and-run",
+    "browser-back-and-forward"
+  ],
+  "rows": [
+    {
+      "name": "reverse",
+      "rows": [
+        {
+          "time": 31962.3,
+          "phase": "IDLE",
+          "active": "fixture-rear",
+          "requested": "fixture-rear",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 31979,
+          "phase": "IDLE",
+          "active": "fixture-rear",
+          "requested": "fixture-rear",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 31995.7,
+          "phase": "IDLE",
+          "active": "fixture-rear",
+          "requested": "fixture-rear",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32012.3,
+          "phase": "IDLE",
+          "active": "fixture-rear",
+          "requested": "fixture-rear",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32029,
+          "phase": "PREPARING_NEXT",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32045.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 29.1456,
+              "opacity": 0.90845,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -269.315,
+              "opacity": 0.172927,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32062.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 56.8332,
+              "opacity": 0.821481,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -241.628,
+              "opacity": 0.337204,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32079.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 82.8835,
+              "opacity": 0.739653,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -215.577,
+              "opacity": 0.491766,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32095.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 107.008,
+              "opacity": 0.663875,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -191.453,
+              "opacity": 0.634903,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32112.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 129.392,
+              "opacity": 0.593564,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -169.069,
+              "opacity": 0.767712,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32129,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 149.712,
+              "opacity": 0.527138,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -148.749,
+              "opacity": 0.856235,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32145.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 168.211,
+              "opacity": 0.461584,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -130.25,
+              "opacity": 0.874114,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32162.2,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 184.618,
+              "opacity": 0.40344,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -113.843,
+              "opacity": 0.889971,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32179.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 199.585,
+              "opacity": 0.3504,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -98.8763,
+              "opacity": 0.904436,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32195.6,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 212.519,
+              "opacity": 0.304561,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -85.9415,
+              "opacity": 0.916938,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32212.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 224.059,
+              "opacity": 0.263667,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -74.402,
+              "opacity": 0.928091,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32229.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 234.239,
+              "opacity": 0.227592,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -64.2221,
+              "opacity": 0.93793,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32245.6,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 242.986,
+              "opacity": 0.196594,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -55.4751,
+              "opacity": 0.946383,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32262.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 250.759,
+              "opacity": 0.169047,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -47.702,
+              "opacity": 0.953896,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32279,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 257.447,
+              "opacity": 0.145346,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -41.014,
+              "opacity": 0.96036,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32295.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 263.3,
+              "opacity": 0.124606,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -35.1614,
+              "opacity": 0.966017,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32312.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 268.354,
+              "opacity": 0.106695,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -30.1073,
+              "opacity": 0.970901,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32329,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 272.766,
+              "opacity": 0.091058,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -25.6949,
+              "opacity": 0.975166,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32345.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 276.589,
+              "opacity": 0.0775088,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -21.8715,
+              "opacity": 0.978861,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32362.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 279.88,
+              "opacity": 0.0658473,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -18.5809,
+              "opacity": 0.982042,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32379,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 282.743,
+              "opacity": 0.0557018,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -15.718,
+              "opacity": 0.984809,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32395.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 285.214,
+              "opacity": 0.0469449,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -13.247,
+              "opacity": 0.987197,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32411.9,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 287.284,
+              "opacity": 0.0396095,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -11.1771,
+              "opacity": 0.989197,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32428.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 289.092,
+              "opacity": 0.0332005,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -9.36855,
+              "opacity": 0.990945,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32445.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 290.701,
+              "opacity": 0.0275008,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -7.7602,
+              "opacity": 0.9925,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32461.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 292.005,
+              "opacity": 0.0228771,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -6.45548,
+              "opacity": 0.993761,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32479.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 293.226,
+              "opacity": 0.0185506,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -5.23464,
+              "opacity": 0.994941,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32495.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 294.194,
+              "opacity": 0.0151206,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -4.26676,
+              "opacity": 0.995876,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32512.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 295.013,
+              "opacity": 0.0122186,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -3.44787,
+              "opacity": 0.996668,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32529,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 295.706,
+              "opacity": 0.00976297,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -2.75493,
+              "opacity": 0.997337,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32545.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 296.285,
+              "opacity": 0.00771163,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -2.17608,
+              "opacity": 0.997897,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32562.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 296.765,
+              "opacity": 0.0060108,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -1.69613,
+              "opacity": 0.998361,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32579,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 297.157,
+              "opacity": 0.00462053,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -1.30383,
+              "opacity": 0.99874,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32595.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 297.478,
+              "opacity": 0.00348228,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.982633,
+              "opacity": 0.99905,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32612.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 297.736,
+              "opacity": 0.00256805,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.724655,
+              "opacity": 0.9993,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32629,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 297.939,
+              "opacity": 0.00184865,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.521655,
+              "opacity": 0.999496,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32645.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.098,
+              "opacity": 0.00128622,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.362947,
+              "opacity": 0.999649,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32662.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.218,
+              "opacity": 0.00085951,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.242538,
+              "opacity": 0.999766,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32679,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.307,
+              "opacity": 0.000546839,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.154308,
+              "opacity": 0.999851,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32695.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.368,
+              "opacity": 0.000328194,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.0926101,
+              "opacity": 0.99991,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32712.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.412,
+              "opacity": 0.000173967,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.0490901,
+              "opacity": 0.999953,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32729,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.438,
+              "opacity": 0.0000812334,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.0229225,
+              "opacity": 0.999978,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32745.2,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.452,
+              "opacity": 0.0000307421,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.00867485,
+              "opacity": 0.999992,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32761.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 298.459,
+              "opacity": 0.00000748663,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.00211259,
+              "opacity": 0.999998,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 33079.1,
+          "phase": "IDLE",
+          "active": "world-simulator",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "forward",
+      "rows": [
+        {
+          "time": 73129,
+          "phase": "IDLE",
+          "active": "world-simulator",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73145.7,
+          "phase": "IDLE",
+          "active": "world-simulator",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73162.3,
+          "phase": "IDLE",
+          "active": "world-simulator",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73179,
+          "phase": "IDLE",
+          "active": "world-simulator",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73195.7,
+          "phase": "PREPARING_NEXT",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73211.6,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -27.7812,
+              "opacity": 0.912736,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 270.68,
+              "opacity": 0.164832,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73229,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -56.6721,
+              "opacity": 0.821986,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 241.789,
+              "opacity": 0.336248,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73245.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -82.7327,
+              "opacity": 0.740127,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 215.728,
+              "opacity": 0.490871,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73262.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -107.008,
+              "opacity": 0.663875,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 191.453,
+              "opacity": 0.634903,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73279,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -129.264,
+              "opacity": 0.593967,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 169.197,
+              "opacity": 0.766951,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73295.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -149.712,
+              "opacity": 0.527138,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 148.749,
+              "opacity": 0.856235,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73312.3,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -168.106,
+              "opacity": 0.461956,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 130.355,
+              "opacity": 0.874012,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73329,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -184.712,
+              "opacity": 0.403107,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 113.749,
+              "opacity": 0.890062,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73345.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -199.501,
+              "opacity": 0.350695,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 98.9596,
+              "opacity": 0.904356,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73362.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -212.593,
+              "opacity": 0.304301,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 85.8679,
+              "opacity": 0.917009,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73379,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -224.059,
+              "opacity": 0.263667,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 74.402,
+              "opacity": 0.928091,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73395.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -234.182,
+              "opacity": 0.227792,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 64.2787,
+              "opacity": 0.937875,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73412.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -243.035,
+              "opacity": 0.196418,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 55.4256,
+              "opacity": 0.946431,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73429,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -250.716,
+              "opacity": 0.1692,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 47.7451,
+              "opacity": 0.953855,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73445.6,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -257.409,
+              "opacity": 0.145479,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 41.0516,
+              "opacity": 0.960324,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73461.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -262.972,
+              "opacity": 0.125767,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 35.4891,
+              "opacity": 0.9657,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73478.2,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -268.126,
+              "opacity": 0.107501,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 30.3349,
+              "opacity": 0.970681,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73495.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -272.692,
+              "opacity": 0.0913197,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 25.7687,
+              "opacity": 0.975095,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73512.3,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -276.568,
+              "opacity": 0.0775843,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 21.8928,
+              "opacity": 0.978841,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73528,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -279.695,
+              "opacity": 0.0665031,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 18.7659,
+              "opacity": 0.981863,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73545.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -282.743,
+              "opacity": 0.0557018,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 15.718,
+              "opacity": 0.984809,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73562.3,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -285.2,
+              "opacity": 0.0469936,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 13.2607,
+              "opacity": 0.987184,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73579.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -287.343,
+              "opacity": 0.0393997,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 11.1178,
+              "opacity": 0.989255,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73595.8,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -289.174,
+              "opacity": 0.0329117,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 9.28707,
+              "opacity": 0.991024,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73612.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -290.736,
+              "opacity": 0.0273772,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 7.72534,
+              "opacity": 0.992534,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73629,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -292.073,
+              "opacity": 0.0226388,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 6.38825,
+              "opacity": 0.993826,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73645.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -293.22,
+              "opacity": 0.0185731,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 5.24097,
+              "opacity": 0.994935,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73662.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -294.194,
+              "opacity": 0.0151206,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 4.26676,
+              "opacity": 0.995876,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73679,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -295.013,
+              "opacity": 0.0122186,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 3.44787,
+              "opacity": 0.996668,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73695.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -295.706,
+              "opacity": 0.00976297,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 2.75493,
+              "opacity": 0.997337,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73712.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -296.285,
+              "opacity": 0.00771163,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 2.17608,
+              "opacity": 0.997897,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73729,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -296.762,
+              "opacity": 0.00602004,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.69874,
+              "opacity": 0.998358,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73745.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.157,
+              "opacity": 0.00462053,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.30383,
+              "opacity": 0.99874,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73762.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.478,
+              "opacity": 0.00348228,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.982633,
+              "opacity": 0.99905,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73779.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.736,
+              "opacity": 0.00256805,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.724655,
+              "opacity": 0.9993,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73795.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.939,
+              "opacity": 0.00184865,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.521655,
+              "opacity": 0.999496,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73812.3,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.097,
+              "opacity": 0.00128916,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.363777,
+              "opacity": 0.999648,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73829,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.218,
+              "opacity": 0.000861708,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.243158,
+              "opacity": 0.999765,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73845.8,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.307,
+              "opacity": 0.00054525,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.153859,
+              "opacity": 0.999851,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73862.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.37,
+              "opacity": 0.000323777,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0913638,
+              "opacity": 0.999912,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73879.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.412,
+              "opacity": 0.000173967,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0490901,
+              "opacity": 0.999953,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73895.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.438,
+              "opacity": 0.0000812334,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0229225,
+              "opacity": 0.999978,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73912.3,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.453,
+              "opacity": 0.0000298874,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.00843366,
+              "opacity": 0.999992,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73929.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.459,
+              "opacity": 0.00000669092,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.00188805,
+              "opacity": 0.999998,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73945.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.461,
+              "opacity": 3.45962e-7,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.000097624,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 73962.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "rapid",
+      "rows": [
+        {
+          "time": 86095.8,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86112.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86129.1,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86145.7,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86162.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86179,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86195.8,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86212.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86229,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86245.7,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86262.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86279.1,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86295.7,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86312.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86329,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86345.7,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86362.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86379.1,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86395.7,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86412.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86429.1,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86445.8,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86462.4,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86479,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 28.9753,
+              "opacity": 0.908985,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -269.486,
+              "opacity": 0.171916,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86495.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 56.6721,
+              "opacity": 0.821986,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -241.789,
+              "opacity": 0.336248,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86512.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 82.5819,
+              "opacity": 0.740601,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -215.879,
+              "opacity": 0.489976,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86529.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 107.008,
+              "opacity": 0.663875,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -191.453,
+              "opacity": 0.634903,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86545.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 129.392,
+              "opacity": 0.593564,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -169.069,
+              "opacity": 0.767712,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86561.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 149.012,
+              "opacity": 0.529622,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -149.449,
+              "opacity": 0.855558,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86579,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 168.106,
+              "opacity": 0.461956,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -130.355,
+              "opacity": 0.874012,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86595.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 184.712,
+              "opacity": 0.403107,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -113.749,
+              "opacity": 0.890062,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86612.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 199.501,
+              "opacity": 0.350695,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -98.9596,
+              "opacity": 0.904356,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86629,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 212.519,
+              "opacity": 0.304561,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -85.9415,
+              "opacity": 0.916938,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86645.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 224.059,
+              "opacity": 0.263667,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -74.402,
+              "opacity": 0.928091,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86662.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 234.182,
+              "opacity": 0.227792,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -64.2787,
+              "opacity": 0.937875,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86679,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 242.986,
+              "opacity": 0.196594,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -55.4751,
+              "opacity": 0.946383,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86694.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 250.282,
+              "opacity": 0.170736,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -48.1786,
+              "opacity": 0.953435,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86712.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 257.447,
+              "opacity": 0.145346,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -41.014,
+              "opacity": 0.96036,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86729.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 263.3,
+              "opacity": 0.124606,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -35.1614,
+              "opacity": 0.966017,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86745.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 268.354,
+              "opacity": 0.106695,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -30.1073,
+              "opacity": 0.970901,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86762.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 272.766,
+              "opacity": 0.091058,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -25.6949,
+              "opacity": 0.975166,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86779.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 276.589,
+              "opacity": 0.0775088,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -21.8715,
+              "opacity": 0.978861,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86795.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 279.88,
+              "opacity": 0.0658473,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -18.5809,
+              "opacity": 0.982042,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86812.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 282.743,
+              "opacity": 0.0557018,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -15.718,
+              "opacity": 0.984809,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86829.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 285.214,
+              "opacity": 0.0469449,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -13.247,
+              "opacity": 0.987197,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86845.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "world-simulator",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 287.331,
+              "opacity": 0.0394415,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -11.1297,
+              "opacity": 0.989243,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86862.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-rear",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 289.164,
+              "opacity": 0.0329477,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -9.29722,
+              "opacity": 0.991014,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86879.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-rear",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 290.736,
+              "opacity": 0.0273772,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -7.72534,
+              "opacity": 0.992534,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86894.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-rear",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 292.005,
+              "opacity": 0.0228771,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -6.45548,
+              "opacity": 0.993761,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86912.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-rear",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 293.22,
+              "opacity": 0.0185731,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -5.24097,
+              "opacity": 0.994935,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86929,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 294.189,
+              "opacity": 0.0151397,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -4.27213,
+              "opacity": 0.995871,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86945.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 295.013,
+              "opacity": 0.0122186,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -3.44787,
+              "opacity": 0.996668,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86962.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 295.702,
+              "opacity": 0.00977641,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -2.75872,
+              "opacity": 0.997334,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86979.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 296.285,
+              "opacity": 0.00771163,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -2.17608,
+              "opacity": 0.997897,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 86995.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 296.762,
+              "opacity": 0.00602004,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -1.69874,
+              "opacity": 0.998358,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87011.9,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 297.146,
+              "opacity": 0.00465844,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -1.31453,
+              "opacity": 0.99873,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87029.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 297.478,
+              "opacity": 0.00348228,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.982633,
+              "opacity": 0.99905,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87045.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 297.736,
+              "opacity": 0.00256805,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.724655,
+              "opacity": 0.9993,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87062.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 297.939,
+              "opacity": 0.00184865,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.521655,
+              "opacity": 0.999496,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87079,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.097,
+              "opacity": 0.00128916,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.363777,
+              "opacity": 0.999648,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87095.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.218,
+              "opacity": 0.000861708,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.243158,
+              "opacity": 0.999765,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87112.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.306,
+              "opacity": 0.000548432,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.154757,
+              "opacity": 0.99985,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87128.9,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.369,
+              "opacity": 0.00032598,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.0919855,
+              "opacity": 0.999911,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87145.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.412,
+              "opacity": 0.000174679,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.0492912,
+              "opacity": 0.999952,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87162.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.438,
+              "opacity": 0.0000812334,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.0229225,
+              "opacity": 0.999978,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87179,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.453,
+              "opacity": 0.0000298874,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.00843366,
+              "opacity": 0.999992,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87195.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.459,
+              "opacity": 0.00000676778,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.00190974,
+              "opacity": 0.999998,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87211.5,
+          "phase": "TRANSITIONING",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 298.461,
+              "opacity": 4.48686e-7,
+              "inert": true
+            },
+            {
+              "id": "world-simulator",
+              "y": -0.000126611,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87229,
+          "phase": "PREPARING_NEXT",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": -1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87245.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -29.1456,
+              "opacity": 0.90845,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 269.315,
+              "opacity": 0.172927,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87262.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -56.8332,
+              "opacity": 0.821481,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 241.628,
+              "opacity": 0.337204,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87279,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -82.7327,
+              "opacity": 0.740127,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 215.728,
+              "opacity": 0.490871,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87295.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -107.008,
+              "opacity": 0.663875,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 191.453,
+              "opacity": 0.634903,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87312.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -129.392,
+              "opacity": 0.593564,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 169.069,
+              "opacity": 0.767712,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87329,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -149.712,
+              "opacity": 0.527138,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 148.749,
+              "opacity": 0.856235,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87345.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -168.211,
+              "opacity": 0.461584,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 130.25,
+              "opacity": 0.874114,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87362.3,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -184.712,
+              "opacity": 0.403107,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 113.749,
+              "opacity": 0.890062,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87379.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -199.585,
+              "opacity": 0.3504,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 98.8763,
+              "opacity": 0.904436,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87395.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -212.593,
+              "opacity": 0.304301,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 85.8679,
+              "opacity": 0.917009,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87412.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -224.124,
+              "opacity": 0.263438,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 74.3373,
+              "opacity": 0.928153,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87429,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -234.182,
+              "opacity": 0.227792,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 64.2787,
+              "opacity": 0.937875,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87445.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -243.035,
+              "opacity": 0.196418,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 55.4256,
+              "opacity": 0.946431,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87462.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -250.759,
+              "opacity": 0.169047,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 47.702,
+              "opacity": 0.953896,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87479.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -257.484,
+              "opacity": 0.145213,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 40.9764,
+              "opacity": 0.960396,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87495.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -263.3,
+              "opacity": 0.124606,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 35.1614,
+              "opacity": 0.966017,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87512.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -268.382,
+              "opacity": 0.106594,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 30.0789,
+              "opacity": 0.970929,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87529,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -272.766,
+              "opacity": 0.091058,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 25.6949,
+              "opacity": 0.975166,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87545.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -276.589,
+              "opacity": 0.0775088,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 21.8715,
+              "opacity": 0.978861,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87562.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -279.898,
+              "opacity": 0.065782,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 18.5624,
+              "opacity": 0.982059,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87579.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -282.759,
+              "opacity": 0.0556454,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 15.7021,
+              "opacity": 0.984824,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87595.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -285.214,
+              "opacity": 0.0469449,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 13.247,
+              "opacity": 0.987197,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87612.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -287.343,
+              "opacity": 0.0393997,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 11.1178,
+              "opacity": 0.989255,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87629.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -289.174,
+              "opacity": 0.0329117,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 9.28707,
+              "opacity": 0.991024,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87645.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -290.736,
+              "opacity": 0.0273772,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 7.72534,
+              "opacity": 0.992534,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87662.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -292.08,
+              "opacity": 0.0226125,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 6.38082,
+              "opacity": 0.993833,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87679,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -293.22,
+              "opacity": 0.0185731,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 5.24097,
+              "opacity": 0.994935,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87695.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -294.194,
+              "opacity": 0.0151206,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 4.26676,
+              "opacity": 0.995876,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87712.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -295.018,
+              "opacity": 0.0122026,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 3.44334,
+              "opacity": 0.996672,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87729,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -295.706,
+              "opacity": 0.00976297,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 2.75493,
+              "opacity": 0.997337,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87745.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -296.285,
+              "opacity": 0.00771163,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 2.17608,
+              "opacity": 0.997897,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87762.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -296.765,
+              "opacity": 0.0060108,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.69613,
+              "opacity": 0.998361,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87779,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.157,
+              "opacity": 0.00462053,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.30383,
+              "opacity": 0.99874,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87795.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.478,
+              "opacity": 0.00348228,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.982633,
+              "opacity": 0.99905,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87812.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.736,
+              "opacity": 0.00256805,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.724655,
+              "opacity": 0.9993,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87829,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -297.939,
+              "opacity": 0.00184865,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.521655,
+              "opacity": 0.999496,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87845.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.098,
+              "opacity": 0.00128622,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.362947,
+              "opacity": 0.999649,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87862.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.218,
+              "opacity": 0.00085951,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.242538,
+              "opacity": 0.999766,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87879,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.307,
+              "opacity": 0.000546839,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.154308,
+              "opacity": 0.999851,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87895.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.37,
+              "opacity": 0.000323777,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0913638,
+              "opacity": 0.999912,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87912.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.412,
+              "opacity": 0.000173967,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0490901,
+              "opacity": 0.999953,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87929.1,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.438,
+              "opacity": 0.0000808141,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0228042,
+              "opacity": 0.999978,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87945.7,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.453,
+              "opacity": 0.0000296763,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.00837409,
+              "opacity": 0.999992,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87962.4,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.459,
+              "opacity": 0.00000669092,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.00188805,
+              "opacity": 0.999998,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87979,
+          "phase": "TRANSITIONING",
+          "active": "world-simulator",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "world-simulator",
+              "y": -298.461,
+              "opacity": 3.45962e-7,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.000097624,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 87995.7,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 908,
+          "rainSame": true,
+          "rainSize": [
+            1440,
+            1000
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mobile-forward",
+      "rows": [
+        {
+          "time": 31926,
+          "phase": "IDLE",
+          "active": "fixture-rear",
+          "requested": "fixture-rear",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 31942.7,
+          "phase": "IDLE",
+          "active": "fixture-rear",
+          "requested": "fixture-rear",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 31959.4,
+          "phase": "IDLE",
+          "active": "fixture-rear",
+          "requested": "fixture-rear",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 31976.1,
+          "phase": "PREPARING_NEXT",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 31992.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -6.15113,
+              "opacity": 0.908985,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 57.2089,
+              "opacity": 0.171916,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32008.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -11.8254,
+              "opacity": 0.825026,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 51.5346,
+              "opacity": 0.330506,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32026.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -17.5633,
+              "opacity": 0.740127,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 45.7967,
+              "opacity": 0.490871,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32042.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -22.687,
+              "opacity": 0.664314,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 40.673,
+              "opacity": 0.634074,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32059.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -27.4141,
+              "opacity": 0.59437,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 35.9459,
+              "opacity": 0.76619,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32076.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -31.7823,
+              "opacity": 0.527138,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 31.5777,
+              "opacity": 0.856235,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32092.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -35.687,
+              "opacity": 0.461956,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 27.673,
+              "opacity": 0.874012,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32109.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -39.2123,
+              "opacity": 0.403107,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 24.1477,
+              "opacity": 0.890062,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32126.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -42.352,
+              "opacity": 0.350695,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 21.008,
+              "opacity": 0.904356,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32142.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -45.1156,
+              "opacity": 0.304561,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 18.2445,
+              "opacity": 0.916938,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32159.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -47.5653,
+              "opacity": 0.263667,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 15.7947,
+              "opacity": 0.928091,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32176,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -49.7023,
+              "opacity": 0.227993,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 13.6577,
+              "opacity": 0.93782,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32192.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -51.5832,
+              "opacity": 0.196594,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 11.7768,
+              "opacity": 0.946383,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32209.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -53.2242,
+              "opacity": 0.1692,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 10.1358,
+              "opacity": 0.953855,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32225.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -54.6212,
+              "opacity": 0.14588,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 8.73877,
+              "opacity": 0.960215,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32242.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -55.8887,
+              "opacity": 0.124721,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 7.4713,
+              "opacity": 0.965985,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32259.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -56.9625,
+              "opacity": 0.106795,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 6.39747,
+              "opacity": 0.970874,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32276.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -57.9053,
+              "opacity": 0.091058,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 5.45474,
+              "opacity": 0.975166,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32292.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -58.7124,
+              "opacity": 0.0775843,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 4.64761,
+              "opacity": 0.978841,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32309.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -59.4155,
+              "opacity": 0.0658473,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 3.94451,
+              "opacity": 0.982042,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32326.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -60.0232,
+              "opacity": 0.0557018,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 3.33676,
+              "opacity": 0.984809,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32342.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -60.5449,
+              "opacity": 0.0469936,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 2.8151,
+              "opacity": 0.987184,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32359.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -60.9973,
+              "opacity": 0.0394415,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 2.36271,
+              "opacity": 0.989243,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32376.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -61.3863,
+              "opacity": 0.0329477,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.9737,
+              "opacity": 0.991014,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32392.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -61.7181,
+              "opacity": 0.027408,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.64185,
+              "opacity": 0.992525,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32409.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -62.0038,
+              "opacity": 0.0226388,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.35616,
+              "opacity": 0.993826,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32426,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -62.2461,
+              "opacity": 0.0185955,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 1.11394,
+              "opacity": 0.994928,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32442.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -62.4542,
+              "opacity": 0.0151206,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.905787,
+              "opacity": 0.995876,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32459.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -62.6281,
+              "opacity": 0.0122186,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.731944,
+              "opacity": 0.996668,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32476.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -62.7752,
+              "opacity": 0.00976297,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.584841,
+              "opacity": 0.997337,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32492.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -62.8974,
+              "opacity": 0.00772282,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.462628,
+              "opacity": 0.997894,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32509.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -62.9994,
+              "opacity": 0.00602004,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.360624,
+              "opacity": 0.998358,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32526.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.0832,
+              "opacity": 0.00462053,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.276788,
+              "opacity": 0.99874,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32542.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.151,
+              "opacity": 0.00348839,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.208969,
+              "opacity": 0.999049,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32559.3,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.2056,
+              "opacity": 0.00257781,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.154421,
+              "opacity": 0.999297,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32576,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.249,
+              "opacity": 0.00185248,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.110971,
+              "opacity": 0.999495,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32592.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.283,
+              "opacity": 0.00128622,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0770498,
+              "opacity": 0.999649,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32609.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.3084,
+              "opacity": 0.000861708,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0516198,
+              "opacity": 0.999765,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32626,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.3271,
+              "opacity": 0.000548432,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0328532,
+              "opacity": 0.99985,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32642.8,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.3406,
+              "opacity": 0.000323777,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0193955,
+              "opacity": 0.999912,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32659.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.3495,
+              "opacity": 0.000174679,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.010464,
+              "opacity": 0.999952,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32676.1,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.3551,
+              "opacity": 0.0000812334,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.00486621,
+              "opacity": 0.999978,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32692.7,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.3582,
+              "opacity": 0.0000298874,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.00179037,
+              "opacity": 0.999992,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32709.4,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.3596,
+              "opacity": 0.00000676778,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.000405417,
+              "opacity": 0.999998,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32726,
+          "phase": "TRANSITIONING",
+          "active": "fixture-rear",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-rear",
+              "y": -63.36,
+              "opacity": 3.56503e-7,
+              "inert": true
+            },
+            {
+              "id": "fixture-cartridges",
+              "y": 0.0000213559,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        },
+        {
+          "time": 32742.7,
+          "phase": "IDLE",
+          "active": "fixture-cartridges",
+          "requested": "fixture-cartridges",
+          "direction": 1,
+          "height": 675,
+          "rainSame": true,
+          "rainSize": [
+            390,
+            844
+          ],
+          "layers": [
+            {
+              "id": "fixture-cartridges",
+              "y": 0,
+              "opacity": 1,
+              "inert": false
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

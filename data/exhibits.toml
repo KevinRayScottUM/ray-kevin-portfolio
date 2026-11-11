@@ -1,13 +1,21 @@
+reserved_slots = ["02", "03", "04"]
+
 [[exhibits]]
 id = "world-simulator"
 number = "01"
 slug = "world-simulator"
 title = "TensorCat"
 subtitle = "Interactive World Simulator"
+index_subtitle = "World Simulator"
+index_tags = ["Robotics", "3D", "Physics"]
 category = "Interactive research"
 description = "Six robotics tasks, spatial representations, and physics-based future previews in one interactive research console."
 cover = "img/lab/world-simulator.png"
 cover_alt = "TensorCat handheld and its six robotics experiment cartridges"
+cover_fit = "cover"
+cover_width = 1440
+cover_height = 810
+preview_component = "tensorcat-showcase"
 technology_tags = ["Robotics", "CPU Simulation", "3D Point Cloud", "Interactive Systems"]
 status = "Available"
 route = "lab/world-simulator/"

@@ -1,6 +1,7 @@
 import {THREE,loadConsole,clamp} from "./graphics.js";
 import {localBounds,CartridgeMechanism} from "./mechanics.js";
 import {PowerSwitch} from "./power.js";
+import {drawConsoleHome} from "./home-screen.js";
 
 export const CARTRIDGE_TIMES={ALIGNING:.70,INSERTING:.85,EJECTING:1.25};
 export class CartridgeMachine {
@@ -169,8 +170,7 @@ export class ResearchConsole {
       this.screenButton(c,"launch",caption,32,225,300,35,()=>this.ready?this.pressAndRelease("a"):this.insert());
       if(this.notice)this.text(c,this.notice,32,214,12,"#e1c490");
     }else if(this.screenState==="menu"){
-      c.drawImage(this.logo,189,13,134,134);this.text(c,"TENSORCAT RESEARCH CONSOLE",124,170,15,"#b5ccc7");
-      ["Labs","Cartridges","Inspector","Settings"].forEach((name,index)=>{this.screenButton(c,"home-"+index,name,22+index*120,204,108,48,()=>{this.cursor=index;this.pressAndRelease("a");},this.cursor===index);});
+      drawConsoleHome(c,this.logo,(name,index,x,y,w,h)=>this.screenButton(c,"home-"+index,name,x,y,w,h,()=>{this.cursor=index;this.pressAndRelease("a");},this.cursor===index));
     }else if(this.screenState==="info"){
       ["SYSTEM / TENSORCAT","CPU depth rasterization","Six shared physical experiments","Y-up / meters / radians / seconds"].forEach((line,index)=>this.text(c,line,30,55+index*49,index?17:22));
     }else{

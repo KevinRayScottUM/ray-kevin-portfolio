@@ -68,3 +68,14 @@ test('page rain protects reading areas and remains scheduled offscreen in either
   assert.match(app,/if\(!visible\)\{last=0;if\(!reduced.matches\)schedule\(\);return;\}/);
   assert.doesNotMatch(app,/function schedule\(\)\{[^\n]*&&visible/);
 });
+test('rain preserves stream identity on unchanged geometry, reuses columns on resize and reduces phone density',()=>{
+  const originals={document:globalThis.document,matchMedia:globalThis.matchMedia,ResizeObserver:globalThis.ResizeObserver,devicePixelRatio:globalThis.devicePixelRatio};
+  const context={setTransform(){},clearRect(){},fillText(){}},canvas={setAttribute(){},getContext:()=>context,remove(){}};let width=900,height=600;
+  try{
+    globalThis.document={createElement:()=>canvas};globalThis.matchMedia=()=>({matches:false});globalThis.ResizeObserver=class{observe(){}disconnect(){}};globalThis.devicePixelRatio=2;
+    const rain=new CodeRain({append(){},getBoundingClientRect:()=>({width,height})},true),columns=rain.columns,first=columns[0],seed=rain.seed;
+    rain.paint(1000);rain.resize();assert.equal(rain.columns,columns);assert.equal(rain.seed,seed);assert.equal(rain.last,1000);assert.equal(canvas.width,1350);
+    width=1100;rain.resize();assert.equal(rain.columns[0],first);assert.equal(rain.columns.length,Math.ceil(width/RAIN.spacing));
+    width=390;height=844;rain.resize();assert.equal(rain.columns[0],first);assert.equal(rain.spacing,40);assert.equal(rain.columns.length,10);assert.equal(canvas.height,1266);
+  }finally{for(const [k,v] of Object.entries(originals)){if(v===undefined)delete globalThis[k];else globalThis[k]=v;}}
+});

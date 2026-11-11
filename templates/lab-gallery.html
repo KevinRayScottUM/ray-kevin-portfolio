@@ -1,18 +1,40 @@
 {% extends "base.html" %}
+{% import "macros/exhibit.html" as exhibit_ui %}
+{% import "macros/lab.html" as lab %}
 {% block user_head %}<link rel="stylesheet" href="{{ get_url(path="styles/lab-exhibition.css") }}">{% endblock user_head %}
 {% block title %}<title>TensorCat Lab | {{ config.title }}</title>{% endblock title %}
 {% block content %}
 {% set collection = load_data(path="data/exhibits.toml") %}
-<main class="lab-exhibition lab-collection">
-  <header class="lab-collection-heading"><p class="lab-eyebrow">Research &amp; Engineering</p><h1>TensorCat Lab<span>.</span></h1><p>Exploring intelligence through interactive systems.</p></header>
-  <section aria-label="Exhibitions" class="lab-exhibits">
+{% set available = collection.exhibits | filter(attribute="status", value="Available") | sort(attribute="order") %}
+{% set registered_numbers = collection.exhibits | map(attribute="number") %}
+<main class="lab-exhibition lab-collection" data-exhibit-gallery>
+  <header class="lab-collection-heading"><div><p class="lab-eyebrow">Research &amp; Engineering</p><h1>TensorCat Lab<span>.</span></h1><p>Exploring intelligence through interactive systems.</p></div><p class="lab-collection-counter">Exhibition / {{ available | length }}</p></header>
+  <div class="lab-gallery-layout">
+  <nav class="lab-project-index" aria-label="Project index">
+    <h2 class="lab-index-heading">Project index <span>{{ available | length }} available</span></h2>
+    <div class="lab-project-list" data-project-list>
   {% for exhibit in collection.exhibits | sort(attribute="order") %}
-    <article class="lab-exhibit">
-      <a class="lab-exhibit-visual" href="{{ get_url(path=exhibit.route, trailing_slash=true) }}" aria-label="Enter {{ exhibit.title }} — {{ exhibit.subtitle }}"><img src="{{ get_url(path=exhibit.cover) }}" width="1376" height="650" alt="{{ exhibit.cover_alt | default(value=exhibit.title) }}" fetchpriority="high"></a>
-      <div class="lab-exhibit-caption"><div><p class="lab-eyebrow">Exhibit {{ exhibit.number }} / {{ exhibit.category }}</p><h2><a href="{{ get_url(path=exhibit.route, trailing_slash=true) }}">{{ exhibit.title }} <span>{{ exhibit.subtitle }}</span></a></h2><p>{{ exhibit.description }}</p><ul class="lab-exhibit-tags" aria-label="Research areas">{% for tag in exhibit.technology_tags %}<li>{{ tag }}</li>{% endfor %}</ul></div><a class="lab-exhibit-enter" href="{{ get_url(path=exhibit.route, trailing_slash=true) }}">Enter exhibit <span aria-hidden="true">↗</span></a></div>
-    </article>
+      <button type="button" class="lab-project-row{% if available | length > 0 and exhibit.id == available[0].id %} is-selected{% endif %}" data-exhibit-select="{{ exhibit.id }}" aria-controls="lab-preview-viewport" aria-pressed="{% if available | length > 0 and exhibit.id == available[0].id %}true{% else %}false{% endif %}" {% if exhibit.status != "Available" %}disabled{% endif %}>
+        <span class="lab-project-number">{{ exhibit.number }} / {{ exhibit.title }} {{ lab::icon(name="arrow-up-right") }}</span>
+        <strong>{{ exhibit.index_subtitle | default(value=exhibit.subtitle) }}</strong>
+        <span class="lab-project-category">{% if exhibit.index_tags %}{{ exhibit.index_tags | join(sep=" · ") }}{% else %}{{ exhibit.category }}{% endif %}</span>
+        <span class="lab-project-state">{% if exhibit.status == "Available" %}<i aria-hidden="true"></i>Interactive demo{% else %}Not yet available{% endif %}</span>
+      </button>
   {% endfor %}
+  {% for slot in collection.reserved_slots %}
+  {% if slot not in registered_numbers %}
+      <button type="button" class="lab-project-row lab-project-reserved" disabled><span class="lab-project-number">{{ slot }} / Future exhibit</span><strong>Reserved</strong><span class="lab-project-state">Not yet available</span></button>
+  {% endif %}
+  {% endfor %}
+    </div>
+  </nav>
+  <section class="lab-showcase" aria-label="Live exhibit preview">
+    <div class="lab-preview-viewport" id="lab-preview-viewport" data-preview-viewport>{% if available | length > 0 %}{{ exhibit_ui::preview(exhibit=available[0]) }}{% else %}<p>No exhibits available.</p>{% endif %}</div>
+    <p class="lab-gallery-status" data-gallery-status role="status" aria-live="polite" aria-atomic="true"></p>
   </section>
+  </div>
+  {% for exhibit in available %}<template data-preview-template="{{ exhibit.id }}" data-order="{{ exhibit.order }}">{{ exhibit_ui::preview(exhibit=exhibit) }}</template>{% endfor %}
 </main>
 <script type="module" src="{{ get_url(path="js/lab-rain.js") }}"></script>
+<script type="module" src="{{ get_url(path="js/lab-gallery.js") }}"></script>
 {% endblock content %}

@@ -147,6 +147,40 @@ handlers are retained. The underlying site remains Zola with Kodama templates.
 The `/lab/` route is a data-driven exhibit collection. Exhibit 01, TensorCat / Interactive World Simulator,
 lives at `/lab/world-simulator/`. Entries are defined in `data/exhibits.toml`;
 the gallery renders a real CPU-rendered preview without loading the simulator.
+The collection uses a 28% project index and a full remaining-width showcase.
+Its native Web Animations transition moves outgoing and incoming project presentations
+together over 760 ms, with overlap, directional slides and a latest-request-wins controller.
+Only available registry entries can be selected. The three reserved slots are disabled
+and automatically disappear when a registered exhibit uses their number.
+
+Add real exhibits to `data/exhibits.toml` with a unique `id` and `number`, numeric `order`,
+`status = "Available"`, a real `route`, title, subtitle, description, `technology_tags`
+and `cover`. Optional `index_subtitle`, `index_tags`, `cover_fit`, `cover_width` and
+`cover_height` customize presentation. No client registry or transition code needs editing.
+The preview frame is 16:9; choose `cover_fit = "contain"` when cropping is inappropriate.
+The current TensorCat cover is a 1440x810 export of the actual High-quality CPU scene
+and cartridge framebuffers, framed without cutting any hardware. It remains the
+loading/error/no-JavaScript fallback. Exhibit 01 adds `preview_component = "tensorcat-showcase"`:
+an independently controlled, real-geometry 360-degree hardware tour replaces the
+fallback after its first rendered frame. It does not start a robotics session.
+
+Horizontal wheel/trackpad gestures and pointer dragging progressively drive one
+unwrapped 0-to-360-degree tour; vertical scrolling and browser pinch zoom retain
+their normal behavior. Eight composed poses share an exact critically damped
+spring, bounded release inertia, and independent camera/transform state. Compact
+arrows and focused Left/Right/Home/End use the same controller. Returning from
+another project resets the tour to its original front composition.
+The six cartridges use an unchanged, separately cached geometry layer.
+The main framebuffer renders only while changing, then restores idle high-DPI
+quality; it stops offscreen, on hidden documents, and when leaving the project.
+
+The gallery keeps the active preview during image preparation, preloads adjacent
+available entries, reserves the tallest metadata layout, supports keyboard selection,
+and keeps at most two live preview layers during motion. It does not initialize robotics.
+Matrix rain is independent and is neither remounted nor reset when projects change.
+At 800px and below, the index becomes horizontally scrollable above the full-width preview.
+Reduced motion switches previews without a large slide. Internal browser fixtures
+live only in `tests/fixtures/` and are never copied into the deployed site.
 It remains static Zola: no service, model weights, inference requests, or new
 runtime package installation. Three.js r170 supplies geometry and math only;
 projection, clipping, depth testing, UV interpolation, geometric sampling and
@@ -246,8 +280,8 @@ terminal state. Previewing does not advance the live world. "Pause at goal"
 stops after eight consecutive valid evaluations; disable it to study subsequent
 instability. Goal detection is not a guarantee of sustained physical stability.
 
-Source map: `templates/{lab,lab-gallery}.html`, `data/exhibits.toml`,
-`static/styles/{lab-v3,lab-exhibition}.css`, `static/js/lab-rain.js`,
+Source map: `templates/{lab,lab-gallery}.html`, `templates/macros/exhibit.html`, `data/exhibits.toml`,
+`static/styles/{lab-v3,lab-exhibition}.css`, `static/js/{lab-rain,lab-gallery,lab-showcase,lab-showcase-motion,lab-showcase-scene}.js`,
 `static/js/lab-v3/{app,graphics,studio,console,session,mechanics,motion,gallery,power,inspector,embedded-display,experiment-view,robot,simulation}.js`, and
 `static/lab/tc06/experiments.json`. Old cloth/SVG files are retained but not loaded.
 Licenses remain in `static/vendor/` and `static/img/lab/icons/LICENSE`.
@@ -257,7 +291,7 @@ Reproduce assets and checks from the repository root:
 ```bash
 python3 tools/tc06/process_assets.py /Users/kevin/Desktop/TensorCat.png
 /Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python tools/tc06/generate_console.py -- --render
-node --test tests/lab-exhibition.test.mjs tests/lab-v3.test.mjs tests/tc06-console.test.mjs tests/tc06-interactions.test.mjs tests/tc06-minimal-ui.test.mjs tests/nav-motion.test.cjs
+node --test tests/*.test.mjs tests/*.test.cjs
 node tools/tc06/benchmark.mjs
 zola check
 zola build
@@ -271,7 +305,9 @@ labels and twelve CPU previews live in `static/lab/tc06/`. The original logo is
 copied byte-for-byte; only exterior-connected white pixels become transparent
 in the derived badge. Provenance is recorded in `branding.json`.
 
-See [exhibition, studio and background validation](docs/lab-exhibition-studio.md),
+See [V5 hardware showcase architecture, measurements and limits](docs/lab-showcase-v5.md),
+[V4 gallery architecture and validation](docs/lab-gallery-v4.md),
+[exhibition, studio and background validation](docs/lab-exhibition-studio.md),
 [minimal Console workspace refinement](docs/tc06-minimal-workspace.md),
 [earlier interaction refinement and validation](docs/tc06-interaction-refinement.md),
 [earlier console integration](docs/tc06-console-refinement.md),
