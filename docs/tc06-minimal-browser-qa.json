@@ -1,0 +1,133 @@
+{
+  "cartridges": [
+    {
+      "label": "Dual-arm cloth",
+      "ready": true,
+      "ejectReady": true,
+      "running": true,
+      "ejectRunning": true
+    },
+    {
+      "label": "Peg-in-hole assembly",
+      "ready": true,
+      "ejectReady": true,
+      "running": true,
+      "ejectRunning": true
+    },
+    {
+      "label": "Contact-driven Push-T",
+      "ready": true,
+      "ejectReady": true,
+      "running": true,
+      "ejectRunning": true
+    },
+    {
+      "label": "Multi-object packing",
+      "ready": true,
+      "ejectReady": true,
+      "running": true,
+      "ejectRunning": true
+    },
+    {
+      "label": "Slender-tool insertion",
+      "ready": true,
+      "ejectReady": true,
+      "running": true,
+      "ejectRunning": true
+    },
+    {
+      "label": "Rope threading",
+      "ready": true,
+      "ejectReady": true,
+      "running": true,
+      "ejectRunning": true
+    }
+  ],
+  "inspector": {
+    "before": {
+      "object": "Chassis",
+      "point": "Rear_Grip_-1.sample-1",
+      "frame": "local",
+      "time": 0.3833333333333333,
+      "camera": {
+        "theta": 0,
+        "phi": 1.5707963267948966,
+        "distance": 0.5,
+        "target": [
+          0,
+          0.045,
+          0
+        ]
+      },
+      "session": "PAUSE_MENU"
+    },
+    "after": {
+      "object": "Chassis",
+      "point": "Rear_Grip_-1.sample-1",
+      "frame": "local",
+      "time": 0.3833333333333333,
+      "camera": {
+        "theta": 0,
+        "phi": 1.5707963267948966,
+        "distance": 0.5,
+        "target": [
+          0,
+          0.045,
+          0
+        ]
+      },
+      "session": "PAUSE_MENU"
+    },
+    "collapsed": false
+  },
+  "mobile": {
+    "width": 390,
+    "documentWidth": 390,
+    "inspector": false,
+    "sidebarHidden": true,
+    "grid": "358px",
+    "canvas": [
+      448,
+      575
+    ],
+    "galleryWidth": 338,
+    "galleryScrollWidth": 450
+  },
+  "hoveredEject": {
+    "before": {
+      "camera": {
+        "theta": 0,
+        "phi": 1.5707963267948966,
+        "distance": 0.5,
+        "target": [
+          0,
+          0.045,
+          0
+        ]
+      },
+      "face": {
+        "committed": "front",
+        "yaw": 0,
+        "pitch": 0,
+        "quaternion": [
+          0.0038586911755826487,
+          0.008285336653249797,
+          0.00003197189088160876,
+          0.999958230466029
+        ],
+        "hover": [
+          0.007717666408988178,
+          0.016570986278230775
+        ],
+        "dragging": false,
+        "snapping": false,
+        "transferReady": false
+      }
+    },
+    "outerCameraPreserved": true
+  },
+  "focusEject": true,
+  "labPointCloud": true,
+  "powerOffAndOn": true,
+  "nativeTrackpadAndTouchHardwareTested": false
+}

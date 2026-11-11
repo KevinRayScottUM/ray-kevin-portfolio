@@ -13,7 +13,7 @@ export class CartridgeMechanism {
     this.mouthY=bay.mouthY;const center=this.bay.getCenter(new THREE.Vector3());
     this.seat=new THREE.Vector3(center.x,this.mouthY-bounds.max.y-.0005,center.z);
     this.hover=new THREE.Vector3(center.x,this.mouthY-bounds.min.y+.014,center.z);
-    if(!this.contained())throw new Error("TC-06 internal bay cannot contain this cartridge");
+    if(!this.contained())throw new Error("TensorCat internal bay cannot contain this cartridge");
   }
   contained(){return this.bay.containsBox(this.bounds.clone().translate(this.seat));}
   position(rest,state,time,active,inserted) {

@@ -17,6 +17,7 @@ export function transferPoseFromAnchor(anchor,rig,root,viewport){
 export class CartridgeGallery {
   constructor(element,model,registry,textures){
     this.element=element;this.canvas=element.querySelector("canvas");this.renderer=new SoftwareRenderer(this.canvas,{alpha:true});this.renderer.textures=textures;
+    this.renderer.setStudio(true);
     this.scene=new THREE.Group();this.hovered=-1;this.suspended=new Set();this.dirty=true;this.width=.27;
     this.cards=registry.map((task,index)=>{const card=model.nodes.get("Cartridge_"+task.id).clone(true);card.position.set(galleryCenter(index),0,0);card.quaternion.identity();card.visible=true;this.scene.add(card);return card;});
     this.tilts=registry.map(()=>new HoverTilt());

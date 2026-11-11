@@ -67,7 +67,7 @@ export class ResearchConsole {
   requestCartridgeInsertion(index){if(!Number.isInteger(index)||index<0||index>=this.registry.length)return false;if(!this.machine.request(index))return false;this.notice="";this.session?.eject();this.cancelInput();this.screenState="cartridges";this.screenDirty=true;this.onInsertionRequest?.();return true;}
   select(index){if(this.machine.select(index)){this.notice="";this.session?.returnMenu();this.screenState="cartridges";this.screenDirty=true;}}
   insert(){return this.requestCartridgeInsertion(this.machine.selected);}
-  eject(){if(this.machine.requestEject()){this.session?.eject();this.cancelInput();this.screenState="cartridges";this.screenDirty=true;this.onInsertionRequest?.();}}
+  eject(){if(!this.machine.requestEject())return false;this.session?.eject();this.cancelInput();this.screenState="cartridges";this.screenDirty=true;this.onEjectionRequest?.();this.onInsertionRequest?.();return true;}
   launch(){if(this.power?.on!==false&&this.ready&&!this.embedded){this.notice="";this.onLaunch(this.registry[this.machine.inserted].id);this.screenDirty=true;return true;}return false;}
   press(action){
     this.pressed.add(action);this.holds.set(action,0);this.beep();
@@ -76,9 +76,9 @@ export class ResearchConsole {
     if(this.machine.busy)return;
     if(this.embedded){this.session.dispatch(action);this.screenDirty=true;return;}
     if(this.screenState==="boot")this.screenState="menu";
-    if(action==="a"&&this.ready){this.launch();return;}
+    if(action==="a"&&this.ready&&this.screenState!=="settings"){this.launch();return;}
     if(action==="start"){this.screenState="menu";this.screenDirty=true;return;}
-    if(action==="select"){this.screenState="cartridges";this.screenDirty=true;return;}
+    if(action==="select"){this.screenState=this.screenState==="settings"?"cartridges":"settings";this.screenDirty=true;return;}
     if(action==="b"){this.screenState="menu";this.screenDirty=true;return;}
     if(["up","down","left","right"].includes(action)){
       const direction=["left","up"].includes(action)?-1:1;
@@ -103,7 +103,7 @@ export class ResearchConsole {
   }
   update(dt,reduced=false){
     const before=this.machine.state;this.machine.advance(reduced&&this.machine.busy?2:dt,this.canTransfer);
-    if(before!==this.machine.state)this.screenDirty=true;
+    if(before!==this.machine.state){this.screenDirty=true;if(this.machine.state==="EMPTY")this.screenState="menu";}
     if(this.screenState==="boot"){this.bootTime+=dt;if(this.bootTime>(reduced?0:.4)){this.screenState="menu";this.screenDirty=true;}}
     let moving=this.machine.busy||before!==this.machine.state;
     if(this.power){moving=this.power.update(dt,reduced)||moving;const slider=this.model.nodes.get("Power_Slider");if(slider)slider.position.x=this.rest.get("Power_Slider").x+(this.power.slider.value-1)*.016;const led=this.model.nodes.get("Status_LED");if(led)led.material.color.set(this.power.on?"#a2cd84":"#424c47");}
@@ -144,48 +144,58 @@ export class ResearchConsole {
   context(){const c=this.screen.getContext("2d");c.setTransform(this.screen.width/512,0,0,this.screen.height/288,0,0);return c;}
   text(c,value,x,y,size=18,color="#eaf0ec"){c.fillStyle=color;c.font=`${size}px system-ui, sans-serif`;c.fillText(value,x,y);}
   screenButton(c,id,label,x,y,w,h,action,selected=false){c.fillStyle=selected?"#4b7774":"#e7eeeb";c.fillRect(x,y,w,h);this.text(c,label,x+10,y+h*.65,13,selected?"#fff":"#294644");this.buttons.push({id,x,y,w,h,action});}
+  systemButtons(c){
+    if(this.power?.on===false||!this.ready||this.session?.state==="BOOTING"||this.screenState==="boot")return;
+    if(this.embedded){
+      this.screenButton(c,"system-focus","",374,6,58,42,()=>this.onFocusRequest?.());
+      c.strokeStyle="#294644";c.lineWidth=2;c.beginPath();
+      for(const [x,y,dx,dy] of [[390,18,8,8],[416,18,-8,8],[390,36,8,-8],[416,36,-8,-8]]){c.moveTo(x+dx,y);c.lineTo(x,y);c.lineTo(x,y+dy);}c.stroke();
+    }
+    this.screenButton(c,"system-eject","",442,6,58,42,()=>this.eject());
+    c.fillStyle="#294644";c.beginPath();c.moveTo(471,14);c.lineTo(482,29);c.lineTo(460,29);c.closePath();c.fill();c.fillRect(460,33,22,4);
+  }
   drawScreen(){
     this.screenDirty=false;const c=this.context();c.fillStyle="#17242a";c.fillRect(0,0,512,288);this.buttons=[];
     if(this.power?.on===false){c.fillStyle="#10191d";c.fillRect(0,0,512,288);this.renderer.updateTexture("screen",this.screen);return;}
     c.strokeStyle="#40565e";c.strokeRect(12,12,488,264);
     if(this.embedded&&this.session.state==="BOOTING"||this.screenState==="boot"){
-      c.drawImage(this.logo,171,19,170,170);this.text(c,this.embedded?"LOADING "+this.registry[this.machine.inserted].label:"TC-06 / RESEARCH CONSOLE",131,233,16,"#b4cdc6");
-    }else if(this.ready||["labs","cartridges"].includes(this.screenState)){
+      c.drawImage(this.logo,171,19,170,170);this.text(c,this.embedded?"LOADING "+this.registry[this.machine.inserted].label:"TENSORCAT / RESEARCH CONSOLE",106,233,16,"#b4cdc6");
+    }else if(this.ready&&this.screenState!=="settings"||["labs","cartridges"].includes(this.screenState)){
       const task=this.registry[this.machine.inserted??this.machine.selected];
-      c.drawImage(this.logo,370,35,100,100);this.text(c,"EXPERIMENT "+task.number,32,52,13,"#b2cdc3");this.text(c,task.label,32,99,30);this.text(c,task.name,32,137,16);
+      c.drawImage(this.logo,370,65,100,100);this.text(c,"EXPERIMENT "+task.number,32,52,13,"#b2cdc3");this.text(c,task.label,32,99,30);this.text(c,task.name,32,137,16);
       this.text(c,this.ready?"READY":this.machine.state,32,185,15,"#b5ccc7");
       if(this.machine.inserted!==null&&this.machine.selected!==this.machine.inserted)this.text(c,"Selected next: "+this.registry[this.machine.selected].label,32,208,12,"#b5ccc7");
       const caption=this.machine.busy?"INSERTING CARTRIDGE":this.ready?"PRESS A TO LAUNCH":"Insert cartridge";
       this.screenButton(c,"launch",caption,32,225,300,35,()=>this.ready?this.pressAndRelease("a"):this.insert());
       if(this.notice)this.text(c,this.notice,32,214,12,"#e1c490");
     }else if(this.screenState==="menu"){
-      c.drawImage(this.logo,189,13,134,134);this.text(c,"TC-06 RESEARCH CONSOLE",143,170,15,"#b5ccc7");
+      c.drawImage(this.logo,189,13,134,134);this.text(c,"TENSORCAT RESEARCH CONSOLE",124,170,15,"#b5ccc7");
       ["Labs","Cartridges","Inspector","Settings"].forEach((name,index)=>{this.screenButton(c,"home-"+index,name,22+index*120,204,108,48,()=>{this.cursor=index;this.pressAndRelease("a");},this.cursor===index);});
     }else if(this.screenState==="info"){
-      ["SYSTEM / TC-06","CPU depth rasterization","Six shared physical experiments","Y-up / meters / radians / seconds"].forEach((line,index)=>this.text(c,line,30,55+index*49,index?17:22));
+      ["SYSTEM / TENSORCAT","CPU depth rasterization","Six shared physical experiments","Y-up / meters / radians / seconds"].forEach((line,index)=>this.text(c,line,30,55+index*49,index?17:22));
     }else{
       this.text(c,"SETTINGS",32,52,22);this.text(c,"Quality: "+this.settings.quality,32,105,20);this.text(c,"Sound: "+(this.sound?"on":"muted"),32,153,20);
       this.buttons.push({id:"quality",x:25,y:75,w:450,h:48,action:()=>this.pressAndRelease("right")},{id:"sound",x:25,y:130,w:450,h:45,action:()=>{this.sound=!this.sound;this.screenDirty=true;}});
     }
-    this.renderer.updateTexture("screen",this.screen);
+    this.systemButtons(c);this.renderer.updateTexture("screen",this.screen);
   }
   presentExperiment(viewport){
     if(!this.embedded||this.session.state==="BOOTING")return;
     const c=this.context();c.drawImage(viewport,0,0,512,288);this.buttons=[];
-    c.fillStyle="#f4f8f5f2";c.fillRect(0,0,512,34);c.fillRect(0,242,512,46);
+    c.fillStyle="#f4f8f5f2";c.fillRect(0,0,512,52);c.fillRect(0,242,512,46);
     const task=this.registry[this.machine.inserted],metrics=this.session.world.metrics();
-    this.text(c,task.number+" / "+task.label,12,24,22,"#263f46");
-    const status=this.session.running?"RUNNING":this.session.state==="EXPERIMENT_PAUSED"?"PAUSED":"MENU";this.text(c,status,416,23,15,"#3f7768");
+    this.text(c,task.number+" / "+task.label,12,24,20,"#263f46");
+    const status=this.session.running?"RUNNING":this.session.state==="EXPERIMENT_PAUSED"?"PAUSED":"MENU";this.text(c,status,12,44,12,"#3f7768");
     const metric=this.session.world.task==="box"?`${metrics.packed}/3 packed`:this.session.world.task==="cloth"?`${Math.round(metrics.foldProgress*100)}% fold`:metrics.radialError!==undefined?`${(metrics.radialError*1000).toFixed(1)} mm radial`:this.session.world.task==="rope"?(metrics.crossed?"Ring crossed":"Threading"):`${(metrics.translationError*100).toFixed(1)} cm error`;
     this.text(c,metric+" / "+metrics.time.toFixed(1)+" s",12,239,15,metrics.success?"#237052":"#3f585c");
     [["a",this.session.world.task==="pusht"?"Push":"Grip"],["select","Tools"],["start",this.session.running?"Pause":"Resume"],["auto","Auto"]].forEach(([action,label],i)=>this.screenButton(c,"control-"+action,label,8+i*126,250,118,30,()=>{if(action==="auto"){this.session.world.command("auto");this.session.running=true;}else this.pressAndRelease(action);}));
     if(["PAUSE_MENU","CONTROLS"].includes(this.session.state)){
-      c.fillStyle="#172b32b8";c.fillRect(0,34,512,208);this.buttons=[];
-      this.text(c,this.session.state==="CONTROLS"?"EXPERIMENT CONTROLS":"PAUSED",28,69,22,"#fff");
+      c.fillStyle="#172b32e8";c.fillRect(0,52,512,236);this.buttons=[];
+      this.text(c,this.session.state==="CONTROLS"?"EXPERIMENT CONTROLS":"PAUSED",28,78,20,"#fff");
       const items=this.session.state==="EXPERIMENT_PAUSED"?[{label:"Resume",action:()=>{this.session.running=true;}}]:this.session.menuItems();
-      items.forEach((item,i)=>this.screenButton(c,"menu-"+i,item.label,28+(i%2)*242,87+Math.floor(i/2)*48,214,39,()=>{item.action();this.session.revision++;},i===this.session.menuIndex));
+      items.forEach((item,i)=>this.screenButton(c,"menu-"+i,item.label,28+(i%2)*242,94+Math.floor(i/2)*44,214,36,()=>{item.action();this.session.revision++;},i===this.session.menuIndex));
     }
-    this.renderer.updateTexture("screen",this.screen);
+    this.systemButtons(c);this.renderer.updateTexture("screen",this.screen);
   }
   pressAndRelease(action){this.press(action);this.release(action);}
   screenActionAt(u,v){const x=u*512,y=(1-v)*288;return this.buttons.find(b=>x>=b.x&&x<=b.x+b.w&&y>=b.y&&y<=b.y+b.h)||null;}

@@ -348,7 +348,9 @@
         var activeLink = document.querySelector(".portfolio-nav-link.is-active");
         if (!activeLink) return;
 
-        if (normalizeUrl(link.href) === normalizeUrl(activeLink.href)) {
+        // A collection tab can be active on a child exhibit; clicking it must
+        // return to the collection rather than replay the current-tab motion.
+        if (normalizeUrl(link.href) === normalizeUrl(window.location.href)) {
           event.preventDefault();
           centerInScroll(scroll, activeLink);
           if (!isContactLink(activeLink)) {

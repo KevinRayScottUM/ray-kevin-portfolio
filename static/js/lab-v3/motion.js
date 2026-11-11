@@ -13,7 +13,7 @@ export class Spring {
 }
 
 export class HoverTilt {
-  constructor(yaw=10,pitch=8,frequency=22){this.yawLimit=THREE.MathUtils.degToRad(yaw);this.pitchLimit=THREE.MathUtils.degToRad(pitch);this.yaw=new Spring(0,frequency);this.pitch=new Spring(0,frequency);}
+  constructor(yaw=16,pitch=14,frequency=24){this.yawLimit=THREE.MathUtils.degToRad(yaw);this.pitchLimit=THREE.MathUtils.degToRad(pitch);this.yaw=new Spring(0,frequency);this.pitch=new Spring(0,frequency);}
   point(x,y,reduced=false){this.yaw.target=reduced?0:clamp(x,-1,1)*this.yawLimit;this.pitch.target=reduced?0:clamp(y,-1,1)*this.pitchLimit;}
   clear(){this.yaw.target=0;this.pitch.target=0;}
   step(dt,reduced=false){const a=this.yaw.step(dt,reduced),b=this.pitch.step(dt,reduced);return a||b;}
@@ -23,7 +23,7 @@ export class HoverTilt {
 export const FACE_MOTION={threshold:110*Math.PI/180,flickAngle:62*Math.PI/180,flickDistance:120,flickVelocity:850,duration:.40,pitchLimit:12*Math.PI/180};
 const ease=t=>t*t*t*(t*(t*6-15)+10);
 export class FaceController {
-  constructor(root){this.root=root;this.face="front";this.yaw=0;this.pitch=0;this.hover=new HoverTilt(4,3,17);this.drag=null;this.snap=null;this.locked=false;this.revision=0;this.apply();}
+  constructor(root){this.root=root;this.face="front";this.yaw=0;this.pitch=0;this.hover=new HoverTilt(8,7,18);this.drag=null;this.snap=null;this.locked=false;this.revision=0;this.apply();}
   get settled(){return !this.drag&&!this.snap&&this.hover.settled;}
   get transferReady(){return this.face==="front"&&!this.drag&&!this.snap&&Math.abs(this.yaw%(2*Math.PI))<1e-6&&this.pitch===0&&this.hover.yaw.value===0&&this.hover.pitch.value===0;}
   apply(){this.root.quaternion.setFromEuler(new THREE.Euler(this.pitch+this.hover.pitch.value,this.yaw+this.hover.yaw.value,0,"XYZ"));this.root.updateMatrixWorld(true);}

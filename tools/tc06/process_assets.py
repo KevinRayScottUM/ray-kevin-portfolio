@@ -45,7 +45,7 @@ def prepare(source):
     image.save(OUT / "logo-badge.png", optimize=True)
     boot = Image.new("RGBA", (1024, 576), "#17242a")
     boot.alpha_composite(image.resize((384, 384), Image.Resampling.LANCZOS), (320, 32))
-    ImageDraw.Draw(boot).text((512, 486), "TC-06 / RESEARCH CONSOLE", fill="#c8d9d5", font=font(36), anchor="mm")
+    ImageDraw.Draw(boot).text((512, 486), "TENSORCAT / RESEARCH CONSOLE", fill="#c8d9d5", font=font(36), anchor="mm")
     boot.save(OUT / "boot-screen.png", optimize=True)
     registry = json.loads((OUT / "experiments.json").read_text())
     for task in registry:
@@ -55,9 +55,9 @@ def prepare(source):
         label.alpha_composite(badge, (40, 48))
         draw.text((290, 60), task["number"], fill="#26343b", font=font(160))
         draw.text((40, 350), task["label"], fill="#26343b", font=font(100))
-        draw.text((40, 675), "TensorCat Lab / TC-06", fill="#35444a", font=font(40))
+        draw.text((40, 675), "TensorCat Lab", fill="#35444a", font=font(40))
         label.save(OUT / (task["id"] + "-label.png"), optimize=True)
-    for name, text, size, dimensions in [("a", "A", 300, (768,384)), ("b", "B", 300, (768,384)), ("start", "START", 190, (1024,268)), ("select", "SELECT", 190, (1024,268)), ("off", "OFF", 160, (512,256)), ("on", "ON", 160, (512,256)), ("model", "TC-06", 280, (1024,512)), ("wordmark", "TensorCat", 155, (1024,176))]:
+    for name, text, size, dimensions in [("a", "A", 300, (768,384)), ("b", "B", 300, (768,384)), ("start", "START", 190, (1024,268)), ("select", "SELECT", 190, (1024,268)), ("off", "OFF", 160, (512,256)), ("on", "ON", 160, (512,256)), ("model", "TensorCat", 170, (1024,512)), ("wordmark", "TensorCat", 155, (1024,176))]:
         label = Image.new("RGBA", dimensions, (0, 0, 0, 0))
         draw = ImageDraw.Draw(label)
         color = "#f9f7f0" if name in ("a", "b", "start", "select") else "#26343b"

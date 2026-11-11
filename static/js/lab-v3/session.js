@@ -46,7 +46,7 @@ export class ExperimentSession {
       {label:"Tilt −",action:()=>{this.world.arms[this.arm].tilt=clamp(this.world.arms[this.arm].tilt-.12,-1.57,1.57);}},
       {label:"Tilt +",action:()=>{this.world.arms[this.arm].tilt=clamp(this.world.arms[this.arm].tilt+.12,-1.57,1.57);}},
       {label:"Resume",action:()=>{this.running=true;}}
-    ];
+    ].concat(this.systemItems?.()||[]);
     return [{label:"Resume",action:()=>{this.running=true;}},{label:"Restart experiment",action:()=>this.reset()},{label:"Controls",action:()=>{this.state="CONTROLS";this.menuIndex=0;}},{label:"Cartridge menu",action:()=>this.returnMenu()}];
   }
   choose(index=this.menuIndex) {const item=this.menuItems()[index];if(item){item.action();this.revision++;}}

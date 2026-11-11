@@ -144,19 +144,21 @@ handlers are retained. The underlying site remains Zola with Kodama templates.
 
 ## TensorCat Lab
 
-The `/lab/` route now contains a local TC-06 research-console prototype.
+The `/lab/` route is a data-driven exhibit collection. Exhibit 01, TensorCat / Interactive World Simulator,
+lives at `/lab/world-simulator/`. Entries are defined in `data/exhibits.toml`;
+the gallery renders a real CPU-rendered preview without loading the simulator.
 It remains static Zola: no service, model weights, inference requests, or new
 runtime package installation. Three.js r170 supplies geometry and math only;
 projection, clipping, depth testing, UV interpolation, geometric sampling and
 rasterization execute on the CPU with Canvas 2D / ImageData. cannon-es supplies
 fixed-step physics, not a trained world model.
 
-Console mode opens by default. Click a cartridge in the upper gallery or sidebar;
+Console mode opens by default without an external control sidebar. Click a cartridge in the upper gallery;
 it inserts automatically. Wait for READY,
 then press A to run the real experiment inside the handheld screen. Start opens
 the pause menu; it is not a launch requirement. A/B, D-pad, joystick, Start/Select and the screen
-are independently selectable 3D geometry, with equivalent accessible HTML
-controls. Six front-facing cartridges occupy uniformly spaced, screen-anchored
+are independently selectable 3D geometry, with keyboard input on the canvas.
+Six front-facing cartridges occupy uniformly spaced, screen-anchored
 slots above the handheld. The chosen card leaves its slot empty while the other
 five stay put; ejecting returns it to that exact slot. The actual transfer card
 aligns over the slot and descends into the internal bay. Transparent gallery
@@ -166,14 +168,14 @@ Replacing a cartridge ejects the old one first; rapid requests queue the latest
 choice without restarting an in-flight movement. Lab mode is an explicit expanded presentation of the same cached
 experiment world, not an automatic destination after pressing A.
 
-Cartridges and the handheld have restrained, critically damped pointer-relative
-3D hover. The outer camera remains front-facing while the hardware transforms:
+Cartridges have critically damped pointer-relative 3D hover capped at 16 degrees yaw / 14 degrees pitch;
+the handheld uses 8 / 7 degrees. The outer camera remains front-facing while the hardware transforms:
 small drags return to the current face; deliberate flips snap to Front or Back
 over 400 ms. The gallery does not rotate or zoom with the handheld. Front/Back
 are the only Console view presets; the expanded Lab retains its free camera.
 
-The physical lower-front OFF/ON slider is functional, with equivalent keyboard-
-operable Power switch in the sidebar. Default is ON. OFF pauses the shared
+The physical lower-front OFF/ON slider is the Console power control.
+Default is ON. OFF pauses the shared
 runtime, clears captured input, darkens the screen and dims the existing LED;
 mechanical insertion/ejection and hardware inspection remain available. ON shows
 the inserted cartridge's ready screen and waits for A; it never silently resumes.
@@ -192,11 +194,43 @@ input is ray-mapped into its local UV coordinates and never orbits the outer
 handheld camera. Focus screen enlarges the same live framebuffer without
 switching mode. D-pad Up zooms in, Down zooms out, and Left/Right are inactive
 during the experiment. The physical analog joystick orbits the inner experiment
-camera, like dragging its screen. Select opens arm, axis, tilt
+camera, like dragging its screen. Select opens arm, axis, tilt, sound
 and auto-sequence tools. A toggles the gripper (Push-T triggers its push action),
 B backs out through the pause menu, and Start pauses/resumes. Focus the
 canvas for arrows, A/Enter, B/Escape and Space. Reduced motion starts physics
-paused. Rendering stops while hidden or offscreen.
+paused. Simulation rendering stops while hidden or offscreen. A separate lightweight
+background pass remains active when scrolling through the visible Lab page.
+
+The Lab collection and exhibit pages share a dark studio palette and full-page
+Matrix-inspired code rain, including header gaps, outer margins and footer backgrounds.
+Console mode also has a masked stage layer, so its opaque software-rendered viewport
+does not interrupt the background treatment. Glyphs never intercept pointer events;
+reading areas and projected hardware are cleared. The backdrop redraws at most 10 Hz,
+pauses in hidden tabs and is disabled by reduced-motion preferences. Exhibit backgrounds
+reuse the existing frame scheduler rather than starting another simulation loop.
+
+The CPU renderer adds material-specific diffuse, roughness-dependent specular,
+Schlick Fresnel, an analytic softbox highlight and approximate ground shadow.
+These are software shading approximations, not a physically validated PBR pipeline.
+Screen reflections are bounded to preserve experiment readability. Hard model edges
+and smooth side surfaces use Blender corner normals; static hardware shading is cached.
+
+The shared touchscreen system overlay has a vector Eject icon at the top right
+in Ready, Running and Pause states. It uses the physical screen ray/UV mapping,
+not an external page hitbox. Ejection parks the shared session, releases input,
+cancels previews/replay, returns the card to its gallery slot and stays in Console.
+It is unavailable during boot/transfer and when powered off. The neighboring
+in-screen expand icon opens Focus; its Eject action uses the same lifecycle.
+Select opens sound/quality settings before launch; the experiment Tools menu
+retains sound configuration after launch.
+
+Research Inspector is a native keyboard-operable disclosure, initially collapsed
+in Console and expanded in Lab. Each mode remembers its disclosure preference.
+It contains Coordinates, World state, Timeline, Prediction, rendering/sampling,
+view presets, reset and exports. Collapsing preserves selections and world state
+and skips inspector table/statistic refreshes, not physics. Lab retains its
+standalone controls and top representation toolbar. No duplicate external
+Console D-pad, Power, Launch or Eject controls are mounted.
 
 The embedded scene has an independent 1024x576 backing store (1280x720 at High,
 up to 1536x864 in Focus). Outer rendering follows CSS size and device pixel ratio
@@ -212,8 +246,9 @@ terminal state. Previewing does not advance the live world. "Pause at goal"
 stops after eight consecutive valid evaluations; disable it to study subsequent
 instability. Goal detection is not a guarantee of sustained physical stability.
 
-Source map: `templates/lab.html`, `static/styles/lab-v3.css`,
-`static/js/lab-v3/{app,graphics,console,session,mechanics,motion,gallery,power,embedded-display,experiment-view,robot,simulation}.js`, and
+Source map: `templates/{lab,lab-gallery}.html`, `data/exhibits.toml`,
+`static/styles/{lab-v3,lab-exhibition}.css`, `static/js/lab-rain.js`,
+`static/js/lab-v3/{app,graphics,studio,console,session,mechanics,motion,gallery,power,inspector,embedded-display,experiment-view,robot,simulation}.js`, and
 `static/lab/tc06/experiments.json`. Old cloth/SVG files are retained but not loaded.
 Licenses remain in `static/vendor/` and `static/img/lab/icons/LICENSE`.
 
@@ -222,7 +257,7 @@ Reproduce assets and checks from the repository root:
 ```bash
 python3 tools/tc06/process_assets.py /Users/kevin/Desktop/TensorCat.png
 /Applications/Blender.app/Contents/MacOS/Blender --background --factory-startup --python tools/tc06/generate_console.py -- --render
-node --test tests/lab-v3.test.mjs tests/tc06-console.test.mjs tests/tc06-interactions.test.mjs tests/nav-motion.test.cjs
+node --test tests/lab-exhibition.test.mjs tests/lab-v3.test.mjs tests/tc06-console.test.mjs tests/tc06-interactions.test.mjs tests/tc06-minimal-ui.test.mjs tests/nav-motion.test.cjs
 node tools/tc06/benchmark.mjs
 zola check
 zola build
@@ -236,12 +271,15 @@ labels and twelve CPU previews live in `static/lab/tc06/`. The original logo is
 copied byte-for-byte; only exterior-connected white pixels become transparent
 in the derived badge. Provenance is recorded in `branding.json`.
 
-See [current interaction refinement and validation](docs/tc06-interaction-refinement.md),
+See [exhibition, studio and background validation](docs/lab-exhibition-studio.md),
+[minimal Console workspace refinement](docs/tc06-minimal-workspace.md),
+[earlier interaction refinement and validation](docs/tc06-interaction-refinement.md),
 [earlier console integration](docs/tc06-console-refinement.md),
 [initial V3 implementation ledger](docs/lab-v3-status.md) and
 [measured benchmarks](docs/lab-v3-benchmark.json) for features, validation,
 approximations and remaining V3 requirements. This is a runnable local prototype,
-not full V3 acceptance or a validated robot system. This update is not deployed.
+not full V3 acceptance or a validated robot system. Production releases deploy from
+GitHub `main` through Cloudflare Pages; check the deployment status for the latest commit.
 The [3D World Simulator](https://jwang771.github.io/3dworldsimulator/) provides
 research inspiration; its neural model and service are not embedded.
 

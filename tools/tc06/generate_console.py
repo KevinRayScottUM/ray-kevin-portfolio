@@ -70,7 +70,7 @@ def cylinder(name, radius, depth, pos, mat, parent, action=None):
     bpy.ops.mesh.primitive_cylinder_add(vertices=48, radius=radius, depth=depth, location=pos, rotation=(math.pi / 2, 0, 0))
     obj = bpy.context.object
     for poly in obj.data.polygons:
-        poly.use_smooth = True
+        poly.use_smooth = len(poly.vertices) == 4
     mod = obj.modifiers.new("Rim bevel", "BEVEL")
     mod.width = min(depth * .15, radius * .12)
     mod.segments = 2
@@ -93,6 +93,8 @@ def shell(name, size, pos, mat, parent, radius=.024):
     obj = bpy.data.objects.new(name, data)
     bpy.context.collection.objects.link(obj)
     obj.location = pos
+    for polygon in data.polygons:
+        polygon.use_smooth = len(polygon.vertices) == 4
     bevel = obj.modifiers.new("Edge softness", "BEVEL")
     bevel.width = .0011
     bevel.segments = 2
@@ -269,7 +271,7 @@ def export_model(root):
                     loop = mesh.loops[loop_index]
                     vertex = mesh.vertices[loop.vertex_index]
                     positions.extend(round(v, 7) for v in (C.to_3x3() @ vertex.co))
-                    normal = vertex.normal if mesh.polygons[tri.polygon_index].use_smooth else tri.normal
+                    normal = mesh.corner_normals[loop_index].vector
                     normals.extend(round(v, 6) for v in (C.to_3x3() @ normal))
                     uvs.extend(round(v, 6) for v in (uv_layer.data[loop_index].uv if uv_layer else (0, 0)))
             mat = obj.data.materials[0]

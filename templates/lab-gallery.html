@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block user_head %}<link rel="stylesheet" href="{{ get_url(path="styles/lab-exhibition.css") }}">{% endblock user_head %}
+{% block title %}<title>TensorCat Lab | {{ config.title }}</title>{% endblock title %}
+{% block content %}
+{% set collection = load_data(path="data/exhibits.toml") %}
+<main class="lab-exhibition lab-collection">
+  <header class="lab-collection-heading"><p class="lab-eyebrow">Research &amp; Engineering</p><h1>TensorCat Lab<span>.</span></h1><p>Exploring intelligence through interactive systems.</p></header>
+  <section aria-label="Exhibitions" class="lab-exhibits">
+  {% for exhibit in collection.exhibits | sort(attribute="order") %}
+    <article class="lab-exhibit">
+      <a class="lab-exhibit-visual" href="{{ get_url(path=exhibit.route, trailing_slash=true) }}" aria-label="Enter {{ exhibit.title }} — {{ exhibit.subtitle }}"><img src="{{ get_url(path=exhibit.cover) }}" width="1376" height="650" alt="{{ exhibit.cover_alt | default(value=exhibit.title) }}" fetchpriority="high"></a>
+      <div class="lab-exhibit-caption"><div><p class="lab-eyebrow">Exhibit {{ exhibit.number }} / {{ exhibit.category }}</p><h2><a href="{{ get_url(path=exhibit.route, trailing_slash=true) }}">{{ exhibit.title }} <span>{{ exhibit.subtitle }}</span></a></h2><p>{{ exhibit.description }}</p><ul class="lab-exhibit-tags" aria-label="Research areas">{% for tag in exhibit.technology_tags %}<li>{{ tag }}</li>{% endfor %}</ul></div><a class="lab-exhibit-enter" href="{{ get_url(path=exhibit.route, trailing_slash=true) }}">Enter exhibit <span aria-hidden="true">↗</span></a></div>
+    </article>
+  {% endfor %}
+  </section>
+</main>
+<script type="module" src="{{ get_url(path="js/lab-rain.js") }}"></script>
+{% endblock content %}

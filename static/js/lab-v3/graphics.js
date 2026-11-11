@@ -1,4 +1,5 @@
 import * as THREE from "../../vendor/three/three.module.min.js";
+import {studioLighting,materialKind} from "./studio.js";
 
 export { THREE };
 export const clamp = (value, min, max) => Math.max(min, Math.min(max, value));
@@ -199,12 +200,30 @@ export class SoftwareRenderer {
     this.objects = [];
     this.pointData = [];
     this.stats = { ms: 0, triangles: 0, points: 0 };
+    this.studio=false;this.materialCache=new WeakMap();this.lightingGeometry=new WeakMap();this.lightingValues=new WeakMap();this.lightFrame=0;
     this.setBackground("#f7f9f9");
     this.setQuality("balanced");
   }
   setBackground(hex) {
     const color=new THREE.Color(hex).convertLinearToSRGB();
     this.background=new Uint32Array(new Uint8Array([Math.round(color.r*255),Math.round(color.g*255),Math.round(color.b*255),255]).buffer)[0];
+  }
+  setStudio(enabled){if(this.studio!==enabled){this.studio=enabled;this.staticCache=null;}}
+  lightingMap(geometry){
+    const position=geometry.attributes.position,normal=geometry.attributes.normal,version=position.version+":"+normal?.version;
+    let entry=this.lightingGeometry.get(geometry);if(entry?.version===version)return entry;
+    const map=new Uint32Array(position.count),unique=new Map();
+    for(let i=0;i<position.count;i++){const j=i*3,key=[position.array[j],position.array[j+1],position.array[j+2],normal?.array[j],normal?.array[j+1],normal?.array[j+2]].join(',');if(!unique.has(key))unique.set(key,unique.size);map[i]=unique.get(key);}
+    entry={map,count:unique.size,version};this.lightingGeometry.set(geometry,entry);return entry;
+  }
+  groundShadow(scene,rig){
+    const body=scene.getObjectByName("Chassis");if(!body)return;
+    const box=new THREE.Box3().setFromObject(body),min={x:Infinity,y:Infinity},max={x:-Infinity,y:-Infinity};
+    for(const x of [box.min.x,box.max.x])for(const y of [box.min.y,box.max.y])for(const z of [box.min.z,box.max.z]){const p=rig.project(new THREE.Vector3(x,y,z),this.width,this.height);min.x=Math.min(min.x,p.x);max.x=Math.max(max.x,p.x);max.y=Math.max(max.y,p.y);}
+    const rx=(max.x-min.x)*.53,ry=Math.max(6,rx*.09),cx=(min.x+max.x)/2,cy=max.y+ry*.8,data=this.image.data;
+    for(let y=Math.max(0,Math.floor(cy-ry*2));y<Math.min(this.height,cy+ry*2);y++)for(let x=Math.max(0,Math.floor(cx-rx*1.6));x<Math.min(this.width,cx+rx*1.6);x++){
+      const a=.45*Math.exp(-2.8*(((x-cx)/rx)**2+((y-cy)/ry)**2)),i=(y*this.width+x)*4;data[i]*=1-a;data[i+1]*=1-a;data[i+2]*=1-a;
+    }
   }
   setQuality(quality) {
     this.quality = quality;
@@ -257,7 +276,9 @@ export class SoftwareRenderer {
   }
   render(scene, rig, options = {}) {
     const start = performance.now();
-    const cached=Boolean(options.staticKey&&options.mode!=="cloud"&&options.mode!=="wire"&&options.mode!=="particles"&&this.staticCache?.key===options.staticKey);
+    this.lightFrame++;this.stats.shadedVertices=0;
+    const cacheKey=options.staticKey?this.studio+":"+this.quality+":"+options.staticKey:null;
+    const cached=Boolean(cacheKey&&options.mode!=="cloud"&&options.mode!=="wire"&&options.mode!=="particles"&&this.staticCache?.key===cacheKey);
     const pixels = this.image.data;
     if(cached) {
       pixels.set(this.staticCache.pixels);this.depth.set(this.staticCache.depth);this.ids.set(this.staticCache.ids);this.pointIds.set(this.staticCache.pointIds);this.objects=[...this.staticCache.objects];
@@ -268,6 +289,7 @@ export class SoftwareRenderer {
     this.stats.cached=cached;this.stats.reusedTriangles=cached?this.staticCache.triangles:0;
     scene.updateMatrixWorld(true);
     rig.update();
+    if(this.studio&&!cached&&!options.transparent&&options.mode!=="cloud")this.groundShadow(scene,rig);
     const vp = new THREE.Matrix4().multiplyMatrices(rig.camera.projectionMatrix, rig.camera.matrixWorldInverse);
     if (options.mode === "cloud") {
       this.pointData.forEach((point, index) => {
@@ -306,8 +328,14 @@ export class SoftwareRenderer {
         const count = indices?.length || positions.length / 3;
         const m = matrix.elements;
         const normal = new THREE.Vector3();
+        const vertexNormal=new THREE.Vector3(),vertexPosition=new THREE.Vector3(),factors={};
         const base = object.material.color;
+        let kind=this.materialCache.get(object);if(!kind){kind=materialKind(object);this.materialCache.set(object,kind);}
+        const displayBase=base.clone().convertLinearToSRGB(),baseRGB=[displayBase.r*255,displayBase.g*255,displayBase.b*255];
         const texture = this.textures.get(object.userData.texture);
+        const lighting=this.studio?this.lightingMap(object.geometry):null;
+        let values=this.lightingValues.get(object);
+        if(lighting&&(!values||values.frame.length!==lighting.count)){values={frame:new Uint32Array(lighting.count),diffuse:new Float32Array(lighting.count),specular:new Float32Array(lighting.count)};this.lightingValues.set(object,values);}
         for (let offset = 0; offset < count; offset += 3) {
           const vertices = [];
           normal.set(0, 0, 0);
@@ -315,20 +343,30 @@ export class SoftwareRenderer {
             const index = indices ? indices[offset + corner] : offset + corner;
             const x = positions[index * 3], y = positions[index * 3 + 1], z = positions[index * 3 + 2];
             vertices.push([m[0]*x+m[4]*y+m[8]*z+m[12], m[1]*x+m[5]*y+m[9]*z+m[13], m[2]*x+m[6]*y+m[10]*z+m[14], m[3]*x+m[7]*y+m[11]*z+m[15], uv ? uv[index*2] : 0, uv ? uv[index*2+1] : 0]);
-            if (normals) normal.add(new THREE.Vector3().fromArray(normals, index * 3));
+            if (normals&&!this.studio) normal.add(vertexNormal.fromArray(normals, index * 3));
+            if(this.studio){
+              const slot=lighting.map[index];
+              if(values.frame[slot]!==this.lightFrame){
+                vertexNormal.fromArray(normals||[0,0,1],normals?index*3:0).applyMatrix3(normalMatrix).normalize();
+                vertexPosition.set(x,y,z).applyMatrix4(object.matrixWorld);
+                studioLighting(vertexNormal,vertexPosition,rig.camera.position,kind,this.quality,factors);
+                values.frame[slot]=this.lightFrame;values.diffuse[slot]=factors.diffuse;values.specular[slot]=factors.specular;this.stats.shadedVertices++;
+              }
+              vertices[corner].push(values.diffuse[slot],values.specular[slot]);
+            }
           }
-          normal.applyMatrix3(normalMatrix).normalize();
-          const shade = object.userData.texture ? 1 : .68 + .32 * Math.max(0, normal.dot(new THREE.Vector3(-.4,.8,.6).normalize()));
+          if(!this.studio)normal.applyMatrix3(normalMatrix).normalize();
+          const shade = this.studio||object.userData.texture ? 1 : .68 + .32 * Math.max(0, normal.dot(new THREE.Vector3(-.4,.8,.6).normalize()));
           const polygon = clipPolygon(vertices);
           if (polygon.length < 3) continue;
-          const screen = polygon.map(v => [(v[0]/v[3]+1)*this.width/2, (1-v[1]/v[3])*this.height/2, v[2]/v[3], 1/v[3], v[4]/v[3], v[5]/v[3]]);
-          const display=base.clone().multiplyScalar(shade).convertLinearToSRGB();
-          const color = [display.r * 255, display.g * 255, display.b * 255];
+          const screen = polygon.map(v => [(v[0]/v[3]+1)*this.width/2, (1-v[1]/v[3])*this.height/2, v[2]/v[3], 1/v[3], v[4]/v[3], v[5]/v[3], ...(this.studio?[v[6]/v[3],v[7]/v[3]]:[])]);
+          const display=this.studio?null:base.clone().multiplyScalar(shade).convertLinearToSRGB();
+          const color = this.studio?baseRGB:[display.r * 255, display.g * 255, display.b * 255];
           for (let index = 1; index < screen.length - 1; index++) {
             const tri = [screen[0], screen[index], screen[index + 1]];
             if ((options.mode === "wire" || options.mode === "particles")&&object.userData.texture!=="screen") {
               this.line(tri[0], tri[1], color, id); this.line(tri[1], tri[2], color, id); this.line(tri[2], tri[0], color, id);
-            } else this.triangle(tri[0], tri[1], tri[2], color, texture, id);
+            } else this.triangle(tri[0], tri[1], tri[2], color, texture, id,this.studio);
             this.stats.triangles++;
           }
         }
@@ -363,12 +401,12 @@ export class SoftwareRenderer {
     this.context.putImageData(this.image, 0, 0);
     if(options.staticKey&&!cached&&(!options.mode||options.mode==="surface")) {
       const cache=this.staticCache&&this.staticCache.pixels.length===pixels.length?this.staticCache:{pixels:new Uint8ClampedArray(pixels.length),depth:new Float32Array(this.depth.length),ids:new Int32Array(this.ids.length),pointIds:new Int32Array(this.pointIds.length)};
-      cache.key=options.staticKey;cache.pixels.set(pixels);cache.depth.set(this.depth);cache.ids.set(this.ids);cache.pointIds.set(this.pointIds);cache.objects=[...this.objects];cache.dynamicIds=new Set(this.objects.map((object,index)=>object.userData.texture==="screen"?index:-2));cache.triangles=this.stats.triangles;this.staticCache=cache;
+      cache.key=cacheKey;cache.pixels.set(pixels);cache.depth.set(this.depth);cache.ids.set(this.ids);cache.pointIds.set(this.pointIds);cache.objects=[...this.objects];cache.dynamicIds=new Set(this.objects.map((object,index)=>object.userData.texture==="screen"?index:-2));cache.triangles=this.stats.triangles;this.staticCache=cache;
     }
     this.stats.ms = performance.now() - start;
     return this.stats;
   }
-  triangle(a, b, c, color, texture, objectId) {
+  triangle(a, b, c, color, texture, objectId,lit=false) {
     const edge = (p, q, x, y) => (x - p[0]) * (q[1] - p[1]) - (y - p[1]) * (q[0] - p[0]);
     const area = edge(a, b, c[0], c[1]);
     if (Math.abs(area) < .001) return;
@@ -391,6 +429,7 @@ export class SoftwareRenderer {
         const index = y*this.width+x;
         if (z >= this.depth[index]) continue;
         let r = color[0], g = color[1], blue = color[2],pixelAlpha=1;
+        let diffuse=1,specular=0;if(lit){const invW=w0*a[3]+w1*b[3]+w2*c[3];diffuse=(w0*a[6]+w1*b[6]+w2*c[6])/invW;specular=(w0*a[7]+w1*b[7]+w2*c[7])/invW*255;}
         if (texture) {
           const invW = w0*a[3]+w1*b[3]+w2*c[3];
           const u = (w0*a[4]+w1*b[4]+w2*c[4])/invW, v = (w0*a[5]+w1*b[5]+w2*c[5])/invW;
@@ -401,10 +440,11 @@ export class SoftwareRenderer {
           const alpha=w00+w10+w01+w11;
           if(alpha<.01)continue;
           const backgroundAlpha=data[index*4+3]/255,remaining=backgroundAlpha*(1-alpha);pixelAlpha=alpha+remaining;
-          r=(source[i00]*w00+source[i10]*w10+source[i01]*w01+source[i11]*w11+data[index*4]*remaining)/pixelAlpha;
-          g=(source[i00+1]*w00+source[i10+1]*w10+source[i01+1]*w01+source[i11+1]*w11+data[index*4+1]*remaining)/pixelAlpha;
-          blue=(source[i00+2]*w00+source[i10+2]*w10+source[i01+2]*w01+source[i11+2]*w11+data[index*4+2]*remaining)/pixelAlpha;
+          r=((source[i00]*w00+source[i10]*w10+source[i01]*w01+source[i11]*w11)*diffuse+specular*alpha+data[index*4]*remaining)/pixelAlpha;
+          g=((source[i00+1]*w00+source[i10+1]*w10+source[i01+1]*w01+source[i11+1]*w11)*diffuse+specular*alpha+data[index*4+1]*remaining)/pixelAlpha;
+          blue=((source[i00+2]*w00+source[i10+2]*w10+source[i01+2]*w01+source[i11+2]*w11)*diffuse+specular*alpha+data[index*4+2]*remaining)/pixelAlpha;
         }
+        if(lit&&!texture){r=r*diffuse+specular;g=g*diffuse+specular;blue=blue*diffuse+specular;}
         const offset = index*4;
         data[offset]=r; data[offset+1]=g; data[offset+2]=blue;data[offset+3]=pixelAlpha*255;
         this.depth[index]=z; this.ids[index]=objectId;this.pointIds[index]=-1;

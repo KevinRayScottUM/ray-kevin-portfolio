@@ -49,7 +49,7 @@ test('critically damped hover integration is frame-rate independent',()=>{
 });
 test('hover signs, angle bounds, diagonal combination and graceful return',()=>{
   const h=new HoverTilt();h.point(10,-10);for(let i=0;i<50;i++)h.step(1/60);
-  assert.ok(h.yaw.value>0);assert.ok(h.pitch.value<0);assert.ok(h.yaw.value<=10*Math.PI/180);assert.ok(Math.abs(h.pitch.value)<=8*Math.PI/180);
+  assert.ok(h.yaw.value>0);assert.ok(h.pitch.value<0);assert.ok(h.yaw.value<=16*Math.PI/180);assert.ok(Math.abs(h.pitch.value)<=14*Math.PI/180);
   h.clear();for(let i=0;i<20;i++)h.step(1/60);assert.ok(Math.abs(h.yaw.value)<.003);assert.ok(Math.abs(h.pitch.value)<.003);
   h.point(1,1,true);h.step(1/60,true);near(h.yaw.value,0);near(h.pitch.value,0);
 });

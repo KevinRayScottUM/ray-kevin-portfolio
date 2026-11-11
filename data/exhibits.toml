@@ -1,0 +1,15 @@
+[[exhibits]]
+id = "world-simulator"
+number = "01"
+slug = "world-simulator"
+title = "TensorCat"
+subtitle = "Interactive World Simulator"
+category = "Interactive research"
+description = "Six robotics tasks, spatial representations, and physics-based future previews in one interactive research console."
+cover = "img/lab/world-simulator.png"
+cover_alt = "TensorCat handheld and its six robotics experiment cartridges"
+technology_tags = ["Robotics", "CPU Simulation", "3D Point Cloud", "Interactive Systems"]
+status = "Available"
+route = "lab/world-simulator/"
+order = 1
+featured = true

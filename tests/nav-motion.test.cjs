@@ -15,7 +15,7 @@ function classList(...initial) {
   };
 }
 
-function setup(activePath, fromPath) {
+function setup(activePath, fromPath, currentPath = activePath) {
   const paths = ["/", "/project-experience", "/about", "/blog", "/lab", "/contacts"];
   const links = paths.map((path, index) => ({
     href: "https://example.test" + path,
@@ -62,7 +62,7 @@ function setup(activePath, fromPath) {
   const events = {};
   let timerId = 0;
   const window = {
-    location: { href: "https://example.test" + activePath },
+    location: { href: "https://example.test" + currentPath },
     sessionStorage: {
       getItem: key => storage.get(key),
       setItem: (key, value) => storage.set(key, value),
@@ -83,6 +83,8 @@ function setup(activePath, fromPath) {
   flushFrames();
   return {
     indicator, animations,
+    get href() { return window.location.href; },
+    finishNavigation() { for (const handler of timers.values()) handler(); timers.clear(); flushFrames(); },
     click(path) { links[paths.indexOf(path)].listeners.click({ button: 0, preventDefault() {} }); flushFrames(); },
     resize() { events.resize(); for (const handler of timers.values()) handler(); timers.clear(); flushFrames(); },
   };
@@ -99,6 +101,13 @@ test("Contact starts and stays without an underline, including repeated clicks a
 test("Entering Contact never animates the underline toward its button", () => {
   const state = setup("/contacts", "/about");
   assert.equal(state.indicator.hidden, true);
+  assert.equal(state.animations.length, 0);
+});
+
+test("Active Lab collection link navigates out of a child exhibit without changing tab animations", () => {
+  const state = setup("/lab", undefined, "/lab/world-simulator/");
+  state.click("/lab");state.finishNavigation();
+  assert.equal(state.href, "https://example.test/lab");
   assert.equal(state.animations.length, 0);
 });
 

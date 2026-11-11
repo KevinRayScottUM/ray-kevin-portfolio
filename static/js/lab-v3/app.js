@@ -7,6 +7,8 @@ import {EmbeddedDisplay} from "./embedded-display.js";
 import {screenIntersection,pickGeometry} from "./mechanics.js";
 import {FaceController} from "./motion.js";
 import {CartridgeGallery,TransferOverlay,transferPoseFromAnchor} from "./gallery.js";
+import {InspectorVisibility} from "./inspector.js";
+import {CodeRain,readingMasks} from "../lab-rain.js";
 
 const root=document.querySelector("[data-tc-app]");
 if(root) start(root).catch(error=>{console.error(error);const status=root.querySelector("[data-loading]");status.hidden=false;status.textContent="Workspace unavailable: "+error.message;});
@@ -21,9 +23,6 @@ async function start(host) {
   const range=(label,key,value,min,max,step)=>`<label class="tc-row">${label}<input type="range" data-parameter="${key}" value="${value}" min="${min}" max="${max}" step="${step}"></label>`;
   const options=registry.map(task=>`<option value="${task.id}">${task.number} / ${task.name}</option>`).join("");
   $("[data-sidebar]").innerHTML=`
-    <section data-console-panel><div class="tc-panel-heading"><h2>Cartridge bay</h2><output data-machine>EMPTY</output></div><div class="tc-cartridges">${registry.map((task,index)=>`<button type="button" style="--cart-color:${task.color}" data-cartridge="${index}" aria-label="Select ${task.name}" aria-pressed="${index===0}"><img src="${assets}logo-badge.png" alt=""><small>${task.number}</small><strong>${task.label}</strong></button>`).join("")}</div><div class="tc-command-row">${button("Insert","insert")}${button("Eject","eject")}${button("Launch · A","launch")}${button("Focus screen","focus","maximize-2")}</div><p class="tc-notice" data-console-status>Insert a cartridge</p>
-    <fieldset class="tc-physical"><legend>Console controls</legend><div class="tc-dpad">${[["up","↑"],["left","←"],["down","↓"],["right","→"]].map(([action,label])=>`<button type="button" data-physical="${action}" aria-label="D-pad ${action}">${label}</button>`).join("")}</div><div class="tc-ab"><button type="button" data-physical="a">A</button><button type="button" data-physical="b">B</button></div><div class="tc-small-controls"><button type="button" data-physical="select">Select</button><button type="button" data-physical="start">Start</button></div></fieldset>
-    <label class="tc-row">Power<button type="button" role="switch" aria-label="Console power" aria-checked="true" class="tc-power" data-command="power"><span>OFF</span><i aria-hidden="true"></i><span>ON</span></button></label><label class="tc-row">Sound<input type="checkbox" data-sound></label><label class="tc-row">Rotation sensitivity<input type="range" min="0.3" max="2" step="0.1" value="1" data-sensitivity></label></section>
     <section data-lab-panel hidden><div class="tc-panel-heading"><h2>Experiment</h2><output data-sim-time>0.00 s</output></div><select aria-label="Experiment" data-task>${options}</select><p class="tc-objective" data-objective></p><div class="tc-command-row">${button("","play","play")}${button("","step","step-forward")}${button("Auto","auto")}${button("Release","release")}</div><div class="tc-command-row" data-cloth-actions>${button("Lift","lift")}${button("Stretch","stretch")}${button("Fold","fold")}</div>
     <fieldset><legend>End effector / meters</legend><label class="tc-row">Arm<select data-arm><option value="0">Left</option><option value="1">Right</option></select></label>${["x","y","z"].map(axis=>`<label class="tc-row">${axis.toUpperCase()}<input type="number" min="${axis==="y"?.105:-.75}" max="${axis==="z"?.43:.85}" step="0.01" data-target="${axis}"></label>`).join("")}<label class="tc-row">Gripper<input type="range" min="0" max="1" step="0.01" value="0.1" data-opening></label><label class="tc-row">Tool tilt<input type="range" min="-1.57" max="1.57" step="0.01" value="0" data-tilt></label></fieldset>
     <details><summary>Joint control / radians</summary><label class="tc-row">Joint<select data-joint><option value="yaw">Base yaw</option><option value="shoulder">Shoulder</option><option value="elbow">Elbow</option></select></label><input type="range" aria-label="Joint angle" min="-2.5" max="2.5" step="0.01" value="0" data-joint-value></details>
@@ -36,21 +35,27 @@ async function start(host) {
     <div id="tc-timeline" role="tabpanel" aria-labelledby="tc-tab-timeline" class="tc-inspect-panel" data-panel="timeline" hidden><div class="tc-command-row"><label>Record<input type="checkbox" data-record></label>${button("Replay","replay","play")}${button("Clear","clear-timeline")}${button("Export trajectory","trajectory")}<output data-timeline-count>0 / 180 snapshots</output></div><input aria-label="Timeline position" type="range" min="0" max="0" step="1" value="0" data-scrub><p class="tc-notice">Bounded state snapshots · 10 Hz · simulated time</p></div>
     <div id="tc-prediction" role="tabpanel" aria-labelledby="tc-tab-prediction" class="tc-inspect-panel" data-panel="prediction" hidden><div class="tc-inspect-controls"><label>Horizon / s<input type="number" min="0.25" max="3" step="0.25" value="1.5" data-horizon></label><label>A / ΔX / m<input type="number" min="-0.3" max="0.3" step="0.01" value="0.12" data-branch-a></label><label>B / ΔX / m<input type="number" min="-0.3" max="0.3" step="0.01" value="-0.12" data-branch-b></label>${button("Compare futures","predict")}</div><div class="tc-predictions" data-predictions></div><div class="tc-command-row">${button("Apply action A","commit-a")}${button("Apply action B","commit-b")}${button("Discard","discard")}</div><p class="tc-notice">Independent physical rollouts · no neural inference or real robot safety guarantee</p></div>`;
   $("[data-parameter=gravity]").closest("details").insertAdjacentHTML("beforeend",`${range("Solver iterations","solverIterations",10,4,24,1)}${range("Simulation rate","timeScale",1,.25,2,.25)}<label class="tc-row">Contact stiffness<input type="number" min="100000" max="100000000" step="1000000" value="10000000" data-parameter="contactStiffness"></label>`);
-  $("[data-quality]").closest("details").insertAdjacentHTML("beforeend",'<label class="tc-row">Background<select data-background><option value="#f7f9f9">Porcelain</option><option value="#e3eceb">Mist</option><option value="#243238">Graphite</option></select></label>');
+  $("[data-quality]").closest("details").insertAdjacentHTML("beforeend",'<label class="tc-row">Background<select data-background><option value="#101418">Dark studio</option><option value="#f7f9f9">Porcelain</option><option value="#e3eceb">Mist</option><option value="#243238">Graphite</option></select></label>');
+  $("[data-quality]").closest("details").insertAdjacentHTML("beforeend",'<label class="tc-row">Rotation sensitivity<input type="range" min="0.3" max="2" step="0.1" value="1" data-sensitivity></label>');
+  $("[data-inspector-tools]").append($("[data-quality]").closest("details"));
   $("[data-lab-panel]").insertAdjacentHTML("beforeend",'<label class="tc-row">Pause at goal<input type="checkbox" checked data-goal-pause></label>');
   $("[data-command=predict]").insertAdjacentHTML("beforebegin",'<label>A / Δtilt / rad<input type="number" min="-1.57" max="1.57" step="0.05" value="0" data-tilt-a></label><label>B / Δtilt / rad<input type="number" min="-1.57" max="1.57" step="0.05" value="0.35" data-tilt-b></label>');
   $("[data-panel=coordinates] .tc-inspect-controls").insertAdjacentHTML("afterbegin",'<label>Inspect<select data-inspect-source><option value="hardware">Console hardware</option><option value="experiment">Active experiment</option></select></label>');
-  host.insertAdjacentHTML("beforeend",`<dialog class="tc-focus" data-focus-dialog aria-label="Focused console screen"><header><h2>TC-06 / Focus screen</h2>${button("Close","close-focus","minimize-2")}</header><canvas data-focus-canvas tabindex="0" aria-label="Interactive enlarged console touchscreen"></canvas><div class="tc-command-row">${["a","b","select","start"].map(action=>`<button type="button" data-physical="${action}">${action.toUpperCase()}</button>`).join("")}</div></dialog>`);
+  host.insertAdjacentHTML("beforeend",`<dialog class="tc-focus" data-focus-dialog aria-label="Focused console screen"><header><h2>TensorCat / Focus screen</h2>${button("Close","close-focus","minimize-2")}</header><canvas data-focus-canvas tabindex="0" aria-label="Interactive enlarged console touchscreen"></canvas><div class="tc-command-row">${["a","b","select","start"].map(action=>`<button type="button" data-physical="${action}">${action.toUpperCase()}</button>`).join("")}</div></dialog>`);
   const canvas=$("[data-canvas]"),renderer=new SoftwareRenderer(canvas),sampler=new GeometrySampler();
+  const rain=new CodeRain(canvas.parentElement,true);
+  const pageRain=new CodeRain(document.body);
   const rigs={console:new CameraRig("console"),lab:new CameraRig("lab")};
   const reduced=matchMedia("(prefers-reduced-motion: reduce)");
   const abort=new AbortController(),on=(element,event,callback,options={})=>element.addEventListener(event,callback,{...options,signal:abort.signal});
+  const disclosure=$("[data-research-disclosure]"),inspectorVisibility=new InspectorVisibility(),toolbar=$("[data-toolbar]");
   const worlds=new Map(),timeline=new Timeline(180);
   let mode="console",world=null,renderMode="surface",visible=true,dirty=true,disposed=false,inspectSource="hardware";
   let last=0,accumulator=0,frame=0,lastRender=0,lastInspect=0,lastSample=0,lastRecord=0,replayTime=0,replay=-1,rollouts=[],predicting=false,predictionToken=0,goalStreak=0;
   let points=[],selectedPoint="",filter="all",tab="coordinates",objectMap=new Map(),cameraTween=null,orbitVelocity={x:0,y:0};
   let toastTimer=0,pulseTimers=new Set();
   const params={...DEFAULTS};
+  const backgrounds={console:"#101418",lab:"#f7f9f9"};
   const session=new ExperimentSession((id,reset=false)=>{
     if(reset&&worlds.has(id)){worlds.get(id).dispose();worlds.delete(id);}
     if(!worlds.has(id))worlds.set(id,new WorldSimulator(id,params));
@@ -62,6 +67,7 @@ async function start(host) {
   const inspectionScene=()=>inspectWorld()?world.scene:device.scene,inspectionRig=()=>inspectWorld()?rigs.lab:rigs.console;
   const device=await ResearchConsole.create(renderer,registry,assets,id=>{if(session.launch(id)){timeline.clear();lastRecord=world.time;goalStreak=0;syncWorldUI(id);updateMode();dirty=true;}},settings=>setQuality(settings.quality));
   device.session=session;session.power=device.power;
+  session.systemItems=()=>[{label:"Sound: "+(device.sound?"on":"muted"),action:()=>{device.sound=!device.sound;device.screenDirty=true;}}];
   const pose=new FaceController(device.scene);
   canvas.insertAdjacentHTML("afterend",`<div class="tc-gallery" data-gallery role="group" aria-label="Experiment cartridges"><div class="tc-gallery-strip"><canvas aria-hidden="true" data-gallery-canvas></canvas><div class="tc-gallery-targets">${registry.map((task,index)=>`<button type="button" class="tc-gallery-button" data-gallery-cartridge="${index}" data-cartridge="${index}" aria-label="Insert ${task.name}" aria-pressed="false" title="${task.number} / ${task.name}"></button>`).join("")}</div></div></div>`);
   const galleryElement=$("[data-gallery]"),gallery=new CartridgeGallery(galleryElement,device.model,registry,renderer.textures);
@@ -73,6 +79,8 @@ async function start(host) {
   const embedded=new EmbeddedDisplay(session,rigs.lab,device);
   const interaction=new ExperimentInteraction(session,rigs.lab,hit=>{if(inspectSource!=="experiment"){inspectSource="experiment";$("[data-inspect-source]").value=inspectSource;rebuildObjects();}selectHit({object:hit.object,point:null});});
   const focusDialog=$("[data-focus-dialog]"),focusCanvas=$("[data-focus-canvas]");
+  device.onFocusRequest=()=>command("focus");
+  device.onEjectionRequest=()=>{releaseInput();predictionToken++;predicting=false;rollouts=[];replay=-1;accumulator=0;if(focusDialog.open)focusDialog.close();embedded.force=true;dirty=true;};
   device.onPowerChange=()=>{releaseInput();session.returnMenu();predictionToken++;predicting=false;rollouts=[];replay=-1;accumulator=0;if(focusDialog.open)focusDialog.close();embedded.force=true;dirty=true;};
   let frameMetrics={outerMs:0,embeddedMs:0,physicsMs:0,totalMs:0,fps:0},adaptiveLimit=2,measuredFrames=0,measuredSince=performance.now();
   function resize(){const b=canvas.getBoundingClientRect();if(!b.width||!b.height)return;renderer.resizeToViewport(b.width,b.height,window.devicePixelRatio||1,Math.min(Number($("[data-pixel-ratio]").value),adaptiveLimit));rigs.console.resize(b.width,b.height);rigs.console.theta=0;rigs.console.phi=Math.PI/2;rigs.console.update();gallery.resize(window.devicePixelRatio||1,renderer.quality);if(mode==="lab")rigs.lab.resize(b.width,b.height);else embedded.resize(renderer.quality==="high"?1280:1024);dirty=true;}
@@ -110,7 +118,11 @@ async function start(host) {
     orbitVelocity={x:0,y:0};
     $("[data-predictions]").replaceChildren();
     $$("[data-workspace]").forEach(b=>b.setAttribute("aria-pressed",String(b.dataset.workspace===mode)));
-    $("[data-console-panel]").hidden=mode!=="console";$("[data-lab-panel]").hidden=mode!=="lab";
+    host.dataset.mode=mode;$("[data-sidebar]").hidden=mode!=="lab";$("[data-lab-panel]").hidden=mode!=="lab";
+    rain.canvas.hidden=mode!=="console"||reduced.matches;
+    renderer.setStudio(mode==="console");renderer.setBackground(backgrounds[mode]);$("[data-background]").value=backgrounds[mode];
+    (mode==="console"?$("[data-inspector-tools]"):$("[data-toolbar-slot]")).prepend(toolbar);
+    disclosure.open=inspectorVisibility.select(mode);
     galleryElement.hidden=mode!=="console";
     const currentView=$("[data-view]").value;
     $("[data-view]").replaceChildren(...(mode==="console"?[["front","Front"],["back","Back"]]:[["perspective","Perspective"],["front","Front"],["back","Back"],["left","Left"],["right","Right"],["top","Top"],["bottom","Bottom"]]).map(([value,label])=>new Option(label,value)));
@@ -119,8 +131,8 @@ async function start(host) {
     ["record","scrub"].forEach(name=>$("[data-"+name+"]").disabled=!world);
     ["predict","replay","step","commit-a","commit-b"].forEach(name=>$("[data-command="+name+"]").disabled=!world);
     $("[data-inspect-source]").disabled=mode==="lab";
-    $("[data-stage-title]").textContent=mode==="console"?"TC-06 / Console":registry.find(t=>t.id===world.task).name;
-    canvas.setAttribute("aria-label",mode==="console"?"TC-06 3D console. Drag deliberately to flip front or back. Power, buttons and touchscreen are interactive.":"Physical experiment. Drag a gripper to manipulate, drag empty space to orbit.");
+    $("[data-stage-title]").textContent=mode==="console"?"TensorCat / Console":registry.find(t=>t.id===world.task).name;
+    canvas.setAttribute("aria-label",mode==="console"?"TensorCat 3D console. Drag deliberately to flip front or back. Power, buttons and touchscreen are interactive.":"Physical experiment. Drag a gripper to manipulate, drag empty space to orbit.");
     rebuildObjects();syncArm();resize();embedded.force=true;dirty=true;last=0;accumulator=0;
   }
   function syncWorldUI(id) {
@@ -137,23 +149,16 @@ async function start(host) {
     releaseInput();updateMode();
   }
   function inspect() {
-    const machine=device.machine;$("[data-machine]").textContent=device.lifecycle;
+    const machine=device.machine;
     $$("[data-cartridge]").forEach(b=>{const index=Number(b.dataset.cartridge);b.setAttribute("aria-pressed",String(index===(machine.queued??machine.selected)));b.disabled=b.dataset.galleryCartridge!==undefined&&b.dataset.vacant==="true";});
-    $("[data-command=insert]").hidden=true;
-    $("[data-command=launch]").disabled=!device.power.on||!device.ready||device.embedded;$("[data-command=eject]").disabled=machine.busy||machine.inserted===null;
-    $("[data-command=power]").setAttribute("aria-checked",String(device.power.on));
-    if(document.activeElement!==$("[data-sound]"))$("[data-sound]").checked=device.sound;
     $$("[data-physical]").forEach(b=>b.disabled=!device.power.on);
-    $("[data-command=focus]").disabled=!device.embedded;
-    const cameraControls=device.embedded&&!["PAUSE_MENU","CONTROLS","BOOTING"].includes(session.state);
-    for(const direction of ["up","down","left","right"]){const b=$("[data-physical="+direction+"]");b.disabled=!device.power.on||cameraControls&&["left","right"].includes(direction);b.title=cameraControls?(direction==="up"?"Zoom in":direction==="down"?"Zoom out":"Inactive during experiment"):"D-pad "+direction;}
-    $("[data-console-status]").textContent=!device.power.on?"Power off":device.embedded?registry.find(t=>t.id===world.task).name+" / "+session.state.replaceAll("_"," "):device.ready?"Ready / Press A to launch":machine.busy?machine.state:"Choose a cartridge";
     $("[data-stage-state]").textContent=mode==="console"?device.lifecycle:session.running?"Running / 60 Hz":"Paused";
     if(mode==="lab") {
       $("[data-sim-time]").textContent=world.time.toFixed(2)+" s";syncArm();
       $("[data-command=play]").innerHTML=icon(session.running?"pause":"play");$("[data-command=play]").ariaLabel=session.running?"Pause physics":"Play physics";
       $("[data-status]").textContent=world.metrics().success?"Goal conditions met":"Local CPU · "+world.action;
     } else $("[data-status]").textContent="Local CPU · No learned model";
+    if(!disclosure.open)return;
     $("[data-performance]").textContent=`${renderer.width} × ${renderer.height} / ${(renderer.effectiveRatio||1).toFixed(2)}× · outer ${frameMetrics.outerMs.toFixed(1)} ms · screen ${frameMetrics.embeddedMs.toFixed(1)} ms · physics ${frameMetrics.physicsMs.toFixed(1)} ms · ${frameMetrics.fps.toFixed(0)} fps`;
     const point=points.find(p=>p.id===selectedPoint),reference=objectMap.get($("[data-reference]").value);
     $("[data-point-id]").textContent=point?.id||"No point selected";
@@ -175,6 +180,7 @@ async function start(host) {
     tab=name;$$("[data-tab]").forEach(b=>{const active=b.dataset.tab===name;b.setAttribute("aria-selected",String(active));b.tabIndex=active?0:-1;});$$("[data-panel]").forEach(p=>p.hidden=p.dataset.panel!==name);inspect();
   }
   function save(content,name,type="application/json") {const url=URL.createObjectURL(new Blob([content],{type}));const a=document.createElement("a");a.href=url;a.download="tensorcat-"+name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
+  on(disclosure,"toggle",()=>{inspectorVisibility.set(disclosure.open);if(disclosure.open){refreshSamples();inspect();}dirty=true;embedded.force=true;});
   const coordinateRows=()=>{refreshSamples();return exportPoints(points,$("[data-frame]").value,inspectionRig().camera,objectMap.get($("[data-reference]").value),inspectWorld()?world.time:null);};
   async function predict() {
     if(!world||predicting)return;session.running=false;predicting=true;rollouts=[];const token=++predictionToken;
@@ -235,8 +241,7 @@ async function start(host) {
     if(el.matches("[data-joint]"))syncArm();
     if(el.matches("[data-view]")){if(mode==="console"){if(!device.machine.busy)pose.toFace(el.value);}else{orbitVelocity={x:0,y:0};const r=rig(),start={theta:r.theta,phi:r.phi,distance:r.distance,target:r.target.clone()};r.preset(el.value);cameraTween={start,end:{theta:r.theta,phi:r.phi,distance:r.distance,target:r.target.clone()},time:performance.now()};r.theta=start.theta;r.phi=start.phi;r.distance=start.distance;r.target.copy(start.target);}}
     if(el.matches("[data-quality]")){adaptiveLimit=2;setQuality(el.value);embedded.force=true;}
-    if(el.matches("[data-background]"))renderer.setBackground(el.value);
-    if(el.matches("[data-sound]")){device.sound=el.checked;device.screenDirty=true;}
+    if(el.matches("[data-background]")){backgrounds[mode]=el.value;renderer.setBackground(el.value);}
     if(el.matches("[data-resolution]")){params.resolution=Number(el.value);if(mode==="lab"&&world.task==="cloth")command("reset");}
     if(el.matches("[data-object]")){filter=el.value;selectedPoint="";refreshSamples(true);}
     if(el.matches("[data-point]")){selectedPoint=el.value;}
@@ -288,9 +293,13 @@ async function start(host) {
     if(mode!=="console"||device.machine.busy||pose.drag||pose.snap)return;
     const hit=pickGeometry(device.scene,rigs.console,p.x,p.y,p.w,p.h);
     if(!hit||hit.object.name==="Screen_Surface"||findAction(hit.object)){pose.clearHover();return;}
-    const bounds=new THREE.Box3().setFromObject(device.model.nodes.get("Chassis")),min={x:Infinity,y:Infinity},max={x:-Infinity,y:-Infinity};
-    for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){const v=rigs.console.project(new THREE.Vector3(x,y,z),p.w,p.h);min.x=Math.min(min.x,v.x);min.y=Math.min(min.y,v.y);max.x=Math.max(max.x,v.x);max.y=Math.max(max.y,v.y);}
-    pose.point((p.x-(min.x+max.x)/2)/((max.x-min.x)/2),(p.y-(min.y+max.y)/2)/((max.y-min.y)/2),reducedMotion);
+    const b=projectedBounds(device.model.nodes.get("Chassis"),p.w,p.h);
+    pose.point((p.x-b.x-b.width/2)/(b.width/2),(p.y-b.y-b.height/2)/(b.height/2),reducedMotion);
+  }
+  function projectedBounds(object,width,height){
+    const bounds=new THREE.Box3().setFromObject(object),min={x:Infinity,y:Infinity},max={x:-Infinity,y:-Infinity};
+    for(const x of [bounds.min.x,bounds.max.x])for(const y of [bounds.min.y,bounds.max.y])for(const z of [bounds.min.z,bounds.max.z]){const p=rigs.console.project(new THREE.Vector3(x,y,z),width,height);min.x=Math.min(min.x,p.x);min.y=Math.min(min.y,p.y);max.x=Math.max(max.x,p.x);max.y=Math.max(max.y,p.y);}
+    return{x:min.x,y:min.y,width:max.x-min.x,height:max.y-min.y};
   }
   on(host,"pointermove",event=>{const b=event.target.closest("[data-cartridge]");if(!b||event.pointerType==="touch")return;const rect=b.getBoundingClientRect();gallery.point(Number(b.dataset.cartridge),(event.clientX-rect.left)/rect.width*2-1,(event.clientY-rect.top)/rect.height*2-1,reduced.matches);});
   on(host,"pointerout",event=>{const b=event.target.closest("[data-cartridge]");if(b&&!b.contains(event.relatedTarget))gallery.clear();});
@@ -369,13 +378,16 @@ async function start(host) {
   }
   on(focusDialog,"close",()=>{interaction.end(true);device.cancelInput();const b=canvas.getBoundingClientRect();visible=b.bottom>0&&b.top<innerHeight;resize();last=0;dirty=true;schedule();});
   on(window,"blur",()=>{releaseInput();dirty=true;});
-  on(reduced,"change",()=>{if(reduced.matches){session.running=false;orbitVelocity={x:0,y:0};}dirty=true;});
+  on(reduced,"change",()=>{if(reduced.matches){session.running=false;orbitVelocity={x:0,y:0};}dirty=true;schedule();});
   const resizeObserver=new ResizeObserver(resize);resizeObserver.observe(canvas.parentElement);
   const focusObserver=new ResizeObserver(()=>{if(focusDialog.open)resizeFocus();});focusObserver.observe(focusCanvas);
-  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting||focusDialog.open;if(visible){last=0;schedule();}else{cancelAnimationFrame(frame);frame=0;}});observer.observe(canvas);
+  const observer=new IntersectionObserver(entries=>{visible=entries[0].isIntersecting||focusDialog.open;last=0;schedule();});observer.observe(canvas);
   on(document,"visibilitychange",()=>{releaseInput();if(document.hidden){cancelAnimationFrame(frame);frame=0;}else{last=0;schedule();}});
   function tick(now) {
-    frame=0;if(disposed||document.hidden||!visible)return;
+    frame=0;if(disposed||document.hidden)return;
+    pageRain.paint(now,readingMasks(),reduced.matches);
+    // Keep the page backdrop alive offscreen without advancing the simulation.
+    if(!visible){last=0;if(!reduced.matches)schedule();return;}
     const frameStart=performance.now();
     const dt=last?Math.min((now-last)/1000,.08):0;last=now;
     session.advance(dt,reduced.matches);
@@ -385,6 +397,9 @@ async function start(host) {
       const hardwareChanged=device.update(dt,reduced.matches);dirty ||= poseChanged||hardwareChanged||device.screenState==="boot"||device.pressed.size>0;
       gallery.sync(device.machine);
       gallery.update(dt,reduced.matches);
+      const r=canvas.getBoundingClientRect(),holes=[{x:0,y:0,width:r.width,height:36}];
+      for(const object of [device.model.nodes.get("Chassis"),...registry.map(t=>device.model.nodes.get("Cartridge_"+t.id)).filter(o=>o.visible)]){const b=projectedBounds(object,r.width,r.height);holes.push({x:b.x-40,y:b.y-40,width:b.width+80,height:b.height+80});}
+      rain.paint(now,holes,reduced.matches);
     }
     if(cameraTween) {const t=clamp((now-cameraTween.time)/(reduced.matches?1:650),0,1),s=t*t*(3-2*t),r=rig(),{start,end}=cameraTween;r.theta=start.theta+(end.theta-start.theta)*s;r.phi=start.phi+(end.phi-start.phi)*s;r.distance=start.distance+(end.distance-start.distance)*s;r.target.copy(start.target).lerp(end.target,s);r.update();if(t===1)cameraTween=null;dirty=true;}
     const physicsStart=performance.now();
@@ -404,10 +419,10 @@ async function start(host) {
     }
     if(dirty&&now-lastRender>=1000/30) {
       lastRender=now;
-      if(renderMode==="cloud"||selectedPoint||now-lastSample>=200){refreshSamples();lastSample=now;}
+      if(renderMode==="cloud"||disclosure.open&&(selectedPoint||now-lastSample>=200)){refreshSamples();lastSample=now;}
       const hardwarePoints=mode==="console"&&inspectWorld()&&renderMode==="cloud"?sampler.sampleScene(device.scene,Number($("[data-point-budget]").value),Number($("[data-seed]").value)):points;
-      const staticKey=mode==="console"&&!device.isAnimating&&pose.settled&&!cameraTween&&renderMode==="surface"?JSON.stringify([renderer.width,renderer.height,renderer.background,rig().distance,rig().target.toArray(),device.hardwareRevision,pose.revision,selectedPoint]):null;
-      renderer.render(scene(),rig(),{mode:renderMode,staticKey,screenOverlay:mode==="console",points:hardwarePoints,particles:mode==="lab"?world.particleBodies.map(b=>new THREE.Vector3(b.position.x,b.position.y,b.position.z)):[],pointColor:$("[data-point-color]").value,pointSize:Number($("[data-point-size]").value),pointOpacity:Number($("[data-point-opacity]").value),selected:(mode==="lab"||!inspectWorld())?points.find(p=>p.id===selectedPoint)?.world:null,paths:mode==="lab"?rollouts.map((r,i)=>({points:r.path,color:new THREE.Color(i?"#c38c69":"#4c9b92")})):[],ghosts:mode==="lab"?rollouts.map((r,i)=>({points:r.ghosts,color:i?"#c38c69":"#4c9b92"})):[]});
+      const staticKey=mode==="console"&&!device.isAnimating&&pose.settled&&!cameraTween&&renderMode==="surface"?JSON.stringify([renderer.width,renderer.height,renderer.background,rig().distance,rig().target.toArray(),device.hardwareRevision,pose.revision,disclosure.open?selectedPoint:""]):null;
+      renderer.render(scene(),rig(),{mode:renderMode,staticKey,screenOverlay:mode==="console",points:hardwarePoints,particles:mode==="lab"?world.particleBodies.map(b=>new THREE.Vector3(b.position.x,b.position.y,b.position.z)):[],pointColor:$("[data-point-color]").value,pointSize:Number($("[data-point-size]").value),pointOpacity:Number($("[data-point-opacity]").value),selected:disclosure.open&&(mode==="lab"||!inspectWorld())?points.find(p=>p.id===selectedPoint)?.world:null,paths:mode==="lab"?rollouts.map((r,i)=>({points:r.path,color:new THREE.Color(i?"#c38c69":"#4c9b92")})):[],ghosts:mode==="lab"?rollouts.map((r,i)=>({points:r.ghosts,color:i?"#c38c69":"#4c9b92"})):[]});
       transferOverlay.present(renderer,mode==="console"&&["ALIGNING","INSERTING","EJECTING"].includes(device.machine.state));
       frameMetrics.outerMs=renderer.stats.ms;frameMetrics.totalMs=performance.now()-frameStart;measuredFrames++;
       if(now-measuredSince>=1000){frameMetrics.fps=measuredFrames*1000/(now-measuredSince);measuredFrames=0;measuredSince=now;}
@@ -417,8 +432,8 @@ async function start(host) {
     }
     if(now-lastInspect>200){lastInspect=now;inspect();}schedule();
   }
-  function schedule(){if(!frame&&!disposed&&visible&&!document.hidden)frame=requestAnimationFrame(tick);}
-  function dispose(){if(disposed)return;disposed=true;predictionToken++;cancelAnimationFrame(frame);abort.abort();resizeObserver.disconnect();focusObserver.disconnect();observer.disconnect();clearTimeout(toastTimer);pulseTimers.forEach(clearTimeout);interaction.end(true);transferOverlay.dispose();gallery.dispose();embedded.dispose();device.dispose();renderer.staticCache=null;worlds.forEach(w=>w.dispose());}
+  function schedule(){if(!frame&&!disposed&&!document.hidden)frame=requestAnimationFrame(tick);}
+  function dispose(){if(disposed)return;disposed=true;predictionToken++;cancelAnimationFrame(frame);abort.abort();resizeObserver.disconnect();focusObserver.disconnect();observer.disconnect();clearTimeout(toastTimer);pulseTimers.forEach(clearTimeout);interaction.end(true);rain.dispose();pageRain.dispose();transferOverlay.dispose();gallery.dispose();embedded.dispose();device.dispose();renderer.staticCache=null;worlds.forEach(w=>w.dispose());}
   on(window,"pagehide",event=>{device.cancelInput();cancelAnimationFrame(frame);frame=0;if(!event.persisted)dispose();});
   on(window,"pageshow",()=>{last=0;dirty=true;resize();schedule();});
   // Read-only diagnostics expose the actual live state for reproducible local QA.
