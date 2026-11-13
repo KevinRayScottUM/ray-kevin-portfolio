@@ -4,9 +4,9 @@
 <script defer src="{{ get_url(path="js/blog-actions.js") }}"></script>
 <div class="blog-index-wrap">
   <div class="blog-index-heading">
-    <p class="editorial-kicker">04 / The notebook</p>
-    <h1>{{ section.title }}</h1>
-    {% if section.description %}<p>{{ section.description }}</p>{% endif %}
+    <p class="editorial-kicker">{{ i18n::text(key="blog.kicker") }}</p>
+    <h1>{{ i18n::text(key="blog.title") }}</h1>
+    {% if section.description %}<p>{{ i18n::text(key="blog.description") }}</p>{% endif %}
   </div>
 
   <div class="blog-list">

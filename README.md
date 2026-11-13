@@ -319,6 +319,38 @@ GitHub `main` through Cloudflare Pages; check the deployment status for the late
 The [3D World Simulator](https://jwang771.github.io/3dworldsimulator/) provides
 research inspiration; its neural model and service are not embedded.
 
+## Language and Appearance (V6)
+
+The header includes an EN / 中 selector beside the brand and a sun / moon
+selector after Contact. English and Light are the first-visit defaults. Explicit
+choices persist in `tensorcat.language` and `tensorcat.theme` in localStorage,
+including navigation, refresh and other open tabs. No account or database is
+needed for these preferences. Changing them does not restart a Lab experiment.
+
+Interface messages and article metadata live in `data/locales.json`. English
+articles remain in `content/`; independently authored Chinese bodies live in
+`locales/zh-CN/` with matching names. Add both message languages, then regenerate
+the checked-in browser catalog:
+
+```sh
+node tools/build-locales.mjs
+node tools/build-locales.mjs --check
+node --test tests/*.test.mjs tests/*.test.cjs
+zola check
+zola build
+python3 tools/check-localized-build.py
+```
+
+Node.js and Python 3 are development-validation tools only. Cloudflare Pages
+still builds with `zola build` and publishes `public`; no new runtime dependency
+or server is required. A future article without a Chinese body explicitly shows
+its English original with a Chinese notice instead of claiming a translation.
+Original research figures, formulas, technical identifiers and downloaded data
+are not automatically translated or recolored.
+
+See [V6 implementation, validation and limitations](docs/portfolio-v6-preferences.md)
+for the architecture, responsive behavior and actual regression results.
+
 ## GitHub Preparation
 
 If this project is not already committed to GitHub, run:

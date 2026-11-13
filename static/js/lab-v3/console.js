@@ -2,6 +2,7 @@ import {THREE,loadConsole,clamp} from "./graphics.js";
 import {localBounds,CartridgeMechanism} from "./mechanics.js";
 import {PowerSwitch} from "./power.js";
 import {drawConsoleHome} from "./home-screen.js";
+import {t} from '../i18n.js';
 
 export const CARTRIDGE_TIMES={ALIGNING:.70,INSERTING:.85,EJECTING:1.25};
 export class CartridgeMachine {
@@ -91,7 +92,7 @@ export class ResearchConsole {
     if(action==="a"){
       if(this.screenState==="menu")this.screenState=["cartridges","cartridges","info","settings"][this.cursor];
       else if(this.screenState==="settings")this.sound=!this.sound;
-      else this.notice="INSERT A CARTRIDGE";
+      else this.notice='console.insertNotice';
       this.screenDirty=true;
     }
   }
@@ -160,21 +161,21 @@ export class ResearchConsole {
     if(this.power?.on===false){c.fillStyle="#10191d";c.fillRect(0,0,512,288);this.renderer.updateTexture("screen",this.screen);return;}
     c.strokeStyle="#40565e";c.strokeRect(12,12,488,264);
     if(this.embedded&&this.session.state==="BOOTING"||this.screenState==="boot"){
-      c.drawImage(this.logo,171,19,170,170);this.text(c,this.embedded?"LOADING "+this.registry[this.machine.inserted].label:"TENSORCAT / RESEARCH CONSOLE",106,233,16,"#b4cdc6");
+      c.drawImage(this.logo,171,19,170,170);this.text(c,this.embedded?t('console.loading',{label:this.registry[this.machine.inserted].label}):t('console.boot'),106,233,16,"#b4cdc6");
     }else if(this.ready&&this.screenState!=="settings"||["labs","cartridges"].includes(this.screenState)){
       const task=this.registry[this.machine.inserted??this.machine.selected];
-      c.drawImage(this.logo,370,65,100,100);this.text(c,"EXPERIMENT "+task.number,32,52,13,"#b2cdc3");this.text(c,task.label,32,99,30);this.text(c,task.name,32,137,16);
-      this.text(c,this.ready?"READY":this.machine.state,32,185,15,"#b5ccc7");
-      if(this.machine.inserted!==null&&this.machine.selected!==this.machine.inserted)this.text(c,"Selected next: "+this.registry[this.machine.selected].label,32,208,12,"#b5ccc7");
-      const caption=this.machine.busy?"INSERTING CARTRIDGE":this.ready?"PRESS A TO LAUNCH":"Insert cartridge";
+      c.drawImage(this.logo,370,65,100,100);this.text(c,t('console.experiment',{number:task.number}),32,52,13,"#b2cdc3");this.text(c,task.label,32,99,30);this.text(c,t('task.'+task.id+'.name'),32,137,16);
+      this.text(c,t('state.'+(this.ready?'READY':this.machine.state)),32,185,15,"#b5ccc7");
+      if(this.machine.inserted!==null&&this.machine.selected!==this.machine.inserted)this.text(c,t('console.next',{label:this.registry[this.machine.selected].label}),32,208,12,"#b5ccc7");
+      const caption=t(this.machine.busy?'console.inserting':this.ready?'console.launch':'console.insert');
       this.screenButton(c,"launch",caption,32,225,300,35,()=>this.ready?this.pressAndRelease("a"):this.insert());
-      if(this.notice)this.text(c,this.notice,32,214,12,"#e1c490");
+      if(this.notice)this.text(c,t(this.notice),32,214,12,"#e1c490");
     }else if(this.screenState==="menu"){
       drawConsoleHome(c,this.logo,(name,index,x,y,w,h)=>this.screenButton(c,"home-"+index,name,x,y,w,h,()=>{this.cursor=index;this.pressAndRelease("a");},this.cursor===index));
     }else if(this.screenState==="info"){
-      ["SYSTEM / TENSORCAT","CPU depth rasterization","Six shared physical experiments","Y-up / meters / radians / seconds"].forEach((line,index)=>this.text(c,line,30,55+index*49,index?17:22));
+      ['system','raster','shared','units'].forEach((key,index)=>this.text(c,t('console.'+key),30,55+index*49,index?17:22));
     }else{
-      this.text(c,"SETTINGS",32,52,22);this.text(c,"Quality: "+this.settings.quality,32,105,20);this.text(c,"Sound: "+(this.sound?"on":"muted"),32,153,20);
+      this.text(c,t('console.settings'),32,52,22);this.text(c,t('console.quality',{value:t('sim.'+this.settings.quality)}),32,105,20);this.text(c,t('console.sound',{value:t(this.sound?'console.on':'console.muted')}),32,153,20);
       this.buttons.push({id:"quality",x:25,y:75,w:450,h:48,action:()=>this.pressAndRelease("right")},{id:"sound",x:25,y:130,w:450,h:45,action:()=>{this.sound=!this.sound;this.screenDirty=true;}});
     }
     this.systemButtons(c);this.renderer.updateTexture("screen",this.screen);
@@ -185,14 +186,14 @@ export class ResearchConsole {
     c.fillStyle="#f4f8f5f2";c.fillRect(0,0,512,52);c.fillRect(0,242,512,46);
     const task=this.registry[this.machine.inserted],metrics=this.session.world.metrics();
     this.text(c,task.number+" / "+task.label,12,24,20,"#263f46");
-    const status=this.session.running?"RUNNING":this.session.state==="EXPERIMENT_PAUSED"?"PAUSED":"MENU";this.text(c,status,12,44,12,"#3f7768");
-    const metric=this.session.world.task==="box"?`${metrics.packed}/3 packed`:this.session.world.task==="cloth"?`${Math.round(metrics.foldProgress*100)}% fold`:metrics.radialError!==undefined?`${(metrics.radialError*1000).toFixed(1)} mm radial`:this.session.world.task==="rope"?(metrics.crossed?"Ring crossed":"Threading"):`${(metrics.translationError*100).toFixed(1)} cm error`;
+    const status=this.session.running?"RUNNING":this.session.state==="EXPERIMENT_PAUSED"?"PAUSED":"MENU";this.text(c,t('console.'+status),12,44,12,"#3f7768");
+    const metric=this.session.world.task==="box"?t('console.packed',{count:metrics.packed}):this.session.world.task==="cloth"?t('console.fold',{count:Math.round(metrics.foldProgress*100)}):metrics.radialError!==undefined?t('console.radial',{value:(metrics.radialError*1000).toFixed(1)}):this.session.world.task==="rope"?t(metrics.crossed?'console.crossed':'console.threading'):t('console.error',{value:(metrics.translationError*100).toFixed(1)});
     this.text(c,metric+" / "+metrics.time.toFixed(1)+" s",12,239,15,metrics.success?"#237052":"#3f585c");
-    [["a",this.session.world.task==="pusht"?"Push":"Grip"],["select","Tools"],["start",this.session.running?"Pause":"Resume"],["auto","Auto"]].forEach(([action,label],i)=>this.screenButton(c,"control-"+action,label,8+i*126,250,118,30,()=>{if(action==="auto"){this.session.world.command("auto");this.session.running=true;}else this.pressAndRelease(action);}));
+    [["a",t(this.session.world.task==="pusht"?'console.push':'console.grip')],["select",t('console.tools')],["start",t(this.session.running?'console.pause':'console.resume')],["auto",t('sim.auto')]].forEach(([action,label],i)=>this.screenButton(c,"control-"+action,label,8+i*126,250,118,30,()=>{if(action==="auto"){this.session.world.command("auto");this.session.running=true;}else this.pressAndRelease(action);}));
     if(["PAUSE_MENU","CONTROLS"].includes(this.session.state)){
       c.fillStyle="#172b32e8";c.fillRect(0,52,512,236);this.buttons=[];
-      this.text(c,this.session.state==="CONTROLS"?"EXPERIMENT CONTROLS":"PAUSED",28,78,20,"#fff");
-      const items=this.session.state==="EXPERIMENT_PAUSED"?[{label:"Resume",action:()=>{this.session.running=true;}}]:this.session.menuItems();
+      this.text(c,t(this.session.state==="CONTROLS"?'console.controlTitle':'console.PAUSED'),28,78,20,"#fff");
+      const items=this.session.state==="EXPERIMENT_PAUSED"?[{label:t('console.resume'),action:()=>{this.session.running=true;}}]:this.session.menuItems();
       items.forEach((item,i)=>this.screenButton(c,"menu-"+i,item.label,28+(i%2)*242,94+Math.floor(i/2)*44,214,36,()=>{item.action();this.session.revision++;},i===this.session.menuIndex));
     }
     this.systemButtons(c);this.renderer.updateTexture("screen",this.screen);

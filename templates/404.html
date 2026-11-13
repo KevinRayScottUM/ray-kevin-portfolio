@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block content %}
+<main class="portfolio-page-wrap">
+  <p class="editorial-kicker">404</p>
+  <h1>{{ i18n::text(key="error.title") }}</h1>
+  <p>{{ i18n::text(key="error.description") }}</p>
+  <a class="editorial-primary" href="{{ get_url(path='/') }}">{{ i18n::text(key="error.home") }}</a>
+</main>
+{% endblock content %}

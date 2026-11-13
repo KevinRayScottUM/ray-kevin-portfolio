@@ -2,34 +2,34 @@
 {% import "macros/exhibit.html" as exhibit_ui %}
 {% import "macros/lab.html" as lab %}
 {% block user_head %}<link rel="stylesheet" href="{{ get_url(path="styles/lab-exhibition.css") }}">{% endblock user_head %}
-{% block title %}<title>TensorCat Lab | {{ config.title }}</title>{% endblock title %}
+{% block title %}{% endblock title %}
 {% block content %}
 {% set collection = load_data(path="data/exhibits.toml") %}
 {% set available = collection.exhibits | filter(attribute="status", value="Available") | sort(attribute="order") %}
 {% set registered_numbers = collection.exhibits | map(attribute="number") %}
 <main class="lab-exhibition lab-collection" data-exhibit-gallery>
-  <header class="lab-collection-heading"><div><p class="lab-eyebrow">Research &amp; Engineering</p><h1>TensorCat Lab<span>.</span></h1><p>Exploring intelligence through interactive systems.</p></div><p class="lab-collection-counter">Exhibition / {{ available | length }}</p></header>
+  <header class="lab-collection-heading"><div><p class="lab-eyebrow">{{ i18n::text(key="gallery.kicker") }}</p><h1>TensorCat Lab<span>.</span></h1><p>{{ i18n::text(key="gallery.intro") }}</p></div><p class="lab-collection-counter" data-i18n="gallery.counter" data-i18n-args='{"count":{{ available | length }}}'>Exhibition / {{ available | length }}</p></header>
   <div class="lab-gallery-layout">
-  <nav class="lab-project-index" aria-label="Project index">
-    <h2 class="lab-index-heading">Project index <span>{{ available | length }} available</span></h2>
+  <nav class="lab-project-index" aria-label="Project index" data-i18n-aria-label="gallery.index">
+    <h2 class="lab-index-heading">{{ i18n::text(key="gallery.index") }} <span data-i18n="gallery.count" data-i18n-args='{"count":{{ available | length }}}'>{{ available | length }} available</span></h2>
     <div class="lab-project-list" data-project-list>
   {% for exhibit in collection.exhibits | sort(attribute="order") %}
       <button type="button" class="lab-project-row{% if available | length > 0 and exhibit.id == available[0].id %} is-selected{% endif %}" data-exhibit-select="{{ exhibit.id }}" aria-controls="lab-preview-viewport" aria-pressed="{% if available | length > 0 and exhibit.id == available[0].id %}true{% else %}false{% endif %}" {% if exhibit.status != "Available" %}disabled{% endif %}>
         <span class="lab-project-number">{{ exhibit.number }} / {{ exhibit.title }} {{ lab::icon(name="arrow-up-right") }}</span>
-        <strong>{{ exhibit.index_subtitle | default(value=exhibit.subtitle) }}</strong>
-        <span class="lab-project-category">{% if exhibit.index_tags %}{{ exhibit.index_tags | join(sep=" · ") }}{% else %}{{ exhibit.category }}{% endif %}</span>
-        <span class="lab-project-state">{% if exhibit.status == "Available" %}<i aria-hidden="true"></i>Interactive demo{% else %}Not yet available{% endif %}</span>
+        <strong>{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.world") }}{% else %}{{ exhibit.index_subtitle | default(value=exhibit.subtitle) }}{% endif %}</strong>
+        <span class="lab-project-category">{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.tags") }}{% elif exhibit.index_tags %}{{ exhibit.index_tags | join(sep=" · ") }}{% else %}{{ exhibit.category }}{% endif %}</span>
+        <span class="lab-project-state">{% if exhibit.status == "Available" %}<i aria-hidden="true"></i>{{ i18n::text(key="gallery.demo") }}{% else %}{{ i18n::text(key="gallery.unavailable") }}{% endif %}</span>
       </button>
   {% endfor %}
   {% for slot in collection.reserved_slots %}
   {% if slot not in registered_numbers %}
-      <button type="button" class="lab-project-row lab-project-reserved" disabled><span class="lab-project-number">{{ slot }} / Future exhibit</span><strong>Reserved</strong><span class="lab-project-state">Not yet available</span></button>
+      <button type="button" class="lab-project-row lab-project-reserved" disabled><span class="lab-project-number">{{ slot }} / {{ i18n::text(key="gallery.future") }}</span><strong>{{ i18n::text(key="gallery.reserved") }}</strong><span class="lab-project-state">{{ i18n::text(key="gallery.unavailable") }}</span></button>
   {% endif %}
   {% endfor %}
     </div>
   </nav>
-  <section class="lab-showcase" aria-label="Live exhibit preview">
-    <div class="lab-preview-viewport" id="lab-preview-viewport" data-preview-viewport>{% if available | length > 0 %}{{ exhibit_ui::preview(exhibit=available[0]) }}{% else %}<p>No exhibits available.</p>{% endif %}</div>
+  <section class="lab-showcase" aria-label="Live exhibit preview" data-i18n-aria-label="gallery.preview">
+    <div class="lab-preview-viewport" id="lab-preview-viewport" data-preview-viewport>{% if available | length > 0 %}{{ exhibit_ui::preview(exhibit=available[0]) }}{% else %}<p>{{ i18n::text(key="gallery.empty") }}</p>{% endif %}</div>
     <p class="lab-gallery-status" data-gallery-status role="status" aria-live="polite" aria-atomic="true"></p>
   </section>
   </div>

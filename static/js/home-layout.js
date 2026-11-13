@@ -14,9 +14,12 @@
       root.querySelectorAll("[data-home-filter]").forEach(function (item) {
         item.setAttribute("aria-pressed", item === button);
       });
-      root.querySelector("[data-home-filter-status]").textContent = "Showing " + Math.min(count, 2) + " notes";
+      var status=root.querySelector("[data-home-filter-status]");
+      status.dataset.count=String(Math.min(count,2));
+      status.textContent=window.TensorCatPreferences?.t('home.showing',{count:Math.min(count,2)})||"Showing " + Math.min(count, 2) + " notes";
     });
   });
+  window.addEventListener('tensorcat:preferences',function(){var status=root.querySelector('[data-home-filter-status]');if(status.dataset.count)status.textContent=window.TensorCatPreferences.t('home.showing',{count:status.dataset.count});});
   var fine = window.matchMedia("(pointer: fine)");
   var reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
   root.querySelectorAll("[data-home-photo], [data-home-note-tilt]").forEach(function (paper) {

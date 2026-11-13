@@ -1,0 +1,10 @@
+{% macro text(key, fallback="") -%}
+{% set catalog = load_data(path="data/locales.json") -%}
+{% if catalog[key] -%}<span class="i18n-text" data-i18n="{{ key }}"><span data-locale="en">{{ catalog[key].en }}</span><span data-locale="zh-CN" lang="zh-CN">{{ catalog[key]["zh-CN"] }}</span></span>{% else -%}{{ fallback }}{% endif -%}
+{%- endmacro %}
+{% macro body(id, english) -%}
+{% set chinese = load_data(path="locales/zh-CN/" ~ id ~ ".md", format="plain", required=false) -%}
+{% set catalog = load_data(path="data/locales.json") -%}
+<div class="locale-content" data-locale="en" lang="en">{{ english | safe }}</div>
+{% if chinese %}<div class="locale-content" data-locale="zh-CN" lang="zh-CN">{{ chinese | markdown | safe }}</div>{% else %}<div data-locale="zh-CN"><p class="locale-fallback" data-i18n="blog.fallback">{{ catalog["blog.fallback"]["zh-CN"] }}</p><div class="locale-content" lang="en">{{ english | safe }}</div></div>{% endif %}
+{%- endmacro %}

@@ -157,7 +157,7 @@
     var toast = ensureShareToast();
     var titleNode = toast.querySelector(".blog-share-toast-title");
     var urlNode = toast.querySelector(".blog-share-toast-url");
-    if (titleNode) titleNode.textContent = copied === false ? "Copy unavailable" : "Share link copied";
+    if (titleNode) titleNode.textContent = window.TensorCatPreferences?.t(copied === false ? 'blog.copyFailed' : 'blog.copied') || (copied === false ? "Copy unavailable" : "Share link copied");
     if (urlNode) urlNode.textContent = url;
 
     window.clearTimeout(showShareToast.timer);

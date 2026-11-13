@@ -9,9 +9,11 @@ import {FaceController} from "./motion.js";
 import {CartridgeGallery,TransferOverlay,transferPoseFromAnchor} from "./gallery.js";
 import {InspectorVisibility} from "./inspector.js";
 import {CodeRain,readingMasks} from "../lab-rain.js";
+import {t} from "../i18n.js";
+import {localizeSimulator} from "./locale-ui.js";
 
 const root=document.querySelector("[data-tc-app]");
-if(root) start(root).catch(error=>{console.error(error);const status=root.querySelector("[data-loading]");status.hidden=false;status.textContent="Workspace unavailable: "+error.message;});
+if(root) {localizeSimulator(root);root.querySelector('[data-stage-title]').textContent='TensorCat / '+t('sim.console');root.querySelector('[data-stage-state]').textContent=t('sim.preparing');root.querySelector('[data-status]').textContent=t('sim.local');root.querySelector('[data-loading]').textContent=t('sim.loading');start(root).catch(error=>{console.error(error);const status=root.querySelector("[data-loading]");status.hidden=false;status.textContent=t('sim.unavailable',{error:error.message});});}
 
 async function start(host) {
   const $=selector=>host.querySelector(selector), $$=selector=>[...host.querySelectorAll(selector)];
@@ -67,7 +69,7 @@ async function start(host) {
   const inspectionScene=()=>inspectWorld()?world.scene:device.scene,inspectionRig=()=>inspectWorld()?rigs.lab:rigs.console;
   const device=await ResearchConsole.create(renderer,registry,assets,id=>{if(session.launch(id)){timeline.clear();lastRecord=world.time;goalStreak=0;syncWorldUI(id);updateMode();dirty=true;}},settings=>setQuality(settings.quality));
   device.session=session;session.power=device.power;
-  session.systemItems=()=>[{label:"Sound: "+(device.sound?"on":"muted"),action:()=>{device.sound=!device.sound;device.screenDirty=true;}}];
+  session.systemItems=()=>[{label:t('console.sound',{value:t(device.sound?'console.on':'console.muted')}),action:()=>{device.sound=!device.sound;device.screenDirty=true;}}];
   const pose=new FaceController(device.scene);
   canvas.insertAdjacentHTML("afterend",`<div class="tc-gallery" data-gallery role="group" aria-label="Experiment cartridges"><div class="tc-gallery-strip"><canvas aria-hidden="true" data-gallery-canvas></canvas><div class="tc-gallery-targets">${registry.map((task,index)=>`<button type="button" class="tc-gallery-button" data-gallery-cartridge="${index}" data-cartridge="${index}" aria-label="Insert ${task.name}" aria-pressed="false" title="${task.number} / ${task.name}"></button>`).join("")}</div></div></div>`);
   const galleryElement=$("[data-gallery]"),gallery=new CartridgeGallery(galleryElement,device.model,registry,renderer.textures);
@@ -89,7 +91,7 @@ async function start(host) {
   function rebuildObjects() {
     objectMap=new Map();inspectionScene().traverseVisible(o=>{if(o.userData.id&&!o.userData.overlay)objectMap.set(o.userData.id,o);});
     for(const [selector,initial] of [["[data-object]","Whole scene"],["[data-reference]","World origin"]]) {
-      const el=$(selector);el.replaceChildren(new Option(initial,selector.includes("reference")?"":"all"));
+      const el=$(selector);el.replaceChildren(new Option(t(selector.includes('reference')?'sim.origin':'sim.whole'),selector.includes("reference")?"":"all"));
       for(const [id] of objectMap)el.add(new Option(id,id));
     }
     filter="all";selectedPoint="";refreshSamples(true);
@@ -102,7 +104,7 @@ async function start(host) {
       points.push({id:body.tcId+".particle",objectId:body.tcId,object,local:new THREE.Vector3(),world:new THREE.Vector3(body.position.x,body.position.y,body.position.z),color:new THREE.Color("#398d90"),triangle:null});
     });
     if(force) {
-      const el=$("[data-point]");el.replaceChildren(new Option("No selection",""));
+      const el=$("[data-point]");el.replaceChildren(new Option(t('sim.noSelection'),""));
       points.slice(0,300).forEach(p=>el.add(new Option(p.id,p.id)));
     }
     if(selectedPoint&&!points.some(p=>p.id===selectedPoint))selectedPoint="";
@@ -131,13 +133,13 @@ async function start(host) {
     ["record","scrub"].forEach(name=>$("[data-"+name+"]").disabled=!world);
     ["predict","replay","step","commit-a","commit-b"].forEach(name=>$("[data-command="+name+"]").disabled=!world);
     $("[data-inspect-source]").disabled=mode==="lab";
-    $("[data-stage-title]").textContent=mode==="console"?"TensorCat / Console":registry.find(t=>t.id===world.task).name;
-    canvas.setAttribute("aria-label",mode==="console"?"TensorCat 3D console. Drag deliberately to flip front or back. Power, buttons and touchscreen are interactive.":"Physical experiment. Drag a gripper to manipulate, drag empty space to orbit.");
-    rebuildObjects();syncArm();resize();embedded.force=true;dirty=true;last=0;accumulator=0;
+    $("[data-stage-title]").textContent=mode==="console"?'TensorCat / '+t('sim.console'):t('task.'+world.task+'.name');
+    canvas.setAttribute("aria-label",t(mode==='console'?'sim.canvasConsole':'sim.canvasLab'));
+    rebuildObjects();syncArm();resize();embedded.force=true;dirty=true;last=0;accumulator=0;localizeSimulator(host,registry);
   }
   function syncWorldUI(id) {
     $("[data-task]").value=id;
-    const task=registry.find(t=>t.id===id);$("[data-objective]").textContent=task.objective;$("[data-method]").textContent=task.method;$("[data-limits]").textContent=task.limits;
+    $("[data-objective]").textContent=t('task.'+id+'.objective');$("[data-method]").textContent=t('task.'+id+'.method');$("[data-limits]").textContent=t('task.'+id+'.limits');
     $("[data-cloth-actions]").hidden=id!=="cloth";$("[data-arm] option[value='1']").disabled=!["cloth","rope"].includes(id);$("[data-arm]").value="0";
     world.grid.visible=$("[data-grid]").checked;world.axes.visible=$("[data-axes]").checked;
   }
@@ -152,27 +154,27 @@ async function start(host) {
     const machine=device.machine;
     $$("[data-cartridge]").forEach(b=>{const index=Number(b.dataset.cartridge);b.setAttribute("aria-pressed",String(index===(machine.queued??machine.selected)));b.disabled=b.dataset.galleryCartridge!==undefined&&b.dataset.vacant==="true";});
     $$("[data-physical]").forEach(b=>b.disabled=!device.power.on);
-    $("[data-stage-state]").textContent=mode==="console"?device.lifecycle:session.running?"Running / 60 Hz":"Paused";
+    $("[data-stage-state]").textContent=mode==="console"?t('state.'+device.lifecycle):t(session.running?'sim.running':'sim.paused');
     if(mode==="lab") {
       $("[data-sim-time]").textContent=world.time.toFixed(2)+" s";syncArm();
-      $("[data-command=play]").innerHTML=icon(session.running?"pause":"play");$("[data-command=play]").ariaLabel=session.running?"Pause physics":"Play physics";
-      $("[data-status]").textContent=world.metrics().success?"Goal conditions met":"Local CPU · "+world.action;
-    } else $("[data-status]").textContent="Local CPU · No learned model";
+      $("[data-command=play]").innerHTML=icon(session.running?"pause":"play");$("[data-command=play]").ariaLabel=t(session.running?'sim.pause':'sim.play');
+      $("[data-status]").textContent=world.metrics().success?t('sim.goal'):t('sim.actionStatus',{action:actionLabel(world.action)});
+    } else $("[data-status]").textContent=t('sim.local');
     if(!disclosure.open)return;
-    $("[data-performance]").textContent=`${renderer.width} × ${renderer.height} / ${(renderer.effectiveRatio||1).toFixed(2)}× · outer ${frameMetrics.outerMs.toFixed(1)} ms · screen ${frameMetrics.embeddedMs.toFixed(1)} ms · physics ${frameMetrics.physicsMs.toFixed(1)} ms · ${frameMetrics.fps.toFixed(0)} fps`;
+    $("[data-performance]").textContent=t('sim.performance',{size:renderer.width+' × '+renderer.height,ratio:(renderer.effectiveRatio||1).toFixed(2),outer:frameMetrics.outerMs.toFixed(1),screen:frameMetrics.embeddedMs.toFixed(1),physics:frameMetrics.physicsMs.toFixed(1),fps:frameMetrics.fps.toFixed(0)});
     const point=points.find(p=>p.id===selectedPoint),reference=objectMap.get($("[data-reference]").value);
-    $("[data-point-id]").textContent=point?.id||"No point selected";
+    $("[data-point-id]").textContent=point?.id||t('sim.noPoint');
     $("[data-coordinates]").replaceChildren();
     for(const frame of ["world","local","relative","camera"]) {
       const tr=document.createElement("tr");const position=point?coordinateInFrame(point.world,point.object,frame,inspectionRig().camera,reference):null;
-      [frame,...(position?position.toArray().map(v=>v.toFixed(5)):["—","—","—"])].forEach(value=>{const td=document.createElement("td");td.textContent=value;tr.append(td);});$("[data-coordinates]").append(tr);
+      [t('sim.frame'+({world:'World',local:'Local',relative:'Relative',camera:'Camera'})[frame]),...(position?position.toArray().map(v=>v.toFixed(5)):["—","—","—"])].forEach(value=>{const td=document.createElement("td");td.textContent=value;tr.append(td);});$("[data-coordinates]").append(tr);
     }
     const box=new THREE.Box3();points.forEach(p=>box.expandByPoint(p.world));
     const center=points.reduce((v,p)=>v.add(p.world),new THREE.Vector3()).multiplyScalar(1/Math.max(1,points.length));
-    $("[data-sample-stats]").textContent=`${points.length} surface samples / ${new Set(points.map(p=>p.objectId)).size} objects\nCentroid: ${center.toArray().map(v=>v.toFixed(3)).join(", ")} m\nExtent: ${box.getSize(new THREE.Vector3()).toArray().map(v=>v.toFixed(3)).join(" × ")} m`;
+    $("[data-sample-stats]").textContent=t('sim.sampleStats',{count:points.length,objects:new Set(points.map(p=>p.objectId)).size,center:center.toArray().map(v=>v.toFixed(3)).join(', '),extent:box.getSize(new THREE.Vector3()).toArray().map(v=>v.toFixed(3)).join(' × ')});
     $("[data-sample-stats]").style.whiteSpace="pre-line";
     if(tab==="world")$("[data-world-state]").textContent=JSON.stringify({presentation:mode,lifecycle:device.lifecycle,session:session.state,metrics:world?.metrics(),state:world?.snapshot(),machine:{state:machine.state,selected:machine.selected,inserted:machine.inserted},controls:{joystick:device.joy,pressed:[...device.pressed]}},null,2);
-    $("[data-timeline-count]").textContent=`${timeline.frames.length} / 180 snapshots`;
+    $("[data-timeline-count]").textContent=t('sim.snapshots',{count:timeline.frames.length});
     $("[data-scrub]").max=Math.max(0,timeline.frames.length-1);
     $("[data-command=commit-a]").disabled=!rollouts[0];$("[data-command=commit-b]").disabled=!rollouts[1];
   }
@@ -184,7 +186,7 @@ async function start(host) {
   const coordinateRows=()=>{refreshSamples();return exportPoints(points,$("[data-frame]").value,inspectionRig().camera,objectMap.get($("[data-reference]").value),inspectWorld()?world.time:null);};
   async function predict() {
     if(!world||predicting)return;session.running=false;predicting=true;rollouts=[];const token=++predictionToken;
-    $("[data-command=predict]").disabled=true;$("[data-predictions]").textContent="Computing independent rollouts…";
+    $("[data-command=predict]").disabled=true;$("[data-predictions]").textContent=t('sim.computing');
     const snapshot=world.snapshot(),arm=Number($("[data-arm]").value),horizon=clamp(Number($("[data-horizon]").value)||1.5,.25,3),results=[];
     try {
       for(const key of ["a","b"]) {
@@ -196,16 +198,16 @@ async function start(host) {
           results.push({action,path,ghosts,metrics:branch.metrics(),terminal:branch.snapshot()});}finally{branch.dispose();}
       }
       if(token!==predictionToken)return;rollouts=results;
-      $("[data-predictions]").replaceChildren();results.forEach((r,i)=>{const article=document.createElement("article"),heading=document.createElement("h3"),p=document.createElement("p");heading.textContent="Branch "+(i?"B":"A");p.textContent=JSON.stringify(r.metrics,null,2);article.append(heading,p);$("[data-predictions]").append(article);});toast("Two futures computed; live state unchanged");
-    } catch(error) {toast(error.message);$("[data-predictions]").textContent="Rollout failed: "+error.message;} finally {predicting=false;$("[data-command=predict]").disabled=!world;dirty=true;embedded.force=true;inspect();}
+      $("[data-predictions]").replaceChildren();results.forEach((r,i)=>{const article=document.createElement("article"),heading=document.createElement("h3"),p=document.createElement("p");heading.dataset.branchName=i?'B':'A';heading.textContent=t('sim.branch',{name:i?'B':'A'});p.textContent=JSON.stringify(r.metrics,null,2);article.append(heading,p);$("[data-predictions]").append(article);});toast(t('sim.computed'));
+    } catch(error) {toast(error.message);$("[data-predictions]").textContent=t('sim.failed',{error:error.message});} finally {predicting=false;$("[data-command=predict]").disabled=!world;dirty=true;embedded.force=true;inspect();}
   }
   async function command(action) {
     if(action==="power"){device.beep();device.power.set(!device.power.on);dirty=true;inspect();return;}
-    if(!device.power.on&&["launch","play","step","auto","release","lift","stretch","fold","predict","replay","commit-a","commit-b"].includes(action)){toast("Switch power ON first");return;}
+    if(!device.power.on&&["launch","play","step","auto","release","lift","stretch","fold","predict","replay","commit-a","commit-b"].includes(action)){toast(t('sim.powerFirst'));return;}
     if(action==="insert")device.insert();else if(action==="eject"){interaction.end(true);device.eject();if(focusDialog.open)focusDialog.close();}else if(action==="launch")pulse("a");
     else if(action==="focus"){if(device.embedded&&!focusDialog.open){focusDialog.showModal();visible=true;resizeFocus();embedded.force=true;last=0;schedule();focusCanvas.focus({preventScroll:true});}}
     else if(action==="close-focus")focusDialog.close();
-    else if(action==="fullscreen") {if(document.fullscreenElement)await document.exitFullscreen();else if(host.requestFullscreen)await host.requestFullscreen();else toast("Fullscreen is unavailable in this browser");}
+    else if(action==="fullscreen") {if(document.fullscreenElement)await document.exitFullscreen();else if(host.requestFullscreen)await host.requestFullscreen();else toast(t('sim.fullscreenUnavailable'));}
     else if(action==="image")canvas.toBlob(blob=>{if(blob)save(blob,mode+".png","image/png");});
     else if(action==="reset") {predictionToken++;rollouts=[];orbitVelocity={x:0,y:0};releaseInput();if(mode==="console"){device.cancelInput();rig().reset();rig().theta=0;rig().phi=Math.PI/2;rig().update();pose.reset();$("[data-view]").value="front";}else session.reset();timeline.clear();}
     else if(action==="play") {session.running=!session.running;replay=-1;accumulator=0;}
@@ -214,13 +216,13 @@ async function start(host) {
     else if(action==="state")save(JSON.stringify(world?world.snapshot():{model:device.model.metadata,machine:device.machine},null,2),"state.json");
     else if(action==="csv")save(pointsCSV(coordinateRows()),"points.csv","text/csv");
     else if(action==="ply")save(pointsPLY(coordinateRows()),"points.ply","text/plain");
-    else if(action==="copy") {const p=coordinateRows().find(p=>p.pointId===selectedPoint);if(p){await navigator.clipboard.writeText([p.x,p.y,p.z].join(", "));toast("XYZ copied / "+p.frame);}else toast("Select a point first");}
+    else if(action==="copy") {const p=coordinateRows().find(p=>p.pointId===selectedPoint);if(p){await navigator.clipboard.writeText([p.x,p.y,p.z].join(", "));toast(t('sim.xyzCopied',{frame:p.frame}));}else toast(t('sim.selectPoint'));}
     else if(action==="trajectory")save(JSON.stringify({version:3,units:"m,s,rad",frames:timeline.frames},null,2),"trajectory.json");
     else if(action==="clear-timeline"){timeline.clear();replay=-1;}
-    else if(action==="replay"&&world){if(timeline.frames.length){session.running=false;timeline.recording=false;$("[data-record]").checked=false;replay=0;}else toast("Record a trajectory first");}
+    else if(action==="replay"&&world){if(timeline.frames.length){session.running=false;timeline.recording=false;$("[data-record]").checked=false;replay=0;}else toast(t('sim.recordFirst'));}
     else if(action==="predict")await predict();
     else if(action==="discard"){predictionToken++;rollouts=[];$("[data-predictions]").replaceChildren();}
-    else if(action.startsWith("commit-")&&world){const r=rollouts[action.endsWith("a")?0:1];if(r){world.applyAction(r.action);rollouts=[];session.running=true;toast("Action applied to current state");}}
+    else if(action.startsWith("commit-")&&world){const r=rollouts[action.endsWith("a")?0:1];if(r){world.applyAction(r.action);rollouts=[];session.running=true;toast(t('sim.applied'));}}
     dirty=true;embedded.force=true;inspect();
   }
   on(host,"click",event=>{
@@ -407,8 +409,8 @@ async function start(host) {
       accumulator+=dt*world.parameters.timeScale;let steps=0;
       try {while(accumulator>=STEP&&steps<4){world.step();accumulator-=STEP;steps++;if(timeline.recording&&world.time-lastRecord>=.099){timeline.record(world);lastRecord=world.time;$("[data-scrub]").value=timeline.frames.length-1;}
         goalStreak=world.metrics().success?goalStreak+1:0;
-        if(goalStreak>=8&&$("[data-goal-pause]").checked){session.running=false;accumulator=0;toast("Goal conditions met / physics paused");break;}
-      }}catch(error){session.running=false;toast("Physics paused: "+error.message);console.error(error);}
+        if(goalStreak>=8&&$("[data-goal-pause]").checked){session.running=false;accumulator=0;toast(t('sim.goalPaused'));break;}
+      }}catch(error){session.running=false;toast(t('sim.physicsError',{error:error.message}));console.error(error);}
       if(steps)dirty=true;if(steps===4)accumulator=0;
     }
     frameMetrics.physicsMs=performance.now()-physicsStart;
@@ -439,5 +441,15 @@ async function start(host) {
   // Read-only diagnostics expose the actual live state for reproducible local QA.
   host.tcInteractionDiagnostics=()=>({power:{state:device.power.state,value:device.power.slider.value,dragging:device.power.dragging},face:{committed:pose.face,yaw:pose.yaw,pitch:pose.pitch,quaternion:device.scene.quaternion.toArray(),hover:[pose.hover.pitch.value,pose.hover.yaw.value],dragging:Boolean(pose.drag),snapping:Boolean(pose.snap),transferReady:pose.transferReady},gallery:gallery.diagnostics(),pointerOwner:drag?.kind||null,queue:device.machine.queued,visiblePhysicalCartridges:registry.filter(t=>device.model.nodes.get("Cartridge_"+t.id).visible).map(t=>t.id),screenSize:[device.screen.width,device.screen.height],galleryRenderMs:gallery.renderer.stats.ms});
   host.tcDiagnostics=()=>({mode,task:world?.task,renderMode,running:session.running,lifecycle:device.lifecycle,session:{state:session.state,cartridgeId:session.cartridgeId,arm:session.arm,axes:session.axes},focus:focusDialog.open,camera:{theta:rig().theta,phi:rig().phi,distance:rig().distance,target:rig().target.toArray()},innerCamera:{theta:rigs.lab.theta,phi:rigs.lab.phi,distance:rigs.lab.distance,target:rigs.lab.target.toArray()},renderer:{...renderer.stats,width:renderer.width,height:renderer.height,effectiveRatio:renderer.effectiveRatio},embeddedRenderer:{...embedded.renderer.stats,width:embedded.renderer.width,height:embedded.renderer.height,frames:embedded.frames},performance:{...frameMetrics},samples:points.length,machine:{state:device.machine.state,selected:device.machine.selected,inserted:device.machine.inserted,screen:device.screenState,joystick:{...device.joy},pressed:[...device.pressed],cartridges:registry.map((task,i)=>{const node=device.model.nodes.get("Cartridge_"+task.id);return{id:task.id,visible:node.visible,position:node.position.toArray(),bounds:{min:device.mechanisms[i].bounds.min.toArray(),max:device.mechanisms[i].bounds.max.toArray()},seat:device.mechanisms[i].seat.toArray(),contained:device.mechanisms[i].contained()};})},metrics:world?.metrics(),snapshot:world?.snapshot(),timeline:timeline.frames.length,rollouts:rollouts.map(r=>r.metrics)});
+  on(window,'tensorcat:preferences',event=>{
+    if(!event.detail.changed.includes('language'))return;
+    localizeSimulator(host,registry);
+    $("[data-stage-title]").textContent=mode==='console'?'TensorCat / '+t('sim.console'):t('task.'+world.task+'.name');
+    canvas.ariaLabel=t(mode==='console'?'sim.canvasConsole':'sim.canvasLab');
+    if(world)for(const field of ['objective','method','limits'])$('[data-'+field+']').textContent=t('task.'+world.task+'.'+field);
+    host.querySelectorAll('[data-branch-name]').forEach(el=>el.textContent=t('sim.branch',{name:el.dataset.branchName}));
+    device.screenDirty=true;embedded.force=true;dirty=true;inspect();schedule();
+  });
   updateMode();resize();schedule();
 }
+function actionLabel(action){const keys={Idle:'idle',Manual:'manual','Manual target':'target','Position region reached; check orientation':'reached','Contact push':'push','Sequence complete':'complete','Close gripper':'grip',Release:'release',auto:'auto',release:'release',lift:'lift',stretch:'stretch',fold:'fold'};const waypoint=/^Waypoint (\d+) \/ (\d+)$/.exec(action);return waypoint?t('action.waypoint',{number:waypoint[1],count:waypoint[2]}):keys[action]?t('action.'+keys[action]):action;}

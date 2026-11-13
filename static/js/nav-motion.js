@@ -366,6 +366,9 @@
     });
 
     var resizeTimer = null;
+    window.addEventListener("tensorcat:preferences", function () {
+      window.requestAnimationFrame(function () { syncToActive(scroll, indicator); });
+    });
     window.addEventListener("resize", function () {
       window.clearTimeout(resizeTimer);
       resizeTimer = window.setTimeout(function () {

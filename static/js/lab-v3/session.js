@@ -1,4 +1,5 @@
 import {clamp} from "./graphics.js";
+import {t} from '../i18n.js';
 
 // One world and lifecycle, independent of whether it is shown on the handheld or in Lab.
 export class ExperimentSession {
@@ -40,14 +41,14 @@ export class ExperimentSession {
   }
   menuItems() {
     if(this.state==="CONTROLS")return [
-      {label:"Arm: "+(this.arm?"Right":"Left"),action:()=>{if(this.world.arms[1].root.visible)this.arm=1-this.arm;}},
-      {label:"Axes: "+this.axes.toUpperCase(),action:()=>{this.axes=this.axes==="xy"?"xz":"xy";}},
-      {label:"Auto sequence",action:()=>{this.world.command("auto");this.running=true;}},
-      {label:"Tilt −",action:()=>{this.world.arms[this.arm].tilt=clamp(this.world.arms[this.arm].tilt-.12,-1.57,1.57);}},
-      {label:"Tilt +",action:()=>{this.world.arms[this.arm].tilt=clamp(this.world.arms[this.arm].tilt+.12,-1.57,1.57);}},
-      {label:"Resume",action:()=>{this.running=true;}}
+      {label:t('console.arm',{name:t(this.arm?'sim.right':'sim.left')}),action:()=>{if(this.world.arms[1].root.visible)this.arm=1-this.arm;}},
+      {label:t('console.axes',{axes:this.axes.toUpperCase()}),action:()=>{this.axes=this.axes==="xy"?"xz":"xy";}},
+      {label:t('console.sequence'),action:()=>{this.world.command("auto");this.running=true;}},
+      {label:t('console.tiltMinus'),action:()=>{this.world.arms[this.arm].tilt=clamp(this.world.arms[this.arm].tilt-.12,-1.57,1.57);}},
+      {label:t('console.tiltPlus'),action:()=>{this.world.arms[this.arm].tilt=clamp(this.world.arms[this.arm].tilt+.12,-1.57,1.57);}},
+      {label:t('console.resume'),action:()=>{this.running=true;}}
     ].concat(this.systemItems?.()||[]);
-    return [{label:"Resume",action:()=>{this.running=true;}},{label:"Restart experiment",action:()=>this.reset()},{label:"Controls",action:()=>{this.state="CONTROLS";this.menuIndex=0;}},{label:"Cartridge menu",action:()=>this.returnMenu()}];
+    return [{label:t('console.resume'),action:()=>{this.running=true;}},{label:t('console.restart'),action:()=>this.reset()},{label:t('console.controls'),action:()=>{this.state="CONTROLS";this.menuIndex=0;}},{label:t('console.menu'),action:()=>this.returnMenu()}];
   }
   choose(index=this.menuIndex) {const item=this.menuItems()[index];if(item){item.action();this.revision++;}}
   move(x,y,amount=.025) {

@@ -120,6 +120,6 @@ test('gallery integration loads only hardware modules, guards async mounts and p
   const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8'),showcase=read('static/js/lab-showcase.js'),gallery=read('static/js/lab-gallery.js'),template=read('templates/macros/exhibit.html');
   assert.doesNotMatch(showcase,/WorldSimulator|ExperimentSession|simulation\.js|cannon|WebGLRenderer|WebGPURenderer|FaceController/);
   assert.match(gallery,/this.showcase\?\.pause\(\)/);assert.match(gallery,/epoch!==this.showcaseEpoch/);assert.match(gallery,/import\('\.\/lab-showcase.js'\)/);assert.match(gallery,/Promise.allSettled/);
-  assert.match(template,/data-showcase/);assert.match(template,/Enter Exhibit/);assert.match(read('static/styles/lab-exhibition.css'),/touch-action:pan-y pinch-zoom/);
+  assert.match(template,/data-showcase/);assert.match(template,/gallery\.enter/);assert.match(read('static/styles/lab-exhibition.css'),/touch-action:pan-y pinch-zoom/);
   assert.match(showcase,/if\(moving\)this.schedule\(\)/);assert.match(showcase,/intersectionObserver.disconnect\(\)/);
 });

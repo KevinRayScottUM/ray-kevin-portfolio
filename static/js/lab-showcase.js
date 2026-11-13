@@ -3,6 +3,7 @@ import {CartridgeGallery} from './lab-v3/gallery.js';
 import {drawConsoleHome} from './lab-v3/home-screen.js';
 import {compileHardware,createHardwareScene,ShowcaseRig} from './lab-showcase-scene.js';
 import {ShowcaseMotion,HorizontalIntent,TOUR_INPUT,TOUR_POSES} from './lab-showcase-motion.js';
+import {t} from './i18n.js';
 
 const banks=new Map();
 async function hardwareAssets(base){
@@ -18,7 +19,7 @@ async function hardwareAssets(base){
     const c=screen.getContext('2d');c.scale(2,2);c.fillStyle='#17242a';c.fillRect(0,0,512,288);c.strokeStyle='#40565e';c.strokeRect(12,12,488,264);
     drawConsoleHome(c,logo,(name,index,x,y,w,h)=>{c.fillStyle=index===0?'#4b7774':'#e7eeeb';c.fillRect(x,y,w,h);c.fillStyle=index===0?'#fff':'#294644';c.font='13px system-ui, sans-serif';c.fillText(name,x+10,y+h*.65);});
     decoder.updateTexture('screen',screen);
-    return {model,registry,textures:decoder.textures};
+    return {model,registry,textures:decoder.textures,logo};
   })().catch(error=>{banks.delete(base);throw error;}));
   return banks.get(base);
 }
@@ -39,6 +40,7 @@ export class HardwareShowcase {
     this.buttons.forEach(button=>on(button,'click',()=>{if(this.canOwn()){this.releaseInput();this.motion.advance(Number(button.dataset.showcaseStep));this.markInput();}}));
     on(this.media,'change',()=>{this.motion.setReduced(this.media.matches);this.dirty=true;this.schedule();});
     on(window,'blur',()=>this.releaseInput(true));
+    on(window,'tensorcat:preferences',event=>{if(!event.detail.changed.includes('language'))return;this.label.textContent=t('tour.pose'+this.motion.snapshot().stage);if(this.ready){this.paintHome();this.dirty=true;this.schedule();}});
     on(document,'visibilitychange',()=>{if(document.hidden)this.stopFrame();else{this.last=0;this.dirty=true;this.schedule();}});
     on(window,'pagehide',event=>{if(event.persisted)this.stopFrame();else this.dispose();});
     on(window,'pageshow',()=>{const b=stage.getBoundingClientRect();this.visible=b.bottom>0&&b.top<innerHeight;this.last=0;this.dirty=true;this.schedule();});
@@ -52,12 +54,14 @@ export class HardwareShowcase {
       if(this.disposed)return;
       this.hardware=createHardwareScene(assets.model);this.rig=new ShowcaseRig();
       this.renderer=new SoftwareRenderer(this.canvas);this.renderer.textures=assets.textures;this.renderer.setStudio(true);this.renderer.setBackground('#101418');
+      this.logo=assets.logo;this.paintHome();
       this.gallery=new CartridgeGallery(this.stage.querySelector('.lab-showcase-cartridges'),this.hardware,assets.registry,assets.textures);
       this.ready=true;this.dirty=true;this.schedule();
     }catch(error){
-      if(this.disposed)return;this.stage.dataset.showcaseState='error';this.stage.setAttribute('aria-busy','false');this.label.textContent='Hardware preview unavailable';console.warn('TensorCat hardware preview:',error.message);
+      if(this.disposed)return;this.stage.dataset.showcaseState='error';this.stage.setAttribute('aria-busy','false');this.label.textContent=t('tour.unavailable');console.warn('TensorCat hardware preview:',error.message);
     }
   }
+  paintHome(){const screen=document.createElement('canvas');screen.width=1024;screen.height=576;const c=screen.getContext('2d');c.scale(2,2);c.fillStyle='#17242a';c.fillRect(0,0,512,288);c.strokeStyle='#40565e';c.strokeRect(12,12,488,264);drawConsoleHome(c,this.logo,(name,index,x,y,w,h)=>{c.fillStyle=index===0?'#4b7774':'#e7eeeb';c.fillRect(x,y,w,h);c.fillStyle=index===0?'#fff':'#294644';c.font='13px system-ui, sans-serif';c.fillText(name,x+10,y+h*.65);});this.renderer.updateTexture('screen',screen);}
   canOwn(){return this.ready&&!this.disposed&&!this.suspended&&!document.hidden;}
   markInput(){if(this.inputAt===null)this.inputAt=performance.now();this.dirty=true;this.schedule();}
   wheel(event){
@@ -116,7 +120,7 @@ export class HardwareShowcase {
       this.frames++;this.dirty=false;this.frameTimes.push(this.renderer.stats.ms);if(this.frameTimes.length>180)this.frameTimes.shift();
       if(moving)this.average=this.average?this.average*.85+this.renderer.stats.ms*.15:this.renderer.stats.ms;
       if(moving&&this.average>28&&this.scale>.75)this.scale=Math.max(.75,this.scale-.05);
-      this.label.textContent=TOUR_POSES[pose.index].name;this.progress.textContent=String(pose.index+1).padStart(2,'0')+' / 08';
+      this.label.textContent=t('tour.pose'+pose.index);this.progress.textContent=String(pose.index+1).padStart(2,'0')+' / 08';
       this.stage.dataset.showcaseState='ready';this.stage.setAttribute('aria-busy','false');this.fallback.hidden=true;this.buttons.forEach(b=>b.disabled=false);
       if(this.inputAt!==null){this.responseTimes.push(performance.now()-this.inputAt);if(this.responseTimes.length>80)this.responseTimes.shift();this.inputAt=null;}
     }

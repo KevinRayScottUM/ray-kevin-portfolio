@@ -13,10 +13,10 @@
           </div>
           <figcaption><strong>Kevin Ray Scott</strong></figcaption>
         </figure>
-        <aside class="home-question" data-home-note-tilt aria-label="Quote by Alan Turing">
-          <span>Quote</span>
-          <blockquote>Can machines<br> think?</blockquote>
-          <cite><a href="https://doi.org/10.1093/mind/LIX.236.433" target="_blank" rel="noopener">Alan Turing · 1950</a></cite>
+        <aside class="home-question" data-home-note-tilt aria-label="Quote by Alan Turing" data-i18n-aria-label="home.quoteLabel">
+          {{ i18n::text(key="home.quote") }}
+          <blockquote>{{ i18n::text(key="home.question") }}</blockquote>
+          <cite><a href="https://doi.org/10.1093/mind/LIX.236.433" target="_blank" rel="noopener">{{ i18n::text(key="home.quoteAuthor") }}</a></cite>
           <svg class="home-neural-sketch" viewBox="0 0 176 58" fill="none" aria-hidden="true">
             <g class="home-neural-connections" stroke="currentColor" stroke-width=".8" opacity=".32">
               <path d="M12 14 62 7M12 14 62 29M12 14 62 51M12 44 62 7M12 44 62 29M12 44 62 51M62 7 113 7M62 7 113 29M62 7 113 51M62 29 113 7M62 29 113 29M62 29 113 51M62 51 113 7M62 51 113 29M62 51 113 51M113 7 164 14M113 7 164 44M113 29 164 14M113 29 164 44M113 51 164 14M113 51 164 44"/>
@@ -31,11 +31,11 @@
         </aside>
       </div>
       <div class="home-intro-copy">
-        <p class="home-eyebrow"><span aria-hidden="true"></span>Research notes by Kevin Ray Scott</p>
+        <p class="home-eyebrow"><span aria-hidden="true"></span>{{ i18n::text(key="home.eyebrow") }}</p>
         <h1 id="home-title">LEI KAIWEN,<br><em>雷凯文.</em></h1>
-        <p class="home-intro-description">Building reliable intelligent systems.<br>Exploring models, evidence, and real-world interaction.</p>
-        <a class="home-explore" href="#notebook">Explore the writing <span aria-hidden="true">↓</span></a>
-        <p class="home-topics">AI RESEARCH <span>·</span> INTELLIGENT AGENTS <span>·</span> ROBOTICS</p>
+        <p class="home-intro-description">{{ i18n::text(key="home.mission") }}<br>{{ i18n::text(key="home.explore") }}</p>
+        <a class="home-explore" href="#notebook">{{ i18n::text(key="home.writing") }} <span aria-hidden="true">↓</span></a>
+        <p class="home-topics">{{ i18n::text(key="home.topics") }}</p>
       </div>
     </div>
   </section>
@@ -43,14 +43,14 @@
   <section id="notebook" class="home-notebook" aria-labelledby="notebook-title">
     <div class="home-writing">
       <div class="home-section-heading">
-        <div><p class="home-eyebrow">The notebook</p><h2 id="notebook-title">Ideas worth exploring.</h2></div>
-        <span class="home-folio">01 / Writing</span>
+        <div><p class="home-eyebrow">{{ i18n::text(key="home.notebook") }}</p><h2 id="notebook-title">{{ i18n::text(key="home.ideas") }}</h2></div>
+        <span class="home-folio">{{ i18n::text(key="home.folio") }}</span>
       </div>
-      <div class="home-filters" role="group" aria-label="Filter recent notes">
-        <button type="button" data-home-filter="all" aria-pressed="true">All writing</button>
-        <button type="button" data-home-filter="research" aria-pressed="false">Research</button>
-        <button type="button" data-home-filter="systems" aria-pressed="false">AI systems</button>
-        <button type="button" data-home-filter="robotics" aria-pressed="false">Robotics</button>
+      <div class="home-filters" role="group" aria-label="Filter recent notes" data-i18n-aria-label="home.filters">
+        <button type="button" data-home-filter="all" aria-pressed="true">{{ i18n::text(key="home.all") }}</button>
+        <button type="button" data-home-filter="research" aria-pressed="false">{{ i18n::text(key="home.research") }}</button>
+        <button type="button" data-home-filter="systems" aria-pressed="false">{{ i18n::text(key="home.systems") }}</button>
+        <button type="button" data-home-filter="robotics" aria-pressed="false">{{ i18n::text(key="home.robotics") }}</button>
       </div>
       {% set notes = get_section(path="blog/_index.md") %}
       <div class="home-note-list">
@@ -62,44 +62,44 @@
           {% set category = "research" %}
         {% endif %}
         <div data-home-note="{{ category }}"{% if loop.index > 2 %} hidden{% endif %}>
-          <div class="home-note-label"><span>Research note</span><span>{% if loop.index <= 4 %}Selected{% else %}From the notebook{% endif %}</span></div>
+          <div class="home-note-label"><span>{{ i18n::text(key="home.note") }}</span><span>{% if loop.index <= 4 %}{{ i18n::text(key="home.selected") }}{% else %}{{ i18n::text(key="home.archive") }}{% endif %}</span></div>
           {{ blog::page_summary(page=note) }}
         </div>
         {% endfor %}
       </div>
       <p class="home-filter-status sr-only" role="status" aria-live="polite" data-home-filter-status></p>
-      <a class="home-more" href="{{ get_url(path="/blog/") }}">All notes <span aria-hidden="true">↗</span></a>
+      <a class="home-more" href="{{ get_url(path="/blog/") }}">{{ i18n::text(key="home.allNotes") }} <span aria-hidden="true">↗</span></a>
     </div>
     <aside class="home-about">
       <img class="home-about-avatar" src="{{ get_url(path=config.extra.avatar) }}" alt="" loading="lazy">
-      <p class="home-eyebrow">A little about me</p>
-      <h2>Hi, I'm Kevin.</h2>
-      <p>I study artificial intelligence at Universiti Malaya and build systems around language models, data, and human interaction.</p>
-      <a class="home-about-link" href="{{ get_url(path="/about/") }}">More about me <span aria-hidden="true">↗</span></a>
-      <div class="home-profiles" aria-label="Profile links">
+      <p class="home-eyebrow">{{ i18n::text(key="home.aboutLabel") }}</p>
+      <h2>{{ i18n::text(key="home.hello") }}</h2>
+      <p>{{ i18n::text(key="home.about") }}</p>
+      <a class="home-about-link" href="{{ get_url(path="/about/") }}">{{ i18n::text(key="home.moreAbout") }} <span aria-hidden="true">↗</span></a>
+      <div class="home-profiles" aria-label="Profile links" data-i18n-aria-label="home.profiles">
         {% for icon in section.extra.avatar_icons %}
         <a href="{{ icon.link }}" target="_blank" rel="noopener" aria-label="{{ icon.icon }}" title="{{ icon.icon }}">{{ icons::factory(icon=icon.icon,classes="home-profile-icon") }}</a>
         {% endfor %}
       </div>
-      <a class="home-lab-link" href="{{ get_url(path="/lab/") }}"><span>In the lab</span><strong>TensorCat Lab ↗</strong></a>
+      <a class="home-lab-link" href="{{ get_url(path="/lab/") }}"><span>{{ i18n::text(key="home.inLab") }}</span><strong>TensorCat Lab ↗</strong></a>
     </aside>
   </section>
 
   <section class="home-background" aria-labelledby="background-title">
     <div class="home-background-inner">
       <div class="home-background-copy">
-        <p class="home-eyebrow">02 / Background</p>
-        <h2 id="background-title">Biography.</h2>
-        <article class="prose portfolio-biography-copy">{{ section.content | safe }}</article>
-        <a class="home-about-link" href="{{ get_url(path="/project-experience/") }}">Explore my projects <span aria-hidden="true">↗</span></a>
+        <p class="home-eyebrow">{{ i18n::text(key="home.background") }}</p>
+        <h2 id="background-title">{{ i18n::text(key="home.biography") }}</h2>
+        <article class="prose portfolio-biography-copy">{{ i18n::body(id="home",english=section.content) }}</article>
+        <a class="home-about-link" href="{{ get_url(path="/project-experience/") }}">{{ i18n::text(key="home.projects") }} <span aria-hidden="true">↗</span></a>
       </div>
       <div class="home-background-facts">
-        <h3>Education</h3>
+        <h3>{{ i18n::text(key="home.education") }}</h3>
         {% for course in section.extra.education.courses %}
-        <div class="home-education-item"><strong>{{ course.course }}</strong><span>{{ course.institution }}</span></div>
+        <div class="home-education-item"><strong>{% if loop.first %}{{ i18n::text(key="home.msc") }}{% else %}{{ i18n::text(key="home.bsc") }}{% endif %}</strong><span>{% if loop.first %}{{ i18n::text(key="home.um") }}{% else %}{{ i18n::text(key="home.hnu") }}{% endif %}</span></div>
         {% endfor %}
-        <h3>Research Interests</h3>
-        <ul>{% for interest in section.extra.interests %}<li>{{ interest }}</li>{% endfor %}</ul>
+        <h3>{{ i18n::text(key="home.interests") }}</h3>
+        <ul>{% for interest in section.extra.interests %}<li>{{ i18n::text(key="home.interest" ~ loop.index0) }}</li>{% endfor %}</ul>
       </div>
     </div>
   </section>

@@ -2,17 +2,17 @@
 
 {% block content %}
 <div class="portfolio-page-wrap container max-w-3xl mx-auto px-5 sm:px-3">
-  <p class="editorial-kicker">{% if page.path is containing("project-experience") %}02 / Research &amp; engineering{% else %}03 / Background &amp; perspective{% endif %}</p>
+  <p class="editorial-kicker">{% if page.path is containing("project-experience") %}{{ i18n::text(key="page.projectsKicker") }}{% else %}{{ i18n::text(key="page.aboutKicker") }}{% endif %}</p>
   <div class="pt-8 flex">
-    <h1 class="grow font-bold font-sans break-normal text-gray-900 text-3xl">{{ page.title }}</h1>
+    <h1 class="grow font-bold font-sans break-normal text-gray-900 text-3xl">{% if page.path is containing("project-experience") %}{{ i18n::text(key="nav.projects") }}{% else %}{{ i18n::text(key="nav.about") }}{% endif %}</h1>
   </div>
   <div class="mb-8"></div>
 
   <article class="prose prose-indigo max-w-3xl">
     {{ macros::toc() }}
-    {{ page.content | safe }}
+    {{ i18n::body(id=page.slug, english=page.content) }}
     {% if page.extra.external_link %}<p><a href="{{page.extra.external_link | safe}}" target="_blank">{{page.extra.external_link | safe}}</a></p>{% endif -%}
   </article>
-  <div class="editorial-page-end"><span>Kevin Ray Scott / TensorCat</span><a href="{{ get_url(path="/contacts/") }}">Get in touch <span aria-hidden="true">↗</span></a></div>
+  <div class="editorial-page-end"><span>Kevin Ray Scott / TensorCat</span><a href="{{ get_url(path="/contacts/") }}">{{ i18n::text(key="page.contactLink") }} <span aria-hidden="true">↗</span></a></div>
 </div>
 {% endblock content %}

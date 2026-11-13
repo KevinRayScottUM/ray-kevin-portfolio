@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% import "macros/lab.html" as lab %}
 {% block user_head %}<link rel="stylesheet" href="{{ get_url(path="styles/lab-v3.css") }}"><link rel="stylesheet" href="{{ get_url(path="styles/lab-exhibition.css") }}">{% endblock user_head %}
-{% block title %}<title>TensorCat — Interactive World Simulator | {{ config.title }}</title>{% endblock title %}
+{% block title %}{% endblock title %}
 {% block content %}
 <main class="tc-app" data-tc-app data-mode="console" data-assets="{{ get_url(path="lab/tc06/") }}" data-icons="{{ get_url(path="img/lab/icons/") }}">
   <a class="lab-back" href="{{ get_url(path="lab/", trailing_slash=true) }}">← All Projects</a>

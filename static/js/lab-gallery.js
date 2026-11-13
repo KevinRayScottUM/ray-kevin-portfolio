@@ -1,3 +1,4 @@
+import {t,bindTranslations} from './i18n.js';
 export const EXHIBIT_MOTION={duration:760,easing:'cubic-bezier(0.22, 1, 0.36, 1)'};
 
 export function previewFrames(direction,distance){
@@ -77,7 +78,7 @@ export class ExhibitGallery {
       prepare:(entry,signal)=>this.prepare(entry,signal),transition:(layer,direction)=>this.transition(layer,direction),
       commit:(layer,entry)=>this.commit(layer,entry),select:id=>this.selectRow(id),rollback:()=>this.rollback(),
       phase:phase=>{host.dataset.transitionPhase=phase;this.viewport.setAttribute('aria-busy',String(phase!=='IDLE'));if(phase==='PREPARING_NEXT')this.status.classList.remove('is-error');},
-      error:entry=>{this.status.textContent=`The preview for ${entry.id} could not be loaded. The current exhibit remains available.`;this.status.classList.add('is-error');},
+      error:entry=>{this.status.textContent=t('gallery.failed');this.status.classList.add('is-error');},
       dispose:()=>this.disposeView(),
     },this.activeLayer.dataset.previewId);
     on(this.list,'click',event=>{const b=event.target.closest('[data-exhibit-select]');if(b&&!b.disabled)this.switcher.request(b.dataset.exhibitSelect);});
@@ -88,6 +89,7 @@ export class ExhibitGallery {
     on(document,'visibilitychange',()=>{if(document.hidden)this.finishMotion();});
     on(window,'pagehide',event=>{if(event.persisted)this.finishMotion();else this.dispose();});
     on(window,'pageshow',()=>this.scheduleMeasure());
+    on(window,'tensorcat:preferences',()=>{bindTranslations(this.host);this.scheduleMeasure();});
     this.observer=new ResizeObserver(entries=>{const width=entries[0].contentRect.width;if(Math.abs(width-this.width)>.5){this.width=width;this.finishMotion();this.scheduleMeasure();}});
     this.observer.observe(this.viewport);this.measure();
     document.fonts?.ready.then(()=>this.scheduleMeasure());
@@ -104,7 +106,7 @@ export class ExhibitGallery {
       this.showcase=new HardwareShowcase(stage);await this.showcase.start();
     }catch(error){if(!this.disposed)console.warn('Hardware showcase unavailable:',error.message);}
   }
-  clone(id){return document.importNode(this.templates.get(id).content.firstElementChild,true);}
+  clone(id){const layer=document.importNode(this.templates.get(id).content.firstElementChild,true);bindTranslations(layer);return layer;}
   loadImage(src){
     if(this.images.has(src))return this.images.get(src).promise;
     const image=new Image();let fail;
@@ -144,7 +146,7 @@ export class ExhibitGallery {
     this.showcaseEpoch++;this.showcase?.dispose();this.showcase=null;
     layer.classList.remove('is-incoming','is-outgoing');layer.inert=false;layer.removeAttribute('aria-hidden');
     this.viewport.replaceChildren(layer);this.activeLayer=layer;this.clearMotion();
-    this.status.classList.remove('is-error');this.status.textContent=layer.querySelector('h2').textContent.trim()+' selected.';this.preloadNeighbors(entry.id);
+    this.status.classList.remove('is-error');this.status.textContent=t('gallery.selected',{title:layer.querySelector('h2').textContent.trim()});this.preloadNeighbors(entry.id);
     this.mountShowcase(layer);
   }
   rollback(){this.activeLayer.classList.remove('is-outgoing');this.activeLayer.inert=false;this.activeLayer.removeAttribute('aria-hidden');this.viewport.replaceChildren(this.activeLayer);this.clearMotion();this.showcase?.resume();}

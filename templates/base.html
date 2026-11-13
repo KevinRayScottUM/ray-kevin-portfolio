@@ -1,0 +1,37 @@
+{% import 'macros/head.html' as macros_head %}
+{% import 'macros/nav.html' as macros_nav %}
+{% import 'macros/macros.html' as macros %}
+{% import 'macros/icons.html' as icons %}
+{% import 'macros/blog.html' as blog %}
+{% import 'macros/publication.html' as publication %}
+{% import 'macros/i18n.html' as i18n %}
+<!DOCTYPE html>
+<html lang="en" data-language="en" data-theme="light">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="{{ get_url(path='js/preferences-init.js') }}"></script>
+  {% set favicon = resize_image(path=config.extra.favicon, format="png", width=32, height=32) %}
+  <link rel="icon" href="{{ favicon.url }}" type="image/png">
+  <link rel="canonical" href="{{ config.base_url | trim_end_matches(pat='/') }}{{ current_path | default(value='/') }}">
+  {% set title_key = "nav.home" %}
+  {% set route_path = current_path | default(value="/") %}
+  {% if route_path is containing("project-experience") %}{% set title_key = "nav.projects" %}{% elif route_path is containing("about") %}{% set title_key = "nav.about" %}{% elif route_path is containing("contacts") %}{% set title_key = "nav.contact" %}{% elif route_path is containing("blog") %}{% set title_key = "blog.title" %}{% elif route_path is containing("lab") %}{% set title_key = "nav.lab" %}{% endif %}
+  {% if page and route_path is containing("/blog/") %}{% set title_key = "post." ~ page.slug ~ ".title" %}{% endif %}
+  {% if not current_path %}{% set title_key = "error.title" %}{% endif %}
+  {% set messages = load_data(path="data/locales.json") %}
+  {% set english_title = config.title %}{% if title_key in messages %}{% set english_title = messages[title_key].en %}{% elif page %}{% set english_title = page.title %}{% endif %}
+  <title data-title-key="{{ title_key }}" data-title-en="{{ english_title }}">{{ english_title }} | {{ config.title }}</title>
+  <meta property="og:title" data-i18n-content="{{ title_key }}" content="{{ english_title }}">
+  {% set description_key = "home.explore" %}{% if page and route_path is containing("/blog/") %}{% set description_key = "post." ~ page.slug ~ ".description" %}{% endif %}
+  <meta name="description" data-i18n-content="{{ description_key }}" content="{% if page and page.description %}{{ page.description }}{% else %}Exploring models, evidence, and real-world interaction.{% endif %}">
+  <meta property="og:description" data-i18n-content="{{ description_key }}" content="{% if page and page.description %}{{ page.description }}{% else %}Exploring models, evidence, and real-world interaction.{% endif %}">
+  {% block user_head %}{% endblock user_head %}
+  {% block head %}{% block css %}{{ macros_head::stylesheet() }}{% endblock css %}{% block title %}{% endblock title %}{% endblock head %}
+</head>
+<body class="bg-white">
+  {% block nav %}{{ macros_nav::nav(website_title=config.title) }}{% endblock nav %}
+  {% block content %}{% endblock content %}
+  {% block footer %}<footer class="bg-white"><div class="bg-white text-gray-400 container max-w-4xl mx-auto my-8 px-4">© Kevin Ray Scott | TensorCat. {{ i18n::text(key="footer.credit") }} <a href="https://github.com/adfaure/kodama-theme" target="_blank" rel="noopener">Kodama ↗</a></div></footer>{% endblock footer %}
+</body>
+</html>

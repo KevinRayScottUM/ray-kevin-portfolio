@@ -68,7 +68,7 @@ test('both keyframe sequences share a 760ms decelerating timeline and maintain c
 });
 test('gallery templates remain registry driven, with real routes and disabled future slots',()=>{
   const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8'),template=read('templates/lab-gallery.html'),source=read('static/js/lab-gallery.js'),css=read('static/styles/lab-exhibition.css');
-  assert.match(template,/data-preview-template/);assert.match(template,/data-exhibit-select/);assert.match(template,/Future exhibit/);assert.match(template,/lab-project-reserved" disabled/);
+  assert.match(template,/data-preview-template/);assert.match(template,/data-exhibit-select/);assert.match(template,/gallery\.future/);assert.match(template,/lab-project-reserved" disabled/);
   assert.doesNotMatch(source,/WorldSimulator|lab-v3|new CodeRain|setInterval|requestAnimationFrame\(tick/);
   assert.match(source,/Promise.allSettled/);assert.match(source,/document.hidden/);assert.match(source,/prefers-reduced-motion/);assert.match(source,/replaceChildren\(layer\)/);
   assert.match(css,/grid-template-columns:minmax\(240px,28%\) minmax\(0,1fr\)/);assert.match(css,/aspect-ratio:16\/9/);assert.match(css,/@media\(max-width:800px\)/);

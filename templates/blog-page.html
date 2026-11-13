@@ -2,53 +2,53 @@
 
 {% block title -%}
 {% set section = get_section(path=page.ancestors[1], metadata_only=true) -%}
-<title>{% if section -%}{{ section.title }} | {% endif %} {{ config.title }}</title>
+<meta name="article:title" data-i18n-content="post.{{ page.slug }}.title" content="{{ page.title }}">
 {% endblock title -%}
 
 {% block content %}
 {% set share_url = config.extra.public_base_url ~ page.path -%}
 <script defer src="{{ get_url(path="js/blog-actions.js") }}"></script>
 <div class="blog-post-wrap" data-post-id="{{ page.slug }}">
-  <a class="editorial-kicker editorial-back" href="{{ get_url(path="/blog/") }}">← Back to the notebook</a>
+  <a class="editorial-kicker editorial-back" href="{{ get_url(path="/blog/") }}">{{ i18n::text(key="blog.back") }}</a>
   <div class="blog-post-header">
     <div class="blog-card-meta blog-post-meta">
       <img class="blog-author-avatar" src="{{ get_url(path=config.extra.avatar) }}" alt="Kevin Ray Scott">
       <span class="blog-author-name">Kevin Ray Scott</span>
-      {% if page.date %}<span class="blog-dot">·</span><time>{{ page.date }}</time>{% endif %}
-      {% if page.reading_time %}<span class="blog-dot">·</span><span>{{ page.reading_time }} min read</span>{% endif %}
+      {% if page.date %}<span class="blog-dot">·</span><time data-date="{{ page.date }}" datetime="{{ page.date }}">{{ page.date }}</time>{% endif %}
+      {% if page.reading_time %}<span class="blog-dot">·</span><span data-i18n="blog.reading" data-i18n-args='{"count":{{ page.reading_time }}}'>{{ page.reading_time }} min read</span>{% endif %}
     </div>
-    <h1>{{ page.title }}</h1>
-    {% if page.description %}<p class="blog-post-description">{{ page.description }}</p>{% endif %}
+    <h1>{{ i18n::text(key="post." ~ page.slug ~ ".title",fallback=page.title) }}</h1>
+    {% if page.description %}<p class="blog-post-description">{{ i18n::text(key="post." ~ page.slug ~ ".description",fallback=page.description) }}</p>{% endif %}
     <div class="blog-card-actions blog-post-actions">
-      <button type="button" class="blog-action" data-blog-action="like" data-post-id="{{ page.slug }}" data-initial-count="{{ page.extra.likes | default(value=0) }}" aria-label="Like {{ page.title }}">
+      <button type="button" class="blog-action" data-blog-action="like" data-post-id="{{ page.slug }}" data-initial-count="{{ page.extra.likes | default(value=0) }}" aria-label="Like {{ page.title }}" data-i18n-aria-label="blog.like">
         {{ icons::factory(icon="clap", classes="blog-action-icon") }}
         <span data-like-count>{{ page.extra.likes | default(value=0) }}</span>
       </button>
-      <button type="button" class="blog-action" data-blog-action="bookmark" data-post-id="{{ page.slug }}" aria-label="Bookmark {{ page.title }}">
+      <button type="button" class="blog-action" data-blog-action="bookmark" data-post-id="{{ page.slug }}" aria-label="Bookmark {{ page.title }}" data-i18n-aria-label="blog.bookmark">
         {{ icons::factory(icon="bookmark", classes="blog-action-icon") }}
       </button>
-      <button type="button" class="blog-action" data-blog-action="share" data-share-url="{{ share_url | safe }}" data-share-title="{{ page.title }}" aria-label="Share {{ page.title }}">
+      <button type="button" class="blog-action" data-blog-action="share" data-share-url="{{ share_url | safe }}" data-share-title="{{ page.title }}" aria-label="Share {{ page.title }}" data-i18n-aria-label="blog.share">
         {{ icons::factory(icon="share", classes="blog-action-icon") }}
-        <span>Share</span>
+        <span>{{ i18n::text(key="blog.share") }}</span>
       </button>
     </div>
   </div>
   {% if page.extra.thumbnail %}
   {% if page.extra.figure_caption %}
   <figure class="paper-figure">
-    <a href="{{ get_url(path=page.extra.thumbnail) }}"><img src="{{ get_url(path=page.extra.thumbnail) }}" alt="{{ page.extra.figure_alt }}"></a>
-    <figcaption>{{ page.extra.figure_caption }}</figcaption>
+    <a href="{{ get_url(path=page.extra.thumbnail) }}"><img src="{{ get_url(path=page.extra.thumbnail) }}" alt="{{ page.extra.figure_alt }}" data-i18n-alt="post.{{ page.slug }}.figureAlt"></a>
+    <figcaption>{{ i18n::text(key="post." ~ page.slug ~ ".caption",fallback=page.extra.figure_caption) }}</figcaption>
   </figure>
   {% else %}
   <img class="blog-post-hero" src="{{ get_url(path=page.extra.thumbnail) }}" alt="">
   {% endif %}
   {% endif %}
   {% if page.extra.tldr -%}
-  <p class="blog-post-tldr"> <span>TLDR.</span> {{ page.extra.tldr | safe }} </p>
+  <p class="blog-post-tldr"> <span>TLDR.</span> {{ i18n::text(key="post." ~ page.slug ~ ".tldr",fallback=page.extra.tldr) }} </p>
   {% endif -%}
   <article class="prose prose-indigo max-w-3xl blog-post-content">
     {{ macros::toc() }}
-    {{ page.content | safe }}
+    {{ i18n::body(id="blog/" ~ page.slug,english=page.content) }}
     {% if page.extra.external_link %}<p><a href="{{page.extra.external_link | safe}}" target="_blank">{{page.extra.external_link | safe}}</a></p>{% endif -%}
   </article>
 </div>

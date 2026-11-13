@@ -1,8 +1,14 @@
+{% import 'macros/i18n.html' as i18n %}
 {% macro nav(website_title) %}
 <nav id="header" class="portfolio-nav">
   <div class="portfolio-nav-inner">
     <div class="portfolio-brand">
       <a href="{{ get_url(path="#", trailing_slash=false) }}">{{ website_title }}</a>
+    </div>
+    <div class="preference-switch preference-language" data-preference="language" data-selection="0" role="radiogroup" aria-label="Language" data-i18n-aria-label="prefs.language">
+      <span class="preference-thumb" aria-hidden="true"></span>
+      <button type="button" role="radio" data-value="en" aria-checked="true" aria-label="Language: English" data-i18n-aria-label="prefs.english">EN</button>
+      <button type="button" role="radio" data-value="zh-CN" aria-checked="false" tabindex="-1" aria-label="Language: 简体中文" data-i18n-aria-label="prefs.chinese">中</button>
     </div>
     <div class="portfolio-nav-scroll" id="nav-content">
       <ul class="portfolio-nav-list">
@@ -23,12 +29,17 @@
           {% endif -%}
           <li>
             <a href="{{ get_url(path=item.path, trailing_slash=false, lang=lang) }}" class="portfolio-nav-link{% if item.path == "/contacts" %} portfolio-nav-contact{% endif %}{% if active %} is-active{% endif %}">
-              {{ item.name }}
+              {% if item.path == "#" %}{{ i18n::text(key="nav.home") }}{% elif item.path == "/project-experience" %}{{ i18n::text(key="nav.projects") }}{% elif item.path == "/about" %}{{ i18n::text(key="nav.about") }}{% elif item.path == "/blog" %}{{ i18n::text(key="nav.blog") }}{% elif item.path == "/lab" %}{{ i18n::text(key="nav.lab") }}{% elif item.path == "/contacts" %}{{ i18n::text(key="nav.contact") }}{% else %}{{ item.name }}{% endif %}
             </a>
           </li>
         {% endfor -%}
       </ul>
       <span class="portfolio-nav-indicator" aria-hidden="true"></span>
+    </div>
+    <div class="preference-switch preference-appearance" data-preference="theme" data-selection="0" role="radiogroup" aria-label="Appearance" data-i18n-aria-label="prefs.appearance">
+      <span class="preference-thumb" aria-hidden="true"></span>
+      <button type="button" role="radio" data-value="light" aria-checked="true" aria-label="Appearance: Light" title="Light" data-i18n-aria-label="prefs.light" data-i18n-title="prefs.light"><img src="{{ get_url(path='img/lab/icons/sun.svg') }}" width="17" height="17" alt=""></button>
+      <button type="button" role="radio" data-value="dark" aria-checked="false" tabindex="-1" aria-label="Appearance: Dark" title="Dark" data-i18n-aria-label="prefs.dark" data-i18n-title="prefs.dark"><img src="{{ get_url(path='img/lab/icons/moon.svg') }}" width="17" height="17" alt=""></button>
     </div>
   </div>
 </nav>
