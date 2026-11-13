@@ -1,6 +1,7 @@
 import catalog from './locales/catalog.js';
 export {catalog};
 export const DEFAULTS=Object.freeze({language:'en',theme:'light'});
+export const effectiveAppearance=(scope,preferred)=>scope==='lab'||preferred==='dark'?'dark':'light';
 export function translate(key,args={},language='en',fallback){
   const message=catalog[key]?.[language]??catalog[key]?.en??fallback;
   if(message===undefined)return '['+key+']';

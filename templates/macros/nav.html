@@ -1,5 +1,5 @@
 {% import 'macros/i18n.html' as i18n %}
-{% macro nav(website_title) %}
+{% macro nav(website_title,lab_route=false) %}
 <nav id="header" class="portfolio-nav">
   <div class="portfolio-nav-inner">
     <div class="portfolio-brand">
@@ -36,10 +36,11 @@
       </ul>
       <span class="portfolio-nav-indicator" aria-hidden="true"></span>
     </div>
-    <div class="preference-switch preference-appearance" data-preference="theme" data-selection="0" role="radiogroup" aria-label="Appearance" data-i18n-aria-label="prefs.appearance">
+    <div class="preference-switch preference-appearance" data-preference="theme" data-selection="0" role="radiogroup" aria-label="Appearance" data-i18n-aria-label="prefs.appearance"{% if lab_route %} aria-describedby="lab-appearance-note"{% endif %}>
       <span class="preference-thumb" aria-hidden="true"></span>
       <button type="button" role="radio" data-value="light" aria-checked="true" aria-label="Appearance: Light" title="Light" data-i18n-aria-label="prefs.light" data-i18n-title="prefs.light"><img src="{{ get_url(path='img/lab/icons/sun.svg') }}" width="17" height="17" alt=""></button>
       <button type="button" role="radio" data-value="dark" aria-checked="false" tabindex="-1" aria-label="Appearance: Dark" title="Dark" data-i18n-aria-label="prefs.dark" data-i18n-title="prefs.dark"><img src="{{ get_url(path='img/lab/icons/moon.svg') }}" width="17" height="17" alt=""></button>
+      {% if lab_route %}<span class="preference-note" id="lab-appearance-note">{{ i18n::text(key="prefs.labAppearance") }}</span>{% endif %}
     </div>
   </div>
 </nav>

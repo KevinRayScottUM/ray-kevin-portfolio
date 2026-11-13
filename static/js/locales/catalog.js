@@ -1600,6 +1600,10 @@ export default {
     "en": "Research areas",
     "zh-CN": "研究方向"
   },
+  "prefs.labAppearance": {
+    "en": "Saves your portfolio appearance. TensorCat Lab always uses its own dark exhibition theme.",
+    "zh-CN": "此处保存个人网站的外观偏好；TensorCat Lab 始终使用独立的深色展厅主题。"
+  },
   "error.title": {
     "en": "Page not found",
     "zh-CN": "未找到页面"

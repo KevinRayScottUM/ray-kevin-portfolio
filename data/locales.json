@@ -399,6 +399,7 @@
   "post.reward-design-for-grounded-agents.description":{"en":"Why reliable agents need reward signals for evidence use, refusal, tool discipline, and recovery rather than only final-task success.","zh-CN":"为何可靠智能体需要针对证据使用、拒答、工具调用纪律与恢复能力的奖励，而不只是最终任务成功。"},
   "post.reward-design-for-grounded-agents.tldr":{"en":"If the reward only scores final answers, an agent can learn shortcuts. A better reward model should include evidence grounding, tool discipline, uncertainty handling, and recoverability.","zh-CN":"若奖励只评价最终答案，智能体可能学会走捷径。更合理的奖励应考虑证据支撑、工具使用纪律、不确定性处理与恢复能力。"},
   "gallery.areas":{"en":"Research areas","zh-CN":"研究方向"},
+  "prefs.labAppearance":{"en":"Saves your portfolio appearance. TensorCat Lab always uses its own dark exhibition theme.","zh-CN":"此处保存个人网站的外观偏好；TensorCat Lab 始终使用独立的深色展厅主题。"},
   "error.title":{"en":"Page not found","zh-CN":"未找到页面"},
   "error.description":{"en":"This page is not available. Return to the homepage to continue.","zh-CN":"该页面暂不可用，请返回首页继续浏览。"},
   "error.home":{"en":"Return home","zh-CN":"返回首页"},

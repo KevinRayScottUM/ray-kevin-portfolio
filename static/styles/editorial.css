@@ -106,14 +106,20 @@ body:has(.portfolio-page-wrap), body:has(.blog-index-wrap), body:has(.blog-post-
 .paper-figure { border-block: 1px solid #d8e0d1; padding: 26px 0; }
 .paper-figure figcaption { color: #75816d; }
 .editorial-contact { min-height: 65vh; }
-.editorial-contact h1 span { color: #365d47; }
+.editorial-contact h1 .editorial-contact-period { color: var(--accent-primary); }
 .editorial-contact-intro { font-family: var(--editorial-serif); font-size: 24px; color: #627458; margin-bottom: 44px; }
-.editorial-contact-links { max-width: 720px; }
-.editorial-contact-links > a { display: flex; gap: 22px; align-items: center; padding: 22px 0; border-top: 1px solid #cbd5c3; text-decoration: none; color: #314a37; font-size: 22px; font-family: var(--editorial-serif); transition: color 200ms, padding 350ms; }
-.editorial-contact-links > a:last-child { border-bottom: 1px solid #cbd5c3; }
-.editorial-contact-links > a:hover { color: #18291d; padding-left: 8px; }
+.editorial-contact-links { max-width: 720px; --contact-ease: cubic-bezier(.22,1,.36,1); --contact-surface-duration: 380ms; --contact-content-duration: 420ms; --contact-arrow-duration: 460ms; --contact-exit-duration: 340ms; --contact-content-delay: 50ms; --contact-arrow-delay: 80ms; }
+.editorial-contact-link { display: flex; gap: 22px; align-items: center; padding: 22px 0; border-top: 1px solid var(--border-default); position: relative; isolation: isolate; text-decoration: none; color: var(--accent-primary); font-size: 22px; font-family: var(--editorial-serif); transition: color 340ms var(--contact-ease), border-color var(--contact-surface-duration) var(--contact-ease); }
+.editorial-contact-link:last-child { border-bottom: 1px solid var(--border-default); }
+.editorial-contact-link::before { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--surface-elevated); opacity: 0; pointer-events: none; transition: opacity var(--contact-surface-duration) var(--contact-ease); }
+.editorial-contact-icon, .editorial-contact-label { display: inline-block; transform: translate3d(0,0,0); transition: transform var(--contact-exit-duration) var(--contact-ease), color 320ms var(--contact-ease); }
 .editorial-contact-svg { width: 28px; height: 28px; display: block; }
-.editorial-contact-arrow { margin-left: auto; color: #738b68; }
+.editorial-contact-arrow { display: inline-block; margin-left: auto; color: var(--text-muted); opacity: .75; transform: translate3d(0,0,0); transition: transform var(--contact-exit-duration) var(--contact-ease), opacity 300ms var(--contact-ease), color 300ms var(--contact-ease); }
+.editorial-contact-link:is(:hover,:focus-visible) { color: var(--accent-hover); border-color: var(--accent-primary); }
+.editorial-contact-link:is(:hover,:focus-visible)::before { opacity: 1; }
+.editorial-contact-link:is(:hover,:focus-visible) :is(.editorial-contact-icon,.editorial-contact-label) { transform: translate3d(4px,0,0); transition-duration: var(--contact-content-duration), 320ms; transition-delay: var(--contact-content-delay), 0ms; }
+.editorial-contact-link:is(:hover,:focus-visible) .editorial-contact-arrow { transform: translate3d(6px,-6px,0); opacity: 1; color: var(--accent-hover); transition-duration: var(--contact-arrow-duration), 320ms, 320ms; transition-delay: var(--contact-arrow-delay), 0ms, 0ms; }
+.editorial-contact-link:focus-visible { outline: 2px solid var(--focus); outline-offset: 4px; }
 .tensorcat-lab { max-width: 1240px; background: white; }
 body:has(.tensorcat-lab) { background: #f8faf6; }
 .lab-heading h1 { font-family: var(--editorial-serif); font-weight: 400; font-size: 48px; color: #263d2b; }
@@ -163,4 +169,6 @@ body > footer > .bg-white { background: transparent; max-width: 1240px; color: #
 }
 @media (prefers-reduced-motion: reduce) {
   .editorial-primary, .editorial-contact-links > a, .blog-card-thumb img { transition: none; }
+  .editorial-contact-link::before, .editorial-contact-link :is(.editorial-contact-icon,.editorial-contact-label,.editorial-contact-arrow) { transition: none; }
+  .editorial-contact-link:is(:hover,:focus-visible) :is(.editorial-contact-icon,.editorial-contact-label,.editorial-contact-arrow) { transform: none; }
 }

@@ -326,6 +326,9 @@ selector after Contact. English and Light are the first-visit defaults. Explicit
 choices persist in `tensorcat.language` and `tensorcat.theme` in localStorage,
 including navigation, refresh and other open tabs. No account or database is
 needed for these preferences. Changing them does not restart a Lab experiment.
+TensorCat Lab and every exhibit under `/lab/` always use their own dark theme,
+including the header and native controls. The appearance selector still saves
+the visitor's portfolio preference, which is restored on leaving Lab.
 
 Interface messages and article metadata live in `data/locales.json`. English
 articles remain in `content/`; independently authored Chinese bodies live in
@@ -350,6 +353,8 @@ are not automatically translated or recolored.
 
 See [V6 implementation, validation and limitations](docs/portfolio-v6-preferences.md)
 for the architecture, responsive behavior and actual regression results.
+The [V6.1 precision refinements](docs/portfolio-v61-refinements.md) document the
+shared full-width header, isolated Lab appearance and Contact hover choreography.
 
 ## GitHub Preparation
 

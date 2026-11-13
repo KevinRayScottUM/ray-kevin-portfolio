@@ -2,13 +2,13 @@
 {% block content %}
 <main class="editorial-contact">
   <p class="editorial-kicker">{{ i18n::text(key="contact.kicker") }}</p>
-  <h1>{{ i18n::text(key="nav.contact") }}<span>.</span></h1>
+  <h1>{{ i18n::text(key="nav.contact") }}<span class="editorial-contact-period">.</span></h1>
   <p class="editorial-contact-intro">{{ i18n::text(key="contact.intro") }}</p>
   <div class="editorial-contact-links">
     {% for link in page.extra.links %}
-    <a href="{{ link.link }}" target="_blank" rel="noopener">
+    <a class="editorial-contact-link" href="{{ link.link }}" target="_blank" rel="noopener">
       <span class="editorial-contact-icon">{{ icons::factory(icon=link.icon,classes="editorial-contact-svg") }}</span>
-      <span>{{ link.name }}</span><span class="editorial-contact-arrow" aria-hidden="true">↗</span>
+      <span class="editorial-contact-label">{{ link.name }}</span><span class="editorial-contact-arrow" aria-hidden="true">↗</span>
     </a>
     {% endfor %}
   </div>

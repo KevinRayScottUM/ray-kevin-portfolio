@@ -16,9 +16,12 @@ class Page(HTMLParser):
         self.unknown = set()
         self.order = []
         self.template_depth = 0
+        self.root = {}
 
     def handle_starttag(self, tag, attributes):
         attrs = dict(attributes)
+        if tag == "html":
+            self.root = attrs
         if tag == "template":
             self.template_depth += 1
         if attrs.get("id") and not self.template_depth:
@@ -46,6 +49,9 @@ for path in paths:
     assert not page.unknown, (path, page.unknown)
     assert page.preferences == {"language": 1, "theme": 1}, (path, page.preferences)
     assert page.order[0] == "init", (path, page.order)
+    scope = "lab" if path.relative_to(ROOT / "public").parts[0] == "lab" else "portfolio"
+    assert page.root.get("data-appearance-scope") == scope, (path, page.root)
+    assert page.root.get("data-effective-theme") == ("dark" if scope == "lab" else "light"), (path, page.root)
     duplicates = [key for key, count in Counter(page.ids).items() if count > 1]
     assert not duplicates, (path, duplicates)
 print(f"Validated locale bindings, unique IDs, early initialization and controls in {len(paths)} built pages.")

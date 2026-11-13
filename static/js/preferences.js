@@ -1,4 +1,4 @@
-import {createPreferenceStore} from './preferences-core.js';
+import {createPreferenceStore,effectiveAppearance} from './preferences-core.js';
 import {bindTranslations,t} from './i18n.js';
 let storage=null;try{storage=window.localStorage;}catch(_){}
 const store=createPreferenceStore({storage,initial:document.documentElement.dataset});
@@ -14,7 +14,7 @@ function revealLocalizedAnchor(){
   if(index>=0)chinese.querySelectorAll(headings)[index]?.scrollIntoView({block:'start',behavior:'instant'});
 }
 function apply(state,before){
-  const root=document.documentElement;root.dataset.language=state.language;root.lang=state.language;root.dataset.theme=state.theme;root.style.colorScheme=state.theme;
+  const root=document.documentElement;root.dataset.language=state.language;root.lang=state.language;root.dataset.theme=state.theme;root.dataset.effectiveTheme=effectiveAppearance(root.dataset.appearanceScope,state.theme);root.style.colorScheme=root.dataset.effectiveTheme;
   bindTranslations();
   document.querySelectorAll('[data-preference]').forEach(control=>{
     const key=control.dataset.preference;control.dataset.selection=state[key]===control.querySelector('button').dataset.value?'0':'1';

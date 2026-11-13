@@ -1,5 +1,4 @@
 .home-publication { color: #232720; }
-body:has(.home-publication) .portfolio-nav-inner { max-width: 1240px; padding-inline: 32px; }
 .home-publication [hidden] { display: none !important; }
 .home-intro { background: #f5f4ef; border-bottom: 1px solid #3f443a; overflow: hidden; }
 .home-intro-inner { max-width: 1240px; height: 550px; margin: auto; position: relative; padding: 80px 32px 50px; }
@@ -86,8 +85,6 @@ body:has(.home-publication) .portfolio-nav-inner { max-width: 1240px; padding-in
   .home-background-inner { gap: 42px; grid-template-columns: minmax(0,1fr) 260px; }
 }
 @media (max-width: 760px) {
-  body:has(.home-publication) .portfolio-nav-inner { padding: 18px 24px; }
-  body:has(.home-publication) .portfolio-brand a { font-size: 20px; }
   .home-intro-inner { height: 645px; padding: 30px 24px; }
   .home-intro-copy { max-width: 100%; }
   .home-intro-copy > .home-eyebrow { font-size: 9px; margin-bottom: 18px; }
@@ -118,7 +115,6 @@ body:has(.home-publication) .portfolio-nav-inner { max-width: 1240px; padding-in
   .home-background-facts { padding: 28px 0 0; border-left: 0; border-top: 1px solid #d1dcc9; }
 }
 @media (max-width: 360px) {
-  body:has(.home-publication) .portfolio-brand a { font-size: 18px; }
   .home-intro-inner { padding-inline: 20px; height: 590px; }
   .home-intro h1 { font-size: 43px; }
   .home-topics { margin-top: 12px; }

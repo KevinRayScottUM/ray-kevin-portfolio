@@ -5,8 +5,11 @@
 {% import 'macros/blog.html' as blog %}
 {% import 'macros/publication.html' as publication %}
 {% import 'macros/i18n.html' as i18n %}
+{% set route_path = current_path | default(value="/") %}
+{% set lab_route = false %}
+{% if route_path == "/lab" or route_path is starting_with("/lab/") %}{% set lab_route = true %}{% endif %}
 <!DOCTYPE html>
-<html lang="en" data-language="en" data-theme="light">
+<html lang="en" data-language="en" data-theme="light" data-appearance-scope="{% if lab_route %}lab{% else %}portfolio{% endif %}" data-effective-theme="{% if lab_route %}dark{% else %}light{% endif %}">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -15,7 +18,6 @@
   <link rel="icon" href="{{ favicon.url }}" type="image/png">
   <link rel="canonical" href="{{ config.base_url | trim_end_matches(pat='/') }}{{ current_path | default(value='/') }}">
   {% set title_key = "nav.home" %}
-  {% set route_path = current_path | default(value="/") %}
   {% if route_path is containing("project-experience") %}{% set title_key = "nav.projects" %}{% elif route_path is containing("about") %}{% set title_key = "nav.about" %}{% elif route_path is containing("contacts") %}{% set title_key = "nav.contact" %}{% elif route_path is containing("blog") %}{% set title_key = "blog.title" %}{% elif route_path is containing("lab") %}{% set title_key = "nav.lab" %}{% endif %}
   {% if page and route_path is containing("/blog/") %}{% set title_key = "post." ~ page.slug ~ ".title" %}{% endif %}
   {% if not current_path %}{% set title_key = "error.title" %}{% endif %}
@@ -30,7 +32,7 @@
   {% block head %}{% block css %}{{ macros_head::stylesheet() }}{% endblock css %}{% block title %}{% endblock title %}{% endblock head %}
 </head>
 <body class="bg-white">
-  {% block nav %}{{ macros_nav::nav(website_title=config.title) }}{% endblock nav %}
+  {% block nav %}{{ macros_nav::nav(website_title=config.title,lab_route=lab_route) }}{% endblock nav %}
   {% block content %}{% endblock content %}
   {% block footer %}<footer class="bg-white"><div class="bg-white text-gray-400 container max-w-4xl mx-auto my-8 px-4">© Kevin Ray Scott | TensorCat. {{ i18n::text(key="footer.credit") }} <a href="https://github.com/adfaure/kodama-theme" target="_blank" rel="noopener">Kodama ↗</a></div></footer>{% endblock footer %}
 </body>

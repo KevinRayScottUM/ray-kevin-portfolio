@@ -4,10 +4,49 @@ import {readFileSync,readdirSync,existsSync,mkdtempSync,writeFileSync,rmSync} fr
 import {tmpdir} from 'node:os';
 import {join} from 'node:path';
 import {execFileSync} from 'node:child_process';
-import {createPreferenceStore,translate,catalog} from '../static/js/preferences-core.js';
+import {runInNewContext} from 'node:vm';
+import {createPreferenceStore,effectiveAppearance,translate,catalog} from '../static/js/preferences-core.js';
 const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8');
 test('first visit defaults to English and Light without inferring OS preferences',()=>{
   assert.deepEqual(createPreferenceStore().get(),{language:'en',theme:'light'});
+});
+test('Lab appearance is isolated from all four global language and theme combinations',()=>{
+  for(const language of ['en','zh-CN'])for(const theme of ['light','dark']){
+    const map=new Map([['tensorcat.language',language],['tensorcat.theme',theme]]),storage={getItem:key=>map.get(key),setItem:(key,value)=>map.set(key,value)},store=createPreferenceStore({storage});
+    assert.equal(effectiveAppearance('lab',store.get().theme),'dark');
+    assert.equal(effectiveAppearance('portfolio',store.get().theme),theme);
+    assert.deepEqual(store.get(),{language,theme});assert.equal(map.get('tensorcat.theme'),theme);
+  }
+});
+test('early bootstrap paints Lab dark without changing a saved Light preference',()=>{
+  for(const appearanceScope of ['portfolio','lab'])for(const theme of ['light','dark']){
+    const root={dataset:{appearanceScope},style:{}},writes=[];
+    runInNewContext(read('static/js/preferences-init.js'),{document:{documentElement:root},localStorage:{getItem:key=>key==='tensorcat.theme'?theme:'zh-CN',setItem:(...args)=>writes.push(args)}});
+    assert.equal(root.dataset.theme,theme);assert.equal(root.dataset.effectiveTheme,appearanceScope==='lab'?'dark':theme);assert.equal(root.style.colorScheme,root.dataset.effectiveTheme);assert.equal(root.lang,'zh-CN');assert.deepEqual(writes,[]);
+  }
+});
+test('Lab boundary belongs to exact layout route segments, not arbitrary substrings',()=>{
+  const boundary=read('templates/base.html').split('<!DOCTYPE html>')[0];
+  assert.match(boundary,/route_path == "\/lab" or route_path is starting_with\("\/lab\/"\)/);
+  assert.doesNotMatch(boundary,/containing/);assert.match(read('static/js/preferences.js'),/effectiveAppearance\(root\.dataset\.appearanceScope,state\.theme\)/);
+});
+test('Home does not override shared header geometry or typography',()=>{
+  assert.doesNotMatch(read('static/styles/home-layout.css'),/portfolio-nav-inner|portfolio-brand/);
+  const css=read('static/styles/preferences.css');assert.match(css,/width:100%;max-width:none;margin-inline:0;padding:18px 48px/);assert.match(css,/scrollbar-gutter:stable/);assert.match(css,/\.portfolio-nav-link\.is-active\{[^}]*font-weight:600/);
+});
+test('Lab has its own permanent tokens and no global Light-specific pale surface',()=>{
+  const css=read('static/styles/preferences.css');assert.match(css,/:root\[data-appearance-scope=lab\]\{--page-bg:#090b0e/);assert.doesNotMatch(css,/#eaf0eb|html\[data-theme=light\] body/);
+  assert.match(css,/html\[data-effective-theme=dark\] \.preference-switch img/);
+  assert.match(read('templates/macros/nav.html'),/aria-describedby="lab-appearance-note"/);
+});
+test('Contact motion uses stable targets, gradual independent transforms and no layout animation',()=>{
+  const css=read('static/styles/editorial.css'),contact=css.slice(css.indexOf('.editorial-contact-links {'),css.indexOf('.tensorcat-lab {'));
+  assert.match(contact,/--contact-content-duration: 420ms/);assert.match(contact,/--contact-arrow-duration: 460ms/);assert.match(contact,/--contact-exit-duration: 340ms/);assert.match(contact,/--contact-content-delay: 50ms/);assert.match(contact,/--contact-arrow-delay: 80ms/);
+  assert.match(contact,/translate3d\(4px,0,0\)/);assert.match(contact,/translate3d\(6px,-6px,0\)/);assert.doesNotMatch(contact,/transition[^;{}]*\b(?:padding|margin|width|height|top|left)\b/);
+  assert.doesNotMatch(contact,/padding-left|setTimeout/);assert.match(contact,/:focus-visible/);
+  assert.doesNotMatch(read('static/styles/preferences.css'),/\.editorial-contact-links>a/);
+  assert.doesNotMatch(css,/\.editorial-contact h1 span\s*\{/);
+  const template=read('templates/contact-page.html');assert.match(template,/class="editorial-contact-label"/);assert.match(template,/target="_blank" rel="noopener"/);
 });
 test('only supported preferences enter state and no-op selections do not notify',()=>{
   const store=createPreferenceStore();let calls=0;store.subscribe(()=>calls++);
