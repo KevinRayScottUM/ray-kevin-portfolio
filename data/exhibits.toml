@@ -43,3 +43,25 @@ status = "Available"
 route = "lab/ai-image-studio/"
 order = 2
 featured = false
+
+[[exhibits]]
+id = "neural-network-xray"
+number = "03"
+slug = "neural-network-xray"
+title = "TensorCat Neural Network X-Ray"
+subtitle = "Interactive Deep Learning Architecture Observatory"
+index_subtitle = "Neural Network X-Ray"
+index_tags = ["Neural Networks", "CPU", "Interpretability"]
+category = "Neural computation"
+description = "Eleven architectures, real numerical traces and inspectable tensors in a bilingual CPU research workspace."
+cover = "img/lab/neural-network-xray.png"
+cover_alt = "Actual TensorCat Neural Network X-Ray workspace with causal attention and a tensor inspector"
+cover_fit = "contain"
+cover_width = 1440
+cover_height = 1100
+preview_component = "neural-xray"
+technology_tags = ["CPU computation", "Tensors", "Neural architectures"]
+status = "Available"
+route = "lab/neural-network-xray/"
+order = 3
+featured = false

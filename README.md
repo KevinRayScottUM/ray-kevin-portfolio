@@ -412,3 +412,20 @@ Read [the V8 engineering report](docs/image-studio-v8.md) and
 The [cloud deployment ledger](docs/image-studio-deployment.md) tracks production
 prerequisites and verification separately from the local UI. The `main` branch
 automatically deploys to the existing public Cloudflare Pages site.
+
+## Neural Network X-Ray / Exhibit 03
+
+`/lab/neural-network-xray/` is a bilingual, CPU-only neural architecture workspace
+registered through the same exhibit index. Eleven architecture views share actual
+tensor traces, a mathematical inspector, operation playback and structural
+comparison. MLP/DNN and the 2D GAN support real local training. The other small
+networks and analytical diffusion demonstration are explicitly labeled; an
+optional authentic GPT-2 recording is loaded only when selected. Full live
+pretrained GPT-2, trained image classification/segmentation and neural image
+diffusion are not claimed.
+
+There are no new API bindings or deployment dependencies: vendor assets are
+checked in and `zola build` remains the production command. See the
+[implementation and numerical verification](docs/neural-xray-implementation.md),
+[upstream source audit](docs/neural-xray-audit.md) and
+[browser evidence](docs/qa/neural-xray/README.md).

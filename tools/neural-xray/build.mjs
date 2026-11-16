@@ -1,0 +1,14 @@
+import fs from 'node:fs/promises';
+import path from 'node:path';
+import {fileURLToPath} from 'node:url';
+import {build} from 'esbuild';
+const root=path.resolve(path.dirname(fileURLToPath(import.meta.url)),'../..');
+const local=(...p)=>path.join(root,...p);
+await fs.mkdir(local('static/vendor/tfjs-cpu'),{recursive:true});
+await build({entryPoints:[local('tools/neural-xray/runtime.js')],outfile:local('static/vendor/tfjs-cpu/tf.js'),bundle:true,format:'esm',platform:'browser',minify:true,legalComments:'eof',define:{'process.versions.node':'undefined'}});
+await fs.access(local('static/vendor/tfjs-cpu/LICENSE'));
+await fs.mkdir(local('static/vendor/katex'),{recursive:true});
+for(const name of ['katex.mjs','katex.min.css'])await fs.copyFile(local('tools/neural-xray/node_modules/katex/dist',name),local('static/vendor/katex',name));
+await fs.cp(local('tools/neural-xray/node_modules/katex/dist/fonts'),local('static/vendor/katex/fonts'),{recursive:true});
+await fs.copyFile(local('tools/neural-xray/node_modules/katex/LICENSE'),local('static/vendor/katex/LICENSE'));
+console.log('Bundled CPU-only TensorFlow.js and KaTeX with licenses.');

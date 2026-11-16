@@ -1,0 +1,6 @@
+TensorFlow.js 4.22.0
+Copyright 2017 Google LLC. Licensed under Apache-2.0.
+Source: https://github.com/tensorflow/tfjs
+TensorCat bundles tfjs-core and tfjs-backend-cpu with esbuild. The local runtime
+registers gradients/chained operations and a portable CPU platform. No WebGPU
+backend or model weights are bundled. See tools/neural-xray for pinned inputs.

@@ -1,0 +1,2 @@
+# Preserve intentional trailing spaces inside generated upstream string literals.
+static/vendor/tfjs-cpu/tf.js whitespace=-blank-at-eol

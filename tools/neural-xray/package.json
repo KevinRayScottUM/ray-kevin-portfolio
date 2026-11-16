@@ -1,0 +1,1 @@
+{"name":"tensorcat-xray-assets","private":true,"type":"module","dependencies":{"@tensorflow/tfjs-backend-cpu":"4.22.0","@tensorflow/tfjs-core":"4.22.0","esbuild":"0.28.1","katex":"0.19.1"}}

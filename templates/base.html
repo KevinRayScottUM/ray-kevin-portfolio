@@ -21,6 +21,7 @@
   {% if route_path is containing("project-experience") %}{% set title_key = "nav.projects" %}{% elif route_path is containing("about") %}{% set title_key = "nav.about" %}{% elif route_path is containing("contacts") %}{% set title_key = "nav.contact" %}{% elif route_path is containing("blog") %}{% set title_key = "blog.title" %}{% elif route_path is containing("lab") %}{% set title_key = "nav.lab" %}{% endif %}
   {% if page and route_path is containing("/blog/") %}{% set title_key = "post." ~ page.slug ~ ".title" %}{% endif %}
   {% if route_path is containing("/lab/ai-image-studio") %}{% set title_key = "studio.title" %}{% endif %}
+  {% if route_path is containing("/lab/neural-network-xray") %}{% set title_key = "xray.title" %}{% endif %}
   {% if not current_path %}{% set title_key = "error.title" %}{% endif %}
   {% set messages = load_data(path="data/locales.json") %}
   {% set english_title = config.title %}{% if title_key in messages %}{% set english_title = messages[title_key].en %}{% elif page %}{% set english_title = page.title %}{% endif %}

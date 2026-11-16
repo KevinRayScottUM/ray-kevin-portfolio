@@ -1,4 +1,11 @@
 {
+  "xray.title":{"en":"Neural Network X-Ray","zh-CN":"神经网络透视实验室"},
+  "xray.subtitle":{"en":"Interactive Deep Learning Architecture Observatory","zh-CN":"交互式深度学习架构观测站"},
+  "xray.description":{"en":"Eleven architectures, actual CPU computation and inspectable numerical traces in one research workspace.","zh-CN":"在同一个研究工作区探索十一种架构、真实 CPU 计算与可检查的数值轨迹。"},
+  "xray.tags":{"en":"Neural networks · CPU · Interpretability","zh-CN":"神经网络 · CPU · 可解释性"},
+  "xray.area0":{"en":"CPU computation","zh-CN":"CPU 计算"},
+  "xray.area1":{"en":"Tensors","zh-CN":"张量"},
+  "xray.area2":{"en":"Neural architectures","zh-CN":"神经网络架构"},
   "studio.title":{"en":"AI Image Studio","zh-CN":"AI 图片工作室"},
   "studio.subtitle":{"en":"A minimal creative image studio","zh-CN":"简洁流畅的创意图像工作室"},
   "studio.tags":{"en":"Image editing · Generative AI · Creative tools","zh-CN":"图像编辑 · 生成式 AI · 创意工具"},

@@ -1,0 +1,15 @@
+import fs from 'node:fs/promises';
+import crypto from 'node:crypto';
+import {pathToFileURL} from 'node:url';
+import path from 'node:path';
+import {execFileSync} from 'node:child_process';
+const repo=path.resolve(process.argv[2]||'tmp/upstream/transformer-explainer'),source=path.join(repo,'src/constants/examples/ex0.js');
+const commit='bfe50afba10b9b560b84143ee1107d977defa74f';
+if(execFileSync('git',['-C',repo,'rev-parse','HEAD'],{encoding:'utf8'}).trim()!==commit)throw Error('Use the audited upstream commit before extracting its trace.');
+if(execFileSync('git',['-C',repo,'status','--porcelain','--','src/constants/examples/ex0.js'],{encoding:'utf8'}).trim())throw Error('The source recording has uncommitted changes.');
+const {ex0}=await import(pathToFileURL(source));
+const result={provenance:{model:'GPT-2 Small / Transformer Explainer',executionMode:'recorded-real-trace',commit:'bfe50afba10b9b560b84143ee1107d977defa74f',source:'https://github.com/poloclub/transformer-explainer/blob/bfe50afba10b9b560b84143ee1107d977defa74f/src/constants/examples/ex0.js',sha256:crypto.createHash('sha256').update(await fs.readFile(source)).digest('hex'),license:'MIT',available:'All 12 blocks x 12 heads: raw/scaled/masked/softmax attention and 50257 logits. Embeddings/QKV/MLP are not present.',encoding:'non-finite values are strings'},...ex0};
+await fs.mkdir('static/lab/neural-xray',{recursive:true});
+await fs.writeFile('static/lab/neural-xray/gpt2-example.json',JSON.stringify(result,(_,value)=>typeof value==='number'&&!Number.isFinite(value)?String(value):value));
+await fs.copyFile(path.join(repo,'LICENSE'),'static/lab/neural-xray/LICENSE-transformer');
+console.log('Extracted authenticated fixed-prompt GPT-2 trace, without inventing missing activations.');
