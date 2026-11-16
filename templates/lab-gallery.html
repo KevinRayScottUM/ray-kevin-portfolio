@@ -16,9 +16,9 @@
   {% for exhibit in collection.exhibits | sort(attribute="order") %}
       <button type="button" class="lab-project-row{% if available | length > 0 and exhibit.id == available[0].id %} is-selected{% endif %}" data-exhibit-select="{{ exhibit.id }}" aria-controls="lab-preview-viewport" aria-pressed="{% if available | length > 0 and exhibit.id == available[0].id %}true{% else %}false{% endif %}" {% if exhibit.status != "Available" %}disabled{% endif %}>
         <span class="lab-project-number">{{ exhibit.number }} / {{ exhibit.title }} {{ lab::icon(name="arrow-up-right") }}</span>
-        <strong>{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.world") }}{% else %}{{ exhibit.index_subtitle | default(value=exhibit.subtitle) }}{% endif %}</strong>
-        <span class="lab-project-category">{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.tags") }}{% elif exhibit.index_tags %}{{ exhibit.index_tags | join(sep=" · ") }}{% else %}{{ exhibit.category }}{% endif %}</span>
-        <span class="lab-project-state">{% if exhibit.status == "Available" %}<i aria-hidden="true"></i>{{ i18n::text(key="gallery.demo") }}{% else %}{{ i18n::text(key="gallery.unavailable") }}{% endif %}</span>
+        <strong>{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.world") }}{% elif exhibit.id == "ai-image-studio" %}{{ i18n::text(key="studio.title") }}{% else %}{{ exhibit.index_subtitle | default(value=exhibit.subtitle) }}{% endif %}</strong>
+        <span class="lab-project-category">{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.tags") }}{% elif exhibit.id == "ai-image-studio" %}{{ i18n::text(key="studio.tags") }}{% elif exhibit.index_tags %}{{ exhibit.index_tags | join(sep=" · ") }}{% else %}{{ exhibit.category }}{% endif %}</span>
+        <span class="lab-project-state">{% if exhibit.id == "ai-image-studio" %}<i aria-hidden="true"></i>{{ i18n::text(key="studio.preview") }}{% elif exhibit.status == "Available" %}<i aria-hidden="true"></i>{{ i18n::text(key="gallery.demo") }}{% else %}{{ i18n::text(key="gallery.unavailable") }}{% endif %}</span>
       </button>
   {% endfor %}
   {% for slot in collection.reserved_slots %}

@@ -383,3 +383,32 @@ git add .
 git commit -m "Update Kevin Ray Scott portfolio for Cloudflare Pages"
 git push
 ```
+
+## Image Studio V8.0
+
+Exhibit 02 is registered at `/lab/ai-image-studio/`. It now opens a minimal image
+workspace: drag/drop, Browse Files or paste an image, then edit it locally. The
+former basketball, mechanics inspector and score gate have been removed from
+Exhibit 02. Exhibit 01 and its simulation are unchanged.
+
+PNG/JPEG/WebP files are signature-checked and decoded, with 10 MiB, 8192px-side
+and 16 MP limits. Selection never sends image bytes to the server. A shared-element
+thumbnail expands into the canvas; reduced motion bypasses this transition.
+Local tools include source-aligned masks, pan/zoom, history, comparison, non-AI
+resize/background compositing and PNG/JPEG/WebP export. Five contextual AI tool
+interfaces report actual capability status; unavailable providers cannot run.
+
+Cloud upload/inference require verified free-plan, trusted decoder, Turnstile,
+D1 and provider configuration. Cloud processing requires
+an explicit action and consent. Existing security, signed receipts and atomic
+daily quotas remain enforced. A local edit is never reported as a cloud result.
+
+Run `zola serve --interface 127.0.0.1 --port 1111`, then in another terminal run
+`node tools/preview-image-studio.mjs`. Open
+[Image Studio](http://127.0.0.1:1112/lab/ai-image-studio/).
+
+Read [the V8 engineering report](docs/image-studio-v8.md) and
+[provider feasibility audit](docs/image-studio-feasibility.md) before publishing.
+The [cloud deployment ledger](docs/image-studio-deployment.md) tracks production
+prerequisites and verification separately from the local UI. The `main` branch
+automatically deploys to the existing public Cloudflare Pages site.

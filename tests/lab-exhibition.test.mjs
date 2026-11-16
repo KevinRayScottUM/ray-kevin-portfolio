@@ -41,7 +41,7 @@ test('stronger hover remains bounded, damped, fixed-position and separate from f
 test('gallery is registry-driven, buildable static routes and does not start a second simulation',()=>{
   const read=p=>readFileSync(new URL('../'+p,import.meta.url),'utf8'),gallery=read('templates/lab-gallery.html'),registry=read('data/exhibits.toml');
   assert.match(gallery,/load_data\(path="data\/exhibits.toml"\)/);assert.match(gallery,/for exhibit in collection.exhibits/);assert.doesNotMatch(gallery,/lab-v3\/app|WorldSimulator|<canvas/);
-  assert.equal((registry.match(/\[\[exhibits\]\]/g)||[]).length,1);assert.match(registry,/route = "lab\/world-simulator\/"/);
+  assert.equal((registry.match(/\[\[exhibits\]\]/g)||[]).length,2);assert.match(registry,/route = "lab\/world-simulator\/"/);assert.match(registry,/route = "lab\/ai-image-studio\/"/);
   assert.match(read('content/lab/_index.md'),/template = "lab-gallery.html"/);assert.match(read('content/lab/world-simulator/_index.md'),/template = "lab.html"/);assert.match(read('templates/lab.html'),/All Projects/);
 });
 test('visitor-facing captions and asset generation no longer use the obsolete model designation',()=>{

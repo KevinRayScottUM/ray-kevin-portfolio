@@ -21,3 +21,25 @@ status = "Available"
 route = "lab/world-simulator/"
 order = 1
 featured = true
+
+[[exhibits]]
+id = "ai-image-studio"
+number = "02"
+slug = "ai-image-studio"
+title = "TensorCat AI Image Studio"
+subtitle = "A minimal creative image studio"
+index_subtitle = "AI Image Studio"
+index_tags = ["Image Editing", "Generative AI", "Creative Tools"]
+category = "Image editing / Generative AI"
+description = "A minimal image-editing workspace with fluid local upload, non-destructive tools and explicit cloud AI availability."
+cover = "img/lab/ai-image-studio.jpg"
+cover_alt = "TensorCat AI Image Studio with a minimal image-upload workspace"
+cover_fit = "contain"
+cover_width = 1262
+cover_height = 660
+preview_component = "image-studio"
+technology_tags = ["Image editing", "Generative AI", "Private by default"]
+status = "Available"
+route = "lab/ai-image-studio/"
+order = 2
+featured = false

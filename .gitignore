@@ -2,3 +2,10 @@
 /tmp/
 /static/processed_images/
 /.DS_Store
+node_modules/
+.wrangler/
+/workers/image-validator/tmp/
+.dev.vars
+.dev.vars.*
+.env
+.env.*

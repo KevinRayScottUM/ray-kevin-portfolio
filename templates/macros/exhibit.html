@@ -2,7 +2,7 @@
 {% import "macros/i18n.html" as i18n %}
 {% macro preview(exhibit) %}
 <article class="lab-preview-layer" data-preview-id="{{ exhibit.id }}" aria-labelledby="lab-title-{{ exhibit.id }}">
-  <header class="lab-preview-header"><p>{{ i18n::text(key="gallery.preview") }} <span>/ {{ exhibit.number }}</span></p><span class="lab-availability"><i aria-hidden="true"></i>{{ i18n::text(key="gallery.available",fallback=exhibit.status) }}</span></header>
+  <header class="lab-preview-header"><p>{{ i18n::text(key="gallery.preview") }} <span>/ {{ exhibit.number }}</span></p><span class="lab-availability"><i aria-hidden="true"></i>{% if exhibit.id == "ai-image-studio" %}{{ i18n::text(key="studio.preview") }}{% else %}{{ i18n::text(key="gallery.available",fallback=exhibit.status) }}{% endif %}</span></header>
   {% if exhibit.preview_component | default(value="") == "tensorcat-showcase" %}
   <div class="lab-preview-visual lab-showcase" data-preview-visual>
     <div class="lab-showcase-frame" data-showcase data-showcase-assets="{{ get_url(path='lab/tc06/') }}" tabindex="0" role="group" aria-label="TensorCat 3D hardware tour" data-i18n-aria-label="tour.label" aria-describedby="lab-showcase-help-{{ exhibit.id }}">
@@ -18,9 +18,9 @@
   {% endif %}
   <div class="lab-preview-copy">
     <p class="lab-eyebrow" data-i18n="gallery.exhibit" data-i18n-args='{"number":"{{ exhibit.number }}"}'>Exhibit {{ exhibit.number }} / {{ exhibit.category }}</p>
-    <h2 id="lab-title-{{ exhibit.id }}">{{ exhibit.title }} <span>— {% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.subtitle") }}{% else %}{{ exhibit.subtitle }}{% endif %}</span></h2>
-    <p class="lab-preview-description">{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.description") }}{% else %}{{ exhibit.description }}{% endif %}</p>
-    <ul class="lab-exhibit-tags" aria-label="Research areas" data-i18n-aria-label="gallery.areas">{% for tag in exhibit.technology_tags %}<li>{% if exhibit.id == "world-simulator" %}{% if loop.index0 == 0 %}{{ i18n::text(key="gallery.robotics") }}{% elif loop.index0 == 1 %}{{ i18n::text(key="gallery.cpu") }}{% elif loop.index0 == 2 %}{{ i18n::text(key="gallery.cloud") }}{% else %}{{ i18n::text(key="gallery.systems") }}{% endif %}{% else %}{{ tag }}{% endif %}</li>{% endfor %}</ul>
+    <h2 id="lab-title-{{ exhibit.id }}">{{ exhibit.title }} <span>— {% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.subtitle") }}{% elif exhibit.id == "ai-image-studio" %}{{ i18n::text(key="studio.subtitle") }}{% else %}{{ exhibit.subtitle }}{% endif %}</span></h2>
+    <p class="lab-preview-description">{% if exhibit.id == "world-simulator" %}{{ i18n::text(key="gallery.description") }}{% elif exhibit.id == "ai-image-studio" %}{{ i18n::text(key="studio.description") }}{% else %}{{ exhibit.description }}{% endif %}</p>
+    <ul class="lab-exhibit-tags" aria-label="Research areas" data-i18n-aria-label="gallery.areas">{% for tag in exhibit.technology_tags %}<li>{% if exhibit.id == "world-simulator" %}{% if loop.index0 == 0 %}{{ i18n::text(key="gallery.robotics") }}{% elif loop.index0 == 1 %}{{ i18n::text(key="gallery.cpu") }}{% elif loop.index0 == 2 %}{{ i18n::text(key="gallery.cloud") }}{% else %}{{ i18n::text(key="gallery.systems") }}{% endif %}{% elif exhibit.id == "ai-image-studio" %}{% if loop.index0 == 0 %}{{ i18n::text(key="studio.area0") }}{% elif loop.index0 == 1 %}{{ i18n::text(key="studio.area1") }}{% else %}{{ i18n::text(key="studio.area2") }}{% endif %}{% else %}{{ tag }}{% endif %}</li>{% endfor %}</ul>
     <a class="lab-exhibit-enter" href="{{ get_url(path=exhibit.route, trailing_slash=true) }}">{{ i18n::text(key="gallery.enter") }} {{ lab::icon(name="arrow-up-right") }}</a>
   </div>
 </article>

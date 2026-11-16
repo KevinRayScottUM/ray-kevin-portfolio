@@ -1,4 +1,13 @@
 {
+  "studio.title":{"en":"AI Image Studio","zh-CN":"AI 图片工作室"},
+  "studio.subtitle":{"en":"A minimal creative image studio","zh-CN":"简洁流畅的创意图像工作室"},
+  "studio.tags":{"en":"Image editing · Generative AI · Creative tools","zh-CN":"图像编辑 · 生成式 AI · 创意工具"},
+  "studio.description":{"en":"Select an image and start editing locally. A quiet creative workspace with fluid transitions, non-destructive tools and transparent AI provider availability.","zh-CN":"选好图片，即可在本地开始编辑。以流畅过渡、非破坏性工具和透明的 AI 服务状态构建简洁的创意工作空间。"},
+  "studio.cover":{"en":"Actual minimal Image Studio upload and editing workspace","zh-CN":"图像工作室实际运行的简洁上传与编辑界面"},
+  "studio.preview":{"en":"Local editing · Cloud AI","zh-CN":"本地编辑 · 云端 AI"},
+  "studio.area0":{"en":"Image editing","zh-CN":"图像编辑"},
+  "studio.area1":{"en":"Generative AI","zh-CN":"生成式 AI"},
+  "studio.area2":{"en":"Private by default","zh-CN":"默认本地处理"},
   "nav.home":{"en":"Home","zh-CN":"首页"},
   "nav.projects":{"en":"Project Experience","zh-CN":"项目经历"},
   "nav.about":{"en":"About","zh-CN":"关于我"},

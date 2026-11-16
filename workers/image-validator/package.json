@@ -1,0 +1,7 @@
+{
+  "name": "tensorcat-image-validator",
+  "private": true,
+  "type": "module",
+  "scripts": { "test": "node --test test/*.test.mjs" },
+  "dependencies": { "@cf-wasm/photon": "0.4.0" }
+}

@@ -1,0 +1,63 @@
+{% extends "base.html" %}
+{% import "macros/lab.html" as lab %}
+{% block user_head %}<link rel="stylesheet" href="{{ get_url(path='styles/lab-exhibition.css') }}"><link rel="stylesheet" href="{{ get_url(path='styles/image-studio.css') }}">{% endblock user_head %}
+{% block title %}{% endblock title %}
+{% block content %}
+<main class="is-studio" data-image-studio data-has-image="false" data-state="EMPTY">
+  <header class="is-heading">
+    <div><a class="lab-back" href="{{ get_url(path='lab/') }}">← <span data-studio-text="back">TensorCat Lab</span></a><p class="is-kicker" data-studio-text="exhibit">EXHIBIT 02 / IMAGE EDITING</p><h1><span data-studio-text="title">AI Image Studio</span><i>.</i></h1><p class="is-subtitle" data-studio-text="subtitle">A little space for your next image.</p></div>
+    <div class="is-status"><span class="is-led"></span><span data-session-state data-studio-text="localSession">Local session</span><output data-quota>AI —</output></div>
+  </header>
+  <input type="file" accept="image/png,image/jpeg,image/webp" data-file hidden>
+  <div class="is-workbench">
+    <nav class="is-tools" aria-label="Image tools" data-studio-label="tools">
+      {% for item in ["edit", "inpaint", "remove-background", "upscale", "face-swap"] %}
+      <button type="button" data-tool="{{ item }}" aria-pressed="{% if item == 'edit' %}true{% else %}false{% endif %}" disabled><span class="is-tool-symbol" aria-hidden="true">{% if item == 'edit' %}{{ lab::icon(name="wand-sparkles") }}{% elif item == 'inpaint' %}{{ lab::icon(name="eraser") }}{% elif item == 'remove-background' %}{{ lab::icon(name="scan") }}{% elif item == 'upscale' %}{{ lab::icon(name="maximize-2") }}{% else %}{{ lab::icon(name="scan-face") }}{% endif %}</span><span data-studio-text="{{ item }}">{{ item }}</span></button>
+      {% endfor %}
+      <button class="is-toolbar-replace" data-action="browse" type="button" title="Replace image" data-studio-title="newFile">{{ lab::icon(name="image-up") }}<span data-studio-text="newFile">Replace image</span></button>
+    </nav>
+    <section class="is-center">
+      <div class="is-stage-top" data-image-meta hidden><div><strong data-file-name></strong><span data-file-summary></span></div><span class="is-local-badge" data-local-badge data-studio-text="imageReady">Image ready · local</span></div>
+      <div class="is-stage" data-drop-zone>
+        <div class="is-drop-surface" data-empty-surface>
+          <div class="is-upload-icon" aria-hidden="true">{{ lab::icon(name="image-up") }}</div>
+          <h2 data-studio-text="uploadTitle">Upload your image</h2>
+          <p data-drop-copy data-studio-text="drop">Drag &amp; drop an image here</p>
+          <button type="button" class="is-primary" data-action="browse" data-studio-text="browse">Browse Files</button>
+          <span class="is-formats" data-studio-text="imageFormats">PNG, JPG or WebP · Up to 10 MB</span>
+          <p class="is-privacy" data-studio-text="privacy">Only in your browser. Cloud processing starts with your permission.</p>
+        </div>
+        <div class="is-editor" data-editor hidden>
+          <div class="is-editor-toolbar">
+            <div class="is-button-row"><button data-action="undo" title="Undo" data-studio-title="undo">{{ lab::icon(name="undo-2") }}</button><button data-action="redo" title="Redo" data-studio-title="redo">{{ lab::icon(name="redo-2") }}</button><span class="is-divider"></span><button data-action="fit" title="Fit to view" data-studio-title="fit">{{ lab::icon(name="maximize-2") }}</button><button data-action="actual" title="Actual pixels" data-studio-title="actual">1:1</button><button data-action="resetImage" title="Restore original" data-studio-title="resetImage">{{ lab::icon(name="rotate-ccw") }}</button></div>
+            <label><span data-studio-text="zoom">Zoom</span><input data-zoom type="range" min=".15" max="8" step=".05" value="1"></label><output data-resolution></output>
+          </div>
+          <div class="is-image-viewport"><canvas data-editor-canvas tabindex="0" aria-label="Image editor" data-studio-label="editor"></canvas><div class="is-processing" hidden data-processing role="status"><span class="is-spinner"></span><span data-studio-text="processing">Processing</span></div></div>
+          <label class="is-comparison" data-comparison hidden><span data-studio-text="compare">Before / After</span><input type="range" min="0" max="100" value="0" data-compare><output data-compare-value>0%</output></label>
+        </div>
+        <div class="is-drop-overlay" aria-hidden="true"><span data-studio-text="release">Release to add image</span></div>
+      </div>
+      <div class="is-status-line"><p class="is-notice" role="status" aria-live="polite" data-notice></p><progress data-progress max="100" value="0" hidden aria-label="Image transfer" data-studio-label="transfer"></progress></div>
+      <details class="is-history-panel" data-image-history hidden><summary data-studio-text="history">Session history</summary><div class="is-history" data-history></div></details>
+    </section>
+    <aside class="is-inspector" data-inspector hidden>
+      <details class="is-tool-drawer" data-tool-drawer open><summary><span data-studio-text="settings">Tool settings</span><span data-selected-tool>Generative Edit</span></summary><div class="is-drawer-body">
+      <section data-ai-inspector><p class="is-kicker" data-studio-text="selectedTool">SELECTED TOOL</p><h2 data-active-tool>Generative Edit</h2><div class="is-provider"><span class="is-led is-led-muted"></span><strong data-provider-status>Not configured</strong><span data-provider-name></span></div><p class="is-provider-reason" data-provider-reason></p>
+        <div data-tool-settings>
+          <div data-prompt-control><label for="studio-prompt" data-studio-text="prompt">Prompt</label><textarea id="studio-prompt" data-prompt maxlength="2000" rows="4" data-studio-placeholder="promptPlaceholder" placeholder="What would you like to change?"></textarea></div>
+          <label data-seed-control><span data-studio-text="seed">Seed</span><input data-seed type="number" value="42" min="0" max="2147483647"></label>
+          <fieldset data-mask-controls hidden><legend data-studio-text="mask">Mask</legend><label><span data-studio-text="brush">Brush size</span><input data-brush type="range" min="2" max="180" value="40"></label><label><span data-studio-text="hardness">Hardness</span><input data-hardness type="range" min=".1" max="1" step=".1" value=".8"></label><label><span data-studio-text="opacity">Mask opacity</span><input data-mask-opacity type="range" min=".1" max=".9" step=".1" value=".5"></label><label class="is-check"><input type="checkbox" data-erase-mask><span data-studio-text="erase">Erase brush</span></label><div class="is-button-row"><button data-action="maskUndo" title="Undo mask" data-studio-title="maskUndo">{{ lab::icon(name="undo-2") }}</button><button data-action="maskRedo" title="Redo mask" data-studio-title="maskRedo">{{ lab::icon(name="redo-2") }}</button><button data-action="clearMask" data-studio-text="clear">Clear</button></div></fieldset>
+          <fieldset data-background-controls hidden><legend data-studio-text="background">Background</legend><label class="is-check"><input type="checkbox" data-fill-background><span data-studio-text="fillBackground">Solid color</span><input type="color" data-background-color value="#ffffff" aria-label="Background color" data-studio-label="background"></label><button data-action="flatten" data-studio-text="flatten">Apply color · non-AI</button></fieldset>
+          <fieldset data-resize-controls hidden><legend data-studio-text="resize">Standard resize · non-AI</legend><label><span data-studio-text="scale">Scale</span><select data-resize-scale><option value="2">2×</option><option value="4">4×</option></select></label><output data-target-resolution></output><button data-action="resize" data-studio-text="applyResize">Resize image</button></fieldset>
+          <fieldset data-face-controls hidden><legend data-studio-text="reference">Source face reference</legend><input data-face-file type="file" accept="image/jpeg,image/png,image/webp" data-studio-label="reference"><img data-face-preview hidden alt="Face reference" data-studio-alt="reference"><label class="is-check"><input type="checkbox" data-consent><span data-studio-text="consent">I have permission from everyone depicted. No deceptive or abusive identity use.</span></label></fieldset>
+        </div>
+        <div data-turnstile></div><label class="is-cloud-consent is-check"><input type="checkbox" data-cloud-consent><span data-studio-text="cloudConsent">Allow this image to be sent to Cloudflare for this operation.</span></label><button data-action="process" class="is-primary is-process-button" disabled data-studio-text="process">Edit image</button><p class="is-small" data-studio-text="noFallback">Verified free services only. No paid fallback.</p>
+      </section>
+      <section class="is-export"><h2 data-studio-text="export">Export</h2><label class="is-export-format"><span data-studio-text="formatLabel">Format</span><select data-export-format><option value="image/png" data-studio-text="png">PNG · transparency</option><option value="image/jpeg" data-studio-text="jpeg">JPG · white background</option><option value="image/webp" data-studio-text="webp">WebP · transparency</option></select></label><button data-action="download" class="is-download-button">{{ lab::icon(name="download") }}<span data-studio-text="download">Download image</span></button></section>
+      <details class="is-provider-details"><summary data-studio-text="availability">Provider availability</summary><div data-provider-list></div></details>
+      </div></details>
+    </aside>
+  </div>
+</main>
+<script type="module" src="{{ get_url(path='js/image-studio/studio.js') }}"></script>
+{% endblock content %}
