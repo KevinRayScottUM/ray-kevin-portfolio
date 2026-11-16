@@ -95,3 +95,25 @@ Turnstile and browser round-trip validation are separate release checks below.
 
 These documents establish supported contracts, not account entitlement or a
 successful live request. Production results must be recorded separately below.
+
+## Production Release Checks
+
+- Commit `3c66d1089ee7152fff071262860134c084035c59` pushed to GitHub `main`.
+  Cloudflare deployment `7a6e9452-0346-4db1-a3a4-31af4d398650` completed its
+  deploy stage successfully at 2026-11-16 07:10:17 UTC.
+- Production `/api/image-studio/capabilities` reports `upload:true` and
+  Generative Edit `EXPERIMENTAL`; specialized services remain unavailable.
+- Production `/api/image-studio/quota` returns 3 remaining requests and UTC reset.
+- Cross-origin upload is rejected with HTTP 403 before image processing.
+- The original blog likes endpoint still returns the existing public count (149
+  for the moving-number strategy note); the likes binding was not changed.
+- Browser opens the public Studio, loads the public TensorCat logo locally,
+  shows real quota/provider state and enables processing only after consent.
+  No image was sent by selection. A stale provider explanation was identified
+  and corrected; zero remaining quota also disables processing after refresh.
+- Current automated suite: 196 portfolio/API tests plus 5 native-WASM tests,
+  all passed. Zola production build, localization (22 HTML pages) and Pages
+  Functions compilation passed.
+- Final browser Turnstile/inference round trip requires the owner's explicit
+  CAPTCHA confirmation. It is not yet reported as passed. The independent
+  authenticated provider test above did pass; it does not substitute for this.
