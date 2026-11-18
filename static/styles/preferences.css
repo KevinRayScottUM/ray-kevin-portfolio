@@ -74,8 +74,9 @@ html[data-appearance-scope=lab] .lab-collection-heading h1{color:var(--text-prim
 html[data-appearance-scope=lab] :is(.lab-collection-heading div>p:last-child,.lab-collection-counter,.lab-index-heading,.lab-index-heading span,.lab-back){color:var(--text-secondary)}
 html[data-appearance-scope=lab] .lab-collection-heading .lab-eyebrow{color:var(--accent-primary)}
 html[data-theme] .tc-app{--tc-ink:var(--text-primary);--tc-accent:var(--accent-primary);--tc-muted:var(--text-muted);--tc-line:var(--border-default);color:var(--text-primary);color-scheme:inherit}
-html[data-theme] .tc-app :is(button,select,input[type=number]){background:var(--input-bg);color:var(--text-primary);border-color:var(--border-default)}
-html[data-theme] .tc-app button:hover{background:var(--surface-elevated)}
+/* Shelf buttons are transparent hit targets over the rendered cartridges. */
+html[data-theme] .tc-app :is(button,select,input[type=number]):not(:where(.tc-gallery-button)){background:var(--input-bg);color:var(--text-primary);border-color:var(--border-default)}
+html[data-theme] .tc-app button:hover:not(:where(.tc-gallery-button)){background:var(--surface-elevated)}
 html[data-theme] .tc-app .tc-segment{background:var(--surface-secondary);border-color:var(--border-default)}
 html[data-theme] .tc-app .tc-segment button{background:transparent;color:var(--text-secondary)}
 html[data-theme] .tc-app .tc-segment button[aria-pressed=true],html[data-theme] .tc-app .tc-primary{background:var(--surface-elevated);color:var(--accent-primary)}

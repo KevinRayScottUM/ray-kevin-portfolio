@@ -81,6 +81,14 @@ test('gallery centers have uniform spacing and remain independent of handheld tr
   centers.slice(1).forEach((x,i)=>near(x-centers[i],.045));near(centers[2]+centers[3],0);
   p.toFace('back');settlePose(p);assert.deepEqual(Array.from({length:6},(_,i)=>galleryCenter(i)),centers);
 });
+test('global palette painting excludes the shelf hit targets and the strip fits narrow viewports',()=>{
+  const read=path=>readFileSync(new URL('../'+path,import.meta.url),'utf8');
+  const palette=read('static/styles/preferences.css'),shelf=read('static/styles/lab-v3.css');
+  assert.match(palette,/:is\(button,select,input\[type=number\]\):not\(:where\(\.tc-gallery-button\)\)\{background:/);
+  assert.match(palette,/button:hover:not\(:where\(\.tc-gallery-button\)\)\{background:/);
+  assert.match(shelf,/\.tc-gallery-button\{[^}]*background:transparent/);
+  assert.match(shelf,/\.tc-gallery-strip\{position:relative;width:100%;aspect-ratio:590\/136\}/);
+});
 test('the transferred card leaves its gallery slot empty and returns after ejection without shifting neighbors',()=>{
   const m=new CartridgeMachine(),centers=Array.from({length:6},(_,i)=>galleryCenter(i)),vacancies=()=>centers.map((_,i)=>galleryVacant(m,i));
   assert.deepEqual(vacancies(),[false,false,false,false,false,false]);m.request(2);m.advance(.1);

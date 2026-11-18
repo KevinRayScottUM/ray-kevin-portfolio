@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFileSync} from 'node:fs';
-import {ExhibitSwitcher,EXHIBIT_MOTION,previewFrames} from '../static/js/lab-gallery.js';
+import {ExhibitGallery,ExhibitSwitcher,EXHIBIT_MOTION,previewFrames} from '../static/js/lab-gallery.js';
 
 const entries=[{id:'a',order:1},{id:'b',order:2},{id:'c',order:3},{id:'d',order:4},{id:'reserved',order:5,available:false}];
 const flush=async()=>{for(let i=0;i<8;i++)await Promise.resolve();};
@@ -77,4 +77,27 @@ test('gallery templates remain registry driven, with real routes and disabled fu
 test('the actual preview is a high-resolution 16:9 project render, not a stretched placeholder',()=>{
   const png=readFileSync(new URL('../static/img/lab/world-simulator.png',import.meta.url));
   assert.equal(png.subarray(1,4).toString(),'PNG');assert.equal(png.readUInt32BE(16),1440);assert.equal(png.readUInt32BE(20),810);assert.ok(png.length<500000);
+});
+test('illustrated covers are distinct compact 16:9 WebP assets in the exhibit registry',()=>{
+  const registry=readFileSync(new URL('../data/exhibits.toml',import.meta.url),'utf8');
+  for(const id of ['ai-image-studio','neural-network-xray']){
+    const path='img/lab/'+id+'-cover.webp',entry=registry.split('[[exhibits]]').find(e=>e.includes('id = "'+id+'"'));
+    assert.ok(entry.includes('cover = "'+path+'"'));assert.match(entry,/cover_fit = "cover"\ncover_width = 1664\ncover_height = 936/);
+    const webp=readFileSync(new URL('../static/'+path,import.meta.url));
+    assert.equal(webp.toString('ascii',8,16),'WEBPVP8 ');
+    assert.deepEqual([webp.readUInt16LE(26)&16383,webp.readUInt16LE(28)&16383],[1664,936]);assert.ok(webp.length<150000);
+  }
+});
+test('an artwork failure keeps the exhibit navigable; retry loads a fresh URL',async()=>{
+  const image={src:'https://site.test/art.webp',decode:async()=>{},hidden:false},placeholder={hidden:true},button={hidden:true,disabled:false},link={focus:()=>{}};
+  const nodes={'[data-preview-visual] img':image,'.lab-artwork-link img':image,'[data-artwork-placeholder]':placeholder,'[data-artwork-retry]':button,'.lab-artwork-link':link,h2:{textContent:'Art'}};
+  const layer={querySelector:key=>nodes[key],contains:n=>n===button};
+  const view=Object.assign(Object.create(ExhibitGallery.prototype),{activeLayer:layer,clone:()=>layer,status:{},loadImage:async()=>{throw Error('fetch failed');}});
+  assert.equal(await view.prepare({id:'art'},new AbortController().signal),layer);
+  assert.equal(image.hidden,true);assert.equal(placeholder.hidden,false);assert.equal(button.hidden,false);
+  const cancelled=new AbortController();cancelled.abort();
+  await assert.rejects(view.prepare({id:'art'},cancelled.signal),{name:'AbortError'});
+  view.loadImage=async url=>assert.ok(new URL(url).searchParams.has('retry'));
+  await view.retryArtwork(button);
+  assert.equal(image.hidden,false);assert.equal(placeholder.hidden,true);assert.equal(button.hidden,true);assert.equal(button.disabled,false);
 });

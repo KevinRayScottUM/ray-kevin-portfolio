@@ -16,6 +16,10 @@ export default {
     "en": "Neural networks · CPU · Interpretability",
     "zh-CN": "神经网络 · CPU · 可解释性"
   },
+  "xray.cover": {
+    "en": "Conceptual neural network of four connected glass layers with an attention matrix and feature maps",
+    "zh-CN": "四层相连的玻璃神经网络，辅以注意力矩阵与特征图的概念插画"
+  },
   "xray.area0": {
     "en": "CPU computation",
     "zh-CN": "CPU 计算"
@@ -45,8 +49,8 @@ export default {
     "zh-CN": "选好图片，即可在本地开始编辑。以流畅过渡、非破坏性工具和透明的 AI 服务状态构建简洁的创意工作空间。"
   },
   "studio.cover": {
-    "en": "Actual minimal Image Studio upload and editing workspace",
-    "zh-CN": "图像工作室实际运行的简洁上传与编辑界面"
+    "en": "A white orchid transitions from a damaged monochrome scan to a restored color image through glass editing layers",
+    "zh-CN": "白色兰花穿过玻璃编辑图层，从受损的黑白扫描图过渡到修复后的彩色图像"
   },
   "studio.preview": {
     "en": "Local editing · Cloud AI",
@@ -459,6 +463,10 @@ export default {
   "gallery.failed": {
     "en": "Preview unavailable. Please try again.",
     "zh-CN": "预览暂不可用，请重试。"
+  },
+  "gallery.retry": {
+    "en": "Retry artwork",
+    "zh-CN": "重新加载封面"
   },
   "tour.label": {
     "en": "TensorCat 3D hardware tour",

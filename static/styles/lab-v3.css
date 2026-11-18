@@ -8,7 +8,7 @@
 .tc-focus::backdrop{background:#162b3266;backdrop-filter:none}.tc-focus header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:14px}.tc-app .tc-focus canvas{display:block;width:100%;height:auto;aspect-ratio:16/9;touch-action:none;background:#f7f9f9;border-radius:4px}.tc-focus .tc-command-row{justify-content:center}.tc-app .tc-focus h2{font-size:16px}.tc-statusbar output{font-size:10px;white-space:normal;text-align:right;max-width:75%}
 @media(max-width:640px){.tc-app .tc-focus{padding:12px}.tc-app .tc-focus header{gap:8px}.tc-app .tc-focus h2{font-size:13px}.tc-statusbar{align-items:flex-start}.tc-statusbar output{max-width:70%;font-size:9px}}
 .tc-gallery{position:absolute;top:40px;left:16px;right:16px;margin:auto;max-width:590px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;z-index:2;touch-action:pan-x}
-.tc-gallery-strip{position:relative;width:100%;min-width:450px;height:136px}
+.tc-gallery-strip{position:relative;width:100%;aspect-ratio:590/136}
 .tc-app .tc-gallery canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .tc-app .tc-viewport .tc-transfer{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:3;background:transparent}
 .tc-gallery-targets{position:absolute;inset:4px 0;display:grid;grid-template-columns:repeat(6,minmax(0,1fr))}
@@ -20,7 +20,7 @@
 .tc-power i{display:block;width:38px;height:19px;position:relative;border:1px solid #83948d;border-radius:12px;background:#c7d1cc}
 .tc-power i::after{content:"";position:absolute;top:2px;left:2px;width:13px;height:13px;border-radius:50%;background:#fff;box-shadow:0 1px 2px #263c4333;transform:translateX(0);transition:transform .16s ease,background .16s ease}
 .tc-power[aria-checked=true] i{background:var(--tc-accent)}.tc-power[aria-checked=true] i::after{transform:translateX(19px)}
-@media(max-width:640px){.tc-gallery{top:35px;left:10px;right:10px}.tc-gallery-strip{height:110px}}
+@media(max-width:640px){.tc-gallery{top:35px;left:10px;right:10px}}
 .tc-app[data-mode=console] .tc-workspace{grid-template-columns:minmax(0,1fr);min-height:0}
 .tc-app[data-mode=console] [data-toolbar-slot]{display:none}
 .tc-app[data-mode=console] .tc-viewport{height:650px}

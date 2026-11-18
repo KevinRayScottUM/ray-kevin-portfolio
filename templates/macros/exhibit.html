@@ -14,7 +14,13 @@
     <div class="lab-showcase-controls"><span data-showcase-pose>{{ i18n::text(key="tour.pose0") }}</span><output data-showcase-progress aria-label="Hardware tour stage" data-i18n-aria-label="tour.progress">01 / 08</output><div><button type="button" data-showcase-step="-1" aria-label="Previous hardware view" title="Previous hardware view" data-i18n-aria-label="tour.previous" data-i18n-title="tour.previous" disabled>{{ lab::icon(name="chevron-left") }}</button><button type="button" data-showcase-step="1" aria-label="Next hardware view" title="Next hardware view" data-i18n-aria-label="tour.next" data-i18n-title="tour.next" disabled>{{ lab::icon(name="chevron-right") }}</button></div></div>
   </div>
   {% else %}
-  <a class="lab-preview-visual" data-preview-visual href="{{ get_url(path=exhibit.route, trailing_slash=true) }}" aria-label="Enter {{ exhibit.title }} — {{ exhibit.subtitle }}"><img src="{{ get_url(path=exhibit.cover) }}" alt="{{ exhibit.cover_alt | default(value=exhibit.title) }}" width="{{ exhibit.cover_width | default(value=1440) }}" height="{{ exhibit.cover_height | default(value=810) }}" decoding="async" style="object-fit:{{ exhibit.cover_fit | default(value='contain') }}"></a>
+  <div class="lab-preview-visual lab-artwork" data-preview-visual>
+    <a class="lab-artwork-link" href="{{ get_url(path=exhibit.route, trailing_slash=true) }}" aria-label="Enter {{ exhibit.title }} — {{ exhibit.subtitle }}">
+      <img src="{{ get_url(path=exhibit.cover) }}" alt="{{ exhibit.cover_alt | default(value=exhibit.title) }}"{% if exhibit.id == "ai-image-studio" %} data-i18n-alt="studio.cover"{% elif exhibit.id == "neural-network-xray" %} data-i18n-alt="xray.cover"{% endif %} width="{{ exhibit.cover_width | default(value=1440) }}" height="{{ exhibit.cover_height | default(value=810) }}" decoding="async" style="object-fit:{{ exhibit.cover_fit | default(value='contain') }}">
+      <div class="lab-artwork-placeholder" data-artwork-placeholder hidden><span>{{ i18n::text(key="gallery.preview") }} / {{ exhibit.number }}</span><strong>{% if exhibit.id == "ai-image-studio" %}{{ i18n::text(key="studio.title") }}{% elif exhibit.id == "neural-network-xray" %}{{ i18n::text(key="xray.title") }}{% else %}{{ exhibit.title }}{% endif %}</strong></div>
+    </a>
+    <button class="lab-artwork-retry" data-artwork-retry type="button" hidden>{{ lab::icon(name="rotate-ccw") }} {{ i18n::text(key="gallery.retry") }}</button>
+  </div>
   {% endif %}
   <div class="lab-preview-copy">
     <p class="lab-eyebrow" data-i18n="gallery.exhibit" data-i18n-args='{"number":"{{ exhibit.number }}"}'>Exhibit {{ exhibit.number }} / {{ exhibit.category }}</p>

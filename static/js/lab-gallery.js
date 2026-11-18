@@ -56,7 +56,7 @@ export class ExhibitSwitcher {
 
 function aborted(){const error=new Error('Preview preparation cancelled');error.name='AbortError';return error;}
 function untilReady(promise,signal){
-  if(signal.aborted)return Promise.reject(aborted());
+  if(signal.aborted){promise.catch(()=>{});return Promise.reject(aborted());}
   return new Promise((resolve,reject)=>{
     const stop=()=>reject(aborted());signal.addEventListener('abort',stop,{once:true});
     promise.then(value=>{signal.removeEventListener('abort',stop);resolve(value);},error=>{signal.removeEventListener('abort',stop);reject(error);});
@@ -83,6 +83,7 @@ export class ExhibitGallery {
     },this.activeLayer.dataset.previewId);
     on(this.list,'click',event=>{const b=event.target.closest('[data-exhibit-select]');if(b&&!b.disabled)this.switcher.request(b.dataset.exhibitSelect);});
     on(this.list,'keydown',event=>this.moveFocus(event));
+    on(this.viewport,'click',event=>{const retry=event.target.closest('[data-artwork-retry]');if(retry)this.retryArtwork(retry);});
     const warm=event=>{const b=event.target.closest('[data-exhibit-select]');if(b&&!b.disabled)this.warm(b.dataset.exhibitSelect);};
     on(this.list,'pointerover',warm);on(this.list,'focusin',warm);
     on(this.media,'change',()=>{if(this.media.matches)this.finishMotion();});
@@ -122,9 +123,39 @@ export class ExhibitGallery {
     this.images.set(src,record);return record.promise;
   }
   async prepare(entry,signal){
+    if(signal.aborted)throw aborted();
     const layer=this.clone(entry.id),image=layer.querySelector('[data-preview-visual] img');
-    if(image){await untilReady(this.loadImage(image.src),signal);await untilReady(image.decode(),signal);}
+    if(image){
+      try{await untilReady(this.loadImage(image.src),signal);await untilReady(image.decode(),signal);}
+      catch(error){
+        if(signal.aborted||!layer.querySelector('[data-artwork-placeholder]'))throw error;
+        this.showArtworkFallback(layer,true);
+      }
+    }
     return layer;
+  }
+  showArtworkFallback(layer,failed){
+    layer.querySelector('.lab-artwork-link img').hidden=failed;
+    layer.querySelector('[data-artwork-placeholder]').hidden=!failed;
+    layer.querySelector('[data-artwork-retry]').hidden=!failed;
+  }
+  async retryArtwork(button){
+    const layer=this.activeLayer;
+    if(button.disabled||!layer.contains(button))return;
+    const image=layer.querySelector('.lab-artwork-link img');
+    button.disabled=true;
+    try{
+      const retry=new URL(image.src);
+      // A failed URL can stay broken in the document's image cache.
+      retry.searchParams.set('retry',String(Date.now()));
+      await this.loadImage(retry.href);
+      if(this.activeLayer!==layer||this.disposed)return;
+      image.src=retry.href;
+      await image.decode();
+      if(this.activeLayer===layer&&!this.disposed){this.showArtworkFallback(layer,false);layer.querySelector('.lab-artwork-link').focus({preventScroll:true});this.status.textContent=t('gallery.selected',{title:layer.querySelector('h2').textContent.trim()});}
+    }catch{
+      if(this.activeLayer===layer&&!this.disposed)this.status.textContent=t('gallery.failed');
+    }finally{button.disabled=false;}
   }
   warm(id){const image=this.templates.get(id)?.content.querySelector('[data-preview-visual] img');if(image&&!navigator.connection?.saveData)this.loadImage(image.src).catch(()=>{});}
   preloadNeighbors(id){const index=this.entries.findIndex(e=>e.id===id);[this.entries[index-1],this.entries[index+1]].filter(Boolean).forEach(e=>this.warm(e.id));}
@@ -146,7 +177,7 @@ export class ExhibitGallery {
     this.showcaseEpoch++;this.showcase?.dispose();this.showcase=null;
     layer.classList.remove('is-incoming','is-outgoing');layer.inert=false;layer.removeAttribute('aria-hidden');
     this.viewport.replaceChildren(layer);this.activeLayer=layer;this.clearMotion();
-    this.status.classList.remove('is-error');this.status.textContent=t('gallery.selected',{title:layer.querySelector('h2').textContent.trim()});this.preloadNeighbors(entry.id);
+    this.status.classList.remove('is-error');this.status.textContent=layer.querySelector('[data-artwork-placeholder]:not([hidden])')?t('gallery.failed'):t('gallery.selected',{title:layer.querySelector('h2').textContent.trim()});this.preloadNeighbors(entry.id);
     this.mountShowcase(layer);
   }
   rollback(){this.activeLayer.classList.remove('is-outgoing');this.activeLayer.inert=false;this.activeLayer.removeAttribute('aria-hidden');this.viewport.replaceChildren(this.activeLayer);this.clearMotion();this.showcase?.resume();}
